@@ -1,5 +1,4 @@
 # FARMI
-# FARMI
 ![Logo do projeto](./nova_logo_clara_sem_fundo%20(1).png)
 >🌱 Tecnologia que protege e faz sua fazenda crescer
 
