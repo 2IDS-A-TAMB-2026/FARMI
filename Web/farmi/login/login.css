@@ -1,0 +1,302 @@
+:root {
+    --verde-escuro: #052501;
+    --verde-claro: #4bc714;
+    --cinza-fundo: #f4f6f8;
+    --branco: #fff;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body {
+    min-height: 100vh;
+    display: flex;
+    margin: 0;
+}
+
+/* LADO ESQUERDO */
+.left {
+    width: 50%;
+    background: url('../images/fundo.png') no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 100vh;
+}
+
+.left::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(5,37,1,0.6);
+}
+
+.logo-left {
+    position: relative;
+    z-index: 1;
+}
+
+.logo-left img {
+    width: 350px;
+}
+
+/* LADO DIREITO */
+.right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--cinza-fundo);
+}
+
+.login-box {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    width: 500px;
+    background: var(--branco);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: var(--verde-escuro);
+}
+
+/* INPUTS */
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+}
+
+.login-box input:focus {
+    border-color: var(--verde-claro);
+    outline: none;
+}
+
+/* BOTÕES */
+.btn-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--verde-escuro);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--verde-claro);
+}
+
+/* LINKS */
+.link-senha {
+    display: block;
+    margin-top: 10px;
+    color: var(--verde-escuroclaro);
+    text-decoration: none;
+}
+
+.link-senha:hover {
+    color: var(--verde-claro);
+}
+
+.back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--verde-escuro);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.back a:hover {
+    color: var(--verde-claro);
+    transform: translateX(-3px); /* leve animação */
+}
+
+.login-box a {
+    color: var(--verde-escuro);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.login-box a:hover {
+    color: var(--verde-claro);
+    text-decoration: underline;
+}
+
+
+/*CAMPOS LABEL*/
+.campo {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--verde-escuro);
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+
+/* ERRO */
+.erro {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
+/*SELECT*/
+.campo-select {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.campo-select label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--verde-escuro);
+}
+
+.campo-select select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.campo-select select:focus {
+    border-color: var(--verde-claro);
+    outline: none;
+}
+
+
+/*CHECKBOX*/
+.termos {
+    margin-top: 15px;
+    text-align: left;
+}
+
+/* container */
+.checkbox-container {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--verde-escuro);
+}
+
+/* esconder checkbox padrão */
+.checkbox-container input {
+    display: none;
+}
+
+/* caixa customizada */
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+}
+
+/* quando marcado */
+.checkbox-container input:checked + .checkmark {
+    background: var(--verde-escuro);
+    border-color: var(--verde-escuro);
+}
+
+/* check interno */
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked + .checkmark::after {
+    display: block;
+}
+
+.checkbox-container .checkmark::after {
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+/*ÍCONE*/
+/* Container do input + ícone */
+.input-icone {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Input */
+.input-icone input {
+    width: 100%;
+    padding-right: 40px; /* espaço pro ícone */
+    box-sizing: border-box;
+}
+
+/* Ícone */
+.input-icone i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+}
+
+
+
+/* RESPONSIVO */
+@media(max-width: 900px){
+    .left {
+        display: none;
+    }
+    .right {
+        width: 100%;
+    }
+}

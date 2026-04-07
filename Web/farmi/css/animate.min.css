@@ -1,0 +1,187 @@
+@charset "UTF-8"; 
+/* Define o padrão de caracteres do CSS (permite acentos corretamente) */
+
+
+/* =========================
+   CONFIGURAÇÃO BASE
+========================= */
+
+.animated {
+  animation-duration: 1s;      
+  /* Define que a animação vai durar 1 segundo */
+
+  animation-fill-mode: both;   
+  /* Mantém o estado inicial e final da animação aplicado no elemento */
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+  /* Faz a animação repetir para sempre */
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+  /* Apenas para a animação "hinge", aumenta a duração para 2 segundos */
+}
+
+
+
+/* =========================
+   BOUNCE (Quicar)
+========================= */
+
+@keyframes bounce {
+
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+    /* Elemento volta para posição normal */
+  }
+
+  40%, 43% {
+    transform: translateY(-30px);
+    /* Sobe 30px (primeiro pulo maior) */
+  }
+
+  70% {
+    transform: translateY(-15px);
+    /* Sobe menos (segundo pulo menor) */
+  }
+
+  90% {
+    transform: translateY(-4px);
+    /* Pequeno ajuste final antes de parar */
+  }
+}
+
+.bounce {
+  animation-name: bounce;
+  /* Aplica a animação chamada "bounce" */
+
+  transform-origin: center bottom;
+  /* Define o ponto de referência do movimento (parte inferior central) */
+}
+
+
+
+/* =========================
+   FLASH (Piscar)
+========================= */
+
+@keyframes flash {
+
+  0%, 50%, 100% {
+    opacity: 1;
+    /* Totalmente visível */
+  }
+
+  25%, 75% {
+    opacity: 0;
+    /* Fica invisível */
+  }
+}
+
+.flash {
+  animation-name: flash;
+  /* Aplica o efeito de piscar */
+}
+
+
+
+/* =========================
+   PULSE (Pulsar)
+========================= */
+
+@keyframes pulse {
+
+  0%, 100% {
+    transform: scale(1);
+    /* Tamanho normal */
+  }
+
+  50% {
+    transform: scale(1.05);
+    /* Aumenta levemente o tamanho (5%) */
+  }
+}
+
+.pulse {
+  animation-name: pulse;
+  /* Aplica o efeito de crescer e voltar */
+}
+
+
+
+/* =========================
+   SHAKE (Tremer)
+========================= */
+
+@keyframes shake {
+
+  0%, 100% {
+    transform: translateX(0);
+    /* Posição normal */
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+    /* Move 10px para a esquerda */
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+    /* Move 10px para a direita */
+  }
+}
+
+.shake {
+  animation-name: shake;
+  /* Aplica efeito de tremida horizontal */
+}
+
+
+
+/* =========================
+   FADE IN (Aparecer)
+========================= */
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    /* Começa invisível */
+  }
+
+  to {
+    opacity: 1;
+    /* Termina totalmente visível */
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  /* Faz o elemento aparecer suavemente */
+}
+
+
+
+/* =========================
+   FADE OUT (Desaparecer)
+========================= */
+
+@keyframes fadeOut {
+
+  from {
+    opacity: 1;
+    /* Começa visível */
+  }
+
+  to {
+    opacity: 0;
+    /* Termina invisível */
+  }
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  /* Faz o elemento desaparecer suavemente */
+}
