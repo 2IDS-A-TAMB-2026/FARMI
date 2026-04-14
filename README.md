@@ -152,15 +152,15 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 
 ### DER
 - Diagrama Entidade Relacionamento.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08%20(2).jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Der.jpeg" width="700">
 
 ### Diagrama de Classes
 - O Diagrama de Classes representa as classes de um sistema e como elas se relacionam.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08.jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_classes.png" width="700">
 
 ### Diagrama de Fluxos
 - O Diagrama de Fluxo representa a sequência de etapas de um processo ou algoritmo.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08%20(3).jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_fluxos.png" width="700">
 
 ---
 📧 [farmi.tcc2026@gmail.com]
@@ -331,15 +331,15 @@ Develop a solution for **smart farm management and monitoring**.
 
 ### DER
 - Entity Relationship Diagram.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08%20(2).jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Der.jpeg" width="700">
 
 ### Class Diagram
 - The Class Diagram represents the classes of a system and how they relate to each other.<br>  
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08.jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_classes.png" width="700">
 
 ### Flowchart
 - The Flowchart represents the sequence of steps in a process or algorithm.<br>  
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/WhatsApp%20Image%202026-04-14%20at%2007.43.08%20(3).jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_fluxos.png" width="700">
 
 ---
 
