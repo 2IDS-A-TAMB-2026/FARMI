@@ -307,3 +307,5 @@ Develop a solution for **smart farm management and monitoring**.
 ---
 
 📧 farmi.tcc2026@gmail.com
+
+---
