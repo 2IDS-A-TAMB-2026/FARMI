@@ -145,6 +145,7 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 
 ---
 
+<<<<<<< HEAD
 ## Diagramas
 ### MER 
 
@@ -153,6 +154,8 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 
 
 ---
+=======
+>>>>>>> c11942ab260fd6f4dabc0d62ffb1987456471a62
 📧 [farmi.tcc2026@gmail.com]
 ---
 
@@ -316,4 +319,8 @@ Develop a solution for **smart farm management and monitoring**.
 
 📧 farmi.tcc2026@gmail.com
 
+<<<<<<< HEAD
 ---
+=======
+---
+>>>>>>> c11942ab260fd6f4dabc0d62ffb1987456471a62

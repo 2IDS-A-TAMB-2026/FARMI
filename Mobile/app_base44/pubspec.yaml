@@ -1,0 +1,22 @@
+name: app_base44
+description: Fazenda Automatizada Remota de Monitoramento Inteligente
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fl_chart: ^0.68.0
+  lucide_icons: 0.257.0
+  intl: ^0.19.0
+  provider: ^6.1.1
+  http: ^1.2.0
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.1.0
+
+flutter:
+  uses-material-design: true
