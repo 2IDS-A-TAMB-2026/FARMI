@@ -145,17 +145,24 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 
 ---
 
-<<<<<<< HEAD
 ## Diagramas
 ### MER 
+- Modelo Entidade Relacionamento.<br>
+![MER](caminho-da-imagem)
 
+### DER
+- Diagrama Entidade Relacionamento.<br>
+![DER](caminho-da-imagem)
 
-- Modelo Entidade Relacionamento
+### Diagrama de Classes
+- O Diagrama de Classes representa as classes de um sistema e como elas se relacionam.<br>
+![Diagrama de Classes](caminho-da-imagem)
 
+### Diagrama de Fluxos
+- O Diagrama de Fluxo representa a sequência de etapas de um processo ou algoritmo.<br>
+![Diagrama de Flxos](caminho-da-imagem)
 
 ---
-=======
->>>>>>> c11942ab260fd6f4dabc0d62ffb1987456471a62
 📧 [farmi.tcc2026@gmail.com]
 ---
 
@@ -316,11 +323,25 @@ Develop a solution for **smart farm management and monitoring**.
 |<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/thaiene.png" width="40"> Thaiene Tessaro | Scrum Master |
 
 ---
+## Diagrams
+
+### MER
+- Entity Relationship Model.<br>
+![MER](caminho-da-imagem)
+
+### DER
+- Entity Relationship Diagram.<br>
+![DER](caminho-da-imagem)
+
+### Class Diagram
+- The Class Diagram represents the classes of a system and how they relate to each other.<br>  
+![Diagrama de Classes](caminho-da-imagem)
+
+### Flowchart
+- The Flowchart represents the sequence of steps in a process or algorithm.<br>  
+![Diagrama de Fluxos](caminho-da-imagem)
+---
 
 📧 farmi.tcc2026@gmail.com
 
-<<<<<<< HEAD
 ---
-=======
----
->>>>>>> c11942ab260fd6f4dabc0d62ffb1987456471a62
