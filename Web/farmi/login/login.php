@@ -1,28 +1,43 @@
 <?php
 
-session_start();
+    session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $erro = $_SESSION['erro'] ?? null;
+    unset($_SESSION['erro']);
 
-    $usuario = trim($_POST["usuario"] ?? "");
-    $senha = $_POST["senha"] ?? "";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if (empty($usuario) || empty($senha)) {
-        $erro = "*Preencha todos os campos!";
-    } else {
 
-        $usuarioCorreto = "admin@gmail.com";
-        $senhaCorreta = "12345678";
+        $usuario = trim($_POST["usuario"] ?? "");
+        $senha = $_POST["senha"] ?? "";
 
-        if ($usuario === $usuarioCorreto && $senha === $senhaCorreta) {
-            $_SESSION["usuario"] = $usuario;
-            header("Location: ../farmi/dashboard.php");
-            exit;
+        if (empty($usuario) || empty($senha)) {
+            $erro = "*Preencha todos os campos!";
         } else {
-            $erro = "*Usuário ou senha inválidos!";
+
+            $usuario_Admin = "admin@gmail.com";
+            $senha_Admin = "12345678";
+
+            $usuario_Usu = "usuario@gmail.com";
+            $senha_Usu = "12345678";
+
+            if ($usuario === $usuario_Admin && $senha === $senha_Admin) {
+                $_SESSION["usuario"] = $usuario;
+                header("Location: ../farmi/farmi_adm/dashboard.php");
+                exit;
+            }
+            if ($usuario === $usuario_Usu && $senha === $senha_Usu) {
+                $_SESSION["usuario"] = $usuario;
+                header("Location: ../farmi/farmi_usuario/dashboard.php");
+                exit;
+            }
+            else {
+                $_SESSION['erro'] = "Usuário ou senha inválidos!";
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            }
         }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Biblioteca para aparecer a setinha -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <!-- Biblioteca Sweet Alert -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     </head>
 
     <body>
@@ -69,10 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <i class="fa-solid fa-eye" id="toggleSenha"></i>
                     </div>
 
-                    <?php if(isset($erro)) echo "<p class='erro'>$erro</p>"; ?>
-
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">Entrar</button>
+                        <button type="submit" class="btn btn-primary" id="btnEntrar" disabled>Entrar</button>
                     </div>
 
                     <a href="esqueceu_senha.php" class="link-senha">*Esqueceu a senha?</a><br>
@@ -87,69 +103,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
 
+        <?php if(isset($erro)): ?>
+            <script>
+                mostrarAlerta("<?php echo $erro; ?>");
+            </script>
+        <?php endif; ?>
+
         <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
             const emailInput = document.getElementById('usuario');
             const senhaInput = document.getElementById('senha');
+            const botao = document.getElementById('btnEntrar');
+            const toggleSenha = document.getElementById('toggleSenha');
 
-            // ===== OLHO SENHA =====
-            toggleSenha.addEventListener('click', function () {
-                const tipo = senhaInput.type === 'password' ? 'text' : 'password';
-                senhaInput.type = tipo;
+            // OLHO SENHA (com verificação pra não quebrar)
+            if (toggleSenha) {
+                toggleSenha.addEventListener('click', function () {
+                    const tipo = senhaInput.type === 'password' ? 'text' : 'password';
+                    senhaInput.type = tipo;
 
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                let isValid = true;
-
-                // Limpa bordas
-                document.querySelectorAll('input').forEach(el => {
-                    el.style.border = '';
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
                 });
+            }
 
-                // ===== EMAIL =====
+            function validarFormulario() {
                 const email = emailInput.value.trim();
-                if (email === '' || !validarEmail(email)) {
-                    emailInput.style.border = '2px solid red';
-                    isValid = false;
-                } else {
-                    emailInput.style.border = '2px solid green';
-                }
-
-                // ===== SENHA =====
                 const senha = senhaInput.value;
-                if (senha === '' || senha.length < 8) {
-                    senhaInput.style.border = '2px solid red';
-                    isValid = false;
-                } else {
-                    senhaInput.style.border = '2px solid green';
-                }
 
-                // ===== ENVIO =====
-                if (isValid) {
-                    form.submit();
-                }
-            });
+                const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                const senhaValida = senha.length >= 8;
+
+                // ativa/desativa botão
+                botao.disabled = !(emailValido && senhaValida);
+            }
+
+            // valida enquanto digita
+            emailInput.addEventListener('input', validarFormulario);
+            senhaInput.addEventListener('input', validarFormulario);
         });
 
-        // VALIDAR EMAIL
-        function validarEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
         </script>
 
-        <!-- ALERTA DO PHP -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
-        <?php if(isset($erro)) { ?>
-            alert('Esse usuário não está cadastrado.');
-        <?php } ?>
+            function mostrarAlerta(msg){
+                Swal.fire({
+                    title: 'Erro!',
+                    text: msg,
+                    icon: 'error'
+                });
+            }
         </script>
-
     </body>
 </html>

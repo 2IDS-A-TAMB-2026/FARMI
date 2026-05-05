@@ -112,6 +112,26 @@ body {
     background: var(--verde-claro);
 }
 
+/* BOTÃO DESATIVADO */
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* BOTÃO ATIVO (normal) */
+.btn-primary {
+    background: var(--verde-escuro);
+    color: white;
+    opacity: 1;
+}
+
+/* Hover só quando estiver ativo */
+.btn-primary:not(:disabled):hover {
+    background: var(--verde-claro);
+}
+
+
+
 /* LINKS */
 .link-senha {
     display: block;
@@ -165,103 +185,13 @@ body {
 
 
 /* ERRO */
-.erro {
+.erro-msg {
     color: red;
-    font-size: 13px;
+    font-size: 12px;
+    display: block;
     margin-bottom: 10px;
 }
 
-
-/*SELECT*/
-.campo-select {
-    margin-top: 15px;
-    text-align: left;
-}
-
-.campo-select label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: var(--verde-escuro);
-}
-
-.campo-select select {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    background: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.campo-select select:focus {
-    border-color: var(--verde-claro);
-    outline: none;
-}
-
-
-/*CHECKBOX*/
-.termos {
-    margin-top: 15px;
-    text-align: left;
-}
-
-/* container */
-.checkbox-container {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--verde-escuro);
-}
-
-/* esconder checkbox padrão */
-.checkbox-container input {
-    display: none;
-}
-
-/* caixa customizada */
-.checkmark {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    display: inline-block;
-    position: relative;
-    transition: 0.3s;
-}
-
-/* quando marcado */
-.checkbox-container input:checked + .checkmark {
-    background: var(--verde-escuro);
-    border-color: var(--verde-escuro);
-}
-
-/* check interno */
-.checkmark::after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.checkbox-container input:checked + .checkmark::after {
-    display: block;
-}
-
-.checkbox-container .checkmark::after {
-    left: 5px;
-    top: 1px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
 
 
 /*ÍCONE*/
@@ -269,7 +199,7 @@ body {
 .input-icone {
     position: relative;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 0;
 }
 
 /* Input */

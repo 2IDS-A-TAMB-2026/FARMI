@@ -36,10 +36,11 @@ html {
      scroll-behavior: smooth;
 }
 
+/* === BODY ===*/
 body {
      color: #66666;
      font-size: 14px;
-      font-family: poppins;
+     font-family: poppins;
      line-height: 1.80857;
      font-weight: normal;
      overflow-x: hidden;
@@ -544,6 +545,78 @@ ul.top_icon li a {
 .right_cart_section ul li a {
      color: #fff;
 }
+
+
+/* === Menu de Acessibilidade === */
+.menu-acessibilidade {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-acessibilidade button {
+  background: transparent;
+  color: white;
+  margin-left: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.menu-acessibilidade button:hover {
+  background: #4BC714;
+}
+
+.contraste{
+     width: 18px;
+     padding: 0;
+}
+
+/*Contraste*/
+.modo-acessivel, 
+.modo-acessivel .copyright{
+  background-color: black !important;
+}
+
+
+.modo-acessivel .footer,
+.modo-acessivel .header {
+  background-color: #505152 !important;
+}
+
+.modo-acessivel .about .about_box a:hover, 
+.modo-acessivel .buynow:hover, 
+.modo-acessivel .product .product_box figure h3 {
+  background-color: #a7a7a7 !important;
+}
+
+.modo-acessivel *{
+  color: white !important;
+}
+
+.modo-acessivel .buynow, 
+.modo-acessivel .leia_mais {
+     color: #000 !important;
+}
+
+.modo-acessivel .about .about_box a {
+  background-color: #fff !important;
+}
+
+.modo-acessivel .sensores, 
+.modo-acessivel .sensores:hover, 
+.modo-acessivel .card img {
+  border: 5px solid white;
+}
+
+.modo-acessivel .address h3{
+         border-bottom: white solid 4px !important;
+}
+
+
+
 
 
 /*-- end header middle --*/
@@ -1637,8 +1710,8 @@ font-weight: 500;
 }
 .location_icon_bottum ul li img {padding-right: 10px;}
 
-/** banner **/
 
+/** banner **/
 .relative {
      position: absolute;
      top: 50%;
@@ -1760,6 +1833,8 @@ ul.social_icon li a:hover {
 border: solid #ff0000 1px;        
 color: #fff;
 }
+
+
 /** end banner **/
 .black {
     color: #63ce33;
@@ -1795,6 +1870,7 @@ margin: 0 auto;
 
 .about .about_img figure {
      margin: 0px;
+     margin-top: 100px;
 }
 
 .about .about_box {
@@ -1820,6 +1896,7 @@ margin: 0 auto;
      color: #4c4a49;
      padding: 40px 0px;
      font-weight: 500;
+     text-align: justify;
 }
 .about .about_box a {
          color: #fff;
@@ -1866,13 +1943,12 @@ border-radius: 18px;
 
 /** end for_box **/
 
-/** offer **/
+/**======== OFFER ========**/
 .offer {
      padding-top: 90px;
    }
 
 .offer-bg {
-     background: #fff !important;
      padding: 90px 0px;
     
 }
@@ -1883,37 +1959,68 @@ border-radius: 18px;
 
 
 .offer .offer-bg {
-     background: #052501;
      text-align: center;
-     padding: 60px 0px;
+     padding: 0px 0px;
 }
 .offer .offer-bg .offer_box {text-align: center;}
 .offer .offer-bg .offer_box figure {margin: 0;}
+
+/*imagem sensores*/
 .offer .offer-bg .offer_box figure img {
-    width: 100%;
+    width: 80%;
 }
+.sensores {
+  border: 5px solid #4BC714;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  
+  /* sombra suave */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  
+  /* centralização */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  /* animação */
+  transition: all 0.3s ease;
+}
+/* efeito ao passar o mouse */
+.sensores:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  border-color: #2e7d32;
+}
+
 .offer .offer-bg .offer_box h3 {
      font-size: 30px;
      font-weight: 500;
      color: #fff;
     padding-bottom: 30px;
 }
-.offer .offer-bg .offer_box p {padding-top: 35px; font-size: 17px; line-height: 23px; color: #fff;}
+
+.offer .offer-bg .offer_box p {
+     padding-top: 35px; 
+     font-size: 17px; 
+     color: #4c4a49;
+     padding: 40px 0px;
+     font-weight: 500;
+}
 
 .read-more { 
-font-family: poppins;
-max-width: 212px;
-margin: 0 auto;
-margin-top: 0px;
-display: block;
-background: #fff;
-color: #000 !important;
-padding: 12px 0px;
-width: 100%;
-font-size: 17px;
-float: left;
-border-radius: 10px;
-margin-top: -100px;
+     font-family: poppins;
+     max-width: 212px;
+     margin: 0 auto;
+     margin-top: 0px;
+     display: block;
+     background: #fff;
+     color: #000 !important;
+     padding: 12px 0px;
+     width: 100%;
+     font-size: 17px;
+     float: left;
+     border-radius: 10px;
+     margin-top: -100px;
 }
 
 .read-more:hover {
@@ -1921,10 +2028,60 @@ margin-top: -100px;
      color: #fff !important;
 }
 
-
 .margin_ttt {margin-top: 0px;}
 .margin-lkk {margin-top: 0px;}
 /** end offer **/
+
+
+
+
+/** valores, missão, visão **/
+.agro-simple-section {
+    padding: 60px 0;
+}
+
+/* container das colunas */
+.agro-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* cada coluna */
+.agro-col {
+    flex: 1;
+    text-align: center;
+}
+
+/* imagem */
+.agro-col img {
+    width: 120px;
+    margin-bottom: 15px;
+}
+
+/* título */
+.agro-col h3 {
+    font-size: 22px;
+    color: #052501;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* texto */
+.agro-col p {
+    font-size: 17px;
+    color: #4c4a49;
+    line-height: 1.6;
+}
+
+/* responsivo */
+@media (max-width: 768px) {
+    .agro-columns {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+/** end visão, missão, valores **/
 
 
 
@@ -2127,19 +2284,19 @@ transform:skew(190deg)
 
  
  ul.loca li {
-    color: #fff;
-padding-bottom: 10px;
-display: flex;
-font-size: 16px;
-flex-wrap: wrap;
+     color: #fff;
+     padding-bottom: 10px;
+     display: flex;
+     font-size: 16px;
+     flex-wrap: wrap;
 }
  ul.loca li:last-child {
     padding-right: 0;
 }
  ul.loca li a {
-   padding-right: 16px;
-color: #fff;
-margin-top: 4px;
+     padding-right: 16px;
+     color: #fff;
+     margin-top: 4px;
 }
  
  ul.Links_footer {
@@ -2163,6 +2320,21 @@ margin-top: 4px;
     padding-bottom: 15px;
     color: #3e7f21;
 }
+
+.icone_redes {
+    display: flex;          /* coloca os itens lado a lado */
+    gap: 10px;              /* espaço entre os ícones */
+    padding: 0;
+    margin: 0;
+}
+.icone_redes li img {
+    width: 45px;            /* tamanho menor */
+    height: 45px;
+    object-fit: contain;
+}
+.icone_redes li a {
+    display: block;
+}
  
  
 
@@ -2185,14 +2357,14 @@ margin-top: 4px;
      border-radius: 10px;
 }
  .address  h3 {
-color: #fff;
-font-size: 29px;
-font-weight: 500;
-padding-top: 15px;
-padding-bottom: 3px;
-border-bottom: #3e7f21 solid 4px;
-margin-bottom: 20px;
-width: 226px;
+     color: #fff;
+     font-size: 29px;
+     font-weight: 500;
+     padding-top: 15px;
+     padding-bottom: 3px;
+     border-bottom: #3e7f21 solid 4px;
+     margin-bottom: 20px;
+     width: 226px;
  }
 .address img {padding-bottom: 10px;}
 

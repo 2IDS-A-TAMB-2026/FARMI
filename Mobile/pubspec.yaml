@@ -1,0 +1,45 @@
+name: app_base44
+description: Fazenda Automatizada Remota de Monitoramento Inteligente
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  url_launcher: ^6.2.5
+  flutter:
+    sdk: flutter
+  fl_chart: ^0.68.0
+  lucide_icons: 0.257.0
+  intl: ^0.19.0
+  provider: ^6.1.1
+  http: ^1.2.0
+  shared_preferences: ^2.2.2
+  google_fonts: ^6.1.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/logo.png
+    - assets/images/lavoura.jpg
+    - assets/images/luz.png
+    - assets/images/temp.png
+    - assets/images/solo.png
+    - assets/images/folha.png
+    - assets/images/product_img1.jpg
+    - assets/images/product_img2.jpg
+    - assets/images/product_img3.jpg
+    - assets/images/product_img4.jpg
+    - assets/images/product_img5.jpg
+    - assets/images/values.png
+    - assets/images/vision.png
+    - assets/images/mission.png
+    - assets/equipe/vitor.png
+    - assets/equipe/vinicius.jpg
+    - assets/equipe/paula.jpg
+    - assets/equipe/maria.jpg
+    - assets/equipe/isabella.png
+    - assets/equipe/thaiene.png

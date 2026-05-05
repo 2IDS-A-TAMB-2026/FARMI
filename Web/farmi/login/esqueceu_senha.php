@@ -2,6 +2,9 @@
 
     session_start();
 
+    $erro = $_SESSION['erro'] ?? null;
+    unset($_SESSION['erro']);
+
     // Verifica se o formulário foi enviado
     if (isset($_POST["email"])) {
 
@@ -18,7 +21,9 @@
             exit;
 
         } else {
-            $erro = "*E-mail não encontrado.";
+            $_SESSION['erro'] = "*E-mail não encontrado!";
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
         }
     }
 ?>
@@ -63,12 +68,11 @@
 
                     <label class="campo">E-mail:</label>
                     <input type="email" name="email" id="email" placeholder="nome@email.com"><br>
-                    <span id="erroEmail" class="erro" style="color: red; font-size: 13px;"></span>
 
                     <?php if(isset($erro)) echo "<p class='erro'>$erro</p>"; ?>
 
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">Enviar link</button>
+                        <button type="submit" class="btn btn-primary" id="btnEnviar" disabled>Enviar link</button>
                     </div>
 
                     <br>
@@ -84,39 +88,22 @@
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
             const emailInput = document.getElementById('email');
+            const botao = document.getElementById('btnEnviar');
+            const erroSpan = document.getElementById('erroEmail');
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                let isValid = true;
-
-                // 🔄 Limpa borda
-                emailInput.style.border = '';
-
-                // ===== EMAIL =====
+            function validarFormulario() {
                 const email = emailInput.value.trim();
+                const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-                if (email === '' || !validarEmail(email)) {
-                    emailInput.style.border = '2px solid red';
-                    isValid = false;
-                } else {
-                    emailInput.style.border = '2px solid green';
-                }
+                // ativa/desativa botão
+                botao.disabled = !emailValido;
 
-                // ===== ENVIO =====
-                if (isValid) {
-                    form.submit();
-                }
-            });
+            }
+
+            // valida enquanto digita
+            emailInput.addEventListener('input', validarFormulario);
         });
-
-        // VALIDAR EMAIL
-        function validarEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
         </script>
 
     </body>
