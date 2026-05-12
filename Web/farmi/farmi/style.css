@@ -1,7 +1,7 @@
 :root {
             --verde-escuro: #052501;
             --verde-claro: #4bc714;
-            --verde-claro-hover: #66bb6a;
+            --verde-claro-hover: #4bc714;
             --branco: #ffffff;
             --cinza-fundo: #f4f6f8;
             --texto-escuro: #333333;
@@ -240,17 +240,17 @@
         }
 
         .btn-primary {
-            background-color: var(--verde-escuro);
+            background-color: var(--verde-claro);
             color: var(--branco);
         }
 
         .btn-primary:hover {
-            background-color: #1b5e20;
+            background-color: #052501;
         }
 
         .btn-success {
             background-color: var(--verde-claro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-success:hover {
@@ -267,8 +267,8 @@
         }
 
         .btn-secondary {
-            background-color: #dbd9d9;
-            color: var(--preto);
+            background-color: #4bc714;
+            color: var(--branco);
         }
 
 
@@ -527,12 +527,12 @@
         }
 
         .btn-primary {
-            background-color: var(--verde-escuro);
+            background-color: var(--verde-claro);
             color: var(--branco);
         }
 
         .btn-primary:hover {
-            background-color: #1b5e20;
+            background-color: #052501;
         }
 
         .btn-success {
@@ -680,11 +680,11 @@
 
         .btn-primary {
             background-color: var(--verde-claro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-primary:hover {
-            background-color: #a2d4a5;
+            background-color: #052501;
         }
 
 
@@ -710,11 +710,11 @@
 
         .btn-secondary {
             background-color: var(--verde-claro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-secondary:hover {
-            background-color: var(--verde-claro-hover);
+            background-color: var(--verde-escuro);
         }
 
         .btn-group {

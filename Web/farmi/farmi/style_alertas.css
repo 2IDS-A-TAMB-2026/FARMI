@@ -118,7 +118,7 @@
         }
 
         .btn-secondary {
-            background: var(--azul);
+            background: var(--verde);
         }
 
         .btn-secondary:hover {
@@ -443,22 +443,22 @@
         }
 
         .btn-primary {
-            background: var(--verde); 
+            background:var(--verde) ; 
             color: #fff;
         }
 
         .btn-primary:hover { 
-            background: #1b5e20; 
+            background: #27a82f; 
             transform: translateY(-2px);
         }
 
         .btn-secondary {
-            background: var(--azul); 
+            background: var(--verde-claro); 
             color: #fff;
         }
 
         .btn-secondary:hover { 
-            background: #1976d2; 
+            background: #27a82f; 
             transform: translateY(-2px);
         }
 
@@ -473,8 +473,8 @@
         }
 
         .btn-success {
-            background: var(--verde-claro); 
-            color: var(--verde);
+            background: #27a82f; 
+            color: #fff;
         }
 
         .btn-success:hover { 

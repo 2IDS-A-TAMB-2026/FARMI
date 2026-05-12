@@ -252,16 +252,16 @@
         }
 
         .btn-primary:hover {
-            background-color: #a2d4a5;
+            background-color: #4bc714;
         }
 
         .btn-secondary {
             background-color: var(--verde-claro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-secondary:hover {
-            background-color: var(--verde-claro-hover);
+            background-color: #3da80e;
         }
 
         .btn-danger {
@@ -274,13 +274,13 @@
         }
 
         .btn-outline {
-            background-color: transparent;
+            background-color: #000;
             border: 2px solid var(--verde-escuro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-outline:hover {
-            background-color: #a2d4a5;
+            background-color: #3da80e;
             color: var(--branco);
         }
 
@@ -398,7 +398,7 @@
         }
         .alterar {
             text-decoration: none;
-            color: #325807;
+            color: #fff;
         }
     </style>
 </head>
@@ -408,7 +408,7 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Usuário
+            FARMI Funcionário
         </div>
         <nav>
             <a href="dashboard.php" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
@@ -431,7 +431,7 @@
             </div>
             <div class="user-profile">
                     <button class="avatar">
-                    <a href="usuario.php " class="alterar"><i></i></i> US</a>
+                    <a href="usuario.php " class="alterar"><i></i></i> FUN</a>
                     </button>
             </div>
         </header>

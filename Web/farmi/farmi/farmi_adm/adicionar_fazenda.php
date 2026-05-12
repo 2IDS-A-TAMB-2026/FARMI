@@ -50,8 +50,19 @@
 
         <!-- FORMULÁRIO -->
         <form id="addressForm">
-            <!-- Linha 1: Latitude + Longitude -->
+            <div class="form-group">
+                    <label for="nome"><i class="fa-solid fa-tractor"></i></i> Nome</label>
+                    <input 
+                        type="text" 
+                        id="nome" 
+                        name="nome" 
+                        step="any"
+                        placeholder="Ex: Fazenda São Jorge"
+                        required
+                    >
+                </div>
             <div class="form-row">
+                
                 <div class="form-group">
                     <label for="latitude"><i class="fa-solid fa-map-pin"></i> Latitude</label>
                     <input 

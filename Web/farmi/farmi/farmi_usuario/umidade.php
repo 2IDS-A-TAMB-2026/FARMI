@@ -334,7 +334,7 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Usuário
+            FARMI Funcionário
         </div>
         <nav>
            <a href="dashboard.php" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
@@ -356,7 +356,7 @@
                 <p style="color: #666;">Dados em tempo real dos sensores de umidade.</p>
             </div>
             <div class="user-profile">
-                <div class="avatar">US</div>
+                <div class="avatar">FUN</div>
             </div>
         </header>
 

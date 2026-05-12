@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Gerenciar Sensores</title>
+    <title>Gestor - Gerenciar Sensores</title>
     <!-- Ícones  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
@@ -14,15 +14,15 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Admin
+            FARMI Gestor
         </div>
         <nav>
-            <a href="dashboard.php" class="menu-item "><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            <a href="sensores.php" class="menu-item active"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
-            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
+            <a href="dashboard.php" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             <a href="fazendas.php" class="menu-item"><i class="fa-solid fa-cow"></i> Fazendas</a>
             <a href="cultura.php" class="menu-item "><i class="fa-solid fa-seedling"></i> Culturas</a>
-            <a href="alertas.php" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
+            <a href="sensores.php" class="menu-item active"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
+            <a href="alertas.php" class="menu-item "><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
             <a href="configuracoes.php" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
     </aside>
@@ -34,10 +34,10 @@
         <header class="header">
             <div>
                 <h2>Gerenciar Sensores</h2>
-                <p style="color: #666;">Painel administrativo</p>
+                <p style="color: #666;">Painel de Gestão</p>
             </div>
             <div class="user-profile">
-                <div class="avatar">ADM</div>
+                <div class="avatar">G</div>
             </div>
         </header>
 

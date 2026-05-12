@@ -14,14 +14,14 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Admin
+            FARMI Gestor
         </div>
         <nav>
             <a href="dashboard.php" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            <a href="sensores.php" class="menu-item"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
-            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
             <a href="fazendas.php" class="menu-item"><i class="fa-solid fa-cow"></i> Fazendas</a>
             <a href="cultura.php" class="menu-item "><i class="fa-solid fa-seedling"></i> Culturas</a>
+            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
+            <a href="sensores.php" class="menu-item"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
             <a href="alertas.php" class="menu-item "><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
             <a href="configuracoes.php" class="menu-item active"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
@@ -38,7 +38,7 @@
             </div>
             <div class="user-profile">
                     <button class="avatar">
-                    <a href="#" class="alterar"><i></i></i> ADM</a>
+                    <a href="#" class="alterar"><i></i></i> G</a>
                     </button>
             </div>
         </header>

@@ -6,6 +6,10 @@
     <title>Meu Perfil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        a{
+            text-decoration: none;
+            color:#fff;
+        }
         *{
             margin:0;
             padding:0;
@@ -117,7 +121,7 @@
         </div>
 
         <button id="logoutBtn" class="btn logout">
-            <a href="../../home.html">
+            <a href="dashboard.php">
                 <i class="fas fa-sign-out-alt"></i> Sair da Conta
             </a>
         </button>
@@ -134,7 +138,7 @@
         const usuario = {
             nome: 'João da Silva',
             email: 'joao@farmsi.com',
-            initials: 'US'
+            initials: 'FUN'
         };
 
         // Preenche perfil

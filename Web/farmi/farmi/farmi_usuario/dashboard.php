@@ -18,6 +18,48 @@
             --sombra: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        /* MODO ALTO CONTRASTE */
+        [data-high-contrast="true"] {
+            --verde-escuro: #ffff !important; 
+            --verde-claro: #ffff !important;
+            --verde-claro-hover: #ffff !important; 
+            --branco: #ffff !important; 
+            --cinza-fundo: #000000 !important; /* Preto */
+            --texto-escuro: #ffff !important; 
+        }
+
+        [data-high-contrast="true"] * {
+            color: #ffff !important;
+            background-color: #000000 !important;
+            border-color: #ffff !important;
+        }
+
+        [data-high-contrast="true"] .sidebar {
+            background-color: #111111 !important;
+        }
+
+        [data-high-contrast="true"] .card,
+        [data-high-contrast="true"] .table-container {
+            background-color: #111111 !important;
+            border-color: #ffff!important;
+        }
+
+        [data-high-contrast="true"] th,
+        [data-high-contrast="true"] td {
+            border-bottom-color: #505152 !important;
+        }
+
+        [data-high-contrast="true"] .status-badge {
+            background-color: #fff !important;
+            color: #000000 !important;
+            border: 1px solid #ffff!important;
+        }
+
+        [data-high-contrast="true"] .status-alert {
+            background-color: #000!important;
+            color: #ffff!important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -29,6 +71,29 @@
             background-color: var(--cinza-fundo);
             display: flex;
             min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* --- BOTÃO DE ACESSIBILIDADE --- */
+        .accessibility-toggle {
+        position: fixed;
+        top: 30px;           
+        right: 280px; 
+        z-index: 1000;
+        background: transparent;
+        color: var(--verde-escuro);
+        border: none;
+        padding: 12px 16px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: none;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+}
+
+        [data-high-contrast="true"] .accessibility-toggle {
+            color: #000000 !important;
         }
 
         /* --- SIDEBAR --- */
@@ -41,6 +106,7 @@
             padding: 20px;
             position: fixed;
             height: 100%;
+            transition: all 0.3s ease;
         }
 
         .logo {
@@ -82,6 +148,7 @@
             margin-left: 250px;
             flex: 1;
             padding: 30px;
+            transition: all 0.3s ease;
         }
 
         .header {
@@ -130,6 +197,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
 
         .card-info h3 {
@@ -163,6 +231,7 @@
             border-radius: 12px;
             box-shadow: var(--sombra);
             margin-bottom: 30px;
+            transition: all 0.3s ease;
         }
 
         table {
@@ -222,7 +291,7 @@
 
         .btn-secondary {
             background-color: var(--verde-claro);
-            color: var(--verde-escuro);
+            color: var(--branco);
         }
 
         .btn-secondary:hover {
@@ -233,11 +302,16 @@
 </head>
 <body>
 
+    <!-- BOTÃO DE ACESSIBILIDADE -->
+    <button class="accessibility-toggle" id="accessibilityBtn" aria-label="Alternar Alto Contraste">
+        <i class="fa-solid fa-eye-low-vision"></i>
+    </button>
+
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Usuário
+            FARMI Funcionário
         </div>
         <nav>
             <a href="dashboard.php" class="menu-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
@@ -256,10 +330,10 @@
         <header class="header">
             <div>
                 <h2>Painel Visual</h2>
-                <p style="color: #666;">Bem-vindo de volta, Usuário.</p>
+                <p style="color: #666;">Bem-vindo de volta, Funcionário.</p>
             </div>
             <div class="user-profile">
-                <div class="avatar">US</div>
+                <div class="avatar">FUN</div>
             </div>
         </header>
 
@@ -357,5 +431,36 @@
             </table>
         </div>
     </main>
+
+    <script>
+        // JavaScript para toggle de acessibilidade
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const btn = document.getElementById('accessibilityBtn');
+            const isHighContrast = localStorage.getItem('highContrast') === 'true';
+
+            // Aplicar estado inicial
+            if (isHighContrast) {
+                body.setAttribute('data-high-contrast', 'true');
+                btn.innerHTML = '<i class="fa-solid fa-eye"></i> ';
+            }
+
+            btn.addEventListener('click', function() {
+                const currentState = body.getAttribute('data-high-contrast') === 'true';
+                
+                if (currentState) {
+                    // Desativar alto contraste
+                    body.removeAttribute('data-high-contrast');
+                    btn.innerHTML = '<i class="fa-solid fa-eye-low-vision"></i> ';
+                    localStorage.setItem('highContrast', 'false');
+                } else {
+                    // Ativar alto contraste
+                    body.setAttribute('data-high-contrast', 'true');
+                    btn.innerHTML = '<i class="fa-solid fa-eye"></i> ';
+                    localStorage.setItem('highContrast', 'true');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

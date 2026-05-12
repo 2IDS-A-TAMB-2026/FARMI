@@ -3,10 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Gerenciar Culturas</title>
+    <title>Gestor - Gerenciar Culturas</title>
     <!-- Ícones  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Estilos para o dropdown de fazendas */
+        .dropdown {
+            position: relative;
+            display: block;
+        }
+        .dropdown-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+            transition: all 0.3s ease;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dropdown-btn:hover {
+            border-color: var(--verde-claro);
+            background: #e8f5e8;
+        }
+        .dropdown-btn::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: auto;
+        }
+        .dropdown-content {
+            position: absolute;
+            background: white;
+            min-width: 100%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            display: none;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown-content label {
+            display: block;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f3f4;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .dropdown-content label:hover {
+            background: #f8f9fa;
+        }
+        .dropdown-content label:last-child {
+            border-bottom: none;
+        }
+        .dropdown-content input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        .dropdown.open .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,15 +79,15 @@
     <aside class="sidebar">
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Admin
+            FARMI Gestor
         </div>
         <nav>
             <a href="dashboard.php" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            <a href="sensores.php" class="menu-item"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
-            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
             <a href="fazendas.php" class="menu-item"><i class="fa-solid fa-cow"></i> Fazendas</a>
-            <a href="cultura.php" class="menu-item active"><i class="fa-solid fa-seedling"></i> Culturas</a>
-            <a href="alertas.php" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
+            <a href="cultura.php" class="menu-item active "><i class="fa-solid fa-seedling"></i> Culturas</a>
+            <a href="usuarios.php" class="menu-item"><i class="fa-solid fa-users"></i> Usuários</a>
+            <a href="sensores.php" class="menu-item"><i class="fa-solid fa-satellite-dish"></i> Sensores</a>
+            <a href="alertas.php" class="menu-item "><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
             <a href="configuracoes.php" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
     </aside>
@@ -37,7 +102,7 @@
                 <p style="color: #666;">Controle total das culturas plantadas</p>
             </div>
             <div class="user-profile">
-                <div class="avatar">ADM</div>
+                <div class="avatar">G</div>
             </div>
         </header>
 
@@ -88,6 +153,26 @@
                 Adicionar Nova Cultura
             </h3>
             <form id="formCultura" class="form-grid">
+
+                <!-- CAMPO FAZENDAS (NOVO) - ANTES DO NOME DA CULTURA -->
+                <div class="form-group">
+                    <label for="fazendas">
+                        <i class="fa-solid fa-cow"></i>
+                        Fazendas *
+                    </label>
+                    <div class="dropdown" id="fazendasDropdown">
+                        <div onclick="toggleDropdown('fazendasDropdown')">
+                            Selecione opções
+                        </div>
+                        <div class="dropdown-content" id="dropdownFazendas">
+                            <label><input type="checkbox" value="1"> Fazenda São João</label>
+                            <label><input type="checkbox" value="2"> Fazenda Santa Cruz</label>
+                            <label><input type="checkbox" value="3"> Fazenda Verde Vale</label>
+                            <label><input type="checkbox" value="4"> Fazenda Nova Esperança</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="nomeCultura">
                         <i class="fa-solid fa-tag"></i>
@@ -138,8 +223,7 @@
                     <input type="number" id="areaCultivada" name="areaCultivada" 
                            min="0" step="0.01" required placeholder="25.50">
                 </div>
-                
-            <form id="formCultura" class="form-grid">
+
                 <div class="form-group">
                     <label for="sensorLuz">
                         <i class="fa-solid fa-lightbulb"></i>
@@ -166,7 +250,6 @@
                     <input type="text" id="sensorUmi" name="sensorUmi" required
                             placeholder="Ex: 65%">
                 </div>
-
 
                 <div class="form-group">
                     <label for="sensorSolo">
@@ -244,21 +327,38 @@
         </tbody>
     </table>
 </div>
+
     <script>
-        // Simulação de funcionalidades
-        document.getElementById('formSensor').addEventListener('submit', function(e) {
+        // Função para toggle do dropdown de fazendas
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('open');
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(function(dropdown) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        });
+
+        // Submit do formulário principal
+        document.getElementById('formCultura').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Sensor adicionado com sucesso! (Simulação)');
+            alert('Cultura adicionada com sucesso! (Simulação)');
             this.reset();
         });
 
-        function editarSensor(id) {
-            alert('Editar sensor ID: ' + id + ' (Implementar modal de edição)');
+        function editarCultura(id) {
+            alert('Editar cultura ID: ' + id + ' (Implementar modal de edição)');
         }
 
-        function excluirSensor(id) {
-            if(confirm('Deseja realmente excluir este sensor?')) {
-                alert('Sensor ID: ' + id + ' excluído com sucesso! (Simulação)');
+        function excluirCultura(id) {
+            if(confirm('Deseja realmente excluir esta cultura?')) {
+                alert('Cultura ID: ' + id + ' excluída com sucesso! (Simulação)');
                 location.reload();
             }
         }
