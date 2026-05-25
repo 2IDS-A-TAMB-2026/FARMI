@@ -54,38 +54,7 @@
         </div>
     </div>
 
-    <script>
-        const form = document.getElementById('changePasswordForm');
-        const newPassword = document.getElementById('newPassword');
-        const confirmPassword = document.getElementById('confirmPassword');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const currentPass = document.getElementById('currentPassword').value;
-            const newPass = newPassword.value;
-            const confirmPass = confirmPassword.value;
-
-            if (newPass !== confirmPass) {
-                alert('As senhas não coincidem!');
-                return;
-            }
-
-            if (newPass.length < 8) {
-                alert('A senha deve ter pelo menos 8 caracteres!');
-                return;
-            }
-
-            if (!/[A-Z]/.test(newPass) || !/[0-9]/.test(newPass)) {
-                alert('A senha deve conter pelo menos 1 letra maiúscula e 1 número!');
-                return;
-            }
-
-            // Aqui você enviaria para o servidor
-            alert('Senha alterada com sucesso! 🎉');
-            form.reset();
-        });
-    </script>
     <script src="./../script.js"></script>
 </body>
 </html>

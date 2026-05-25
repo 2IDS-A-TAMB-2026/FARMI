@@ -89,7 +89,7 @@
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            /* gap: 10px; */
         }
 
         .avatar {
@@ -920,13 +920,13 @@ body.alto-contraste .chart-container {
 #contraste-btn {
     background: transparent !important;
     border: none !important;
-    margin-left: 78%;
+    /* margin-left: 78%; */
 
    
     padding: 10px;
     font-size: 20px;
 
-    color: #ffffff;
+    color: #000;
 
     cursor: pointer;
     transition: all 0.3s ease;

@@ -18,3 +18,16 @@ document.getElementById('contraste-btn')
     }
 
 });
+
+//Aumentar Fonte
+// document.getElementById('aumentar-fonte-btn').addEventListener("click", function(){
+//     document.body.classList.add("aumentar-fonte");
+//     document.body.classList.remove("diminuir-fonte");
+// });
+
+// //Diminuir Fonte
+// document.getElementById('diminuir-fonte-btn').addEventListener("click", function(){
+//     document.body.classList.remove("aumentar-fonte");
+//     document.body.classList.add("diminuir-fonte");
+// });
+

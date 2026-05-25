@@ -80,15 +80,15 @@
 
         .header h2 { color: var(--verde); }
 
-        .avatar {
-            width: 40px; 
-            height: 40px; 
-            background: var(--verde-claro); 
-            border-radius: 50%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            color: var(--verde); 
+    .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--verde-claro);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--verde-escuro);
             font-weight: bold;
         }
 
@@ -694,20 +694,14 @@ body.alto-contraste .fazenda-card {
 #contraste-btn {
     background: transparent !important;
     border: none !important;
-    margin-left: 78%;
- 
-
+    margin: 0; /* Garante que nenhuma margem empurre o botão */
     padding: 10px;
     font-size: 20px;
-
-    color: #ffffff;
-
+    color: #000;
     cursor: pointer;
     transition: all 0.3s ease;
-
     outline: none !important;
     box-shadow: none !important;
-
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;

@@ -38,8 +38,8 @@
                 <h2>Gerenciar Usuários</h2>
                 <p style="color: #666;">Painel de Gestão</p>
             </div>
-            <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
             <div class="user-profile">
+                <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
                 <div class="avatar">G</div>
             </div>
         </header>
@@ -221,3 +221,68 @@
     </main>
     <script src="./../script.js"></script>
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cpf = document.querySelector('#cpf');
+
+    if (!cpf) return;
+
+    cpf.addEventListener('input', function () {
+        let v = cpf.value.replace(/\D/g, '').slice(0, 11);
+
+        // aplica máscara progressiva
+        v = v.replace(/^(\d{3})(\d)/, '$1.$2');
+        v = v.replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3');
+        v = v.replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+
+        cpf.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const senha = document.querySelector('#senha');
+
+    if (!senha) return;
+
+    senha.addEventListener('input', function () {
+        const v = senha.value;
+
+        if (v.length < 8) {
+            senha.style.border = '2px solid red';
+        } else {
+            senha.style.border = '2px solid green';
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const email = document.querySelector('#email');
+
+    if (!email) return;
+
+    email.addEventListener('blur', function () {
+        const v = email.value;
+
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (v && !regex.test(v)) {
+            alert('Email inválido!');
+            email.style.border = '2px solid red';
+        } else {
+            email.style.border = '';
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const nome = document.querySelector('#nome');
+
+    if (!nome) return;
+
+    nome.addEventListener('input', function () {
+        let v = nome.value;
+
+        // remove números e símbolos
+        v = v.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+
+        nome.value = v;
+    });
+});
+</script>

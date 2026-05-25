@@ -34,13 +34,16 @@
                 <h2>Controle de Fazendas</h2>
                 <p style="color: #666;">Gerencie todas as fazendas do sistema</p>
             </div>
-            <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
-            <div class="avatar">G</div>
+            
+            <div class="header-actions">
+                <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
+                <div class="avatar">G</div>
+            </div>
         </header>
 
         <!-- Barra de pesquisa -->
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="Pesquisar fazendas...">
+            <input type="text" id="pesquisar"class="search-input" placeholder="Pesquisar fazendas...">
             <a href="#" class="btn btn-primary">
                 <i class="fa-solid fa-plus"></i>
                 Pesquisar
@@ -232,3 +235,22 @@
     <script src="./../script.js"></script>
 </body>
 </html>
+<script>
+    const pesquisar = document.getElementById('pesquisar');
+
+if(pesquisar){
+
+    pesquisar.addEventListener('keyup', (e) => {
+        let value = e.target.value;
+
+        // REMOVE TUDO QUE NÃO FOR LETRA OU ESPAÇO
+        value = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+
+        // REMOVE ESPAÇOS DUPLOS
+        value = value.replace(/\s+/g, ' ');
+
+        e.target.value = value;
+    });
+
+}
+</script>

@@ -105,6 +105,196 @@
         .back a:hover{text-decoration:underline}
 
         @media(max-width:480px){.container{padding:25px 20px}}
+        /* =========================
+   TODOS OS ELEMENTOS
+========================= */
+
+/* 
+Seleciona TODOS os elementos dentro do body
+quando o alto contraste estiver ativo
+
+O * significa "todos os elementos"
+*/
+body.alto-contraste * {
+
+    /* deixa todos os textos brancos */
+    color: #fff !important;
+
+    /* muda a cor das bordas para branco */
+    border-color: #fff !important;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+
+/* 
+Seleciona vários tipos de containers:
+div, section, main, aside, nav, etc.
+*/
+body.alto-contraste div,
+body.alto-contraste section,
+body.alto-contraste main,
+body.alto-contraste aside,
+body.alto-contraste nav,
+body.alto-contraste header,
+body.alto-contraste footer,
+body.alto-contraste form {
+
+    /* fundo preto para todos esses containers */
+    background: #000 !important;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+/* 
+Seleciona:
+- input
+- select
+- textarea
+*/
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
+
+    /* fundo escuro */
+    background: #000000 !important;
+
+    /* texto branco */
+    color: #fff !important;
+
+    /* borda branca */
+    border: 2px solid #fff !important;
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+/* 
+Seleciona o placeholder do input
+
+Ex:
+<input placeholder="Digite seu nome">
+*/
+body.alto-contraste input::placeholder {
+
+    /* cor cinza clara */
+    color: #ccc !important;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+/* 
+Seleciona:
+- todos os <button>
+- elementos com classe .btn
+*/
+body.alto-contraste button,
+body.alto-contraste .btn {
+
+    /* fundo branco */
+    background: #fff !important;
+
+    /* texto preto */
+    color: #000 !important;
+
+    /* borda branca */
+    border: 2px solid #fff !important;
+}
+
+/* =========================
+   TABELAS
+========================= */
+
+/* 
+Seleciona:
+- table
+- thead
+- tbody
+- tr
+- td
+- th
+*/
+body.alto-contraste table,
+body.alto-contraste thead,
+body.alto-contraste tbody,
+body.alto-contraste tr,
+body.alto-contraste td,
+body.alto-contraste th {
+
+    /* fundo preto */
+    background: #191717 !important;
+
+    /* texto branco */
+    color: #fff !important;
+
+    /* bordas brancas */
+    border: 1px solid #fff !important;
+}
+
+/* =========================
+   ÍCONES
+========================= */
+
+/* 
+Seleciona todos os ícones <i>
+
+Ex:
+<i class="fa-solid fa-user"></i>
+*/
+body.alto-contraste i {
+
+    /* deixa os ícones brancos */
+    color: #fff !important;
+}
+body.alto-contraste .chart-container {
+    background: #222426 !important;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+#contraste-btn {
+    margin-left: 78%;
+    background: transparent !important;
+    border: none !important;
+
+    /* display: inline-flex;
+    align-items: center;
+    justify-content: center; */
+
+    padding: 10px;
+    font-size: 20px;
+
+    color: #000;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    outline: none !important;
+    box-shadow: none !important;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#contraste-btn:hover {
+    color: #ffffff;
+}
+
+#contraste-btn:focus,
+#contraste-btn:active,
+#contraste-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
     </style>
 </head>
 <body>

@@ -563,12 +563,11 @@ body.alto-contraste i {
 #contraste-btn {
     background: transparent !important;
     border: none !important;
-    margin-left: 78%;
-   
+
     padding: 10px;
     font-size: 20px;
 
-    color: #ffffff;
+    color: #000;
 
     cursor: pointer;
     transition: all 0.3s ease;
@@ -591,4 +590,42 @@ body.alto-contraste i {
     outline: none !important;
     box-shadow: none !important;
     background: transparent !important;
+}
+/* 
+Seleciona vários tipos de containers:
+div, section, main, aside, nav, etc.
+*/
+body.alto-contraste div,
+body.alto-contraste section,
+body.alto-contraste main,
+body.alto-contraste aside,
+body.alto-contraste nav,
+body.alto-contraste header,
+body.alto-contraste footer,
+body.alto-contraste form {
+
+    /* fundo preto para todos esses containers */
+    background: #141313d2 !important;
+}
+body.alto-contraste * {
+
+    /* deixa todos os textos brancos */
+    color: #fff !important;
+
+    /* muda a cor das bordas para branco */
+    border-color: #fff !important;
+}
+/* Força o fundo da bolinha a ser preto e o texto/letra dentro dela a ser branco */
+body.alto-contraste button.avatar {
+    background-color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste button.avatar * {
+    color: #ffffff !important;
+}
+
+/* Caso a letra "G" esteja escrita direto na tag <button> (sem tags filhas): */
+body.alto-contraste button.avatar {
+    color: #ffffff !important; 
 }

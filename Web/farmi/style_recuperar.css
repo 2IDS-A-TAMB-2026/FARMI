@@ -404,7 +404,7 @@ body.alto-contraste .chart-container {
     padding: 10px;
     font-size: 20px;
 
-    color: #ffffff;
+    color: #000;
 
     cursor: pointer;
     transition: all 0.3s ease;

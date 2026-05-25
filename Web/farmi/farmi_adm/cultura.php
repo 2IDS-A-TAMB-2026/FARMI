@@ -103,8 +103,8 @@
                 <h2>Gerenciar Culturas</h2>
                 <p style="color: #666;">Controle total das culturas plantadas</p>
             </div>
-            <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
             <div class="user-profile">
+                <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
                 <div class="avatar">G</div>
             </div>
         </header>
@@ -181,8 +181,8 @@
                         <i class="fa-solid fa-tag"></i>
                         Nome da Cultura *
                     </label>
-                    <input type="text" id="nomeCultura" name="nomeCultura" required 
-                           placeholder="Ex: Milho Safrinha, Soja GM 8478">
+                    <input type="text" id="nome" name="nomeCultura" required 
+                           placeholder="Ex: Milho Safrinha">
                 </div>
                 
                 <div class="form-group">
@@ -190,7 +190,7 @@
                         <i class="fa-solid fa-calendar-day"></i>
                         Data do Plantio *
                     </label>
-                    <input type="date" id="dataPlantio" name="dataPlantio" required>
+                    <input type="date" id="data" name="dataPlantio" required>
                 </div>
 
                 <div class="form-group">
@@ -198,7 +198,7 @@
                         <i class="fa-solid fa-clock"></i>
                         Ciclo Produtivo (dias) *
                     </label>
-                    <input type="number" id="cicloProdutivo" name="cicloProdutivo" 
+                    <input type="number" id="ciclo" name="cicloProdutivo" 
                            min="30" max="365" required placeholder="120">
                 </div>
 
@@ -223,7 +223,7 @@
                         <i class="fa-solid fa-ruler-combined"></i>
                         Área Cultivada (ha) *
                     </label>
-                    <input type="number" id="areaCultivada" name="areaCultivada" 
+                    <input type="number" id="area" name="areaCultivada" 
                            min="0" step="0.01" required placeholder="25.50">
                 </div>
 
@@ -232,7 +232,7 @@
                         <i class="fa-solid fa-lightbulb"></i>
                          Sensor de luz (lux):
                     </label>
-                    <input type="text" id="sensorLuz" name="sensorLuz" required 
+                    <input type="text" id="lux" name="sensorLuz" required 
                            placeholder="Ex: 50000 lux">
                 </div>
                 
@@ -241,7 +241,7 @@
                         <i class="fa-solid fa-cloud"></i>
                         Sensor de clima (Temperatura °C):
                     </label>
-                    <input type="text" id="sensorTemp" name="sensorTemp" required
+                    <input type="text" id="temperatura" name="sensorTemp" required
                             placeholder="Ex: 24°C">
                 </div>
 
@@ -250,7 +250,7 @@
                         <i class="fa-solid fa-temperature-empty"></i>
                         Sensor de clima (Umidade %):
                     </label>
-                    <input type="text" id="sensorUmi" name="sensorUmi" required
+                    <input type="text" id="umidade_ar" name="sensorUmi" required
                             placeholder="Ex: 65%">
                 </div>
 
@@ -259,7 +259,7 @@
                         <i class="fa-solid fa-mound"></i>
                         Sensor de umidade do Solo (%):
                     </label>
-                    <input type="text" id="sensorSolo" name="sensorSolo" 
+                    <input type="text" id="umidade_solo" name="sensorSolo" 
                            placeholder="Ex: 70%">
                 </div>
 
@@ -369,3 +369,111 @@
     <script src="./../script.js"></script>
 </body>
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const nome = document.querySelector('#nome');
+
+    if (!nome) return;
+
+    nome.addEventListener('input', function () {
+        nome.value = nome.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const data = document.querySelector('#data');
+    if (!data) return;
+
+    const hoje = new Date().toISOString().split('T')[0];
+    data.setAttribute('max', hoje);
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const ciclo = document.querySelector('#ciclo');
+
+    if (!ciclo) return;
+
+    ciclo.addEventListener('input', function () {
+        ciclo.value = ciclo.value.replace(/\D/g, '').slice(0, 3);
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const area = document.querySelector('#area');
+
+    if (!area) return;
+
+    area.addEventListener('input', function () {
+        let v = area.value.replace(/\D/g, '');
+
+        // força decimal com ponto
+        v = (Number(v) / 100).toFixed(2).replace('.', '.');
+
+        area.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const lux = document.querySelector('#lux');
+
+    if (!lux) return;
+
+    lux.addEventListener('input', function () {
+        lux.value = lux.value.replace(/\D/g, '');
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const temp = document.querySelector('#temperatura');
+
+    if (!temp) return;
+
+    temp.addEventListener('input', function () {
+        let v = temp.value.replace(/[^0-9-]/g, '');
+
+        // permite só um "-"
+        if ((v.match(/-/g) || []).length > 1) {
+            v = v.replace(/-/g, '');
+        }
+
+        temp.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const temp = document.querySelector('#temperatura');
+
+    if (!temp) return;
+
+    temp.addEventListener('input', function () {
+        let v = temp.value.replace(/[^0-9-]/g, '');
+
+        // permite só um "-"
+        if ((v.match(/-/g) || []).length > 1) {
+            v = v.replace(/-/g, '');
+        }
+
+        temp.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const umidade = document.querySelector('#umidade_ar');
+
+    if (!umidade) return;
+
+    umidade.addEventListener('input', function () {
+        let v = umidade.value.replace(/\D/g, '');
+
+        if (v > 100) v = 100;
+
+        umidade.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const solo = document.querySelector('#umidade_solo');
+
+    if (!solo) return;
+
+    solo.addEventListener('input', function () {
+        let v = solo.value.replace(/\D/g, '');
+
+        if (v > 100) v = 100;
+
+        solo.value = v;
+    });
+});
+</script>

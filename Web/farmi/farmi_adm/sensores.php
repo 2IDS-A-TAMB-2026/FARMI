@@ -38,8 +38,8 @@
                 <h2>Gerenciar Sensores</h2>
                 <p style="color: #666;">Painel de Gestão</p>
             </div>
-            <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
             <div class="user-profile">
+                <button id="contraste-btn" aria-label="Alterar contraste"><i class="fa-solid fa-circle-half-stroke"></i></button>
                 <div class="avatar">G</div>
             </div>
         </header>
@@ -102,8 +102,12 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="unidade">Unidade de Medida*</label>
-                    <input type="number" id="unidade" name="unidade" required placeholder="Ex: % (porcentagem) ou °C">
+                    <label for="unidade">Unidade de medida *</label>
+                    <select id="unidade" name="unidade" required>
+                        <option value="">Selecione o unidade</option>
+                        <option value="porcentagem">%</option>
+                        <option value="graus">°</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="status">Status Inicial*</label>
@@ -226,3 +230,12 @@
     <script src="./../script.js"></script>
 </body>
 </html>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    const data = document.querySelector('#data');
+    if (!data) return;
+
+    const hoje = new Date().toISOString().split('T')[0];
+    data.setAttribute('max', hoje);
+});
+</script>
