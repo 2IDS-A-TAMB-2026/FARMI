@@ -657,15 +657,15 @@ body.alto-contraste .chart-container {
                 <h3><i class="fa-solid fa-address-book"></i> Informações de Contato</h3>
                 <div class="form-group">
                     <label>Nome Completo:</label>
-                    <input type="text"  name="nome" placeholder="Nome...." >
+                    <input type="text"  name="nome" id="name" placeholder="Nome...." >
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" placeholder="nome@email.com" >
+                    <input type="email" name="email" id="email" placeholder="nome@email.com" >
                 </div>
                 <div class="form-group">
                     <label>Telefone</label>
-                    <input type="tel" name="number"  placeholder="(00)00000-0000">
+                    <input type="tel" name="number" id="tel"  placeholder="(00)00000-0000">
                 </div>
                 <div class="btn-group">
                     <button class="btn btn-primary">
@@ -712,6 +712,73 @@ body.alto-contraste .chart-container {
 </body>
 </html>
 
+<script>
+const name = document.getElementById('name');
+
+if(name){
+
+    name.addEventListener('keyup', (e) => {
+        let value = e.target.value;
+
+        // REMOVE TUDO QUE NÃO FOR LETRA OU ESPAÇO
+        value = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+
+        // REMOVE ESPAÇOS DUPLOS
+        value = value.replace(/\s+/g, ' ');
+
+        e.target.value = value;
+    });
+
+}
+const text = document.getElementById('tel');
+document.addEventListener('DOMContentLoaded', function () {
+    
+
+    if (!tel) return;
+
+    tel.addEventListener('input', function () {
+        // console.log('teste');
+        let v = tel.value.replace(/\D/g, ''); // só números
+
+        // limita 11 dígitos
+        v = v.slice(0, 11);
+
+        // (DD) + número
+        if (v.length <= 2) {
+            v = v.replace(/(\d{0,2})/, '($1');
+        } 
+        else if (v.length <= 6) {
+            v = v.replace(/(\d{2})(\d+)/, '($1) $2');
+        } 
+        else if (v.length <= 10) {
+            v = v.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3');
+        } 
+        else {
+            v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+
+        tel.value = v;
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const email = document.querySelector('#email');
+
+    if (!email) return;
+
+    email.addEventListener('blur', function () {
+        const v = email.value;
+
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (v && !regex.test(v)) {
+            alert('Email inválido!');
+            email.style.border = '2px solid red';
+        } else {
+            email.style.border = '';
+        }
+    });
+});
+</script>
 
 
                     

@@ -472,33 +472,189 @@ body.alto-contraste .chart-container {
         </div>
     </div>
 
-    <script>
-        // Simulação de envio do formulário
-        document.getElementById('recoverForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            
-            if (email) {
-                // Simular envio
-                const btn = this.querySelector('.btn-primary');
-                const originalText = btn.innerHTML;
-                
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
-                btn.disabled = true;
-                
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Link enviado!';
-                    btn.style.backgroundColor = '#4caf50';
-                    
-                    setTimeout(() => {
-                        alert('Link de recuperação enviado para ' + email + '!');
-                        window.location.href = 'login.php';
-                    }, 1500);
-                }, 2000);
-            }
-        });
-    </script>
+        <script>
+
+
+    const form = document.getElementById('recoverForm');
+    const emailInput = document.getElementById('email');
+    const btnEnviar = form.querySelector('.btn-primary');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+
+        // =========================
+        // VALIDAÇÃO EMAIL
+        // =========================
+
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email) {
+            mostrarAlerta(
+                'warning',
+                'Informe seu email para continuar.'
+            );
+
+            emailInput.focus();
+            return;
+        }
+
+        if (!regexEmail.test(email)) {
+            mostrarAlerta(
+                'warning',
+                'Digite um email válido.'
+            );
+
+            emailInput.focus();
+            return;
+        }
+
+        // =========================
+        // LOADING BOTÃO
+        // =========================
+
+        const textoOriginal = btnEnviar.innerHTML;
+
+        btnEnviar.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+        btnEnviar.disabled = true;
+
+        // =========================
+        // SIMULA ENVIO
+        // =========================
+
+        setTimeout(() => {
+
+            btnEnviar.innerHTML =
+                '<i class="fa-solid fa-check"></i> Link enviado!';
+
+            btnEnviar.style.backgroundColor = '#4caf50';
+
+            atualizarPassos();
+
+            mostrarAlerta(
+                'success',
+                `Link de recuperação enviado para ${email}`
+            );
+
+            // redireciona depois
+            setTimeout(() => {
+                window.location.href = 'login.php';
+            }, 2500);
+
+        }, 2000);
+    });
+
+    // =========================
+    // ALERTAS
+    // =========================
+
+    function mostrarAlerta(tipo, mensagem) {
+
+        // remove alerta antigo
+        const alertaExistente =
+            document.querySelector('.alert');
+
+        if (alertaExistente) {
+            alertaExistente.remove();
+        }
+
+        // cria alerta
+        const alerta = document.createElement('div');
+
+        alerta.className = `alert alert-${tipo}`;
+
+        alerta.innerHTML = `
+            <i class="fa-solid ${
+                tipo === 'success'
+                    ? 'fa-check-circle'
+                    : 'fa-triangle-exclamation'
+            }"></i>
+
+            <span>${mensagem}</span>
+        `;
+
+        // adiciona antes do formulário
+        form.parentNode.insertBefore(alerta, form);
+
+        // remove automaticamente
+        setTimeout(() => {
+            alerta.remove();
+        }, 5000);
+    }
+
+    // =========================
+    // PASSOS
+    // =========================
+
+    function atualizarPassos() {
+
+        const passos =
+            document.querySelectorAll('.step');
+
+        passos[0].classList.remove('active');
+        passos[0].classList.add('completed');
+
+        passos[1].classList.add('active');
+    }
+
+    // =========================
+    // ENTER NO INPUT
+    // =========================
+
+    emailInput.addEventListener('keydown', function (e) {
+
+        if (e.key === 'Enter') {
+            form.dispatchEvent(
+                new Event('submit')
+            );
+        }
+    });
+
+    // =========================
+    // CONTRASTE
+    // =========================
+
+    const contrasteBtn =
+        document.getElementById('contraste-btn');
+
+    // verifica se já estava ativado
+    if (localStorage.getItem('altoContraste') === 'ativo') {
+        document.body.classList.add('alto-contraste');
+    }
+
+    contrasteBtn.addEventListener('click', function () {
+
+        document.body.classList.toggle('alto-contraste');
+
+        // salva preferência
+        if (
+            document.body.classList.contains('alto-contraste')
+        ) {
+            localStorage.setItem(
+                'altoContraste',
+                'ativo'
+            );
+        } else {
+            localStorage.removeItem(
+                'altoContraste'
+            );
+        }
+    });
+
+    // =========================
+    // REMOVE ESPAÇOS EMAIL
+    // =========================
+
+    emailInput.addEventListener('input', function () {
+
+        this.value = this.value.replace(/\s/g, '');
+    });
+</script>
+    
+
     <script src="./../script.js"></script>
 </body>
 </html>
