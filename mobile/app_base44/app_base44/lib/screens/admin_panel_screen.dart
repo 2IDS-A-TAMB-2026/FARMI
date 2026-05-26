@@ -8,8 +8,8 @@ class AdminPanelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final users = [
       {'name': 'João Silva', 'email': 'joao@fazenda.com', 'role': 'ADM / Produtor'},
-      {'name': 'Maria Santos', 'email': 'maria@fazenda.com', 'role': 'Usuário'},
-      {'name': 'Pedro Costa', 'email': 'pedro@fazenda.com', 'role': 'Usuário'},
+      {'name': 'Maria Santos', 'email': 'maria@fazenda.com', 'role': 'Funcionário'},
+      {'name': 'Pedro Costa', 'email': 'pedro@fazenda.com', 'role': 'Funcionário'},
     ];
 
     final sensors = [
@@ -30,7 +30,7 @@ class AdminPanelScreen extends StatelessWidget {
                 children: [
                   Text('Painel Administrativo',
                       style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w800)),
-                  Text('Gerencie usuários e sensores',
+                  Text('Gerencie funcionários e sensores',
                       style: GoogleFonts.inter(fontSize: 13, color: Colors.grey[600])),
                 ],
               ),
@@ -59,7 +59,7 @@ class AdminPanelScreen extends StatelessWidget {
             crossAxisSpacing: 10,
             childAspectRatio: 2.2,
             children: [
-              _statCard('Total Usuários', '3', Icons.people_rounded, Colors.blue),
+              _statCard('Total Funcionários', '3', Icons.people_rounded, Colors.blue),
               _statCard('Admins', '1', Icons.shield_rounded, Colors.amber),
               _statCard('Sensores Ativos', '5', Icons.sensors_rounded, Colors.green),
               _statCard('Inativos', '2', Icons.sensors_off_rounded, Colors.red),
@@ -74,7 +74,7 @@ class AdminPanelScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Usuários', style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 14)),
+                  Text('Funcionários', style: GoogleFonts.inter(fontWeight: FontWeight.w600, fontSize: 14)),
                   const SizedBox(height: 12),
                   ...users.map((u) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -217,7 +217,7 @@ class AdminPanelScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text('Convidar Usuário', style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
+        title: Text('Convidar Funcionário', style: GoogleFonts.inter(fontWeight: FontWeight.w700)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

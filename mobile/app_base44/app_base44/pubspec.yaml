@@ -24,6 +24,7 @@ flutter:
 
   assets:
     - assets/images/logo.png
+    - assets/images/fundo.png
     - assets/images/lavoura.jpg
     - assets/images/luz.png
     - assets/images/temp.png
@@ -38,8 +39,9 @@ flutter:
     - assets/images/vision.png
     - assets/images/mission.png
     - assets/equipe/vitor.png
-    - assets/equipe/vinicius.jpg
-    - assets/equipe/paula.jpg
-    - assets/equipe/maria.jpg
-    - assets/equipe/isabella.png
-    - assets/equipe/thaiene.png
+    - assets/equipe/vinicius.png
+    - assets/equipe/paula.jpeg
+    - assets/equipe/maria.jpeg
+    - assets/equipe/isabella.jpeg
+    - assets/equipe/thaiene.jpeg
+    
