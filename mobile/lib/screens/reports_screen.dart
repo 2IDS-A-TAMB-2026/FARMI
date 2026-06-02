@@ -1,6 +1,9 @@
+import 'package:app_base44/main.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -11,17 +14,36 @@ class ReportsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Relatórios', style: GoogleFonts.inter(fontSize: 22, fontWeight: FontWeight.w800)),
-          Text('Análise de desempenho das culturas', style: GoogleFonts.inter(fontSize: 13, color: Colors.grey[600])),
-          const SizedBox(height: 20),
-          _buildStats(),
-          const SizedBox(height: 20),
-          _buildAreaChart(),
-          const SizedBox(height: 20),
-          _buildHealthPie(),
-          const SizedBox(height: 20),
-          _buildTable(),
-        ],
+  Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        'Relatórios',
+        style: GoogleFonts.inter(
+          fontSize: 22,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+    ],
+  ),
+
+  Text(
+    'Análise de desempenho das culturas',
+    style: GoogleFonts.inter(
+      fontSize: 13,
+      color: Colors.grey[600],
+    ),
+  ),
+
+  const SizedBox(height: 20),
+  _buildStats(),
+  const SizedBox(height: 20),
+  _buildAreaChart(),
+  const SizedBox(height: 20),
+  _buildHealthPie(),
+  const SizedBox(height: 20),
+  _buildTable(),
+],
       ),
     );
   }
@@ -43,7 +65,7 @@ class ReportsScreen extends StatelessWidget {
       childAspectRatio: 2.4,
       children: stats.map((s) => Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,

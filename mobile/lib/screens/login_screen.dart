@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -46,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D2B1A),
+      backgroundColor: const Color(0xFF052501),
 
       // 🔙 APPBAR COM BOTÃO VOLTAR
       appBar: AppBar(
@@ -128,16 +130,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Digite seu e-mail';
-                      }
+  if (value == null || value.isEmpty) {
+    return 'Digite seu e-mail';
+  }
 
-                      if (!value.contains('@')) {
-                        return 'E-mail inválido';
-                      }
+  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+      .hasMatch(value)) {
+    return 'E-mail inválido';
+  }
 
-                      return null;
-                    },
+  return null;
+},
                   ),
 
                   const SizedBox(height: 15),
