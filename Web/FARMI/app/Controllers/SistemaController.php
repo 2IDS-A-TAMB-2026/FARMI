@@ -153,22 +153,51 @@ class SistemaController extends BaseController
             WHERE uf.ID_CPF_USUARIOS = ?
         ", [$cpfUsuario])->getResultArray();
 
-        // Processamento de Totais e Médias Atuais (Cards)
-        $total_sensores = count($dadosGerais);
-        $umidadeTotal = 0; $umidadeQtd = 0;
-        $luxTotal = 0; $luxQtd = 0;
-        $temperaturaTotal = 0; $temperaturaQtd = 0;
+        // Última temperatura registrada
+        $ultimaTemperatura = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Temperatura'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
 
-        foreach ($dadosGerais as $item) {
-            if ($item['VALOR'] === null) continue;
-            if ($item['TIPO_SENSOR'] === 'Temperatura') { $temperaturaTotal += $item['VALOR']; $temperaturaQtd++; }
-            if ($item['TIPO_SENSOR'] === 'Umidade') { $umidadeTotal += $item['VALOR']; $umidadeQtd++; }
-            if ($item['TIPO_SENSOR'] === 'Luz') { $luxTotal += $item['VALOR']; $luxQtd++; }
-        }
+        // Última umidade registrada
+        $ultimaUmidade = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Umidade'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
 
-        $umidade_atual = $umidadeQtd > 0 ? $umidadeTotal / $umidadeQtd : 0;
-        $lux           = $luxQtd > 0 ? $luxTotal / $luxQtd : 0;
-        $temperatura   = $temperaturaQtd > 0 ? $temperaturaTotal / $temperaturaQtd : 0;
+        // Última luminosidade registrada
+        $ultimaLuz = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Luz'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
+
+        $temperatura_atual = $ultimaTemperatura['VALOR'] ?? 0;
+        $umidade_atual = $ultimaUmidade['VALOR'] ?? 0;
+        $lux = $ultimaLuz['VALOR'] ?? 0;
 
         // 3. ESTRUTURAÇÃO DOS GRÁFICOS MULTI-SENSORES (Eixo X unificado e Datasets separados)
         $todos_horarios = [];
@@ -272,13 +301,15 @@ class SistemaController extends BaseController
         // Outros dados de contagem da View
         $total_fazendas = $db->query("SELECT COUNT(DISTINCT ID_FAZENDA) AS total FROM USUARIOS_FAZENDA WHERE ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
         $total_usuarios = $db->query("SELECT COUNT(DISTINCT uf2.ID_CPF_USUARIOS) AS total FROM USUARIOS_FAZENDA uf1 INNER JOIN USUARIOS_FAZENDA uf2 ON uf2.ID_FAZENDA = uf1.ID_FAZENDA WHERE uf1.ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
+        // Total de sensores 
+        $total_sensores = count($dadosGerais); 
 
         return view('sistema/farmi_adm/dashboard', [
             'dadosGerais' => $dadosGerais,
             'total_sensores' => $total_sensores,
             'umidade_atual' => $umidade_atual,
             'lux' => $lux,
-            'temperatura_atual' => $temperatura,
+            'temperatura_atual' => $temperatura_atual,
             'total_fazendas' => $total_fazendas,
             'total_usuarios' => $total_usuarios,
             'sensores' => $sensores,
@@ -524,38 +555,51 @@ class SistemaController extends BaseController
             WHERE uf.ID_CPF_USUARIOS = ?
         ", [$cpfUsuario])->getResultArray();
 
-        $umidadeTotal = 0;
-        $umidadeQtd = 0;
+        // Última temperatura registrada
+        $ultimaTemperatura = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Temperatura'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
 
-        $temperaturaTotal = 0;
-        $temperaturaQtd = 0;
+        // Última umidade registrada
+        $ultimaUmidade = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Umidade'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
 
-        $luxTotal = 0;
-        $luxQtd = 0;
+        // Última luminosidade registrada
+        $ultimaLuz = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Luz'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
 
-        foreach ($sensores as $item) {
-
-            if ($item['VALOR'] === null) continue;
-
-            if ($item['TIPO_SENSOR'] === 'Umidade') {
-                $umidadeTotal += $item['VALOR'];
-                $umidadeQtd++;
-            }
-
-            if ($item['TIPO_SENSOR'] === 'Temperatura') {
-                $temperaturaTotal += $item['VALOR'];
-                $temperaturaQtd++;
-            }
-
-            if ($item['TIPO_SENSOR'] === 'Luz') {
-                $luxTotal += $item['VALOR'];
-                $luxQtd++;
-            }
-        }
-
-        $umidade_atual = $umidadeQtd > 0 ? $umidadeTotal / $umidadeQtd : 0;
-        $temperatura_atual = $temperaturaQtd > 0 ? $temperaturaTotal / $temperaturaQtd : 0;
-        $lux = $luxQtd > 0 ? $luxTotal / $luxQtd : 0;
+        $temperatura_atual = $ultimaTemperatura['VALOR'] ?? 0;
+        $umidade_atual = $ultimaUmidade['VALOR'] ?? 0;
+        $lux = $ultimaLuz['VALOR'] ?? 0;
 
         // 3. EIXO X GLOBAL
         $todos_horarios = [];

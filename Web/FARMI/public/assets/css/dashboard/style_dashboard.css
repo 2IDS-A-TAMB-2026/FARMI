@@ -424,35 +424,23 @@ canvas{
 
 .btn{
     width: 100%;
-
     padding: 12px 20px;
-
     border: none;
-
     border-radius: 10px;
-
     cursor: pointer;
-
     font-weight: bold;
-
     background: var(--verde);
-
     color: #fff;
-
     transition: .3s;
-
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
     gap: 8px;
-
     text-decoration: none;
 }
 
 .btn:hover{
     background: var(--verde-claro);
-
     transform: translateY(-2px);
 }
 
@@ -503,11 +491,6 @@ body.alto-contraste header,
 body.alto-contraste footer,
 body.alto-contraste form{
     background: #000 !important;
-}
-
-body.alto-contraste .grafico-box{
-    background: #505152 !important;
-    border: 2px solid #fff;
 }
 
 body.alto-contraste button,

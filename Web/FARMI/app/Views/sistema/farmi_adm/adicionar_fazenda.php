@@ -148,12 +148,6 @@
 
         </div>
 
-        <!-- PASSOS -->
-        <div class="steps-indicator">
-            <div class="step active"></div>
-            <div class="step"></div>
-            <div class="step"></div>
-        </div>
 
         <!-- FORM -->
         <form action="<?= base_url('/fazenda/inserir') ?>" method="post" id="addressForm">
@@ -192,6 +186,7 @@
                         step="any"
                         id="latitude"
                         name="LATITUDE"
+                        maxlength="10"
                         placeholder="Ex: -23.550520"
                         required
                     >
@@ -210,6 +205,7 @@
                         step="any"
                         id="longitude"
                         name="LONGITUDE"
+                        maxlength="10"
                         placeholder="Ex: -46.633308"
                         required
                     >
@@ -273,6 +269,7 @@
                         step="0.01"
                         id="area_total"
                         name="AREA_TOTAL"
+                        maxlength="8"
                         placeholder="Ex: 150,50"
                         required
                     >
@@ -347,15 +344,15 @@
 
 
     /* =========================
-       MÁSCARA LATITUDE
+    MÁSCARA LATITUDE
     ========================= */
 
     const latitude = document.getElementById('latitude');
 
     if(latitude){
+        latitude.setAttribute('maxlength', '10');
 
         latitude.addEventListener('input', function(e){
-
             let value = e.target.value;
 
             value = value.replace(/[^0-9.-]/g, '');
@@ -363,28 +360,27 @@
             const partes = value.split('.');
 
             if(partes.length > 2){
-
                 value = partes[0] + '.' + partes[1];
-
             }
 
-            e.target.value = value;
+            value = value.substring(0, 10);
 
+            e.target.value = value;
         });
 
     }
 
 
     /* =========================
-       MÁSCARA LONGITUDE
+    MÁSCARA LONGITUDE
     ========================= */
 
     const longitude = document.getElementById('longitude');
 
     if(longitude){
+        longitude.setAttribute('maxlength', '10');
 
         longitude.addEventListener('input', function(e){
-
             let value = e.target.value;
 
             value = value.replace(/[^0-9.-]/g, '');
@@ -392,35 +388,51 @@
             const partes = value.split('.');
 
             if(partes.length > 2){
-
                 value = partes[0] + '.' + partes[1];
-
             }
 
-            e.target.value = value;
+            value = value.substring(0, 10);
 
+            e.target.value = value;
         });
 
     }
 
-
     /* =========================
-       MÁSCARA LOGRADOURO
+    MÁSCARA LOGRADOURO
     ========================= */
 
     const logradouro = document.getElementById('logradouro');
 
     if(logradouro){
+    logradouro.addEventListener('input', function(e){
+    let value = e.target.value;
 
-        logradouro.addEventListener('input', function(e){
+        value = value.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
 
-            let value = e.target.value;
+        value = value.replace(/\s+/g, ' ');
 
-            value = value.replace(/[0-9]/g, '');
+        e.target.value = value;
+    });
 
-            value = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+    }
 
-            value = value.replace(/\s+/g, ' ');
+
+    // =========================
+    // MÁSCARA NÚMERO
+    // SOMENTE 7 NÚMEROS
+    // =========================
+    const numero = document.getElementById('numero');
+
+    if(numero){
+
+        numero.addEventListener('input', function(e){
+
+            // PEGA SOMENTE NÚMEROS
+            let value = e.target.value.replace(/\D/g, '');
+
+            // LIMITA A 7 NÚMEROS
+            value = value.substring(0, 7);
 
             e.target.value = value;
 
@@ -428,57 +440,33 @@
 
     }
 
-
-
-
-    // =========================
-// MÁSCARA NÚMERO
-// SOMENTE 3 NÚMEROS
-// =========================
-const numero = document.getElementById('numero');
-
-if(numero){
-
-    numero.addEventListener('input', function(e){
-
-        // PEGA SOMENTE NÚMEROS
-        let value = e.target.value.replace(/\D/g, '');
-
-        // LIMITA A 3 NÚMEROS
-        value = value.substring(0, 3);
-
-        e.target.value = value;
-
-    });
-
-}
     /* =========================
-       MÁSCARA ÁREA TOTAL
+    MÁSCARA ÁREA TOTAL
     ========================= */
 
     const areaTotal = document.getElementById('area_total');
 
     if(areaTotal){
+    areaTotal.setAttribute('maxlength', '9');
 
-        areaTotal.addEventListener('input', function(e){
+    areaTotal.addEventListener('input', function(e){
+        let value = e.target.value;
 
-            let value = e.target.value;
+        value = value.replace(/[^0-9,]/g, '');
 
-            value = value.replace(/[^0-9,]/g, '');
+        const partes = value.split(',');
 
-            const partes = value.split(',');
+        if(partes.length > 2){
+            value = partes[0] + ',' + partes[1];
+        }
 
-            if(partes.length > 2){
+        value = value.substring(0, 9);
 
-                value = partes[0] + ',' + partes[1];
-
-            }
-
-            e.target.value = value;
-
-        });
+        e.target.value = value;
+    });
 
     }
+
 
 
     /* =========================
@@ -506,28 +494,30 @@ document.addEventListener('DOMContentLoaded', function () {
         e.target.value = value;
     });
 });
- // =========================
-// MÁSCARA NOME
-// SOMENTE LETRAS
-// =========================
 
-const nome = document.getElementById('nome');
+    // =========================
+    // MÁSCARA NOME
+    // LETRAS, NÚMEROS E ESPAÇOS
+    // =========================
 
-if(nome){
+    const nome = document.getElementById('nome');
 
-    nome.addEventListener('keyup', (e) => {
-        let value = e.target.value;
+    if (nome) {
 
-        // REMOVE TUDO QUE NÃO FOR LETRA OU ESPAÇO
-        value = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+        nome.addEventListener('keyup', (e) => {
+            let value = e.target.value;
 
-        // REMOVE ESPAÇOS DUPLOS
-        value = value.replace(/\s+/g, ' ');
+            // REMOVE TUDO QUE NÃO FOR LETRA, NÚMERO OU ESPAÇO
+            value = value.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
 
-        e.target.value = value;
-    });
+            // REMOVE ESPAÇOS DUPLOS
+            value = value.replace(/\s+/g, ' ');
 
-}
+            e.target.value = value;
+        });
+
+    }
+
 
 
     /* =========================

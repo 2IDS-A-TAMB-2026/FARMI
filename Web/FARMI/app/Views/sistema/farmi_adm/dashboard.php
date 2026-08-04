@@ -221,13 +221,13 @@ body.contraste .status-badge {
    ========================================================== */
 body.contraste canvas {
     /* Deixa cinza, dobra o brilho e aumenta o contraste para forçar o branco */
-    filter: grayscale(100%) brightness(200%) contrast(300%) !important;
+    filter: grayscale(0%) brightness(200%) contrast(300%) !important;
 }
 
 /* Para os ícones de culturas e atividades acompanharem e ficarem brancos */
 body.contraste .status-indicator,
 body.contraste .activity-icon {
-    filter: grayscale(100%) brightness(200%) contrast(300%) !important;
+    filter: grayscale(0%) brightness(200%) contrast(300%) !important;
     color: #fff !important; 
 }
 body.contraste .btn-logout {
@@ -256,6 +256,377 @@ body.contraste .avatar {
     background: #fff !important;
     color: #000!important;
 }
+
+.weather-card {
+    background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
+    border-radius: 20px;
+    padding: 6px 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    width: 500px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cabeçalho */
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.location-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Corpo */
+.weather-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.temp-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.temp-main #weather-icon {
+    font-size: 42px;
+    color: #ffc107; /* Cor do sol */
+}
+
+.temp-main #temperatura {
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.temp-main .unit {
+    font-size: 20px;
+    vertical-align: top;
+    margin-top: -15px;
+}
+
+/* Qualidade do ar */
+.air-quality {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.air-quality i {
+    color: #ffb300;
+}
+
+.air-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rodapé */
+.weather-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-previsao {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-previsao:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.weather-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.detail-item i {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.detail-item strong {
+    font-size: 14px;
+}
+
+/* ==========================================================
+   DASHBOARD FARMI - RESPONSIVIDADE ESPECÍFICA
+   ========================================================== */
+.dashboard-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.stats-grid .card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+.card-info {
+    min-width: 0;
+}
+.card-info h3 {
+    overflow-wrap: break-word;
+}
+.card-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* GRÁFICOS */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    min-width: 0;
+}
+.chart-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 350px;
+}
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+}
+/* SEÇÕES */
+.dashboard-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+/* SENSORES */
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.sensor-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+/* TABELAS */
+.dashboard-table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.dashboard-table-container table {
+    min-width: 700px;
+}
+/* NOTEBOOK / DESKTOP MENOR */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .sensor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+/* TABLET */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100%;
+        padding: 75px 15px 25px;
+    }
+    .dashboard-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .header {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .header h2 {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+    .header p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+    .stats-grid .card {
+        min-height: 110px;
+    }
+    .card-info h3 {
+        font-size: 14px;
+    }
+    .card-info p {
+        font-size: 24px;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .chart-card {
+        width: 100%;
+        padding: 15px;
+    }
+    .chart-container {
+        height: 280px;
+    }
+    .sensor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+    .sensor-card {
+        padding: 15px;
+    }
+    .dashboard-table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .dashboard-table-container table {
+        min-width: 650px;
+    }
+}
+/* CELULAR */
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .stats-grid .card {
+        min-height: 95px;
+    }
+    .card-info h3 {
+        font-size: 15px;
+    }
+    .card-info p {
+        font-size: 26px;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .chart-card {
+        padding: 12px;
+    }
+    .chart-container {
+        height: 250px;
+    }
+    .sensor-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .sensor-card {
+        width: 100%;
+    }
+    .section-title {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+}
+/* CELULAR PEQUENO */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 70px 10px 20px;
+    }
+    .header h2 {
+        font-size: 19px;
+    }
+    .header p {
+        font-size: 13px;
+    }
+    .stats-grid .card {
+        padding: 15px;
+    }
+    .card-info h3 {
+        font-size: 14px;
+    }
+    .card-info p {
+        font-size: 23px;
+    }
+    .chart-card {
+        padding: 10px;
+    }
+    .chart-container {
+        height: 220px;
+    }
+    .dashboard-table-container table {
+        min-width: 600px;
+    }
+}
+.mostrar-mais{
+    color: var(--verde-escuro);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s;
+    background: transparent;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #57c91b;
+    color: #fff;
+}
 </style>
     <!-- Ícone -->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
@@ -270,6 +641,9 @@ body.contraste .avatar {
 
     <!-- CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_dashboard.css') ?>">
+
+    <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -329,6 +703,11 @@ body.contraste .avatar {
 
 <!-- MAIN -->
 <main class="main-content">
+
+    <!-- Menu sanduíche -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
 
     <!-- HEADER -->
     <header class="header">
@@ -408,41 +787,72 @@ body.contraste .avatar {
             </div>
         </div>
 
-        <!-- CULTURAS -->
-        <div class="chart-card" id="culturas">
-
-            <h3 class="chart-title">
-                <i class="fa-solid fa-circle-info"></i>
-                Culturas
-            </h3>
-
-            <!-- MILHO -->
-            <div class="status-item" id="culturas">
-                <div class="status-indicator status-saudavel">
-                    <i class="fa-solid fa-wheat-awn" id="fotoMilho"></i>
-                </div>
-                <h4>Milho</h4>
-                <p id="statusMilho">Saudável</p>
-            </div>
-
-            <!-- SOJA -->
-            <div class="status-item" id="culturas">
-                <div class="status-indicator status-atencao">
-                    <i class="fa-solid fa-seedling" id="fotoSoja"></i>
-                </div>
-                <h4>Soja</h4>
-                <p id="statusSoja">Em atenção</p>
-            </div>
-
-            <!-- CAFÉ -->
-            <div class="status-item" id="culturas">
-                <div class="status-indicator status-perigo">
-                    <i class="fa-solid fa-leaf" id="fotoCafe"></i>
-                </div>
-                <h4>Café</h4>
-                <p id="statusCafe">Crítico</p>
-            </div>
+    <!-- CLIMA -->
+        <div class="weather-card" id="weather-widget">
+    <!-- CABEÇALHO (Cidade e Opções) -->
+    <div class="weather-header">
+        <div class="location-selector">
+            <i class="fa-solid fa-location-arrow"></i>
+            <span id="cidade-nome">Tambaú</span>
         </div>
+    </div>
+
+    <!-- CORPO (Temperatura e Qualidade do Ar) -->
+    <div class="weather-body">
+        <div class="temp-main">
+            <i class="fa-solid fa-sun" id="weather-icon"></i>
+            <span id="temperatura">--</span><span class="unit">°C</span>
+        </div>
+
+        <div class="air-quality" id="btn-qualidade-ar">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <div class="air-text">
+                <span class="air-title">Qualidade do ar</span>
+                <span id="qualidade-ar">Carregando...</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <!-- RODAPÉ DO CLIMA -->
+    <div class="weather-footer">
+        <button class="btn-previsao" id="btn-previsao-completa">Ver a previsão completa</button>
+    </div>
+
+    <!-- METRICAS AGRÍCOLAS ADICIONAIS -->
+    <div class="weather-details-grid">
+    <div class="detail-item">
+        <i class="fa-solid fa-wind"></i>
+        <span>Vento</span>
+        <strong id="dado-vento">-- km/h</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-droplet"></i>
+        <span>Umidade</span>
+        <strong id="dado-umidade">--%</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-cloud-rain"></i>
+        <span>Chuva</span>
+        <strong id="dado-chuva">-- mm</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-sun"></i>
+        <span>Índice UV</span>
+        <strong id="dado-uv">--</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-temperature-half"></i>
+        <span>Sensação</span>
+        <strong id="dado-sensacao">-- °C</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-temperature-arrow-down"></i>
+        <span>Orvalho</span>
+        <strong id="dado-orvalho">-- °C</strong>
+    </div>
+</div>
+</div>
 
         <!-- UMIDADE DO Ar -->
         <div class="chart-card">
@@ -567,7 +977,7 @@ body.contraste .avatar {
                     }
                     ?>
 
-                <tr>
+                    <tr class="linha-sensor">
 
                     <td>
                         <?= esc($sensor['ID_SENSOR']) ?>
@@ -630,6 +1040,10 @@ body.contraste .avatar {
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <div id="mostrarMaisSensores" class="mostrar-mais">
+                Mostrar mais
+        <i class="fa-solid fa-chevron-down"></i>
+</div>
         </div>
 
 </main>
@@ -873,62 +1287,61 @@ function classificarLux(lux) {
             }
         },
 
-        plugins: [{
+       plugins: [{
+    id: 'gaugeText',
+    afterDraw(chart) {
+        const {
+            ctx,
+            chartArea: { width, height }
+        } = chart;
+        ctx.save();
 
-            id: 'gaugeText',
+        // Detecta se o modo alto contraste está ativo
+        const eContraste = document.body.classList.contains('contraste');
+        
+        // Define as cores dinamicamente
+        const corTextoPrincipal = eContraste ? '#ffffff' : '#052501';
+        const corSubtitulo = eContraste ? '#dddddd' : '#666666';
 
-            afterDraw(chart) {
+        // Valor Lux
+        ctx.font = 'bold 26px Arial';
+        ctx.fillStyle = corTextoPrincipal; // <-- Agora fica branco no contraste
+        ctx.textAlign = 'center';
+        ctx.fillText(
+            valorLux.toLocaleString('pt-BR'),
+            width / 2,
+            height - 55
+        );
 
-                const {
-                    ctx,
-                    chartArea: { width, height }
-                } = chart;
+        // Unidade (Lux)
+        ctx.font = '16px Arial';
+        ctx.fillStyle = corTextoPrincipal; // <-- Agora fica branco no contraste
+        ctx.fillText(
+            'Lux',
+            width / 2,
+            height - 30
+        );
 
-                ctx.save();
+        // Status (Mantém a cor correspondente à faixa de luz)
+        ctx.font = 'bold 15px Arial';
+        ctx.fillStyle = infoLux.cor;
+        ctx.fillText(
+            infoLux.status,
+            width / 2,
+            height - 8
+        );
 
-                // Valor Lux
-                ctx.font = 'bold 26px Arial';
-                ctx.fillStyle = '#052501';
-                ctx.textAlign = 'center';
-
-                ctx.fillText(
-                    valorLux.toLocaleString('pt-BR'),
-                    width / 2,
-                    height - 55
-                );
-
-                // Unidade
-                ctx.font = '16px Arial';
-
-                ctx.fillText(
-                    'Lux',
-                    width / 2,
-                    height - 30
-                );
-
-                // Status
-                ctx.font = 'bold 15px Arial';
-                ctx.fillStyle = infoLux.cor;
-
-                ctx.fillText(
-                    infoLux.status,
-                    width / 2,
-                    height - 8
-                );
-
-                // Ambiente
-                ctx.font = '13px Arial';
-                ctx.fillStyle = '#666';
-
-                ctx.fillText(
-                    infoLux.ambiente,
-                    width / 2,
-                    height + 15
-                );
-
-                ctx.restore();
-            }
-        }]
+        // Ambiente
+        ctx.font = '13px Arial';
+        ctx.fillStyle = corSubtitulo;
+        ctx.fillText(
+            infoLux.ambiente,
+            width / 2,
+            height + 15
+        );
+        ctx.restore();
+    }
+}]
     });
 
 /* =========================
@@ -953,7 +1366,33 @@ setInterval(atualizarCulturas, 5000);
 const contrasteBtn = document.getElementById('contraste-btn');
 if (contrasteBtn) {
     contrasteBtn.addEventListener('click', () => {
+        // 1. Alterna a classe no body
         document.body.classList.toggle('contraste');
+        
+        // 2. Verifica se o alto contraste está ligado
+        const eContraste = document.body.classList.contains('contraste');
+        
+        // Se estiver em contraste, usa BRANCO (#ffffff). Se não, usa ESCURO (#052501)
+        const corTexto = eContraste ? '#ffffff' : '#052501';
+        const corGrade = eContraste ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+        // 3. Atualiza todos os gráficos na tela automaticamente
+        Object.values(Chart.instances).forEach(chart => {
+            if (chart.options.scales) {
+                if (chart.options.scales.x) {
+                    chart.options.scales.x.ticks.color = corTexto;
+                    chart.options.scales.x.grid.color = corGrade;
+                }
+                if (chart.options.scales.y) {
+                    chart.options.scales.y.ticks.color = corTexto;
+                    chart.options.scales.y.grid.color = corGrade;
+                }
+            }
+            if (chart.options.plugins && chart.options.plugins.legend) {
+                chart.options.plugins.legend.labels.color = corTexto;
+            }
+            chart.update(); // Aplica a mudança visual instantaneamente
+        });
     });
 }
 
@@ -989,7 +1428,215 @@ if (resetarFonte) {
     });
 }
 
+async function buscarClima() {
+    // Coordenadas de Tambaú - SP
+    const lat = -21.7056;
+    const lon = -47.2728;
+
+    try {
+        // Busca Temperatura, Vento, Umidade, Chuva, UV, Sensação Térmica e Ponto de Orvalho
+        const resClima = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,uv_index,apparent_temperature,dewpoint_2m`
+        );
+        const dataClima = await resClima.json();
+        const atual = dataClima.current;
+
+        // Temperatura principal
+        document.getElementById('temperatura').textContent = Math.round(atual.temperature_2m);
+
+        // Preenchimento das 6 métricas em tempo real
+        if (document.getElementById('dado-vento')) {
+            document.getElementById('dado-vento').textContent = `${Math.round(atual.wind_speed_10m)} km/h`;
+        }
+        if (document.getElementById('dado-umidade')) {
+            document.getElementById('dado-umidade').textContent = `${atual.relative_humidity_2m}%`;
+        }
+        if (document.getElementById('dado-chuva')) {
+            document.getElementById('dado-chuva').textContent = `${atual.precipitation} mm`;
+        }
+        if (document.getElementById('dado-uv')) {
+            document.getElementById('dado-uv').textContent = Math.round(atual.uv_index);
+        }
+        if (document.getElementById('dado-sensacao')) {
+            document.getElementById('dado-sensacao').textContent = `${Math.round(atual.apparent_temperature)} °C`;
+        }
+        if (document.getElementById('dado-orvalho')) {
+            document.getElementById('dado-orvalho').textContent = `${Math.round(atual.dewpoint_2m)} °C`;
+        }
+
+        // Qualidade do Ar
+        const resAr = await fetch(
+            `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`
+        );
+        const dataAr = await resAr.json();
+        const aqi = dataAr.current.european_aqi;
+
+        let textoAr = "Boa";
+        if (aqi > 20 && aqi <= 40) textoAr = "Moderada";
+        if (aqi > 40) textoAr = "Ruim";
+
+        document.getElementById('qualidade-ar').textContent = textoAr;
+
+    } catch (erro) {
+        console.error("Erro ao carregar dados do clima:", erro);
+        
+        // Contingência em caso de falha
+        document.getElementById('temperatura').textContent = "23";
+        document.getElementById('qualidade-ar').textContent = "Moderada";
+
+        if (document.getElementById('dado-vento')) document.getElementById('dado-vento').textContent = "-- km/h";
+        if (document.getElementById('dado-umidade')) document.getElementById('dado-umidade').textContent = "--%";
+        if (document.getElementById('dado-chuva')) document.getElementById('dado-chuva').textContent = "0.0 mm";
+        if (document.getElementById('dado-uv')) document.getElementById('dado-uv').textContent = "--";
+        if (document.getElementById('dado-sensacao')) document.getElementById('dado-sensacao').textContent = "-- °C";
+        if (document.getElementById('dado-orvalho')) document.getElementById('dado-orvalho').textContent = "-- °C";
+    }
+}
+
+// --- AÇÕES DOS BOTÕES ---
+
+const btnPrevisao = document.getElementById('btn-previsao-completa');
+if (btnPrevisao) {
+    btnPrevisao.addEventListener('click', () => {
+        const urlPrevisao = 'https://www.msn.com/pt-br/clima/forecast/in-Tamba%C3%BA,S%C3%A3o-Paulo,Brasil';
+        window.open(urlPrevisao, '_blank');
+    });
+}
+
+const btnAr = document.getElementById('btn-qualidade-ar');
+if (btnAr) {
+    btnAr.addEventListener('click', () => {
+        const urlQualidadeAr = 'https://www.iqair.com/br/brazil/sao-paulo/tambau';
+        window.open(urlQualidadeAr, '_blank');
+    });
+}
+
+// Execução inicial e atualização a cada 10 minutos
+buscarClima();
+setInterval(buscarClima, 10 * 60 * 1000);
+
+// Atualiza os dados automaticamente a cada 10 minutos
+setInterval(buscarClima, 10 * 60 * 1000);
 </script>
+
+<script>
+    // =========================
+    // MENU SANDUÍCHE
+    // =========================
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        // Cria o fundo escuro
+        const overlay = document.createElement('div');
+        overlay.classList.add('menu-overlay');
+
+        document.body.appendChild(overlay);
+
+
+        // Abrir e fechar menu
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const aberto = sidebar.classList.contains('active');
+
+            // Troca o ícone
+            if (aberto) {
+                menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
+
+        });
+
+
+        // Fecha ao clicar no fundo escuro
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+
+            menuToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+            menuToggle.setAttribute(
+                'aria-label',
+                'Abrir menu'
+            );
+
+        });
+
+
+        // Fecha o menu ao clicar em um item
+        const menuItems =
+            document.querySelectorAll('.sidebar .menu-item');
+
+        menuItems.forEach(function (item) {
+
+            item.addEventListener('click', function () {
+
+                if (window.innerWidth <= 768) {
+
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+
+                    menuToggle.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute(
+                        'aria-label',
+                        'Abrir menu'
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+
+    const linhas = document.querySelectorAll(".linha-sensor");
+const botao = document.getElementById("mostrarMaisSensores");
+
+let quantidade = 5; // quantidade inicial
+
+function atualizarTabela() {
+
+    linhas.forEach((linha, indice) => {
+
+        if (indice < quantidade) {
+            linha.style.display = "";
+        } else {
+            linha.style.display = "none";
+        }
+
+    });
+
+    if (quantidade >= linhas.length) {
+        botao.style.display = "none";
+    } else {
+        botao.style.display = "flex";
+    }
+}
+
+atualizarTabela();
+
+botao.addEventListener("click", function () {
+
+    quantidade += 5;
+
+    atualizarTabela();
+
+});
+    </script>
+
+
 <!-- JS -->
 <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
 

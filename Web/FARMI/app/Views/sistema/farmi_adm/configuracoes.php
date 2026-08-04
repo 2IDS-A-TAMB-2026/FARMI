@@ -203,7 +203,392 @@ body.contraste .avatar {
     background: #fff !important;
     color: #000 !important;
 }
-    </style>
+
+/* ==========================================================
+CONFIGURAÇÕES - RESPONSIVIDADE ESPECÍFICA
+========================================================== */
+
+* {
+  box-sizing: border-box;
+  }
+  html,
+  body {
+  max-width: 100%;
+  overflow-x: hidden;
+  }
+  .main-content {
+  min-width: 0;
+  width: calc(100% - 260px);
+  max-width: 100%;
+  }
+  .config-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: 100%;
+  gap: 20px;
+  }
+  .config-grid .card {
+  width: 100%;
+  min-width: 0;
+  }
+  .form-group {
+  width: 100%;
+  min-width: 0;
+  }
+  .campo-visualizacao {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  }
+  .security-section {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+  min-width: 0;
+  }
+  .security-item {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  }
+  .security-item .info {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  }
+  .security-item .info span {
+  overflow-wrap: break-word;
+  }
+  .security-item a {
+  flex-shrink: 0;
+  }
+  .btn {
+  max-width: 100%;
+  }
+  .header {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  }
+  .header > div:first-child {
+  min-width: 0;
+  }
+  .header > div:first-child h2 {
+  overflow-wrap: break-word;
+  }
+  .header > div:last-child {
+  max-width: 100%;
+  flex-wrap: wrap;
+  }
+  .btn-logout {
+  white-space: nowrap;
+  }
+  .avatar {
+  flex-shrink: 0;
+  }
+  #aumentar-fonte,
+  #diminuir-fonte,
+  #resetar-fonte,
+  #contraste-btn {
+  flex-shrink: 0;
+  }
+  /* ==========================================================
+  TABLET E NOTEBOOK
+  ========================================================== */
+  @media (max-width: 1100px) {
+  .main-content {
+  width: calc(100% - 260px);
+  padding: 25px;
+  }
+  .header {
+  gap: 20px;
+  }
+  .config-grid {
+  grid-template-columns: 1fr;
+  }
+  }
+  /* ==========================================================
+  TABLET
+  ========================================================== */
+  @media (max-width: 768px) {
+  .main-content {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100%;
+  padding: 75px 15px 25px;
+  }
+  .header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+  }
+  .header > div:first-child {
+  width: 100%;
+  }
+  .header h2 {
+  font-size: 22px;
+  line-height: 1.3;
+  }
+  .header p {
+  font-size: 14px;
+  line-height: 1.5;
+  }
+  .header > div:last-child {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px !important;
+  }
+  .btn-logout {
+  margin-right: 0;
+  }
+  .config-grid {
+  width: 100%;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  }
+  .config-grid .card {
+  width: 100%;
+  padding: 20px;
+  }
+  .card h3 {
+  font-size: 18px;
+  line-height: 1.4;
+  flex-wrap: wrap;
+  }
+  .campo-visualizacao {
+  padding: 13px 14px;
+  min-height: 44px;
+  font-size: 15px;
+  }
+  .security-section {
+  width: 100%;
+  padding: 20px;
+  margin-top: 15px;
+  }
+  .security-section h3 {
+  font-size: 18px;
+  }
+  .security-item {
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px 0;
+  }
+  .security-item .info {
+  flex: 1 1 200px;
+  }
+  .security-item a {
+  width: auto;
+  max-width: 100%;
+  }
+  .security-item .btn {
+  max-width: 100%;
+  }
+  }
+  /* ==========================================================
+  CELULAR
+  ========================================================== */
+  @media (max-width: 600px) {
+  .main-content {
+  padding: 70px 12px 20px;
+  }
+  .header {
+  gap: 12px;
+  }
+  .header h2 {
+  font-size: 20px;
+  }
+  .header p {
+  font-size: 13px;
+  }
+  .header > div:last-child {
+  width: 100%;
+  gap: 7px !important;
+  }
+  .btn-logout {
+  width: 100%;
+  flex-basis: 100%;
+  height: 42px;
+  margin-right: 0;
+  }
+  #contraste-btn,
+  #aumentar-fonte,
+  #diminuir-fonte,
+  #resetar-fonte,
+  .avatar {
+  width: 40px;
+  height: 40px;
+  }
+  .config-grid {
+  gap: 12px;
+  }
+  .config-grid .card {
+  padding: 16px;
+  border-radius: 14px;
+  }
+  .card h3 {
+  font-size: 17px;
+  margin-bottom: 18px;
+  }
+  .form-group {
+  margin-bottom: 15px;
+  }
+  .form-group label {
+  font-size: 13px;
+  }
+  .campo-visualizacao {
+  padding: 12px;
+  font-size: 14px;
+  min-height: 42px;
+  }
+  .security-section {
+  padding: 16px;
+  margin-top: 12px;
+  border-radius: 14px;
+  }
+  .security-section h3 {
+  font-size: 17px;
+  margin-bottom: 15px;
+  }
+  .security-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  }
+  .security-item .info {
+  width: 100%;
+  }
+  .security-item a {
+  width: 100%;
+  }
+  .security-item .btn {
+  width: 100%;
+  min-height: 42px;
+  justify-content: center;
+  }
+  }
+  /* ==========================================================
+  CELULAR PEQUENO
+  ========================================================== */
+  @media (max-width: 480px) {
+  .main-content {
+  padding: 70px 10px 20px;
+  }
+  .header h2 {
+  font-size: 19px;
+  }
+  .header p {
+  font-size: 13px;
+  }
+  .header > div:last-child {
+  gap: 6px !important;
+  }
+  .btn-logout {
+  width: 100%;
+  flex-basis: 100%;
+  }
+  #contraste-btn,
+  #aumentar-fonte,
+  #diminuir-fonte,
+  #resetar-fonte,
+  .avatar {
+  width: 38px;
+  height: 38px;
+  }
+  .config-grid .card {
+  padding: 14px;
+  }
+  .card h3 {
+  font-size: 16px;
+  }
+  .campo-visualizacao {
+  font-size: 14px;
+  padding: 11px;
+  }
+  .security-section {
+  padding: 14px;
+  }
+  .security-item .info {
+  font-size: 14px;
+  }
+  }
+  /* ==========================================================
+  MENU SANDUÍCHE
+  ========================================================== */
+  .menu-toggle {
+    display: none;
+}
+
+  @media (max-width: 768px) {
+  .menu-toggle {
+  display: flex;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background: #58CC02;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  }
+  .menu-toggle:hover {
+  background: #46A302;
+  }
+  .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+  }
+  .sidebar.active {
+  transform: translateX(0);
+  }
+  .menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  }
+  .menu-overlay.active {
+  display: block;
+  }
+  }
+  @media (max-width: 480px) {
+  .menu-toggle {
+  top: 12px;
+  left: 12px;
+  width: 42px;
+  height: 42px;
+  }
+  }
+
+</style>
 </head>
 
 <body>
@@ -257,6 +642,11 @@ body.contraste .avatar {
     </aside>
 
     <main class="main-content">
+
+        <!-- Menu sanduíche -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
         <header class="header">
 
@@ -532,6 +922,90 @@ body.contraste .avatar {
             });
         }
     </script>
+
+    <script>
+    // =========================
+    // MENU SANDUÍCHE
+    // =========================
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        // Cria o fundo escuro
+        const overlay = document.createElement('div');
+        overlay.classList.add('menu-overlay');
+
+        document.body.appendChild(overlay);
+
+
+        // Abrir e fechar menu
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const aberto = sidebar.classList.contains('active');
+
+            // Troca o ícone
+            if (aberto) {
+                menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
+
+        });
+
+
+        // Fecha ao clicar no fundo escuro
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+
+            menuToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+            menuToggle.setAttribute(
+                'aria-label',
+                'Abrir menu'
+            );
+
+        });
+
+
+        // Fecha o menu ao clicar em um item
+        const menuItems =
+            document.querySelectorAll('.sidebar .menu-item');
+
+        menuItems.forEach(function (item) {
+
+            item.addEventListener('click', function () {
+
+                if (window.innerWidth <= 768) {
+
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+
+                    menuToggle.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute(
+                        'aria-label',
+                        'Abrir menu'
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+    </script>
+
 </body>
 
 </html>

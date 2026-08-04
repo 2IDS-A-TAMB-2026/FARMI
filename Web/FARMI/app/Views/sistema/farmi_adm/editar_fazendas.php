@@ -140,12 +140,6 @@
             <p>Preencha os dados do endereço da fazenda</p>
         </div>
 
-        <div class="steps-indicator">
-            <div class="step active"></div>
-            <div class="step"></div>
-            <div class="step"></div>
-        </div>
-
         <form action="<?= base_url('fazenda/atualizar/'.$fazenda['ID_FAZENDA']) ?>"
                 method="post"
                 id="formSensor"
@@ -220,7 +214,7 @@
                     </label>
                     <input
                         type="number"
-                        id="numero"
+                        id="NUMERO"
                         name="NUMERO"
                         value="<?= $fazenda['NUMERO'] ?>"
                         maxlength="10"
@@ -321,68 +315,179 @@
         });
     }
 
-    // ========================================================
-    // MÁSCARAS E VALIDAÇÕES
-    // ========================================================
+
+    /* =========================
+    MÁSCARA LATITUDE
+    ========================= */
+
     const latitude = document.getElementById('LATITUDE');
+
     if(latitude){
+        latitude.setAttribute('maxlength', '10');
+
         latitude.addEventListener('input', function(e){
-            let value = e.target.value.replace(/[^0-9.-]/g, '');
+            let value = e.target.value;
+
+            value = value.replace(/[^0-9.-]/g, '');
+
             const partes = value.split('.');
-            if(partes.length > 2) value = partes[0] + '.' + partes[1];
+
+            if(partes.length > 2){
+                value = partes[0] + '.' + partes[1];
+            }
+
+            value = value.substring(0, 10);
+
             e.target.value = value;
         });
+
     }
+
+
+    /* =========================
+    MÁSCARA LONGITUDE
+    ========================= */
 
     const longitude = document.getElementById('LONGITUDE');
+
     if(longitude){
+        longitude.setAttribute('maxlength', '10');
+
         longitude.addEventListener('input', function(e){
-            let value = e.target.value.replace(/[^0-9.-]/g, '');
+            let value = e.target.value;
+
+            value = value.replace(/[^0-9.-]/g, '');
+
             const partes = value.split('.');
-            if(partes.length > 2) value = partes[0] + '.' + partes[1];
+
+            if(partes.length > 2){
+                value = partes[0] + '.' + partes[1];
+            }
+
+            value = value.substring(0, 10);
+
             e.target.value = value;
         });
+
     }
+
+    /* =========================
+    MÁSCARA LOGRADOURO
+    ========================= */
 
     const logradouro = document.getElementById('LOGRADOURO');
+
     if(logradouro){
-        logradouro.addEventListener('input', function(e){
-            let value = e.target.value.replace(/[0-9]/g, '').replace(/[^a-zA-ZÀ-ÿ\s]/g, '').replace(/\s+/g, ' ');
-            e.target.value = value;
-        });
+    logradouro.addEventListener('input', function(e){
+    let value = e.target.value;
+
+        value = value.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
+
+        value = value.replace(/\s+/g, ' ');
+
+        e.target.value = value;
+    });
+
     }
 
-    const numero = document.getElementById('numero');
+
+    // =========================
+    // MÁSCARA NÚMERO
+    // SOMENTE 7 NÚMEROS
+    // =========================
+    const numero = document.getElementById('NUMERO');
+
     if(numero){
+
         numero.addEventListener('input', function(e){
-            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+
+            // PEGA SOMENTE NÚMEROS
+            let value = e.target.value.replace(/\D/g, '');
+
+            // LIMITA A 7 NÚMEROS
+            value = value.substring(0, 7);
+
+            e.target.value = value;
+
         });
+
     }
+
+    /* =========================
+    MÁSCARA ÁREA TOTAL
+    ========================= */
 
     const areaTotal = document.getElementById('AREA_TOTAL');
+
     if(areaTotal){
-        areaTotal.addEventListener('input', function(e){
-            let value = e.target.value.replace(/[^0-9,]/g, '');
-            const partes = value.split(',');
-            if(partes.length > 2) value = partes[0] + ',' + partes[1];
-            e.target.value = value;
-        });
+    areaTotal.setAttribute('maxlength', '9');
+
+    areaTotal.addEventListener('input', function(e){
+        let value = e.target.value;
+
+        value = value.replace(/[^0-9,]/g, '');
+
+        const partes = value.split(',');
+
+        if(partes.length > 2){
+            value = partes[0] + ',' + partes[1];
+        }
+
+        value = value.substring(0, 9);
+
+        e.target.value = value;
+    });
+
     }
 
-    const cep = document.getElementById('CEP');
-    if(cep){
-        cep.addEventListener('input', function(e){
-            let value = e.target.value.replace(/\D/g, '').slice(0, 8);
-            if(value.length > 5) value = value.replace(/^(\d{5})(\d{1,3})$/, '$1-$2');
+
+    /* =========================
+       MÁSCARA CEP
+    ========================= */
+    document.addEventListener('DOMContentLoaded', function () {
+        const cep = document.getElementById('CEP');
+
+        if (!cep) return;
+
+        cep.addEventListener('input', function (e) {
+            let value = e.target.value;
+
+            // mantém só números
+            value = value.replace(/\D/g, '');
+
+            // limita 8 dígitos
+            value = value.slice(0, 8);
+
+            // aplica máscara
+            if (value.length > 5) {
+                value = value.replace(/^(\d{5})(\d{1,3})$/, '$1-$2');
+            }
+
             e.target.value = value;
         });
-    }
+    });
+
+    // =========================
+    // MÁSCARA NOME
+    // LETRAS, NÚMEROS E ESPAÇOS
+    // =========================
 
     const nome = document.getElementById('NOME');
-    if(nome){
+
+    if (nome) {
+
         nome.addEventListener('keyup', (e) => {
-            e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '').replace(/\s+/g, ' ');
+            let value = e.target.value;
+
+            // REMOVE TUDO QUE NÃO FOR LETRA, NÚMERO OU ESPAÇO
+            value = value.replace(/[^a-zA-ZÀ-ÿ0-9\s]/g, '');
+
+            // REMOVE ESPAÇOS DUPLOS
+            value = value.replace(/\s+/g, ' ');
+
+            e.target.value = value;
         });
+
     }
 
     // ========================================================

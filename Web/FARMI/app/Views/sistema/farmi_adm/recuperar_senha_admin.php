@@ -193,12 +193,6 @@ body.alto-contraste input::placeholder {
             <p>Insira seu email para receber instruções de recuperação</p>
         </div>
 
-        <div class="steps-indicator">
-            <div class="step active"></div>
-            <div class="step"></div>
-            <div class="step"></div>
-        </div>
-
         <form id="recoverForm">
 
             <div class="form-group">

@@ -228,7 +228,20 @@ body.contraste .avatar {
     background-color: #57c91b;
     color: #fff;
 }
-
+.mostrar-mais{
+    color: var(--verde-escuro);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s;
+    background: transparent;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #57c91b;
+    color: #fff;
+}
     </style>
 
 <head>
@@ -238,7 +251,7 @@ body.contraste .avatar {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alertas - FARMI Gestor</title>
+    <title>Alertas - FARMI Funcionário</title>
 
     <!-- Ícones -->
     <link rel="stylesheet"
@@ -257,44 +270,17 @@ body.contraste .avatar {
 
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
-            FARMI Gestor
+            FARMI Funcionário
         </div>
 
         <nav>
-            <a href="<?= base_url('/dashboard-admin') ?>" class="menu-item">
-                <i class="fa-solid fa-chart-line"></i>
-                Dashboard
-            </a>
-
-            <a href="<?= base_url('/fazendas-admin') ?>" class="menu-item">
-                <i class="fa-solid fa-cow"></i>
-                Fazendas
-            </a>
-
-            <a href="<?= base_url('/cultura-admin') ?>" class="menu-item">
-                <i class="fa-solid fa-seedling"></i>
-                Culturas
-            </a>
-
-            <a href="<?= base_url('/usuarios-admin') ?>" class="menu-item">
-                <i class="fa-solid fa-users"></i>
-                Funcionários
-            </a>
-
-            <a href="<?= base_url('/sensor') ?>" class="menu-item">
-                <i class="fa-solid fa-satellite-dish"></i>
-                Sensores
-            </a>
-
-            <a href="<?= base_url('/alertas-admin') ?>" class="menu-item active">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                Alertas
-            </a>
-
-            <a href="<?= base_url('/configuracoes-admin') ?>" class="menu-item">
-                <i class="fa-solid fa-gear"></i>
-                Configurações
-            </a>
+            <a href="<?= base_url('/dashboard-usuario') ?>" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+            <a href="<?= base_url('/luz') ?>" class="menu-item "><i class="fa-solid fa-lightbulb"></i> Luz</a>
+            <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
+            <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
+            <a href="<?= base_url('/solo') ?>" class="menu-item"><i class="fa-solid fa-chart-pie"></i> Solo</a>
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item active"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
+            <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
 
     </aside>
@@ -358,7 +344,7 @@ body.contraste .avatar {
     <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
     <!-- AVATAR (Agora no mesmo nível dos outros, centralizado perfeitamente) -->
-    <div class="avatar">G</div>
+    <div class="avatar">F</div>
 
 </div>
 

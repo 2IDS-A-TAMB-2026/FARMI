@@ -163,6 +163,8 @@ body.contraste .avatar {
 .dropdown-btn:hover {
     border-color: #57c91b;
 }
+
+
 </style>
 
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
@@ -175,8 +177,10 @@ body.contraste .avatar {
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet"
-        href="<?= base_url('assets/css/dashboard/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style.css') ?>">
+
+    <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -233,6 +237,11 @@ body.contraste .avatar {
     </aside>
 
     <main class="main-content">
+
+        <!-- Menu sanduíche -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
         <header class="header">
 
@@ -877,6 +886,89 @@ body.contraste .avatar {
                 confirmButtonColor: '#4CAF50'
             });
         }
+    </script>
+
+    <script>
+    // =========================
+    // MENU SANDUÍCHE
+    // =========================
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        // Cria o fundo escuro
+        const overlay = document.createElement('div');
+        overlay.classList.add('menu-overlay');
+
+        document.body.appendChild(overlay);
+
+
+        // Abrir e fechar menu
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const aberto = sidebar.classList.contains('active');
+
+            // Troca o ícone
+            if (aberto) {
+                menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
+
+        });
+
+
+        // Fecha ao clicar no fundo escuro
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+
+            menuToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+            menuToggle.setAttribute(
+                'aria-label',
+                'Abrir menu'
+            );
+
+        });
+
+
+        // Fecha o menu ao clicar em um item
+        const menuItems =
+            document.querySelectorAll('.sidebar .menu-item');
+
+        menuItems.forEach(function (item) {
+
+            item.addEventListener('click', function () {
+
+                if (window.innerWidth <= 768) {
+
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+
+                    menuToggle.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute(
+                        'aria-label',
+                        'Abrir menu'
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
     </script>
 
 </body>

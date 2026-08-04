@@ -6,6 +6,8 @@
     <!--Ícone do site-->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
     <title>Monitoramento de Solo - Fazenda Inteligente</title>
+    <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     <!-- Ícones (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -636,14 +638,18 @@ body.contraste .chart-container {
             <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
             <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
             <a href="<?= base_url('/solo') ?>" class="menu-item active"><i class="fa-solid fa-chart-pie"></i> Solo</a>
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
             <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
-            
-
         </nav>
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
+
+        <!-- Menu sanduíche -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
         
         <!-- CABEÇALHO -->
         <!-- CABEÇALHO -->
@@ -890,3 +896,89 @@ body.contraste .chart-container {
     }
 });
 </script>
+
+<script>
+    // =========================
+    // MENU SANDUÍCHE
+    // =========================
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        // Cria o fundo escuro
+        const overlay = document.createElement('div');
+        overlay.classList.add('menu-overlay');
+
+        document.body.appendChild(overlay);
+
+
+        // Abrir e fechar menu
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const aberto = sidebar.classList.contains('active');
+
+            // Troca o ícone
+            if (aberto) {
+                menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
+
+        });
+
+
+        // Fecha ao clicar no fundo escuro
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+
+            menuToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+            menuToggle.setAttribute(
+                'aria-label',
+                'Abrir menu'
+            );
+
+        });
+
+
+        // Fecha o menu ao clicar em um item
+        const menuItems =
+            document.querySelectorAll('.sidebar .menu-item');
+
+        menuItems.forEach(function (item) {
+
+            item.addEventListener('click', function () {
+
+                if (window.innerWidth <= 768) {
+
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+
+                    menuToggle.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute(
+                        'aria-label',
+                        'Abrir menu'
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+    </script>
+
+</body>
+</html>

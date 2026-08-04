@@ -106,6 +106,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     // SISTEMA - USUÁRIO
     // ======================================
 
+    $routes->get('/alertas-usuario', 'AlertaController::alertas_usuario');
     $routes->get('/alterar-senha', 'UsuariosController::alterar_senha');
     $routes->post('/alterar-senha', 'SistemaController::salvar_senha_usuario');
     $routes->get('/configuracoes-usuario', 'SistemaController::configuracoes_usuario');

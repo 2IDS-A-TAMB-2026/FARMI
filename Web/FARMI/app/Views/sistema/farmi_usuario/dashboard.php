@@ -8,6 +8,8 @@
     <title>Funcionário - Painel Visual</title>
     <!-- Ícones  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     
     <style>
         :root {
@@ -20,44 +22,7 @@
             --sombra: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* MODO ALTO CONTRASTE */
-        [data-high-contrast="true"] {
-            --verde-escuro: #ffff !important; 
-            --verde-claro: #ffff !important;
-            --verde-claro-hover: #ffff !important; 
-            --branco: #ffff !important; 
-            --cinza-fundo: #000000 !important; /* Preto */
-            --texto-escuro: #ffff !important; 
-        }
-
-        [data-high-contrast="true"] * {
-            color: #ffff !important;
-            background-color: #000000 !important;
-            border-color: #ffff !important;
-        }
-
-
-        [data-high-contrast="true"] .card,
-        [data-high-contrast="true"] .table-container {
-            background-color: #111111 !important;
-            border-color: #ffff!important;
-        }
-
-        [data-high-contrast="true"] th,
-        [data-high-contrast="true"] td {
-            border-bottom-color: #505152 !important;
-        }
-
-        [data-high-contrast="true"] .status-badge {
-            background-color: #fff !important;
-            color: #000000 !important;
-            border: 1px solid #ffff!important;
-        }
-
-        [data-high-contrast="true"] .status-alert {
-            background-color: #000!important;
-            color: #ffff!important;
-        }
+        
 
         * {
             margin: 0;
@@ -251,16 +216,27 @@
         }
 
         /* --- BOTÕES DE AÇÃO --- */
+
         .btn {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
+            background-color: #052501;
+            color: #fff;
+            transition: .3s;
             display: inline-flex;
+            justify-content: center;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover{
+            background: var(--verde-claro);
+            transform: translateY(-2px);
         }
 
         .btn-primary {
@@ -281,152 +257,6 @@
             background-color: var(--verde-claro-hover);
         }
 
-        /* =========================
-   TODOS OS ELEMENTOS
-========================= */
-
-/* 
-Seleciona TODOS os elementos dentro do body
-quando o alto contraste estiver ativo
-
-O * significa "todos os elementos"
-*/
-body.alto-contraste * {
-
-    /* deixa todos os textos brancos */
-    color: #fff !important;
-
-    /* muda a cor das bordas para branco */
-    border-color: #fff !important;
-}
-
-/* =========================
-   CONTAINERS
-========================= */
-
-/* 
-Seleciona vários tipos de containers:
-div, section, main, aside, nav, etc.
-*/
-body.alto-contraste div,
-body.alto-contraste section,
-body.alto-contraste main,
-body.alto-contraste aside,
-body.alto-contraste nav,
-body.alto-contraste header,
-body.alto-contraste footer,
-body.alto-contraste form {
-
-    /* fundo preto para todos esses containers */
-    background: #000 !important;
-}
-
-/* =========================
-   INPUTS
-========================= */
-
-/* 
-Seleciona:
-- input
-- select
-- textarea
-*/
-body.alto-contraste input,
-body.alto-contraste select,
-body.alto-contraste textarea {
-
-    /* fundo escuro */
-    background: #000000 !important;
-
-    /* texto branco */
-    color: #fff !important;
-
-    /* borda branca */
-    border: 2px solid #fff !important;
-}
-
-/* =========================
-   PLACEHOLDER
-========================= */
-
-/* 
-Seleciona o placeholder do input
-
-Ex:
-<input placeholder="Digite seu nome">
-*/
-body.alto-contraste input::placeholder {
-
-    /* cor cinza clara */
-    color: #ccc !important;
-}
-
-/* =========================
-   BOTÕES
-========================= */
-
-/* 
-Seleciona:
-- todos os <button>
-- elementos com classe .btn
-*/
-body.alto-contraste button:not(.accessibility-btn):not(.logout-btn),
-body.alto-contraste .btn:not(.accessibility-btn):not(.logout-btn) {
-
-    background: #fff !important;
-    color: #000 !important;
-}
-
-/* =========================
-   TABELAS
-========================= */
-
-/* 
-Seleciona:
-- table
-- thead
-- tbody
-- tr
-- td
-- th
-*/
-body.alto-contraste table,
-body.alto-contraste thead,
-body.alto-contraste tbody,
-body.alto-contraste tr,
-body.alto-contraste td,
-body.alto-contraste th {
-
-    /* fundo preto */
-    background: #191717 !important;
-
-    /* texto branco */
-    color: #fff !important;
-
-    /* bordas brancas */
-    border: 1px solid #fff !important;
-}
-
-/* =========================
-   ÍCONES
-========================= */
-
-/* 
-Seleciona todos os ícones <i>
-
-Ex:
-<i class="fa-solid fa-user"></i>
-*/
-body.alto-contraste i {
-
-    /* deixa os ícones brancos */
-    color: #fff !important;
-}
-body.alto-contraste .chart-container {
-    background: #222426 !important;
-    border: 2px solid white;
-    border-radius: 10px;
-}
 
 #contraste-btn {
     background: transparent !important;
@@ -649,6 +479,480 @@ canvas{
     color: #dc3545 !important;
 }
 
+.weather-card {
+    background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
+    border-radius: 20px;
+    padding: 16px 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    width: 592px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Cabeçalho */
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.location-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Corpo */
+.weather-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.temp-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.temp-main #weather-icon {
+    font-size: 42px;
+    color: #ffc107; /* Cor do sol */
+}
+
+.temp-main #temperatura {
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.temp-main .unit {
+    font-size: 20px;
+    vertical-align: top;
+    margin-top: -15px;
+}
+
+/* Qualidade do ar */
+.air-quality {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.air-quality i {
+    color: #ffb300;
+}
+
+.air-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Rodapé */
+.weather-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-previsao {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-previsao:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.weather-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.detail-item i {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.detail-item strong {
+    font-size: 14px;
+}
+
+/* ===========================
+   ALTO CONTRASTE (CORRIGIDO)
+===========================*/
+
+body.contraste{
+    background:#000 !important;
+    color:#fff !important;
+}
+
+body.contraste *{
+    color:#fff !important;
+    border-color:#fff !important;
+}
+
+body.contraste .sidebar{
+    background:#000 !important;
+    border-right:2px solid #fff;
+}
+
+body.contraste .main-content{
+    background:#000 !important;
+}
+
+body.contraste .card,
+body.contraste .table-container,
+body.contraste .chart-card,
+body.contraste .activities-card,
+body.contraste .weather-card,
+body.contraste .status-item{
+    background:#111 !important;
+    color:#fff !important;
+    border:2px solid #fff !important;
+    box-shadow:none !important;
+}
+
+/* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
+body.contraste .activities-card > div {
+    background: #000 !important;
+    border: 1px solid #fff !important;
+}
+/* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
+body.contraste .activities-card .btn {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.contraste .activities-card .btn:hover {
+    background-color: #e6e6e6 !important;
+    color: #000000 !important;
+}
+
+body.contraste table,
+body.contraste tr,
+body.contraste td,
+body.contraste th{
+    background:#111 !important;
+    color:#fff !important;
+    border:1px solid #fff !important;
+}
+
+body.contraste .status-badge{
+    background:#fff !important;
+    color:#000 !important;
+}
+
+body.contraste .logout-btn,
+body.contraste .accessibility-btn,
+body.contraste .btn,
+body.contraste .mostrar-mais {
+    background:#000 !important;
+    color:#fff !important;
+    border:2px solid #fff !important;
+}
+body.contraste *{
+    color:#fff !important;
+    border-color:#fff !important;
+}
+
+#contraste-btn:hover {
+    color: var(--verde-claro) !important;
+}
+
+body.contraste #contraste-btn:hover {
+    color: #fff !important;
+}
+
+body.contraste .avatar{
+    background:#fff !important;
+    color:#000 !important;
+}
+
+body.contraste input,
+body.contraste select,
+body.contraste textarea{
+    background:#000 !important;
+    color:#fff !important;
+    border:2px solid #fff !important;
+}
+
+/* CORREÇÃO DOS EIXOS DOS GRÁFICOS (X e Y):
+   Aplica o filtro invert para transformar os eixos/textos pretos do Chart.js em brancos */
+
+/* ==========================================================
+   DASHBOARD FARMI - RESPONSIVIDADE ESPECÍFICA
+   ========================================================== */
+.dashboard-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.stats-grid .card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+.card-info {
+    min-width: 0;
+}
+.card-info h3 {
+    overflow-wrap: break-word;
+}
+.card-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* GRÁFICOS */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    min-width: 0;
+}
+.chart-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 350px;
+}
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+}
+/* SEÇÕES */
+.dashboard-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+/* SENSORES */
+.sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.sensor-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+/* TABELAS */
+.dashboard-table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.dashboard-table-container table {
+    min-width: 700px;
+}
+/* NOTEBOOK / DESKTOP MENOR */
+@media (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+    .sensor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+/* TABLET */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100%;
+        padding: 75px 15px 25px;
+    }
+    .dashboard-container {
+        width: 100%;
+        max-width: 100%;
+    }
+    .header {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .header h2 {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+    .header p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+    .stats-grid .card {
+        min-height: 110px;
+    }
+    .card-info h3 {
+        font-size: 14px;
+    }
+    .card-info p {
+        font-size: 24px;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .chart-card {
+        width: 100%;
+        padding: 15px;
+    }
+    .chart-container {
+        height: 280px;
+    }
+    .sensor-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+    .sensor-card {
+        padding: 15px;
+    }
+    .dashboard-table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .dashboard-table-container table {
+        min-width: 650px;
+    }
+}
+/* CELULAR */
+@media (max-width: 600px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .stats-grid .card {
+        min-height: 95px;
+    }
+    .card-info h3 {
+        font-size: 15px;
+    }
+    .card-info p {
+        font-size: 26px;
+    }
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .chart-card {
+        padding: 12px;
+    }
+    .chart-container {
+        height: 250px;
+    }
+    .sensor-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .sensor-card {
+        width: 100%;
+    }
+    .section-title {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+}
+/* CELULAR PEQUENO */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 70px 10px 20px;
+    }
+    .header h2 {
+        font-size: 19px;
+    }
+    .header p {
+        font-size: 13px;
+    }
+    .stats-grid .card {
+        padding: 15px;
+    }
+    .card-info h3 {
+        font-size: 14px;
+    }
+    .card-info p {
+        font-size: 23px;
+    }
+    .chart-card {
+        padding: 10px;
+    }
+    .chart-container {
+        height: 220px;
+    }
+    .dashboard-table-container table {
+        min-width: 600px;
+    }
+}
+.mostrar-mais{
+    color: var(--verde-escuro);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.3s;
+    background: transparent;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #57c91b;
+    color: #fff;
+}
+
 </style>
 
 </head>
@@ -667,12 +971,17 @@ canvas{
             <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
             <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
             <a href="<?= base_url('/solo') ?>" class="menu-item"><i class="fa-solid fa-chart-pie"></i> Solo</a>
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
             <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
         
     <header class="header">
 
@@ -710,11 +1019,7 @@ canvas{
             <div class="card">
                 <div class="card-info">
                     <h3>Temperatura Atual</h3>
-                    <p>
-                        <?= !empty($temperatura_valores)
-                        ? number_format(end($temperatura_valores), 1, ',', '.')
-                        : '0,0' ?>°C
-                    </p>
+                    <p><?= number_format($temperatura_atual, 1, ',', '.') ?>°C </p>
                 </div>
                 <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
             </div>
@@ -759,41 +1064,72 @@ canvas{
                 </div>
             </div>
 
-            <!-- CULTURAS -->
-            <div class="chart-card" id="culturas">
+            <!-- CLIMA -->
+        <div class="weather-card" id="weather-widget">
+    <!-- CABEÇALHO (Cidade e Opções) -->
+    <div class="weather-header">
+        <div class="location-selector">
+            <i class="fa-solid fa-location-arrow"></i>
+            <span id="cidade-nome">Tambaú</span>
+        </div>
+    </div>
 
-                <h3 class="chart-title">
-                    <i class="fa-solid fa-circle-info"></i>
-                    Culturas
-                </h3>
+    <!-- CORPO (Temperatura e Qualidade do Ar) -->
+    <div class="weather-body">
+        <div class="temp-main">
+            <i class="fa-solid fa-sun" id="weather-icon"></i>
+            <span id="temperatura">--</span><span class="unit">°C</span>
+        </div>
 
-                <!-- MILHO -->
-                <div class="status-item" id="culturas">
-                    <div class="status-indicator status-saudavel">
-                        <i class="fa-solid fa-wheat-awn"></i>
-                    </div>
-                    <h4>Milho</h4>
-                    <p id="statusMilho">Saudável</p>
-                </div>
-
-                <!-- SOJA -->
-                <div class="status-item" id="culturas">
-                    <div class="status-indicator status-atencao">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <h4>Soja</h4>
-                    <p id="statusSoja">Em atenção</p>
-                </div>
-
-                <!-- CAFÉ -->
-                <div class="status-item" id="culturas">
-                    <div class="status-indicator status-perigo">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <h4>Café</h4>
-                    <p id="statusCafe">Crítico</p>
-                </div>
+        <div class="air-quality" id="btn-qualidade-ar">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <div class="air-text">
+                <span class="air-title">Qualidade do ar</span>
+                <span id="qualidade-ar">Carregando...</span>
             </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <!-- RODAPÉ DO CLIMA -->
+    <div class="weather-footer">
+        <button class="btn-previsao" id="btn-previsao-completa">Ver a previsão completa</button>
+    </div>
+
+    <!-- METRICAS AGRÍCOLAS ADICIONAIS -->
+    <div class="weather-details-grid">
+    <div class="detail-item">
+        <i class="fa-solid fa-wind"></i>
+        <span>Vento</span>
+        <strong id="dado-vento">-- km/h</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-droplet"></i>
+        <span>Umidade</span>
+        <strong id="dado-umidade">--%</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-cloud-rain"></i>
+        <span>Chuva</span>
+        <strong id="dado-chuva">-- mm</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-sun"></i>
+        <span>Índice UV</span>
+        <strong id="dado-uv">--</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-temperature-half"></i>
+        <span>Sensação</span>
+        <strong id="dado-sensacao">-- °C</strong>
+    </div>
+    <div class="detail-item">
+        <i class="fa-solid fa-temperature-arrow-down"></i>
+        <span>Orvalho</span>
+        <strong id="dado-orvalho">-- °C</strong>
+    </div>
+</div>
+</div>
 
             <!-- UMIDADE DO Ar -->
             <div class="chart-card">
@@ -815,7 +1151,7 @@ canvas{
                     Luminosidade (Lux)
                 </h3>
                 <div class="grafico-box">
-                    <canvas id="graficoLux"></canvas>
+                    <canvas id="graficoLux" width="200"></canvas>
                 </div>
             </div>
 
@@ -861,11 +1197,9 @@ canvas{
 
             </div>
 
-            <a href="<?= base_url('/alertas-admin') ?>"
+            <a href="<?= base_url('/alertas-usuario') ?>"
                class="btn">
-
-                Ver Alertas3
-
+                Ver Alertas
             </a>
 
         </div>
@@ -913,7 +1247,7 @@ canvas{
                     }
                     ?>
 
-                <tr>
+                    <tr class="linha-sensor">
 
                     <td>
                         <?= esc($sensor['ID_SENSOR']) ?>
@@ -976,6 +1310,10 @@ canvas{
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <div id="mostrarMaisSensores" class="mostrar-mais">
+                Mostrar mais
+            <i class="fa-solid fa-chevron-down"></i>
+            </div>
         </div>
     </main>
 
@@ -995,7 +1333,10 @@ canvas{
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-    
+    // Detecta se o modo alto contraste já está ativo
+const isContraste = document.body.classList.contains('contraste');
+const corEixos = isContraste ? '#ffffff' : '#052501';
+const corGrade = isContraste ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
     const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
     const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
     const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
@@ -1018,46 +1359,37 @@ canvas{
             datasets: datasetsTemperatura
         },
 
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#052501',
-                        font: {size: 14}
-                    }
-                }
-            },
-
-            scales: {
-
-                y: {
-
-                    beginAtZero: true,
-
-                    ticks: {
-                        color: '#052501'
-                    },
-
-                    grid: {
-                        color: '#dfe6e9'
-                    }
-                },
-
-                x: {
-
-                    ticks: {
-                        color: '#052501'
-                    },
-
-                    grid: {
-                        color: '#dfe6e9'
-                    }
-                }
+     options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            labels: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
+                font: { size: 14 }
             }
         }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501'
+            },
+            grid: {
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9'
+            }
+        },
+        x: {
+            ticks: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501'
+            },
+            grid: {
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9'
+            }
+        }
+    }
+}
 
     });
 
@@ -1091,37 +1423,40 @@ canvas{
                 datasets: datasetsUmidadeLimpos
             },
 
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: '#052501',
-                            font: { size: 13, weight: 'bold' }
-                        }
-                    }
-                },
-
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            color: '#052501',
-                            callback: v => v + '%'
-                        },
-                        grid: { color: '#dfe6e9' }
-                    },
-
-                    x: {
-                        ticks: { color: '#052501' },
-                        grid: { color: '#dfe6e9' }
-                    }
-                }
+           options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            display: true,
+            labels: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
+                font: { size: 13, weight: 'bold' }
             }
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
+                callback: v => v + '%'
+            },
+            grid: { 
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
+            }
+        },
+        x: {
+            ticks: { 
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501' 
+            },
+            grid: { 
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
+            }
+        }
+    }
+}
         });
     }
 
@@ -1137,36 +1472,40 @@ canvas{
                 labels: labelsEixoX,
                 datasets: datasetsSolo // já vem pronto do PHP
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        labels: {
-                            color: '#052501',
-                            font: { size: 13, weight: 'bold' }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            color: '#052501',
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        },
-                        grid: { color: '#dfe6e9' }
-                    },
-                    x: {
-                        ticks: { color: '#052501' },
-                        grid: { color: '#dfe6e9' }
-                    }
-                }
+          options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            display: true,
+            labels: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
+                font: { size: 13, weight: 'bold' }
             }
+        }
+    },
+    scales: {
+        y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
+                callback: function(value) { return value + '%'; }
+            },
+            grid: { 
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
+            }
+        },
+        x: {
+            ticks: { 
+                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501' 
+            },
+            grid: { 
+                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
+            }
+        }
+    }
+}
         });
     }
 
@@ -1245,71 +1584,127 @@ canvas{
 
             cutout: '70%',
 
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: false
-                }
-            }
+          plugins: [{
+    id: 'gaugeText',
+    afterDraw(chart) {
+        const {
+            ctx,
+            chartArea: { width, height }
+        } = chart;
+
+        // Verifica se o modo alto contraste está ativo na página
+        const emContraste = document.body.classList.contains('contraste');
+        const corTextoPrincipal = emContraste ? '#ffffff' : '#052501';
+        const corTextoSecundario = emContraste ? '#ffffff' : '#666666';
+
+        ctx.save();
+
+        // 1. Valor Lux (ex: 16.800)
+        ctx.font = 'bold 26px Arial';
+        ctx.fillStyle = corTextoPrincipal; // <-- Garante o Branco no Alto Contraste
+        ctx.textAlign = 'center';
+
+        ctx.fillText(
+            valorLux.toLocaleString('pt-BR'),
+            width / 2,
+            height - 55
+        );
+
+        // 2. Unidade (Lux)
+        ctx.font = '16px Arial';
+        ctx.fillStyle = corTextoSecundario; // <-- Garante o Branco no Alto Contraste
+
+        ctx.fillText(
+            'Lux',
+            width / 2,
+            height - 30
+        );
+
+        // 3. Status (Ideal, Baixa, etc.)
+        ctx.font = 'bold 15px Arial';
+        ctx.fillStyle = emContraste ? '#ffffff' : infoLux.cor; // Para contraste total, deixa branco ou a cor do status
+
+        ctx.fillText(
+            infoLux.status,
+            width / 2,
+            height - 8
+        );
+
+        // 4. Ambiente (Sol indireto, etc.)
+        ctx.font = '13px Arial';
+        ctx.fillStyle = corTextoSecundario;
+
+        ctx.fillText(
+            infoLux.ambiente,
+            width / 2,
+            height + 15
+        );
+
+        ctx.restore();
+    }
+}]
         },
 
         plugins: [{
 
             id: 'gaugeText',
 
-            afterDraw(chart) {
+           afterDraw(chart) {
+    const {
+        ctx,
+        chartArea: { width, height }
+    } = chart;
 
-                const {
-                    ctx,
-                    chartArea: { width, height }
-                } = chart;
+    // Detecta se o contraste está ativado
+    const isContraste = document.body.classList.contains('contraste');
+    const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
+    const corTextoSecundario = isContraste ? '#cccccc' : '#666666';
 
-                ctx.save();
+    ctx.save();
 
-                // Valor Lux
-                ctx.font = 'bold 26px Arial';
-                ctx.fillStyle = '#052501';
-                ctx.textAlign = 'center';
+    // Valor Lux
+    ctx.font = 'bold 26px Arial';
+    ctx.fillStyle = corTextoPrincipal; // <-- Usando a cor dinâmica
+    ctx.textAlign = 'center';
 
-                ctx.fillText(
-                    valorLux.toLocaleString('pt-BR'),
-                    width / 2,
-                    height - 55
-                );
+    ctx.fillText(
+        valorLux.toLocaleString('pt-BR'),
+        width / 2,
+        height - 55
+    );
 
-                // Unidade
-                ctx.font = '16px Arial';
+    // Unidade
+    ctx.font = '16px Arial';
+    ctx.fillStyle = corTextoPrincipal; // <-- Usando a cor dinâmica
 
-                ctx.fillText(
-                    'Lux',
-                    width / 2,
-                    height - 30
-                );
+    ctx.fillText(
+        'Lux',
+        width / 2,
+        height - 30
+    );
 
-                // Status
-                ctx.font = 'bold 15px Arial';
-                ctx.fillStyle = infoLux.cor;
+    // Status
+    ctx.font = 'bold 15px Arial';
+    ctx.fillStyle = infoLux.cor;
 
-                ctx.fillText(
-                    infoLux.status,
-                    width / 2,
-                    height - 8
-                );
+    ctx.fillText(
+        infoLux.status,
+        width / 2,
+        height - 8
+    );
 
-                // Ambiente
-                ctx.font = '13px Arial';
-                ctx.fillStyle = '#666';
+    // Ambiente
+    ctx.font = '13px Arial';
+    ctx.fillStyle = corTextoSecundario; // <-- Usando a cor dinâmica
 
-                ctx.fillText(
-                    infoLux.ambiente,
-                    width / 2,
-                    height + 15
-                );
+    ctx.fillText(
+        infoLux.ambiente,
+        width / 2,
+        height + 15
+    );
 
-                ctx.restore();
-            }
+    ctx.restore();
+}
         }]
     });
 
@@ -1359,21 +1754,232 @@ canvas{
             tamanhoFonte = 100;
             aplicarFonte();
         }
+const contrasteBtn = document.getElementById("contraste-btn");
 
-        // Alto contraste
-        const contrasteBtn = document.getElementById("contraste-btn");
+// Carrega o estado salvo
+if (localStorage.getItem("contraste") === "true") {
+    document.body.classList.add("contraste");
+}
 
-        contrasteBtn.addEventListener("click", () => {
+contrasteBtn.addEventListener("click", () => {
+    document.body.classList.toggle("contraste");
 
-            const ativo =
-                document.body.getAttribute("data-high-contrast") === "true";
+    localStorage.setItem(
+        "contraste",
+        document.body.classList.contains("contraste")
+    );
 
-            document.body.setAttribute(
-                "data-high-contrast",
-                !ativo
+    
+});
+        
+
+
+        async function buscarClima() {
+    // Coordenadas de Tambaú - SP
+    const lat = -21.7056;
+    const lon = -47.2728;
+
+    try {
+        // Busca Temperatura, Vento, Umidade, Chuva, UV, Sensação Térmica e Ponto de Orvalho
+        const resClima = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,uv_index,apparent_temperature,dewpoint_2m`
+        );
+        const dataClima = await resClima.json();
+        const atual = dataClima.current;
+
+        // Temperatura principal
+        document.getElementById('temperatura').textContent = Math.round(atual.temperature_2m);
+
+        // Preenchimento das 6 métricas em tempo real
+        if (document.getElementById('dado-vento')) {
+            document.getElementById('dado-vento').textContent = `${Math.round(atual.wind_speed_10m)} km/h`;
+        }
+        if (document.getElementById('dado-umidade')) {
+            document.getElementById('dado-umidade').textContent = `${atual.relative_humidity_2m}%`;
+        }
+        if (document.getElementById('dado-chuva')) {
+            document.getElementById('dado-chuva').textContent = `${atual.precipitation} mm`;
+        }
+        if (document.getElementById('dado-uv')) {
+            document.getElementById('dado-uv').textContent = Math.round(atual.uv_index);
+        }
+        if (document.getElementById('dado-sensacao')) {
+            document.getElementById('dado-sensacao').textContent = `${Math.round(atual.apparent_temperature)} °C`;
+        }
+        if (document.getElementById('dado-orvalho')) {
+            document.getElementById('dado-orvalho').textContent = `${Math.round(atual.dewpoint_2m)} °C`;
+        }
+
+        // Qualidade do Ar
+        const resAr = await fetch(
+            `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`
+        );
+        const dataAr = await resAr.json();
+        const aqi = dataAr.current.european_aqi;
+
+        let textoAr = "Boa";
+        if (aqi > 20 && aqi <= 40) textoAr = "Moderada";
+        if (aqi > 40) textoAr = "Ruim";
+
+        document.getElementById('qualidade-ar').textContent = textoAr;
+
+    } catch (erro) {
+        console.error("Erro ao carregar dados do clima:", erro);
+        
+        // Contingência em caso de falha
+        document.getElementById('temperatura').textContent = "23";
+        document.getElementById('qualidade-ar').textContent = "Moderada";
+
+        if (document.getElementById('dado-vento')) document.getElementById('dado-vento').textContent = "-- km/h";
+        if (document.getElementById('dado-umidade')) document.getElementById('dado-umidade').textContent = "--%";
+        if (document.getElementById('dado-chuva')) document.getElementById('dado-chuva').textContent = "0.0 mm";
+        if (document.getElementById('dado-uv')) document.getElementById('dado-uv').textContent = "--";
+        if (document.getElementById('dado-sensacao')) document.getElementById('dado-sensacao').textContent = "-- °C";
+        if (document.getElementById('dado-orvalho')) document.getElementById('dado-orvalho').textContent = "-- °C";
+    }
+}
+
+// --- AÇÕES DOS BOTÕES ---
+
+const btnPrevisao = document.getElementById('btn-previsao-completa');
+if (btnPrevisao) {
+    btnPrevisao.addEventListener('click', () => {
+        const urlPrevisao = 'https://www.msn.com/pt-br/clima/forecast/in-Tamba%C3%BA,S%C3%A3o-Paulo,Brasil';
+        window.open(urlPrevisao, '_blank');
+    });
+}
+
+const btnAr = document.getElementById('btn-qualidade-ar');
+if (btnAr) {
+    btnAr.addEventListener('click', () => {
+        const urlQualidadeAr = 'https://www.iqair.com/br/brazil/sao-paulo/tambau';
+        window.open(urlQualidadeAr, '_blank');
+    });
+}
+
+// Execução inicial e atualização a cada 10 minutos
+buscarClima();
+setInterval(buscarClima, 10 * 60 * 1000);
+
+// Atualiza os dados automaticamente a cada 10 minutos
+setInterval(buscarClima, 10 * 60 * 1000);
+    </script>
+
+    <script>
+    // =========================
+    // MENU SANDUÍCHE
+    // =========================
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        // Cria o fundo escuro
+        const overlay = document.createElement('div');
+        overlay.classList.add('menu-overlay');
+
+        document.body.appendChild(overlay);
+
+
+        // Abrir e fechar menu
+        menuToggle.addEventListener('click', function () {
+
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            const aberto = sidebar.classList.contains('active');
+
+            // Troca o ícone
+            if (aberto) {
+                menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuToggle.setAttribute('aria-label', 'Fechar menu');
+            } else {
+                menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuToggle.setAttribute('aria-label', 'Abrir menu');
+            }
+
+        });
+
+
+        // Fecha ao clicar no fundo escuro
+        overlay.addEventListener('click', function () {
+
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+
+            menuToggle.innerHTML =
+                '<i class="fa-solid fa-bars"></i>';
+
+            menuToggle.setAttribute(
+                'aria-label',
+                'Abrir menu'
             );
 
         });
+
+
+        // Fecha o menu ao clicar em um item
+        const menuItems =
+            document.querySelectorAll('.sidebar .menu-item');
+
+        menuItems.forEach(function (item) {
+
+            item.addEventListener('click', function () {
+
+                if (window.innerWidth <= 768) {
+
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+
+                    menuToggle.innerHTML =
+                        '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute(
+                        'aria-label',
+                        'Abrir menu'
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+
+    const linhas = document.querySelectorAll(".linha-sensor");
+const botao = document.getElementById("mostrarMaisSensores");
+
+let quantidade = 5; // quantidade inicial
+
+function atualizarTabela() {
+
+    linhas.forEach((linha, indice) => {
+
+        if (indice < quantidade) {
+            linha.style.display = "";
+        } else {
+            linha.style.display = "none";
+        }
+
+    });
+
+    if (quantidade >= linhas.length) {
+        botao.style.display = "none";
+    } else {
+        botao.style.display = "flex";
+    }
+}
+
+atualizarTabela();
+
+botao.addEventListener("click", function () {
+
+    quantidade += 5;
+
+    atualizarTabela();
+
+});
     </script>
 </body>
 </html>
