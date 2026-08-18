@@ -165,14 +165,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="CPF">
-                        <i class="fa-solid fa-id-card"></i>
-                        CPF *
-                    </label>
-                    <input type="CPF" id="CPF" name="CPF" required value="<?= $usuarios['CPF'] ?>">
-                </div>
-
-                <div class="form-group">
                     <label for="STATUS">
                         <i class="fa-solid fa-toggle-on"></i>
                         Status Inicial *
@@ -412,5 +404,30 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php if (session()->getFlashdata('erro')): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'E-mail já cadastrado!',
+            text: '<?= session()->getFlashdata('erro') ?>',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#d33'
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('sucesso')): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Alteração realizada!',
+            text: '<?= session()->getFlashdata('sucesso') ?>',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2e7d32'
+        });
+    </script>
+    <?php endif; ?>
+
 </body>
 </html>

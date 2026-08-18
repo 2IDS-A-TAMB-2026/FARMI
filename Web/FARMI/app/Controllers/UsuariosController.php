@@ -122,25 +122,59 @@ class UsuariosController extends BaseController
     {
         $model = new UsuariosModel();
 
+        $cpf = $this->request->getPost('CPF');
+        $email = $this->request->getPost('EMAIL');
+
+        // Verifica se o CPF já existe
+        $cpfExistente = $model
+            ->where('CPF', $cpf)
+            ->first();
+
+        if ($cpfExistente) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'Este CPF já está cadastrado no sistema!');
+        }
+
+        // Verifica se o e-mail já existe
+        $emailExistente = $model
+            ->where('EMAIL', $email)
+            ->first();
+
+        if ($emailExistente) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'Este e-mail já está cadastrado no sistema!');
+        }
+
         $dados = [
-            'CPF' => $this->request->getPost('CPF'),
+            'CPF' => $cpf,
             'NOME' => $this->request->getPost('NOME'),
-            'EMAIL' => $this->request->getPost('EMAIL'),
-            'SENHA' => password_hash($this->request->getPost('SENHA'), PASSWORD_DEFAULT),
+            'EMAIL' => $email,
+            'SENHA' => password_hash(
+                $this->request->getPost('SENHA'),
+                PASSWORD_DEFAULT
+            ),
             'PERFIL' => $this->request->getPost('PERFIL'),
             'DATA_CADASTRO' => date('Y-m-d'),
             'STATUS' => $this->request->getPost('STATUS')
         ];
+
+        $fazendas = $this->request->getPost('FAZENDAS');
+
+        if (empty($fazendas)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'Selecione pelo menos uma fazenda!');
+        }
 
         $model->insert($dados);
 
         $fazendas = $this->request->getPost('FAZENDAS');
         $modelUF = new UsuariosFazendaModel();
 
-        if($fazendas)
-        {
-            foreach($fazendas as $idFazenda)
-            {
+        if ($fazendas) {
+            foreach ($fazendas as $idFazenda) {
                 $modelUF->insert([
                     'ID_CPF_USUARIOS' => $dados['CPF'],
                     'ID_FAZENDA' => $idFazenda
@@ -148,7 +182,8 @@ class UsuariosController extends BaseController
             }
         }
 
-        return redirect()->to('/usuarios-admin');
+        return redirect()->to('/usuarios-admin')
+            ->with('sucesso', 'Usuário cadastrado com sucesso!');
     }
 
     public function editar($cpf)
@@ -162,53 +197,64 @@ class UsuariosController extends BaseController
     {
         $model = new UsuariosModel();
 
-        // print_r($this->request->getPost('NOME'));
-        // die();
+        $email = $this->request->getPost('EMAIL');
+
+        // Verifica se o e-mail pertence a outro usuário
+        $emailExistente = $model
+            ->where('EMAIL', $email)
+            ->where('CPF !=', $cpf)
+            ->first();
+
+        if ($emailExistente) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'Este e-mail já está sendo utilizado por outro usuário!');
+        }
 
         $dados = [
-            // 'CPF' => $this->request->getPost('CPF'),
             'NOME' => $this->request->getPost('NOME'),
-            'EMAIL' => $this->request->getPost('EMAIL'),
+            'EMAIL' => $email,
             'PERFIL' => $this->request->getPost('PERFIL'),
             'DATA_CADASTRO' => $this->request->getPost('DATA_CADASTRO'),
             'STATUS' => $this->request->getPost('STATUS')
         ];
 
-        // Verifica se digitou nova senha
-        if($this->request->getPost('SENHA') != '')
-        {
-            // Atualiza senha criptografada
+        if ($this->request->getPost('SENHA') != '') {
             $dados['SENHA'] = password_hash(
                 $this->request->getPost('SENHA'),
                 PASSWORD_DEFAULT
             );
         }
 
+        $fazendas = $this->request->getPost('FAZENDAS');
+
+        if (empty($fazendas)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('erro', 'Selecione pelo menos uma fazenda!');
+        }
+
         $model->update($cpf, $dados);
-        
-        // Atualiza fazendas
+
         $modelUF = new UsuariosFazendaModel();
 
-        // Remove vínculos antigos
         $modelUF
             ->where('ID_CPF_USUARIOS', $cpf)
             ->delete();
 
-        // Insere os novos vínculos
         $fazendas = $this->request->getPost('FAZENDAS');
 
-        if ($fazendas)
-        {
-            foreach ($fazendas as $idFazenda)
-            {
+        if ($fazendas) {
+            foreach ($fazendas as $idFazenda) {
                 $modelUF->insert([
                     'ID_CPF_USUARIOS' => $cpf,
-                    'ID_FAZENDA'      => $idFazenda
+                    'ID_FAZENDA' => $idFazenda
                 ]);
             }
         }
 
-        return redirect()->to('/usuarios-admin');
+        return redirect()->to('/usuarios-admin')
+            ->with('sucesso', 'Usuário atualizado com sucesso!');
     }
 
     public function excluir($cpf)

@@ -539,37 +539,37 @@ foreach($alerta as $a){
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
     <script>
         // paginação
-        const alertas = document.querySelectorAll(".alerta");
-        const botao = document.getElementById("mostrarMais");
+        // const alertas = document.querySelectorAll(".alerta");
+        // const botao = document.getElementById("mostrarMais");
 
-        let quantidade = 5; // mostra 5 alertas inicialmente
+        // let quantidade = 5; // mostra 5 alertas inicialmente
 
-        function atualizar() {
+        // function atualizar() {
 
-            alertas.forEach((alerta, indice) => {
+        //     alertas.forEach((alerta, indice) => {
 
-                if(indice < quantidade){
-                    alerta.style.display = "flex";
-                }else{
-                    alerta.style.display = "none";
-                }
+        //         if(indice < quantidade){
+        //             alerta.style.display = "flex";
+        //         }else{
+        //             alerta.style.display = "none";
+        //         }
 
-            });
+        //     });
 
-            if(quantidade >= alertas.length){
-                botao.style.display = "none";
-            }
-        }
+        //     if(quantidade >= alertas.length){
+        //         botao.style.display = "none";
+        //     }
+        // }
 
-        atualizar();
+        // atualizar();
 
-        botao.onclick = function(){
+        // botao.onclick = function(){
 
-            quantidade += 5;
+        //     quantidade += 5;
 
-            atualizar();
+        //     atualizar();
 
-        };
+        // };
 /* =========================
    ACESSIBILIDADE - TAMANHO DA FONTE
 ========================= */
@@ -748,30 +748,113 @@ document.addEventListener('click', function(){
     filtroMenu.classList.remove('show');
 
 });
-document.querySelectorAll('.filtro-item').forEach(item => {
+// document.querySelectorAll('.filtro-item').forEach(item => {
 
-    item.addEventListener('click', function() {
+//     item.addEventListener('click', function() {
 
-        const filtro = this.dataset.filtro;
+//         const filtro = this.dataset.filtro;
 
-        document.querySelectorAll('.alert-item').forEach(alerta => {
+//         document.querySelectorAll('.alert-item').forEach(alerta => {
 
-            if (
-                filtro === 'todos' ||
-                alerta.dataset.sensor === filtro
-            ) {
-                alerta.style.display = '';
-            } else {
-                alerta.style.display = 'none';
-            }
+//             if (
+//                 filtro === 'todos' ||
+//                 alerta.dataset.sensor === filtro
+//             ) {
+//                 alerta.style.display = '';
+//             } else {
+//                 alerta.style.display = 'none';
+//             }
 
-        });
+//         });
 
-        filtroMenu.classList.remove('show');
+//         filtroMenu.classList.remove('show');
+
+//     });
+
+// });
+
+// =========================
+// FILTRO + MOSTRAR MAIS
+// =========================
+
+const alertas = document.querySelectorAll(".alerta");
+const botaoMostrarMais = document.getElementById("mostrarMais");
+
+let quantidade = 5;
+let filtroAtual = "todos";
+
+function atualizarAlertas() {
+
+    // Primeiro, pega somente os alertas que pertencem ao filtro
+    const alertasFiltrados = Array.from(alertas).filter(alerta => {
+
+        return (
+            filtroAtual === "todos" ||
+            alerta.dataset.sensor === filtroAtual
+        );
+
+    });
+
+    // Controla quais alertas serão mostrados
+    alertas.forEach(alerta => {
+        alerta.style.display = "none";
+    });
+
+    alertasFiltrados.forEach((alerta, indice) => {
+
+        if (indice < quantidade) {
+            alerta.style.display = "flex";
+        }
+
+    });
+
+    // Mostra ou esconde o botão "Mostrar mais"
+    if (quantidade >= alertasFiltrados.length) {
+        botaoMostrarMais.style.display = "none";
+    } else {
+        botaoMostrarMais.style.display = "flex";
+    }
+}
+
+
+// =========================
+// BOTÃO MOSTRAR MAIS
+// =========================
+
+botaoMostrarMais.addEventListener("click", function () {
+
+    quantidade += 5;
+
+    atualizarAlertas();
+
+});
+
+
+// =========================
+// FILTROS
+// =========================
+
+document.querySelectorAll(".filtro-item").forEach(item => {
+
+    item.addEventListener("click", function () {
+
+        filtroAtual = this.dataset.filtro;
+
+        // Ao trocar o filtro, volta para os primeiros 5
+        quantidade = 5;
+
+        atualizarAlertas();
+
+        // Fecha o menu
+        filtroMenu.classList.remove("show");
 
     });
 
 });
+
+
+// Inicia mostrando os primeiros 5
+atualizarAlertas();
 
 </script>
 

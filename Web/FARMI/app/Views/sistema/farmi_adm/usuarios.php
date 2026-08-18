@@ -327,7 +327,7 @@ body.contraste .avatar {
                 Adicionar Novo Funcionário
             </h3>
 
-            <form action="<?= base_url('/usuarios/inserir') ?>" method="post" class="form-grid" id="formUsuario">
+            <form action="<?= base_url('/usuarios/inserir') ?>" method="post" class="form-grid" id="formUsuario" novalidate>
 
                 <div class="form-group">
                     <label for="nome">
@@ -725,60 +725,7 @@ body.contraste .avatar {
 
             }
 
-            // =========================
-            // CONFIRMAR ADICIONAR
-            // =========================
-
-            const formUsuario =
-                document.getElementById('formUsuario');
-
-            if (formUsuario) {
-
-                formUsuario.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    Swal.fire({
-
-                        title: 'Adicionar funcionário?',
-                        text: 'Deseja realmente cadastrar este funcionário?',
-
-                        icon: 'question',
-
-                        showCancelButton: true,
-
-                        confirmButtonColor: '#2e7d32',
-                        cancelButtonColor: '#6c757d',
-
-                        confirmButtonText: 'Sim, adicionar',
-                        cancelButtonText: 'Cancelar'
-
-                    }).then((result) => {
-
-                        if (result.isConfirmed) {
-
-                            Swal.fire({
-
-                                title: 'Funcionário adicionado!',
-                                text: 'Cadastro realizado com sucesso.',
-
-                                icon: 'success',
-
-                                timer: 1500,
-                                showConfirmButton: false
-
-                            }).then(() => {
-
-                                formUsuario.submit();
-
-                            });
-
-                        }
-
-                    });
-
-                });
-
-            }
+            
 
             // =========================
             // CONFIRMAR EXCLUIR
@@ -969,7 +916,149 @@ body.contraste .avatar {
         });
 
     });
+
+    // =========================
+    // CONFIRMAR ADICIONAR
+    // =========================
+    const formUsuario = document.getElementById('formUsuario');
+    if (formUsuario) {
+
+        formUsuario.addEventListener('submit', function (e) {
+
+            e.preventDefault();
+
+            // Verifica todos os campos obrigatórios
+            const camposObrigatorios = formUsuario.querySelectorAll('[required]');
+
+            let campoVazio = false;
+
+            camposObrigatorios.forEach(function (campo) {
+
+                if (campo.value.trim() === '') {
+                    campoVazio = true;
+                }
+
+            });
+
+            // Verifica se alguma fazenda foi selecionada
+            const fazendasSelecionadas = formUsuario.querySelectorAll(
+                'input[name="FAZENDAS[]"]:checked'
+            );
+
+            const cpf = document.getElementById('cpf');
+            const cpfNumeros = cpf.value.replace(/\D/g, '');
+
+            const email = document.getElementById('email');
+            const emailValor = email.value.trim();
+
+            const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValor);
+
+            if (!emailValido) {
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção!',
+                    text: 'Digite um e-mail válido',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#2e7d32'
+                });
+
+                return;
+            }
+
+            // Verifica a senha
+            const senha = document.getElementById('senha');
+
+            if (senha.value.length < 8) {
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção!',
+                    text: 'A senha deve ter no mínimo 8 caracteres',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#2e7d32'
+                });
+
+                return;
+            }
+
+            if (cpfNumeros.length !== 11) {
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção!',
+                    text: 'Preencha o CPF corretamente',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#2e7d32'
+                });
+
+                return;
+            }
+
+            // Se tiver algum campo vazio
+            if (campoVazio || fazendasSelecionadas.length === 0) {
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção!',
+                    text: 'Preencha todos os campos',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#2e7d32'
+                });
+
+                return;
+            }
+
+            // Se todos os campos estiverem preenchidos
+            Swal.fire({
+                title: 'Adicionar funcionário?',
+                text: 'Deseja realmente cadastrar este funcionário?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2e7d32',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sim, adicionar',
+                cancelButtonText: 'Cancelar'
+
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+                    formUsuario.submit();
+                }
+
+            });
+
+        });
+
+    }
     </script>
+
+
+
+    <?php if (session()->getFlashdata('erro')): ?>
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Cadastro não realizado',
+            text: '<?= session()->getFlashdata('erro') ?>',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#d33'
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('sucesso')): ?>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: '<?= session()->getFlashdata('sucesso') ?>',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#2e7d32'
+        });
+    </script>
+    <?php endif; ?>
+
 
 </body>
 

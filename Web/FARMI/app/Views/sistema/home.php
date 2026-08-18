@@ -88,7 +88,7 @@
                                         <nav class="main-menu">
                                             <ul class="menu-area-main">
                                                 <li> <a href="#about">Sobre</a> </li>
-                                                <li><a href="#contact">Nos contate</a></li>
+                                                <li><a href="#contact">Contatos</a></li>
                                                 <li><a href="#identidade">Identidade</a></li>
                                                 <li><a href="<?= base_url('/login') ?>">Entrar</a></li>
                                             </ul>
@@ -466,7 +466,7 @@
                                 <li><img src="<?= base_url('assets/icon/3.png') ?>" id="seta3" alt="Símbolo de seta para a direita" /> <a href="#identidade">Identidade </a> </li>
                                 <li><img src="<?= base_url('assets/icon/3.png') ?>" id="seta4" alt="Símbolo de seta para a direita" /> <a href="#offer">Sensores </a> </li>
                                 <li><img src="<?= base_url('assets/icon/3.png') ?>" id="seta5" alt="Símbolo de seta para a direita" /> <a href="#product">Serviços </a> </li>
-                                <li><img src="<?= base_url('assets/icon/3.png') ?>" id="seta6" alt="Símbolo de seta para a direita" /> <a href="#equipe-container">Equipe </a> </li>
+                                <li><img src="<?= base_url('assets/icon/3.png') ?>" id="seta6" alt="Símbolo de seta para a direita" /> <a href="#team">Equipe </a> </li>
                             </ul>
                         </div>
                     </div>
@@ -497,7 +497,7 @@
 
                             <ul class="loca">
                                 <li>
-                                    <a href="#"><img src="<?= base_url('assets/icon/loc.png') ?>" alt="ícone de localização" /></a>SESI CE 370
+                                    <a href="https://www.google.com/maps/place/Servi%C3%A7o+Social+da+Ind%C3%BAstria-SESI/@-21.7110061,-47.279045,17z/data=!3m1!4b1!4m6!3m5!1s0x94b7efc1347e3265:0x53eb3a234374dc72!8m2!3d-21.7110061!4d-47.2764701!16s%2Fg%2F1q5hrr5y8!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D"><img src="<?= base_url('assets/icon/loc.png') ?>" alt="ícone de localização" /></a>SESI CE 370
                                     <br>Joelmir Beting </li>
                                 <li>
                                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fami.tcc2026@gmail.com"><img src="<?= base_url('assets/icon/email.png') ?>" alt="ícone de carta" /></a>farmi.tcc2026@gmail.com</li>
