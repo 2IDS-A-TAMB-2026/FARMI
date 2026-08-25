@@ -627,6 +627,7 @@ body.contraste .avatar {
     background-color: #57c91b;
     color: #fff;
 }
+
 </style>
     <!-- Ícone -->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">

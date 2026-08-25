@@ -96,35 +96,29 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     // ROTAS DA API
 
-    $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
+    $routes->group('api', ['namespace' => 'App\Controllers\Api', 'filter' => 'cors'], function ($routes) {
         // Fazendas
         $routes->resource('fazendas', ['controller' => 'FazendaController']);
 
-        // Usuários (sem repetir o 'api/' nem o 'Api\')
+        // Usuários
         $routes->get('usuarios', 'UsuariosController::index');
         $routes->get('usuarios/(:segment)', 'UsuariosController::show/$1');
 
-        // Rota da API de Culturas (Mapeia GET, POST, PUT, DELETE automaticamente)
+        // Culturas
         $routes->resource('culturas', ['controller' => 'CulturaController']);
-        
-        // Rota da API de Alertas (Consulta)
+
+        // Alertas
         $routes->get('alertas', 'AlertaController::index');
         $routes->get('alertas/(:num)', 'AlertaController::show/$1');
 
-        // ESP32 / Medidas Sensores
-        $routes->resource('medidas_sensores', ['controller' => 'MedidasSensoresController']);
-    });
-    
-    $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
-        // Liberando GET (listar) e POST (salvar) para a API de medidas
-        $routes->resource('medidas_sensores', ['controller' => 'MedidasSensoresController']);
-    });
+        // ESP32 / Medidas dos sensores
+        $routes->resource('medidas_sensores', [
+            'controller' => 'MedidasSensoresController'
+        ]);
 
-    //Não terminamos essa parte de login com api
-    $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes) {
-        // Usar resource ativa tanto GET (index) quanto POST (create/login)
-        $routes->resource('login', ['controller' => 'AuthApiController']);
-        
-        $routes->resource('medidas_sensores', ['controller' => 'MedidasSensoresController']);
+        // Login
+        $routes->resource('login', [
+            'controller' => 'AuthApiController'
+        ]);
     });
 });

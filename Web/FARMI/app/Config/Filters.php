@@ -37,6 +37,8 @@ class Filters extends BaseFilters
 
         //Filtro de Autenticação de usuários PGE
         'auth' => \App\Filters\AuthFilter::class,
+
+        'cors'          => \App\Filters\CorsFilter::class,
     ];
 
     /**

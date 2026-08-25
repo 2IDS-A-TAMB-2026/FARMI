@@ -39,17 +39,27 @@ class MedidasSensoresController extends ResourceController
             return $this->fail('Dados JSON inválidos', 400);
         }
 
+        $valor = $json['VALOR'] ?? null;
+        $dataHora = $json['DATA_HORA'] ?? null;
+        $sensorId = $json['FK_ID_SENSOR'] ?? null;
+
+        if ($valor === null || $dataHora === null || $sensorId === null) {
+            return $this->fail('Existem dados obrigatórios não preenchidos!', 400);
+        }
+
         $model = new LeituraSensorModel();
 
         $dados = [
-            'VALOR'        => $json['MEDIDA_SENSOR_DADO'] ?? null,
-            'FK_ID_SENSOR' => $json['FK_SENSOR_ID'] ?? null,
+            'VALOR' => $valor,
+            'DATA_HORA' => $dataHora,
+            'FK_ID_SENSOR' => $sensorId
         ];
 
         if ($model->insert($dados)) {
             return $this->respondCreated([
-                'status'   => 201,
-                'mensagem' => 'Medida gravada com sucesso!'
+                'status' => 201,
+                'mensagem' => 'Medida gravada com sucesso!',
+                'dados' => $dados
             ]);
         }
 
