@@ -13,11 +13,30 @@ class FazendaController extends ResourceController
     /**
      * Auxiliar para obter o CPF do usuário (Sessão, Header ou Query String)
      */
+    /**
+     * Auxiliar para obter o CPF do usuário (Sessão, Header ou Query String)
+     */
     private function getCpfUsuario()
     {
-        return session()->get('usuario_cpf') 
-            ?? $this->request->getHeaderLine('X-User-CPF') 
-            ?? $this->request->getGet('cpf');
+        // 1. Tenta pegar da Sessão Web
+        $sessaoCpf = session()->get('usuario_cpf');
+        if (!empty($sessaoCpf)) {
+            return $sessaoCpf;
+        }
+
+        // 2. Tenta pegar do Header HTTP
+        $headerCpf = $this->request->getHeaderLine('X-User-CPF');
+        if (!empty($headerCpf)) {
+            return $headerCpf;
+        }
+
+        // 3. Tenta pegar via Query String (?cpf=12345678900)
+        $getCpf = $this->request->getGet('cpf');
+        if (!empty($getCpf)) {
+            return $getCpf;
+        }
+
+        return null;
     }
 
     /**
@@ -28,8 +47,13 @@ class FazendaController extends ResourceController
     {
         $cpf = $this->getCpfUsuario();
 
+        // Se nenhum CPF for informado, traz todas as fazendas registradas
         if (!$cpf) {
-            return $this->failUnauthorized('CPF do usuário não informado.');
+            $fazendas = $this->model->findAll();
+            return $this->respond([
+                'status' => 200,
+                'data'   => $fazendas
+            ]);
         }
 
         $pesquisa = $this->request->getGet('pesquisar');
@@ -47,10 +71,6 @@ class FazendaController extends ResourceController
         }
 
         $fazendas = $query->findAll();
-
-        if (empty($fazendas) && !empty($pesquisa)) {
-            return $this->failNotFound('Nenhuma fazenda encontrada com esse nome.');
-        }
 
         return $this->respond([
             'status' => 200,

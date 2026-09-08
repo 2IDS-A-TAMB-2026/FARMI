@@ -19,6 +19,7 @@ document.getElementById('contraste-btn')
 
 });
 
+
 //Aumentar Fonte
 // document.getElementById('aumentar-fonte-btn').addEventListener("click", function(){
 //     document.body.classList.add("aumentar-fonte");

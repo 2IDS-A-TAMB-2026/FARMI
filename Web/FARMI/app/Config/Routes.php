@@ -1,38 +1,30 @@
 <?php
 
+use CodeIgniter\Router\RouteCollection;
+
+/**
+ * @var RouteCollection $routes
+ */
+
 // =========================
-// HOME
+// ROTAS PÚBLICAS (WEB)
 // =========================
 $routes->get('/', 'HomeController::index');
 
-
-// =========================
-// LOGIN
-// =========================
 $routes->get('/login', 'AuthController::login');
 $routes->post('/login/autenticar', 'AuthController::autenticar');
 $routes->get('/logout', 'AuthController::logout');
 
-
-// =========================
-// ESQUECEU SENHA
-// =========================
 $routes->get('/esqueceu-senha', 'EsqueceuSenhaController::index');
 $routes->post('/enviar-recuperacao', 'EsqueceuSenhaController::enviar');
 
 
 // =========================
-// API ESP32 (PÚBLICA - SEM FILTRO DE LOGIN)
-// =========================
-$routes->post('api/medidas_sensores', 'Api\MedidasSensoresController::create');
-
-
-// =========================
-// FILTROS PRIVADOS (EXIGE LOGIN)
+// ROTAS PROTEGIDAS (EXIGE LOGIN VIA FILTRO)
 // =========================
 $routes->group('', ['filter' => 'auth'], function($routes) {
 
-    // ROTAS FAZENDA
+    // FAZENDA
     $routes->get('/fazenda', 'FazendaController::index');
     $routes->get('/fazenda/novo', 'FazendaController::novo');
     $routes->post('/fazenda/inserir', 'FazendaController::inserir');
@@ -40,7 +32,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->post('/fazenda/atualizar/(:num)', 'FazendaController::atualizar/$1');
     $routes->get('/fazenda/excluir/(:num)', 'FazendaController::excluir/$1');
 
-    // ROTAS CULTURA
+    // CULTURA
     $routes->get('/cultura-admin', 'CulturaController::index');
     $routes->get('/cultura/novo', 'CulturaController::novo');
     $routes->post('/cultura/inserir', 'CulturaController::inserir');
@@ -48,21 +40,21 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->post('/cultura/atualizar/(:num)', 'CulturaController::atualizar/$1');
     $routes->get('/cultura/excluir/(:num)', 'CulturaController::excluir/$1');
 
-    // ROTAS SENSORES
+    // SENSORES
     $routes->get('/sensor', 'SensorController::index');
     $routes->post('/sensor/inserir', 'SensorController::inserir');
     $routes->get('/sensor/editar/(:num)', 'SensorController::editar/$1');
     $routes->post('/sensor/atualizar/(:num)', 'SensorController::atualizar/$1');
     $routes->get('/sensor/excluir/(:num)', 'SensorController::excluir/$1');
 
-    // ROTAS USUARIOS
+    // USUARIOS
     $routes->get('/usuarios-admin', 'UsuariosController::index');
     $routes->post('/usuarios/inserir', 'UsuariosController::inserir');
     $routes->post('/usuarios/atualizar/(:any)', 'UsuariosController::atualizar/$1');
     $routes->get('/usuarios/excluir/(:any)', 'UsuariosController::excluir/$1');
     $routes->get('/usuarios_editar/(:any)', 'UsuariosController::pagina_editar/$1');
 
-    // ROTAS LEITURA SENSOR
+    // LEITURA SENSOR
     $routes->get('/leitura_sensor', 'LeituraSensorController::index');
     $routes->get('/leitura_sensor/novo', 'LeituraSensorController::novo');
     $routes->post('/leitura_sensor/inserir', 'LeituraSensorController::inserir');
@@ -93,32 +85,31 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/umidade', 'SistemaController::umidade');
     $routes->get('/usuario', 'UsuariosController::usuario');
     $routes->get('/usuarios_editar', 'UsuariosController::pagina_editar');
+    $routes->get('/dados-graficos', 'SistemaController::dados_graficos');
+});
 
-    // ROTAS DA API
 
-    $routes->group('api', ['namespace' => 'App\Controllers\Api', 'filter' => 'cors'], function ($routes) {
-        // Fazendas
-        $routes->resource('fazendas', ['controller' => 'FazendaController']);
-
-        // Usuários
-        $routes->get('usuarios', 'UsuariosController::index');
-        $routes->get('usuarios/(:segment)', 'UsuariosController::show/$1');
-
-        // Culturas
-        $routes->resource('culturas', ['controller' => 'CulturaController']);
-
-        // Alertas
-        $routes->get('alertas', 'AlertaController::index');
-        $routes->get('alertas/(:num)', 'AlertaController::show/$1');
-
-        // ESP32 / Medidas dos sensores
-        $routes->resource('medidas_sensores', [
-            'controller' => 'MedidasSensoresController'
-        ]);
-
-        // Login
-        $routes->resource('login', [
-            'controller' => 'AuthApiController'
-        ]);
+// =========================
+// ROTAS DA API (PÚBLICAS / ESP32 / FLUTTER)
+// =========================
+$routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
+    $routes->get('dashboard/stats', 'DashboardController::index');
+    // Autenticação API
+    $routes->options('login', static function () {
+        return response()->setStatusCode(200);
     });
+    $routes->get('login', 'AuthController::index');
+    $routes->post('login', 'AuthApiController::login');
+
+    // Recursos
+    $routes->resource('fazendas', ['controller' => 'FazendaController']);
+    $routes->resource('culturas', ['controller' => 'CulturaController']);
+    $routes->resource('medidas_sensores', ['controller' => 'MedidasSensoresController']);
+
+    // Endpoints adicionais
+    $routes->get('usuarios', 'UsuariosController::index');
+    $routes->get('usuarios/(:segment)', 'UsuariosController::show/$1');
+
+    $routes->get('alertas', 'AlertaController::index');
+    $routes->get('alertas/(:num)', 'AlertaController::show/$1');
 });

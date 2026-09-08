@@ -14,6 +14,10 @@
 }
 
 /* BODY */
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     min-height: 100vh;
     display: flex;
@@ -46,6 +50,7 @@ body {
 
 .logo-left img {
     width: 350px;
+    max-width: 100%;
 }
 
 /* LADO DIREITO */
@@ -60,7 +65,8 @@ body {
 .login-box {
     margin-top: 35px;
     margin-bottom: 35px;
-    width: 500px;
+    width: 90%;
+    max-width: 500px;
     background: var(--branco);
     padding: 30px;
     border-radius: 12px;
@@ -106,9 +112,11 @@ body {
 .btn-primary {
     background: var(--verde-escuro);
     color: white;
+    opacity: 1;
 }
 
-.btn-primary:hover {
+/* Hover só quando estiver ativo */
+.btn-primary:not(:disabled):hover {
     background: var(--verde-claro);
 }
 
@@ -118,25 +126,11 @@ body {
     cursor: not-allowed;
 }
 
-/* BOTÃO ATIVO (normal) */
-.btn-primary {
-    background: var(--verde-escuro);
-    color: white;
-    opacity: 1;
-}
-
-/* Hover só quando estiver ativo */
-.btn-primary:not(:disabled):hover {
-    background: var(--verde-claro);
-}
-
-
-
 /* LINKS */
 .link-senha {
     display: block;
     margin-top: 10px;
-    color: var(--verde-escuroclaro);
+    color: var(--verde-escuro);
     text-decoration: none;
 }
 
@@ -156,7 +150,7 @@ body {
 
 .back a:hover {
     color: var(--verde-claro);
-    transform: translateX(-3px); /* leve animação */
+    transform: translateX(-3px);
 }
 
 .login-box a {
@@ -171,18 +165,16 @@ body {
     text-decoration: underline;
 }
 
-
-/*CAMPOS LABEL*/
+/* CAMPOS LABEL */
 .campo {
-  display: block;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--verde-escuro);
-  margin-bottom: 8px;
-  padding-left: 2px;
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--verde-escuro);
+    margin-bottom: 8px;
+    padding-left: 2px;
 }
-
 
 /* ERRO */
 .erro-msg {
@@ -192,24 +184,19 @@ body {
     margin-bottom: 10px;
 }
 
-
-
-/*ÍCONE*/
-/* Container do input + ícone */
+/* ÍCONE */
 .input-icone {
     position: relative;
     width: 100%;
     margin: 0;
 }
 
-/* Input */
 .input-icone input {
     width: 100%;
-    padding-right: 40px; /* espaço pro ícone */
+    padding-right: 40px;
     box-sizing: border-box;
 }
 
-/* Ícone */
 .input-icone i {
     position: absolute;
     right: 10px;
@@ -219,14 +206,72 @@ body {
     color: #555;
 }
 
-
-
 /* RESPONSIVO */
-@media(max-width: 900px){
-    .left {
-        display: none;
+@media (max-width: 900px) {
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
     }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left {
+        display: none !important;
+    }
+
     .right {
         width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: var(--cinza-fundo);
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        padding: 25px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Ajuste fino pra telas bem pequenas (celulares) */
+@media (max-width: 480px) {
+    .login-box {
+        max-width: 100%;
+        padding: 20px 15px;
+        border-radius: 8px;
+    }
+
+    .logo-left img {
+        width: 220px;
+    }
+
+    .acessibilidade-login {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+    }
+
+    #aumentar-fonte, #diminuir-fonte, #resetar-fonte, #contraste-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
     }
 }

@@ -1057,7 +1057,7 @@ body.contraste textarea{
             <div class="chart-card">
                 <h3 class="chart-title">
                     <i class="fa-solid fa-chart-line"></i>
-                    Temperatura
+                    Temperatura do Ar (°C)
                 </h3>
                 <div class="grafico-box">
                     <canvas id="graficoMonitoramento"></canvas>
@@ -1333,397 +1333,269 @@ body.contraste textarea{
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-    // Detecta se o modo alto contraste já está ativo
+// 1. CAPTURA AS VARIÁVEIS ESTRUTURADAS VINDAS DO CONTROLLER
+// Detecta se o modo alto contraste já está ativo
 const isContraste = document.body.classList.contains('contraste');
 const corEixos = isContraste ? '#ffffff' : '#052501';
 const corGrade = isContraste ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
-    const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
-    const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
-    const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
-    const datasetsSolo = <?= json_encode($datasets_solo ?? []) ?>;
-    const valorLux = <?= $lux ?? 0 ?>;
 
-    
+const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
+const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
+const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
+const datasetsSolo = <?= json_encode($datasets_solo ?? []) ?>;
+const datasetsLux = <?= json_encode($datasets_lux ?? []) ?>;
+let valorLuxAtual = <?= floatval($lux ?? 0) ?>;
 
-    /* =========================
-    GRÁFICO - TEMPERATURA
-    ========================= */
-    const ctx = document.getElementById('graficoMonitoramento');
+// Declarando as variáveis globais para permitir atualização do Chart.js
+let chartTemperatura = null;
+let chartUmidade = null;
+let chartSolo = null;
+let chartLux = null;
 
-    new Chart(ctx, {
-
+/* =========================
+   GRÁFICO - TEMPERATURA
+========================= */
+const ctxTemperatura = document.getElementById('graficoMonitoramento');
+if (ctxTemperatura) {
+    chartTemperatura = new Chart(ctxTemperatura, {
         type: 'line',
-
         data: {
             labels: labelsEixoX,
             datasets: datasetsTemperatura
         },
-
-     options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            labels: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
-                font: { size: 14 }
-            }
-        }
-    },
-    scales: {
-        y: {
-            beginAtZero: true,
-            ticks: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501'
-            },
-            grid: {
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9'
-            }
-        },
-        x: {
-            ticks: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501'
-            },
-            grid: {
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9'
-            }
-        }
-    }
-}
-
-    });
-
-    /* =========================
-    GRÁFICO UMIDADE DO AR
-    ========================= */
-    const ctxUmidade = document.getElementById('graficoUmidade');
-
-    if (ctxUmidade) {
-
-        // 🔧 LIMPA OS DADOS (remove null e garante número)
-        const datasetsUmidadeLimpos = datasetsUmidade.map(sensor => {
-
-            return {
-                label: sensor.label,
-                data: sensor.data.map(v => v ?? 0), // 🔥 AQUI É A CORREÇÃO
-                borderColor: sensor.borderColor,
-                backgroundColor: 'transparent',
-                borderWidth: 3,
-                tension: 0.3
-            };
-
-        });
-
-        new Chart(ctxUmidade, {
-
-            type: 'line',
-
-            data: {
-                labels: labelsEixoX,
-                datasets: datasetsUmidadeLimpos
-            },
-
-           options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            display: true,
-            labels: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
-                font: { size: 13, weight: 'bold' }
-            }
-        }
-    },
-    scales: {
-        y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
-                callback: v => v + '%'
-            },
-            grid: { 
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
-            }
-        },
-        x: {
-            ticks: { 
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501' 
-            },
-            grid: { 
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
-            }
-        }
-    }
-}
-        });
-    }
-
-    /* =========================
-    GRÁFICO UMIDADE DO SOLO (MÚLTIPLOS SENSORES)
-    ========================= */
-    const ctxUmidadeSolo = document.getElementById('graficoUmidadeSolo');
-
-    if (ctxUmidadeSolo) {
-        new Chart(ctxUmidadeSolo, {
-            type: 'line',
-            data: {
-                labels: labelsEixoX,
-                datasets: datasetsSolo // já vem pronto do PHP
-            },
-          options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            display: true,
-            labels: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
-                font: { size: 13, weight: 'bold' }
-            }
-        }
-    },
-    scales: {
-        y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501',
-                callback: function(value) { return value + '%'; }
-            },
-            grid: { 
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
-            }
-        },
-        x: {
-            ticks: { 
-                color: () => document.body.classList.contains('contraste') ? '#ffffff' : '#052501' 
-            },
-            grid: { 
-                color: () => document.body.classList.contains('contraste') ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9' 
-            }
-        }
-    }
-}
-        });
-    }
-
-
-    /* =========================
-    GRÁFICO LUMINOSIDADE
-    ========================= */
-
-    function classificarLux(lux) {
-
-        if (lux <= 10) {
-            return {
-                status: 'Baixa luminosidade',
-                ambiente: 'Noite',
-                cor: '#4b5563' // cinza
-            };
-        }
-
-        if (lux <= 500) {
-            return {
-                status: 'Baixa luminosidade',
-                ambiente: 'Ambiente interno',
-                cor: '#3b82f6'
-            };
-        }
-
-        if (lux <= 5000) {
-            return {
-                status: 'Moderada',
-                ambiente: 'Nublado',
-                cor: '#add1ff'
-            };
-        }
-
-        if (lux <= 25000) {
-            return {
-                status: 'Ideal',
-                ambiente: 'Sol indireto',
-                cor: '#84cc16'
-            };
-        }
-
-        return {
-            status: 'Alta luminosidade',
-            ambiente: 'Sol forte',
-            cor: '#dc2626'
-        };
-    }
-
-    const infoLux = classificarLux(valorLux);
-
-    new Chart(document.getElementById('graficoLux'), {
-
-        type: 'doughnut',
-
-        data: {
-            datasets: [{
-                data: [5, 10, 20, 30, 35],
-                backgroundColor: [
-                    '#4b5563',
-                    '#3b82f6',
-                    '#add1ff',
-                    '#84cc16',
-                    '#ef4444'
-                ],
-                borderWidth: 0
-            }]
-        },
-
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { 
+                        color: '#052501', 
+                        callback: function(value) { return value + 'ºC'; } 
+                    },
+                    grid: { color: '#dfe6e9' }
+                },
+                x: {
+                    ticks: { color: '#052501' },
+                    grid: { color: '#dfe6e9' }
+                }
+            }
+        }
+    });
+}
 
+/* =========================
+   GRÁFICO UMIDADE DO AR
+========================= */
+const ctxUmidade = document.getElementById('graficoUmidade');
+if (ctxUmidade) {
+    chartUmidade = new Chart(ctxUmidade, {
+        type: 'line',
+        data: {
+            labels: labelsEixoX,
+            datasets: datasetsUmidade
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { 
+                        color: '#052501',
+                        callback: function(value) { return value + '%'; } 
+                    },
+                    grid: { color: '#dfe6e9' }
+                },
+                x: {
+                    ticks: { color: '#052501' },
+                    grid: { color: '#dfe6e9' }
+                }
+            }
+        }
+    });
+}
+
+/* =========================
+   GRÁFICO UMIDADE DO SOLO
+========================= */
+const ctxUmidadeSolo = document.getElementById('graficoUmidadeSolo');
+if (ctxUmidadeSolo) {
+    chartSolo = new Chart(ctxUmidadeSolo, {
+        type: 'line',
+        data: {
+            labels: labelsEixoX,
+            datasets: datasetsSolo
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                        color: '#052501',
+                        callback: function(value) { return value + '%'; }
+                    },
+                    grid: { color: '#dfe6e9' }
+                },
+                x: {
+                    ticks: { color: '#052501' },
+                    grid: { color: '#dfe6e9' }
+                }
+            }
+        }
+    });
+}
+
+/* =========================
+   GRÁFICO LUMINOSIDADE
+========================= */
+function classificarLux(lux) {
+    if (lux <= 10) return { status: 'Baixa luminosidade', ambiente: 'Noite', cor: '#4b5563' };
+    if (lux <= 500) return { status: 'Baixa luminosidade', ambiente: 'Ambiente interno', cor: '#3b82f6' };
+    if (lux <= 5000) return { status: 'Moderada', ambiente: 'Nublado', cor: '#add1ff' };
+    if (lux <= 25000) return { status: 'Ideal', ambiente: 'Sol indireto', cor: '#84cc16' };
+    return { status: 'Alta luminosidade', ambiente: 'Sol forte', cor: '#dc2626' };
+}
+
+const graficoLuxCanvas = document.getElementById('graficoLux');
+if (graficoLuxCanvas) {
+    chartLux = new Chart(graficoLuxCanvas, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [5, 10, 20, 30, 35],
+                backgroundColor: ['#4b5563', '#3b82f6', '#add1ff', '#84cc16', '#ef4444'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
             rotation: -90,
             circumference: 180,
-
-            cutout: '70%',
-
-          plugins: [{
-    id: 'gaugeText',
-    afterDraw(chart) {
-        const {
-            ctx,
-            chartArea: { width, height }
-        } = chart;
-
-        // Verifica se o modo alto contraste está ativo na página
-        const emContraste = document.body.classList.contains('contraste');
-        const corTextoPrincipal = emContraste ? '#ffffff' : '#052501';
-        const corTextoSecundario = emContraste ? '#ffffff' : '#666666';
-
-        ctx.save();
-
-        // 1. Valor Lux (ex: 16.800)
-        ctx.font = 'bold 26px Arial';
-        ctx.fillStyle = corTextoPrincipal; // <-- Garante o Branco no Alto Contraste
-        ctx.textAlign = 'center';
-
-        ctx.fillText(
-            valorLux.toLocaleString('pt-BR'),
-            width / 2,
-            height - 55
-        );
-
-        // 2. Unidade (Lux)
-        ctx.font = '16px Arial';
-        ctx.fillStyle = corTextoSecundario; // <-- Garante o Branco no Alto Contraste
-
-        ctx.fillText(
-            'Lux',
-            width / 2,
-            height - 30
-        );
-
-        // 3. Status (Ideal, Baixa, etc.)
-        ctx.font = 'bold 15px Arial';
-        ctx.fillStyle = emContraste ? '#ffffff' : infoLux.cor; // Para contraste total, deixa branco ou a cor do status
-
-        ctx.fillText(
-            infoLux.status,
-            width / 2,
-            height - 8
-        );
-
-        // 4. Ambiente (Sol indireto, etc.)
-        ctx.font = '13px Arial';
-        ctx.fillStyle = corTextoSecundario;
-
-        ctx.fillText(
-            infoLux.ambiente,
-            width / 2,
-            height + 15
-        );
-
-        ctx.restore();
-    }
-}]
+            cutout: '70%'
         },
-
         plugins: [{
-
             id: 'gaugeText',
+            afterDraw(chart) {
+                const { ctx, chartArea: { width, height } } = chart;
+                const infoLux = classificarLux(valorLuxAtual);
+                const isContraste = document.body.classList.contains('contraste');
 
-           afterDraw(chart) {
-    const {
-        ctx,
-        chartArea: { width, height }
-    } = chart;
+                const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
+                const corTextoSecundario = isContraste ? '#ffffff' : '#666666';
 
-    // Detecta se o contraste está ativado
-    const isContraste = document.body.classList.contains('contraste');
-    const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
-    const corTextoSecundario = isContraste ? '#cccccc' : '#666666';
+                ctx.save();
 
-    ctx.save();
+                /* Valor Lux */
+                ctx.font = 'bold 26px Arial';
+                ctx.fillStyle = corTextoPrincipal;
+                ctx.textAlign = 'center';
+                ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 55);
 
-    // Valor Lux
-    ctx.font = 'bold 26px Arial';
-    ctx.fillStyle = corTextoPrincipal; // <-- Usando a cor dinâmica
-    ctx.textAlign = 'center';
+                /* Unidade */
+                ctx.font = '16px Arial';
+                ctx.fillStyle = corTextoSecundario;
+                ctx.fillText('Lux', width / 2, height - 30);
 
-    ctx.fillText(
-        valorLux.toLocaleString('pt-BR'),
-        width / 2,
-        height - 55
-    );
+                /* Status */
+                ctx.font = 'bold 15px Arial';
+                ctx.fillStyle = isContraste ? '#ffffff' : infoLux.cor;
+                ctx.fillText(infoLux.status, width / 2, height - 8);
 
-    // Unidade
-    ctx.font = '16px Arial';
-    ctx.fillStyle = corTextoPrincipal; // <-- Usando a cor dinâmica
+                /* Ambiente */
+                ctx.font = '13px Arial';
+                ctx.fillStyle = corTextoSecundario;
+                ctx.fillText(infoLux.ambiente, width / 2, height + 15);
 
-    ctx.fillText(
-        'Lux',
-        width / 2,
-        height - 30
-    );
-
-    // Status
-    ctx.font = 'bold 15px Arial';
-    ctx.fillStyle = infoLux.cor;
-
-    ctx.fillText(
-        infoLux.status,
-        width / 2,
-        height - 8
-    );
-
-    // Ambiente
-    ctx.font = '13px Arial';
-    ctx.fillStyle = corTextoSecundario; // <-- Usando a cor dinâmica
-
-    ctx.fillText(
-        infoLux.ambiente,
-        width / 2,
-        height + 15
-    );
-
-    ctx.restore();
-}
+                ctx.restore();
+            }
         }]
     });
+}
 
+// Função auxiliar criada para atualizar o gráfico de Luminosidade
+function atualizarLux(novoValor) {
+    valorLuxAtual = novoValor;
+    if (chartLux) {
+        chartLux.update();
+    }
+}
 
+/* =========================
+   ATUALIZA OS GRÁFICOS
+========================= */
+async function atualizarGraficos() {
+    try {
+        const resposta = await fetch('<?= base_url('dados-graficos') ?>');
+        if (!resposta.ok) throw new Error('Erro ao buscar dados dos gráficos');
 
-    /* =========================
-    CULTURAS FIXAS
-    ========================= */
+        const dados = await resposta.json();
 
-    /* MILHO */
-    document.getElementById('statusMilho').innerText = 'Saudável';
+        // TEMPERATURA
+        if (chartTemperatura && dados.temperatura) {
+            chartTemperatura.data.labels = dados.horarios;
+            chartTemperatura.data.datasets = dados.temperatura;
+            chartTemperatura.update();
+        }
 
-    /* SOJA */
-    document.getElementById('statusSoja').innerText = 'Em atenção';
+        // UMIDADE DO AR
+        if (chartUmidade && dados.umidade) {
+            chartUmidade.data.labels = dados.horarios;
+            chartUmidade.data.datasets = dados.umidade;
+            chartUmidade.update();
+        }
 
-    /* CAFÉ */
-    document.getElementById('statusCafe').innerText = 'Crítico';
-    /* Atualiza sozinho */
-    setInterval(atualizarCulturas, 5000);
+        // UMIDADE DO SOLO (Garantindo atualização dos dados no gráfico)
+        if (chartSolo && dados.solo) {
+            chartSolo.data.labels = dados.horarios;
+            chartSolo.data.datasets = dados.solo;
+            chartSolo.update();
+        }
+
+        // LUX (Garantindo que a medição mais recente atualize o velocímetro/gauge)
+        if (dados.lux !== undefined && chartLux) {
+            atualizarLux(dados.lux);
+        }
+
+    } catch (erro) {
+        console.error('Erro ao atualizar gráficos:', erro);
+    }
+}
 
     </script>
     

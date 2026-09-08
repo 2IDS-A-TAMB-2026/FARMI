@@ -1,9 +1,8 @@
-
-
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FARMI - Recuperar Senha</title>
 
         <!--Ícone do site-->
@@ -51,35 +50,36 @@
         junto com o JavaScript
         ========================================================== */
 
-    /* 1. Inputs (E-mail e Senha) */
-    .login-box input {
-        font-size: 1rem !important;
-    }
+        /* 1. Inputs (E-mail e Senha) */
+        .login-box input {
+            font-size: 1rem !important;
+        }
 
-    /* 1.1. Placeholder (o texto "E-mail" e "Senha" que fica no fundo) */
-    .login-box input::placeholder {
-        font-size: 1rem !important;
-    }
+        /* 1.1. Placeholder (o texto "E-mail" e "Senha" que fica no fundo) */
+        .login-box input::placeholder {
+            font-size: 1rem !important;
+        }
 
-    /* 2. Botão (Entrar) */
-    .login-box .btn-primary {
-        font-size: 1rem !important;
-    }
+        /* 2. Botão (Entrar) */
+        .login-box .btn-primary {
+            font-size: 1rem !important;
+        }
 
-    /* 3. Links (Esqueceu a senha? e Voltar a Tela Inicial) */
-    .login-box .link-senha,
-    .login-box .back a {
-        font-size: 1rem !important;
-    }
-    /* Faz o texto do label (E-mail:) aumentar de tamanho */
-    .login-box label {
-        font-size: 1rem !important;
-    }
+        /* 3. Links (Esqueceu a senha? e Voltar a Tela Inicial) */
+        .login-box .link-senha,
+        .login-box .back a {
+            font-size: 1rem !important;
+        }
 
-    /* Garante que o label fique visível no modo de alto contraste */
-    body.contraste .login-box label {
-        color: #fff !important;
-    }
+        /* Faz o texto do label (E-mail:) aumentar de tamanho */
+        .login-box label {
+            font-size: 1rem !important;
+        }
+
+        /* Garante que o label fique visível no modo de alto contraste */
+        body.contraste .login-box label {
+            color: #fff !important;
+        }
 
         #contraste-btn {
             background: transparent; border: none;
@@ -94,9 +94,9 @@
         /* ==========================================================
         ALTO CONTRASTE ESPECÍFICO PARA O LOGIN
         ========================================================== */
-        body.contraste .left, 
+        body.contraste .left,
         body.contraste .right {
-            background-color: #121212 !important; /* Fundo escuro */
+            background-color: #121212 !important;
         }
 
         body.contraste .login-box {
@@ -105,8 +105,8 @@
             box-shadow: none;
         }
 
-        body.contraste h2, 
-        body.contraste .link-senha, 
+        body.contraste h2,
+        body.contraste .link-senha,
         body.contraste .back a {
             color: #fff !important;
         }
@@ -123,8 +123,8 @@
             border: 2px solid #fff !important;
         }
 
-        body.contraste #aumentar-fonte, 
-        body.contraste #diminuir-fonte, 
+        body.contraste #aumentar-fonte,
+        body.contraste #diminuir-fonte,
         body.contraste #resetar-fonte {
             background: #000 !important;
             color: #fff !important;
@@ -219,7 +219,7 @@
 
             // 1. Lógica do Alto Contraste
             const contrasteBtn = document.getElementById('contraste-btn');
-            
+
             if (localStorage.getItem('temaContraste') === 'ativo') {
                 document.body.classList.add('contraste');
             }
@@ -227,7 +227,7 @@
             if (contrasteBtn) {
                 contrasteBtn.addEventListener('click', () => {
                     document.body.classList.toggle('contraste');
-                    
+
                     if (document.body.classList.contains('contraste')) {
                         localStorage.setItem('temaContraste', 'ativo');
                     } else {
@@ -244,7 +244,7 @@
 
             function aplicarFonte() {
                 document.documentElement.style.fontSize = tamanhoFonte + '%';
-                localStorage.setItem('tamanhoFonteDashboard', tamanhoFonte); 
+                localStorage.setItem('tamanhoFonteDashboard', tamanhoFonte);
             }
 
             const fonteSalva = localStorage.getItem('tamanhoFonteDashboard');

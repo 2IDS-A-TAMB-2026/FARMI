@@ -7,8 +7,8 @@
     <title>Gestor - Gerenciar Culturas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- RESPONSIVO -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* Estilos para o dropdown de fazendas */
@@ -904,64 +904,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-/* =========================
-   FORMULÁRIO
-========================= */
-/*
-document.getElementById('formCultura').addEventListener('submit', function (e) {
-    const area = parseFloat(document.getElementById('area').value) || 0;
-    const lux = parseInt(document.getElementById('lux').value) || 0;
-    const temp = parseInt(document.getElementById('temperatura').value) || 0;
-
-    if (area > 1000000) {
-
-        e.preventDefault();
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Área inválida',
-            text: 'A área cultivada não pode ultrapassar 1.000.000 ha.'
-        });
-
-        return;
-    }
-
-    if (lux > 100000) {
-
-        e.preventDefault();
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Sensor de luz inválido',
-            text: 'O sensor de luz não pode ultrapassar 100.000 lux.'
-        });
-
-        return;
-    }
-
-    if (temp > 50) {
-
-        e.preventDefault();
-
-        Swal.fire({
-            icon: 'error',
-            title: 'Temperatura inválida',
-            text: 'A temperatura não pode ultrapassar 50°C.'
-        });
-
-        return;
-    }
-
-    Swal.fire({
-        title: 'Cadastro realizado!',
-        text: 'A cultura foi cadastrada com sucesso.',
-        icon: 'success',
-        confirmButtonColor: '#2e7d32',
-        confirmButtonText: 'OK'
-    });
-
-});
-*/
 
 </script>
 

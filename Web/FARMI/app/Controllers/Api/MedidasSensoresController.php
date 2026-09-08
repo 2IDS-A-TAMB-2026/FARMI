@@ -40,10 +40,9 @@ class MedidasSensoresController extends ResourceController
         }
 
         $valor = $json['VALOR'] ?? null;
-        $dataHora = $json['DATA_HORA'] ?? null;
         $sensorId = $json['FK_ID_SENSOR'] ?? null;
 
-        if ($valor === null || $dataHora === null || $sensorId === null) {
+        if ($valor === null || $sensorId === null) {
             return $this->fail('Existem dados obrigatórios não preenchidos!', 400);
         }
 
@@ -51,7 +50,6 @@ class MedidasSensoresController extends ResourceController
 
         $dados = [
             'VALOR' => $valor,
-            'DATA_HORA' => $dataHora,
             'FK_ID_SENSOR' => $sensorId
         ];
 

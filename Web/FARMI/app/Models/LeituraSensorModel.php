@@ -9,10 +9,9 @@ class LeituraSensorModel extends Model
     protected $table = 'LEITURA_SENSOR';
     protected $primaryKey = 'ID_LEITURA';
 
-    // Libera os campos do seu banco para o insert do ESP32 funcionar
     protected $allowedFields = [
         'VALOR',
-        'UNIDADE_MEDIDA', // Opcional: crie este campo no banco se quiser gravar o "ºC" ou "%"
+        'DATA_HORA',
         'FK_ID_SENSOR'
     ];
 

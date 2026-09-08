@@ -78,22 +78,32 @@ class SistemaController extends BaseController
 
         // 1. BUSCA TODAS AS LEITURAS DOS ÚLTIMOS DIAS PARA MONTAR O HISTÓRICO DOS GRÁFICOS
         $leiturasHistorico = $db->query("
-            SELECT 
-                s.ID_SENSOR,
-                s.NOME_SENSOR,
-                s.TIPO_SENSOR,
-                ls.VALOR,
-                ls.DATA_HORA,
-                f.ID_FAZENDA,
-                f.NOME AS NOME_FAZENDA
-            FROM SENSOR s
-            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
-            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
-            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
-            INNER JOIN LEITURA_SENSOR ls ON ls.FK_ID_SENSOR = s.ID_SENSOR
-            WHERE uf.ID_CPF_USUARIOS = ?
-            ORDER BY ls.DATA_HORA ASC
-        ", [$cpfUsuario])->getResultArray();
+        SELECT
+            s.ID_SENSOR,
+            s.NOME_SENSOR,
+            s.TIPO_SENSOR,
+            ls.VALOR,
+            ls.DATA_HORA,
+            f.ID_FAZENDA,
+            f.NOME AS NOME_FAZENDA
+        FROM SENSOR s
+        INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+        INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+        INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+        INNER JOIN LEITURA_SENSOR ls ON ls.FK_ID_SENSOR = s.ID_SENSOR
+        WHERE uf.ID_CPF_USUARIOS = ?
+        AND ls.ID_LEITURA IN (
+            SELECT ID_LEITURA
+            FROM (
+                SELECT l2.ID_LEITURA
+                FROM LEITURA_SENSOR l2
+                WHERE l2.FK_ID_SENSOR = s.ID_SENSOR
+                ORDER BY l2.DATA_HORA DESC
+                LIMIT 10
+            ) AS ultimas
+        )
+        ORDER BY ls.DATA_HORA ASC
+    ", [$cpfUsuario])->getResultArray();
 
         // 2. BUSCA APENAS A ÚLTIMA LEITURA ATUAL DE CADA SENSOR PARA OS CARDS E MÉDIAS
         $dadosGerais = $db->query("
@@ -201,9 +211,11 @@ class SistemaController extends BaseController
 
         // 3. ESTRUTURAÇÃO DOS GRÁFICOS MULTI-SENSORES (Eixo X unificado e Datasets separados)
         $todos_horarios = [];
+
         $sensoresTemp = [];
         $sensoresUmid = [];
         $sensoresSolo = [];
+        $sensoresLux = [];
 
         // Mapeia os horários únicos ordenados para o Eixo X e separa por sensor
         foreach ($leiturasHistorico as $leitura) {
@@ -226,6 +238,10 @@ class SistemaController extends BaseController
             elseif ($leitura['TIPO_SENSOR'] === 'Solo') {
                 $sensoresSolo[$idSensor]['label'] = $nomeSensor;
                 $sensoresSolo[$idSensor]['dados'][$horaFormatada] = $leitura['VALOR'];
+            }
+            elseif ($leitura['TIPO_SENSOR'] === 'Luz') {
+                $sensoresLux[$idSensor]['label'] = $nomeSensor;
+                $sensoresLux[$idSensor]['dados'][$horaFormatada] = $leitura['VALOR'];
             }
         }
 
@@ -298,6 +314,32 @@ class SistemaController extends BaseController
             $corIdxSolo++;
         }
 
+        $datasets_lux = [];
+        
+        $cores = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b', '#858796'];
+
+        $k = 0;
+
+        foreach ($sensoresLux as $sensor) {
+
+            $data = [];
+
+            foreach ($todos_horarios as $hora) {
+                $data[] = $sensor['dados'][$hora] ?? null;
+            }
+
+            $datasets_lux[] = [
+                'label' => $sensor['label'],
+                'data' => $data,
+                'borderColor' => $cores[$k % count($cores)],
+                'backgroundColor' => 'transparent',
+                'borderWidth' => 3,
+                'tension' => 0.3
+            ];
+
+            $k++;
+        }
+
         // Outros dados de contagem da View
         $total_fazendas = $db->query("SELECT COUNT(DISTINCT ID_FAZENDA) AS total FROM USUARIOS_FAZENDA WHERE ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
         $total_usuarios = $db->query("SELECT COUNT(DISTINCT uf2.ID_CPF_USUARIOS) AS total FROM USUARIOS_FAZENDA uf1 INNER JOIN USUARIOS_FAZENDA uf2 ON uf2.ID_FAZENDA = uf1.ID_FAZENDA WHERE uf1.ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
@@ -318,7 +360,8 @@ class SistemaController extends BaseController
             'grafico_horarios' => $todos_horarios,
             'datasets_temperatura' => $datasets_temperatura,
             'datasets_umidade' => $datasets_umidade,
-            'datasets_solo' => $datasets_solo
+            'datasets_solo' => $datasets_solo,
+            'datasets_lux' => $datasets_lux
         ]);
     }
 
@@ -357,26 +400,23 @@ class SistemaController extends BaseController
 
     public function dados_grafico_sensor($idSensor)
     {
-        $db = \Config::Database::connect();
+        $db = \Config\Database::connect();
 
-        // Busca as últimas 15 leituras do sensor para não sobrecarregar o gráfico
-        // Convertemos o VALOR para DECIMAL para que o JavaScript o interprete corretamente como número
         $query = $db->query("
-            SELECT 
-                VALOR, 
-                DATE_FORMAT(DATA_HORA, '%d/%m %H:%i') as MOMENTO 
-            FROM LEITURA_SENSOR 
+            SELECT
+                VALOR,
+                DATE_FORMAT(DATA_HORA, '%d/%m %H:%i') AS MOMENTO
+            FROM LEITURA_SENSOR
             WHERE FK_ID_SENSOR = ?
-            ORDER BY DATA_HORA ASC 
-            LIMIT 15
+            ORDER BY DATA_HORA DESC
+            LIMIT 10
         ", [$idSensor]);
 
         $dados = $query->getResultArray();
+        $dados = array_reverse($dados);
 
-        // Retorna os dados em formato JSON para o Javascript ler
         return $this->response->setJSON($dados);
     }
-
 
 
 
@@ -514,20 +554,32 @@ class SistemaController extends BaseController
 
         // 1. HISTÓRICO COMPLETO (igual admin)
         $leiturasHistorico = $db->query("
-            SELECT 
-                s.ID_SENSOR,
-                s.NOME_SENSOR,
-                s.TIPO_SENSOR,
-                ls.VALOR,
-                ls.DATA_HORA
-            FROM SENSOR s
-            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
-            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
-            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
-            INNER JOIN LEITURA_SENSOR ls ON ls.FK_ID_SENSOR = s.ID_SENSOR
-            WHERE uf.ID_CPF_USUARIOS = ?
-            ORDER BY ls.DATA_HORA ASC
-        ", [$cpfUsuario])->getResultArray();
+        SELECT
+            s.ID_SENSOR,
+            s.NOME_SENSOR,
+            s.TIPO_SENSOR,
+            ls.VALOR,
+            ls.DATA_HORA,
+            f.ID_FAZENDA,
+            f.NOME AS NOME_FAZENDA
+        FROM SENSOR s
+        INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+        INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+        INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+        INNER JOIN LEITURA_SENSOR ls ON ls.FK_ID_SENSOR = s.ID_SENSOR
+        WHERE uf.ID_CPF_USUARIOS = ?
+        AND ls.ID_LEITURA IN (
+            SELECT ID_LEITURA
+            FROM (
+                SELECT l2.ID_LEITURA
+                FROM LEITURA_SENSOR l2
+                WHERE l2.FK_ID_SENSOR = s.ID_SENSOR
+                ORDER BY l2.DATA_HORA DESC
+                LIMIT 10
+            ) AS ultimas
+        )
+        ORDER BY ls.DATA_HORA ASC
+    ", [$cpfUsuario])->getResultArray();
 
         // 2. DADOS ATUAIS (cards + tabela)
         $sensores = $db->query("
@@ -607,6 +659,7 @@ class SistemaController extends BaseController
         $sensoresTemp = [];
         $sensoresUmid = [];
         $sensoresSolo = [];
+        $sensoresLux = [];
 
         foreach ($leiturasHistorico as $leitura) {
 
@@ -632,6 +685,11 @@ class SistemaController extends BaseController
             if ($leitura['TIPO_SENSOR'] === 'Solo') {
                 $sensoresSolo[$id]['label'] = $nome;
                 $sensoresSolo[$id]['dados'][$hora] = $leitura['VALOR'];
+            }
+
+            if ($leitura['TIPO_SENSOR'] === 'Luz') {
+                $sensoresLux[$id]['label'] = $nome;
+                $sensoresLux[$id]['dados'][$hora] = $leitura['VALOR'];
             }
         }
 
@@ -711,6 +769,29 @@ class SistemaController extends BaseController
             $j++;
         }
 
+        $datasets_lux = [];
+        $k = 0;
+
+        foreach ($sensoresLux as $sensor) {
+
+            $data = [];
+
+            foreach ($todos_horarios as $hora) {
+                $data[] = $sensor['dados'][$hora] ?? null;
+            }
+
+            $datasets_lux[] = [
+                'label' => $sensor['label'],
+                'data' => $data,
+                'borderColor' => $cores[$k % count($cores)],
+                'backgroundColor' => 'transparent',
+                'borderWidth' => 3,
+                'tension' => 0.3
+            ];
+
+            $k++;
+        }
+
         // 8. TOTAIS
         $total_sensores = count($sensores);
 
@@ -748,7 +829,8 @@ class SistemaController extends BaseController
             'grafico_horarios' => $todos_horarios,
             'datasets_temperatura' => $datasets_temperatura,
             'datasets_umidade' => $datasets_umidade,
-            'datasets_solo' => $datasets_solo
+            'datasets_solo' => $datasets_solo,
+            'datasets_lux' => $datasets_lux
         ]);
     }
 
