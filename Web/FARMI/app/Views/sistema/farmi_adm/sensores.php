@@ -329,9 +329,12 @@ body.contraste .avatar {
             </h3>
 
             <form action="<?= base_url('/sensor/inserir') ?>"
+
                 method="post"
                 id="formSensor"
                 class="form-grid">
+
+                <?= csrf_field() ?>
 
                 <div class="form-group">
                     <label for="nome">

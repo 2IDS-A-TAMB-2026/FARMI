@@ -34,10 +34,10 @@ class AppContrast extends InheritedWidget {
 class _MainLayoutState extends State<MainLayout> {
   final List<_NavItem> _navItems = const [
     _NavItem(icon: Icons.dashboard_rounded, label: 'Dashboard', route: '/dashboard'),
-    _NavItem(icon: Icons.eco_rounded, label: 'Culturas', route: '/crops'),
+    _NavItem(icon: Icons.agriculture, label: 'Fazendas', route: '/fazendas'),
+    _NavItem(icon: Icons.eco, label: 'Culturas', route: '/crops'),
     _NavItem(icon: Icons.sensors_rounded, label: 'Sensores', route: '/sensors'),
-    _NavItem(icon: Icons.bar_chart_rounded, label: 'Relatórios', route: '/reports'),
-    _NavItem(icon: Icons.notifications_rounded, label: 'Alertas', route: '/alerts'),
+    _NavItem(icon: Icons.error_outline_rounded, label: 'Alertas', route: '/alerts'),
   ];
 
   bool _isHighContrast = false;

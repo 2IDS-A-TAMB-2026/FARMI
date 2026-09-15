@@ -1,21 +1,18 @@
-import 'package:app_base44/screens/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import 'services/auth_service.dart';
 import 'widgets/main_layout.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/dashboard_screen.dart';
-import 'screens/crop_management_screen.dart';
-import 'screens/sensor_management_screen.dart';
+import 'screens/cultura_screen.dart';
+import 'screens/sensores_screen.dart';
 import 'screens/alerts_screen.dart';
-import 'screens/reports_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/forgot_password_screen.dart';
 import 'screens/reset_password_screen.dart';
-import 'screens/theme_provider.dart';
+import 'screens/fazenda_screen.dart';
 
 void main() {
   runApp(const FarmiApp());
@@ -163,17 +160,24 @@ class _FarmiAppState extends State<FarmiApp> {
                   )
                 : const LoginScreen(),
 
+        '/fazendas': (context) =>
+            AuthService.isLoggedIn
+                ? MainLayout(
+                    child: FazendasScreen(),
+                  )
+                : const LoginScreen(),
+
         '/crops': (context) =>
             AuthService.isLoggedIn
                 ? MainLayout(
-                    child: CropManagementScreen(),
+                    child: CulturaScreen(),
                   )
                 : const LoginScreen(),
 
         '/sensors': (context) =>
             AuthService.isLoggedIn
                 ? MainLayout(
-                    child: SensorManagementScreen(),
+                    child: SensoresScreen(),
                   )
                 : const LoginScreen(),
 
@@ -181,13 +185,6 @@ class _FarmiAppState extends State<FarmiApp> {
             AuthService.isLoggedIn
                 ? MainLayout(
                     child: AlertsScreen(),
-                  )
-                : const LoginScreen(),
-
-        '/reports': (context) =>
-            AuthService.isLoggedIn
-                ? MainLayout(
-                    child: ReportsScreen(),
                   )
                 : const LoginScreen(),
 

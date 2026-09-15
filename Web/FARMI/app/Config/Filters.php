@@ -22,9 +22,8 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
 
-        // Filtros Customizados
-        'cors'          => \App\Filters\CorsFilter::class,
-        'auth'          => \App\Filters\AuthFilter::class,
+        'cors' => \App\Filters\CorsFilter::class,
+        'auth' => \App\Filters\AuthFilter::class,
     ];
 
     public array $required = [
@@ -40,7 +39,10 @@ class Filters extends BaseFilters
    public array $globals = [
     'before' => [
         'csrf' => [
-            'except' => ['api/*']
+            'except' => [
+                'api/*',
+                'fazenda/inserir',
+            ],
         ],
     ],
     'after' => [

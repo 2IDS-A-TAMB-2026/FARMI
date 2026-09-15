@@ -306,7 +306,8 @@ body.alto-contraste .avatar {
             </h3>
 
             <form action="<?= base_url('/cultura/inserir') ?>" method="POST" id="formCultura" class="form-grid">
-                <div class="form-group">
+                <?= csrf_field() ?>
+            <div class="form-group">
                     <label>
                         <i class="fa-solid fa-cow"></i>
                         Fazenda *

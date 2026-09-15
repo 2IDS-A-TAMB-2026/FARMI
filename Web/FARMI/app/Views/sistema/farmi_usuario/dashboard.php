@@ -9,6 +9,7 @@
     <!-- Ícones  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_dashboard.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     
     <style>
@@ -712,245 +713,800 @@ body.contraste textarea{
 /* CORREÇÃO DOS EIXOS DOS GRÁFICOS (X e Y):
    Aplica o filtro invert para transformar os eixos/textos pretos do Chart.js em brancos */
 
+```css
 /* ==========================================================
-   DASHBOARD FARMI - RESPONSIVIDADE ESPECÍFICA
+   RESPONSIVO FARMI
    ========================================================== */
-.dashboard-container {
+
+/* BASE - evita elementos ultrapassando a tela */
+html,
+body {
     width: 100%;
     max-width: 100%;
+    overflow-x: hidden;
+}
+
+.main-content {
     min-width: 0;
+    width: calc(100% - 250px);
 }
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-    width: 100%;
-}
-.stats-grid .card {
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
-}
-.card-info {
-    min-width: 0;
-}
-.card-info h3 {
-    overflow-wrap: break-word;
-}
-.card-info p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-/* GRÁFICOS */
+
+.stats-grid,
 .charts-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
     width: 100%;
     min-width: 0;
 }
-.chart-card {
-    width: 100%;
+
+.card,
+.chart-card,
+.activities-card,
+.weather-card,
+.table-container {
     min-width: 0;
-    overflow: hidden;
+    max-width: 100%;
 }
-.chart-container {
-    position: relative;
+
+/* GRÁFICOS */
+.grafico-box {
     width: 100%;
     max-width: 100%;
-    min-width: 0;
     height: 350px;
+    min-height: 0;
 }
-.chart-container canvas {
-    display: block;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100%;
+
+.grafico-box canvas {
+    max-width: 100% !important;
 }
-/* SEÇÕES */
-.dashboard-section {
+
+/* CLIMA */
+.weather-card {
     width: 100%;
     max-width: 100%;
-    min-width: 0;
 }
-/* SENSORES */
-.sensor-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+
+/* TABELA */
+.table-container {
     width: 100%;
-}
-.sensor-card {
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
-}
-/* TABELAS */
-.dashboard-table-container {
-    width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
-.dashboard-table-container table {
+
+.table-container table {
     min-width: 700px;
 }
-/* NOTEBOOK / DESKTOP MENOR */
+
+
+/* ==========================================================
+   ATÉ 1200px
+   ========================================================== */
+
 @media (max-width: 1200px) {
+
     .stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
     .charts-grid {
         grid-template-columns: 1fr;
     }
-    .sensor-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .weather-card {
+        width: 100%;
     }
 }
-/* TABLET */
+
+
+/* ==========================================================
+   TABLET - ATÉ 768px
+   ========================================================== */
+
 @media (max-width: 768px) {
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    /* FUNDO ESCURO */
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* BOTÃO DO MENU */
+    .menu-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+
+        width: 45px;
+        height: 45px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #052501;
+        color: #ffffff;
+
+        border: none;
+        border-radius: 10px;
+
+        font-size: 20px;
+        cursor: pointer;
+
+        z-index: 1100;
+    }
+
+    .menu-toggle:hover {
+        background: #4bc714;
+    }
+
+    /* CONTEÚDO */
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
         max-width: 100%;
-        padding: 75px 15px 25px;
+        padding: 75px 20px 30px;
     }
-    .dashboard-container {
-        width: 100%;
-        max-width: 100%;
-    }
+
+    /* CABEÇALHO */
     .header {
         width: 100%;
-        margin-bottom: 20px;
+        gap: 15px;
+        margin-bottom: 25px;
     }
+
     .header h2 {
         font-size: 22px;
+    }
+
+    .header-right {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .logout-btn {
+        padding: 0 12px;
+    }
+
+    /* CARDS */
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .card-info {
+        min-width: 0;
+    }
+
+    .card-info h3 {
+        font-size: 14px;
         line-height: 1.3;
     }
-    .header p {
-        font-size: 14px;
-        line-height: 1.5;
-    }
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 15px;
-    }
-    .stats-grid .card {
-        min-height: 110px;
-    }
-    .card-info h3 {
-        font-size: 14px;
-    }
+
     .card-info p {
         font-size: 24px;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
+
+    .card-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+        margin-left: 10px;
+    }
+
+    /* GRÁFICOS */
     .charts-grid {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    .chart-card {
+
+    .chart-card,
+    .activities-card {
         width: 100%;
-        padding: 15px;
+        padding: 18px;
     }
-    .chart-container {
-        height: 280px;
+
+    .chart-title {
+        font-size: 1.15rem;
+        line-height: 1.4;
     }
-    .sensor-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .grafico-box {
+        width: 100%;
+        height: 300px;
+        padding: 8px;
+    }
+
+    /* CLIMA */
+    .weather-card {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .weather-body {
         gap: 15px;
     }
-    .sensor-card {
-        padding: 15px;
+
+    .temp-main #temperatura {
+        font-size: 44px;
     }
-    .dashboard-table-container {
+
+    .temp-main #weather-icon {
+        font-size: 35px;
+    }
+
+    .air-quality {
+        max-width: 50%;
+    }
+
+    .weather-details-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    /* SENSORES */
+    .sensor-status-item {
         width: 100%;
+        min-width: 0;
+    }
+
+    .sensor-left {
+        min-width: 0;
+    }
+
+    .sensor-info {
+        min-width: 0;
+    }
+
+    .sensor-info h4,
+    .sensor-info p {
+        overflow-wrap: anywhere;
+    }
+
+    /* TABELA */
+    .table-container {
         overflow-x: auto;
     }
-    .dashboard-table-container table {
-        min-width: 650px;
+
+    .table-container table {
+        min-width: 700px;
     }
 }
-/* CELULAR */
+
+
+/* ==========================================================
+   CELULAR - ATÉ 600px
+   ========================================================== */
+
 @media (max-width: 600px) {
+
+    .main-content {
+        padding: 70px 12px 25px;
+    }
+
+    /* HEADER */
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header h2 {
+        font-size: 21px;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 7px;
+    }
+
+    .logout-btn {
+        height: 40px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+
+    .accessibility-btn,
+    #contraste-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* CARDS */
     .stats-grid {
         grid-template-columns: 1fr;
         gap: 12px;
     }
-    .stats-grid .card {
-        min-height: 95px;
+
+    .card {
+        min-height: 90px;
+        padding: 16px;
     }
-    .card-info h3 {
-        font-size: 15px;
-    }
+
     .card-info p {
-        font-size: 26px;
+        font-size: 25px;
     }
-    .charts-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+
+    /* GRÁFICOS */
+    .chart-card,
+    .activities-card {
+        padding: 14px;
     }
-    .chart-card {
+
+    .chart-title {
+        font-size: 1.05rem;
+        margin-bottom: 15px;
+    }
+
+    .grafico-box {
+        height: 260px;
+        padding: 5px;
+    }
+
+    /* CLIMA */
+    .weather-card {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .weather-header {
+        font-size: 13px;
+    }
+
+    .weather-body {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .temp-main {
+        justify-content: center;
+    }
+
+    .temp-main #temperatura {
+        font-size: 48px;
+    }
+
+    .air-quality {
+        max-width: 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .weather-details-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detail-item {
+        padding: 9px 5px;
+        font-size: 11px;
+    }
+
+    /* SENSORES */
+    .sensor-status-item {
         padding: 12px;
     }
-    .chart-container {
-        height: 250px;
+
+    .sensor-left {
+        gap: 10px;
     }
-    .sensor-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
+
+    .status-circle {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
     }
-    .sensor-card {
-        width: 100%;
+
+    .sensor-info h4 {
+        font-size: 14px;
     }
-    .section-title {
-        font-size: 18px;
-        line-height: 1.4;
+
+    .sensor-info p {
+        font-size: 12px;
+    }
+
+    .sensor-right {
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .status-badge {
+        padding: 5px 9px;
+        font-size: 11px;
     }
 }
-/* CELULAR PEQUENO */
+
+
+/* ==========================================================
+   CELULAR PEQUENO - ATÉ 480px
+   ========================================================== */
+
 @media (max-width: 480px) {
+
     .main-content {
-        padding: 70px 10px 20px;
+        padding: 68px 10px 20px;
     }
+
+    .menu-toggle {
+        width: 42px;
+        height: 42px;
+        top: 12px;
+        left: 12px;
+    }
+
+    /* HEADER */
     .header h2 {
         font-size: 19px;
     }
+
     .header p {
         font-size: 13px;
     }
-    .stats-grid .card {
-        padding: 15px;
+
+    .header-right {
+        gap: 5px;
     }
+
+    .logout-btn {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .logout-btn i {
+        margin-right: 0;
+    }
+
+    .accessibility-btn,
+    #contraste-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+    /* CARDS */
+    .card {
+        padding: 14px;
+    }
+
     .card-info h3 {
-        font-size: 14px;
+        font-size: 13px;
     }
+
     .card-info p {
         font-size: 23px;
     }
-    .chart-card {
+
+    .card-icon {
+        font-size: 1.8rem;
+    }
+
+    /* GRÁFICOS */
+    .chart-card,
+    .activities-card {
+        padding: 12px;
+    }
+
+    .chart-title {
+        font-size: 1rem;
+    }
+
+    .grafico-box {
+        height: 230px;
+    }
+
+    /* CLIMA */
+    .weather-card {
+        padding: 13px;
+        border-radius: 15px;
+    }
+
+    .temp-main #temperatura {
+        font-size: 42px;
+    }
+
+    .temp-main #weather-icon {
+        font-size: 30px;
+    }
+
+    .weather-details-grid {
+        gap: 7px;
+    }
+
+    .detail-item {
+        padding: 8px 3px;
+    }
+
+    .detail-item strong {
+        font-size: 12px;
+    }
+
+    /* SENSORES */
+    .sensor-status-item {
         padding: 10px;
     }
-    .chart-container {
-        height: 220px;
+
+    .status-circle {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
     }
-    .dashboard-table-container table {
-        min-width: 600px;
+
+    .sensor-info h4 {
+        font-size: 13px;
+    }
+
+    .sensor-info p {
+        font-size: 11px;
+    }
+
+    .status-badge {
+        font-size: 10px;
+        padding: 4px 7px;
+    }
+
+    /* TABELA */
+    .table-container {
+        padding: 12px;
+    }
+
+    .table-container table {
+        min-width: 650px;
     }
 }
-.mostrar-mais{
-    color: var(--verde-escuro);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: 0.3s;
-    background: transparent;
-    cursor: pointer;
-    padding: 10px;
-    background-color: #57c91b;
-    color: #fff;
+
+
+/* ==========================================================
+   CELULAR MUITO PEQUENO - ATÉ 360px
+   ========================================================== */
+
+@media (max-width: 360px) {
+
+    .main-content {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .header-right {
+        flex-wrap: wrap;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+
+    .weather-details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .temp-main #temperatura {
+        font-size: 38px;
+    }
+}
+```
+
+
+/* ==========================================================
+   ALTO CONTRASTE - STATUS DOS SENSORES
+   ========================================================== */
+
+/* Card principal */
+body.contraste .activities-card {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: none !important;
+}
+
+/* Título */
+body.contraste .activities-card .chart-title {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.contraste .activities-card .chart-title i {
+    color: #fff !important;
+}
+
+/* Lista dos sensores */
+body.contraste .sensor-status-list {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+/* Cada sensor */
+body.contraste .sensor-status-item {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: none !important;
+}
+
+/* Área esquerda */
+body.contraste .sensor-left {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+/* Área direita */
+body.contraste .sensor-right {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+/* Nome do sensor */
+body.contraste .sensor-info h4 {
+    color: #fff !important;
+}
+
+/* Tipo e horário */
+body.contraste .sensor-info p {
+    color: #fff !important;
+}
+
+/* Círculo do sensor */
+body.contraste .status-circle {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+/* Ícone dentro do círculo */
+body.contraste .status-circle i {
+    color: #fff !important;
+}
+
+/* Barras de sinal */
+body.contraste .signal-bars {
+    color: #fff !important;
+}
+
+body.contraste .signal-bars i {
+    background: #fff !important;
+}
+
+/* Status ONLINE / OFFLINE / OSCILANDO */
+body.contraste .sensor-status-item .status-badge {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+/* Bolinha de pulso do sensor online */
+body.contraste .pulse-dot {
+    background: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+/* Remove cores verde/vermelha/laranja do modo normal */
+body.contraste .sensor-status-item.is-online,
+body.contraste .sensor-status-item.is-offline,
+body.contraste .sensor-status-item.is-warning {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+/* Hover */
+body.contraste .sensor-status-item:hover {
+    background: #222 !important;
+}
+
+body.contraste .sensor-status-item:hover * {
+    color: #fff !important;
+}
+
+/* ================================
+   GRÁFICOS - ALTO CONTRASTE
+   ================================ */
+
+body.contraste .chart-card,
+body.contraste .grafico-box {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+/* Área do gráfico permanece preta */
+body.contraste .grafico-box canvas {
+    background: #000 !important;
+}
+
+/* Títulos dos gráficos */
+body.contraste .chart-card .chart-title {
+    color: #fff !important;
+}
+
+body.contraste .chart-card .chart-title i {
+    color: #fff !important;
+}
+
+/* =========================================
+   AUTO CONTRASTE - TODOS OS BOTÕES BRANCOS
+   ========================================= */
+
+body.contraste #contraste-btn,
+body.contraste .logout-btn,
+body.contraste .btn-logout,
+body.contraste .accessibility-btn,
+body.contraste #aumentar-fonte,
+body.contraste #diminuir-fonte,
+body.contraste #resetar-fonte {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Texto e ícones PRETOS dentro dos botões */
+body.contraste #contraste-btn i,
+body.contraste .logout-btn i,
+body.contraste .btn-logout i,
+body.contraste .accessibility-btn i,
+body.contraste #aumentar-fonte,
+body.contraste #diminuir-fonte,
+body.contraste #resetar-fonte {
+    color: #000000 !important;
+}
+
+/* Hover continua branco */
+body.contraste #contraste-btn:hover,
+body.contraste .logout-btn:hover,
+body.contraste .btn-logout:hover,
+body.contraste .accessibility-btn:hover,
+body.contraste #aumentar-fonte:hover,
+body.contraste #diminuir-fonte:hover,
+body.contraste #resetar-fonte:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+}
+
+/* Ícones no hover */
+body.contraste #contraste-btn:hover i,
+body.contraste .logout-btn:hover i,
+body.contraste .btn-logout:hover i {
+    color: #000000 !important;
+}
+
+/* =========================================
+   BOTÃO F / AVATAR
+   ========================================= */
+
+body.contraste .avatar {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
 }
 
 </style>
@@ -1166,46 +1722,35 @@ body.contraste textarea{
                 </div>
             </div>
             
-            <!-- ALERTAS -->
-        <div class="activities-card">
+           <!-- STATUS DOS SENSORES -->
+<div class="activities-card">
 
-            <h3 class="chart-title">
-                <i class="fa-solid fa-bell"></i>
-                Alertas (3)
-            </h3>
+    <h3 class="chart-title">
+        <i class="fa-solid fa-microchip"></i>
+        Status dos Sensores
+    </h3>
 
-            <div style="
-                height:200px;
-                background:linear-gradient(135deg,#fff5f5 0%,#ffebee 100%);
-                border-radius:8px;
-                padding:15px;
-                overflow-y:auto;
-                font-size:.9rem;
-            ">
+    <div class="sensor-status-list" id="sensor-status-list">
+        <!-- Preenchido dinamicamente por atualizarStatusSensores() -->
+    </div>
 
-                <div style="color:var(--vermelho); margin-bottom:10px;">
-                    ⚠️ Temperatura alta na Estufa A
-                </div>
+</div>
 
-                <div style="color:var(--laranja); margin-bottom:10px;">
-                    🌡️ Umidade baixa no Campo B
-                </div>
-
-                <div style="color:var(--azul);">
-                    💡 Luz fraca na Estufa C
-                </div>
-
-            </div>
 
             <a href="<?= base_url('/alertas-usuario') ?>"
                class="btn">
                 Ver Alertas
             </a>
+            <a href="<?= base_url('/relatorio') ?>" class="logout-btn">
+                <i class="fa-solid fa-print"></i>
+                Imprimir Relatório
+            </a>
 
         </div>
 
         </div>
-
+        
+        
 
         <!-- TABELA DE STATUS DOS SISTEMAS -->
         <h3 class="section-title">Status dos Sistemas Automatizados</h3>
@@ -1597,6 +2142,55 @@ async function atualizarGraficos() {
     }
 }
 
+    </script>
+
+    <script>
+async function atualizarStatusSensores() {
+    try {
+        const resposta = await fetch('<?= base_url('status-sensores') ?>');
+        if (!resposta.ok) throw new Error('Erro ao buscar status dos sensores');
+        const sensores = await resposta.json();
+
+        const lista = document.getElementById('sensor-status-list');
+        if (!lista) return;
+
+        lista.innerHTML = sensores.map(function(s) {
+            let classe, circulo, badge, texto, pulso = '';
+
+            if (s.minutos_atras === null || s.minutos_atras > 20) {
+                classe = 'is-offline'; circulo = 'offline'; badge = 'offline'; texto = 'Offline';
+            } else if (s.minutos_atras <= 5) {
+                classe = 'is-online'; circulo = 'online'; badge = 'online'; texto = 'Online';
+                pulso = '<span class="pulse-dot"></span>';
+            } else {
+                classe = 'is-warning'; circulo = 'warning'; badge = 'warning'; texto = 'Oscilando';
+            }
+
+            return `
+                <div class="sensor-status-item ${classe}">
+                    <div class="sensor-left">
+                        <span class="status-circle ${circulo}">
+                            <i class="fa-solid ${s.icone}"></i>
+                            ${pulso}
+                        </span>
+                        <div class="sensor-info">
+                            <h4>${s.nome}</h4>
+                            <p>${s.tipo} · ${s.tempo_texto}</p>
+                        </div>
+                    </div>
+                    <div class="sensor-right">
+                        <span class="signal-bars"><i></i><i></i><i></i></span>
+                        <span class="status-badge ${badge}">${texto}</span>
+                    </div>
+                </div>`;
+        }).join('');
+    } catch (erro) {
+        console.error('Erro ao atualizar status dos sensores:', erro);
+    }
+}
+
+atualizarStatusSensores();
+setInterval(atualizarStatusSensores, 30 * 1000);
     </script>
     
     <script src="./../script.js"></script>

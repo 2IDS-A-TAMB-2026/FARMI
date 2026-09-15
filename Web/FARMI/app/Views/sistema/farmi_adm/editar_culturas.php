@@ -194,39 +194,21 @@
                 Editar Cultura
             </h3>
             <form action="<?= base_url('/cultura/atualizar/'.$cultura['ID_CULTURA']) ?>" method="POST" id="formCultura" class="form-grid">
-
+            <?= csrf_field() ?>
                 <div class="form-group">
+                    <label>
+                        <i class="fa-solid fa-cow"></i>
+                        Fazenda *
+                    </label>
+                    <select name="FK_ID_FAZENDA" class="form-control" required>
+                        <option value="">Selecione uma fazenda</option>
 
-                    <label>Fazendas *</label>
-
-                    <div class="dropdown">
-
-                        <div class="dropdown-btn" onclick="toggleDropdown()">
-                            Selecionar Fazendas
-                        </div>
-
-                        <div class="dropdown-content" id="dropdown">
-
-                            <?php foreach($fazendas as $fazenda): ?>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="FAZENDAS[]"
-                                        value="<?= $fazenda['ID_FAZENDA']; ?>"
-                                        <?= in_array(
-                                                $fazenda['ID_FAZENDA'],
-                                                $fazendasSelecionadas
-                                            ) ? 'checked' : ''; ?>
-                                    >
-
-                                    <?= $fazenda['NOME']; ?>
-                                </label>
-                            <?php endforeach; ?>
-
-                        </div>
-
-                    </div>
-
+                        <?php foreach($fazendas as $fazenda): ?>
+                            <option value="<?= $fazenda['ID_FAZENDA'] ?>">
+                                <?= $fazenda['NOME'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <script>

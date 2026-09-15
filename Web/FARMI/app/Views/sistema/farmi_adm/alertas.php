@@ -228,6 +228,20 @@ body.contraste .avatar {
     background-color: #57c91b;
     color: #fff;
 }
+.paginacao-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.pagina-info {
+    font-size: 16px;
+    font-weight: 600;
+    color: #57c91b;
+}
 
     </style>
 
@@ -448,38 +462,38 @@ body.contraste .avatar {
 
             <div class="alerts-list">
                 
-                <?php
-foreach($alerta as $a){
-?>
+                <?php foreach($alerta as $a) { 
+                    // 1. Define a classe do card com base na gravidade do alerta
+                    $classeGravidade = 'alert-medio';
+                    if ($a['NIVEL_GRAVIDADE'] == 'Alto') {
+                        $classeGravidade = 'alert-critico';
+                    } elseif ($a['NIVEL_GRAVIDADE'] == 'Baixo') {
+                        $classeGravidade = 'alert-baixo';
+                    }
+                ?>
 
+                <div class="alert-item <?= $classeGravidade ?> alerta" data-sensor="<?= $a['TIPO_SENSOR']; ?>">
 
-<div class="alert-item alert-critico alerta"
-     data-sensor="<?= $a['TIPO_SENSOR']; ?>">
+                    <div class="alert-icon">
+                        <!-- 2. Correção dos Ícones correspondentes -->
+                        <?php if($a['TIPO_SENSOR'] == 'Temperatura'){ ?>
+                            <i class="fa-solid fa-temperature-high"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Umidade'){ ?>
+                            <i class="fa-solid fa-percent"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Luz'){ ?>
+                            <i class="fa-solid fa-sun"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Solo'){ ?>
+                            <i class="fa-solid fa-droplet"></i>
+                        <?php } else { ?>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        <?php } ?>
+                    </div>
 
-    <div class="alert-icon">
-
-        <?php if($a['TIPO_SENSOR'] == 'Umidade'){ ?>
-            <i class="fa-solid fa-temperature-high"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Temperatura'){ ?>
-            <i class="fa-solid fa-percent"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Luz'){ ?>
-            <i class="fa-solid fa-sun"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Solo'){ ?>
-            <i class="fa-solid fa-droplet"></i>
-        <?php } ?>
-
-    </div>
                     <div class="alert-content">
                         <h4><?= $a['NOME_FAZENDA']; ?></h4>
                         <h4><?= $a['TIPO_ALERTA']; ?> - Cultura <?= $a['NOME_CULTURA']; ?> - <?= $a['TIPO_CULTURA']; ?></h4>
                         <p>
-                            <?= $a['VALOR'].$a['UNIDADE_MEDIDA']; ?> - <?= $a['DESCRICAO']; ?> - <?= $a['NIVEL_GRAVIDADE']; ?>
+                            <?= $a['DESCRICAO']; ?> - Gravidade: <?= $a['NIVEL_GRAVIDADE']; ?>
                         </p>
                         <div class="alert-meta">
                             <span class="alert-time">
@@ -487,35 +501,31 @@ foreach($alerta as $a){
                                 <?= $a['DATA_HORA']; ?>
                             </span>
 
-                            <?php
-                            if($a['STATUS'] == "Ativo"){
-                            ?>
+                            <?php if($a['STATUS'] == "Ativo"){ ?>
                                 <span class="alert-status status-ativo">
                                     <?= $a['STATUS']; ?>
                                 </span>
-                            <?php
-                            }
-                            ?>
-
-                            <?php
-                            if($a['STATUS'] != "Ativo"){
-                            ?>
-                                <span class="btn-warning">
+                            <?php } else { ?>
+                                <span class="alert-status status-resolvido">
                                     <?= $a['STATUS']; ?>
                                 </span>
-                            <?php
-                            }
-                            ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
                             
                         </div>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
-                <div id="mostrarMais" class="mostrar-mais">
-                    Mostrar mais
-                    <i class="fa-solid fa-chevron-down"></i>
+                <div class="paginacao-container">
+                    <div id="paginaInfo" class="pagina-info">
+                        Página 1 de 1
+                    </div>
+
+                    <div id="mostrarMais" class="mostrar-mais">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
                 </div>
             </div>
 
@@ -538,38 +548,7 @@ foreach($alerta as $a){
     <!-- JS -->
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
     <script>
-        // paginação
-        // const alertas = document.querySelectorAll(".alerta");
-        // const botao = document.getElementById("mostrarMais");
 
-        // let quantidade = 5; // mostra 5 alertas inicialmente
-
-        // function atualizar() {
-
-        //     alertas.forEach((alerta, indice) => {
-
-        //         if(indice < quantidade){
-        //             alerta.style.display = "flex";
-        //         }else{
-        //             alerta.style.display = "none";
-        //         }
-
-        //     });
-
-        //     if(quantidade >= alertas.length){
-        //         botao.style.display = "none";
-        //     }
-        // }
-
-        // atualizar();
-
-        // botao.onclick = function(){
-
-        //     quantidade += 5;
-
-        //     atualizar();
-
-        // };
 /* =========================
    ACESSIBILIDADE - TAMANHO DA FONTE
 ========================= */
@@ -748,44 +727,27 @@ document.addEventListener('click', function(){
     filtroMenu.classList.remove('show');
 
 });
-// document.querySelectorAll('.filtro-item').forEach(item => {
-
-//     item.addEventListener('click', function() {
-
-//         const filtro = this.dataset.filtro;
-
-//         document.querySelectorAll('.alert-item').forEach(alerta => {
-
-//             if (
-//                 filtro === 'todos' ||
-//                 alerta.dataset.sensor === filtro
-//             ) {
-//                 alerta.style.display = '';
-//             } else {
-//                 alerta.style.display = 'none';
-//             }
-
-//         });
-
-//         filtroMenu.classList.remove('show');
-
-//     });
-
-// });
-
 // =========================
-// FILTRO + MOSTRAR MAIS
+// PAGINAÇÃO + FILTRO
 // =========================
 
 const alertas = document.querySelectorAll(".alerta");
 const botaoMostrarMais = document.getElementById("mostrarMais");
+const paginaInfo = document.getElementById("paginaInfo");
 
-let quantidade = 5;
+const ALERTAS_POR_PAGINA = 5;
+
+let paginaAtual = 1;
 let filtroAtual = "todos";
+
+
+// =========================
+// ATUALIZAR ALERTAS
+// =========================
 
 function atualizarAlertas() {
 
-    // Primeiro, pega somente os alertas que pertencem ao filtro
+    // Pega somente os alertas do filtro escolhido
     const alertasFiltrados = Array.from(alertas).filter(alerta => {
 
         return (
@@ -795,40 +757,135 @@ function atualizarAlertas() {
 
     });
 
-    // Controla quais alertas serão mostrados
+    // Calcula o total de páginas
+    const totalPaginas = Math.ceil(
+        alertasFiltrados.length / ALERTAS_POR_PAGINA
+    );
+
+    // ==========================================
+    // ATUALIZA O TEXTO DA PÁGINA
+    // ==========================================
+
+    if (totalPaginas > 0) {
+        paginaInfo.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
+    } else {
+        paginaInfo.textContent = "Nenhuma página";
+    }
+
+
+    // Se não houver alertas
+    if (totalPaginas === 0) {
+        paginaAtual = 1;
+    }
+
+    // Evita ficar em uma página que não existe
+    if (paginaAtual > totalPaginas && totalPaginas > 0) {
+        paginaAtual = totalPaginas;
+    }
+
+    // Esconde todos os alertas
     alertas.forEach(alerta => {
         alerta.style.display = "none";
     });
 
-    alertasFiltrados.forEach((alerta, indice) => {
+    // Calcula quais alertas pertencem à página atual
+    const inicio = (paginaAtual - 1) * ALERTAS_POR_PAGINA;
+    const fim = inicio + ALERTAS_POR_PAGINA;
 
-        if (indice < quantidade) {
+    // Mostra somente os 5 da página atual
+    alertasFiltrados
+        .slice(inicio, fim)
+        .forEach(alerta => {
             alerta.style.display = "flex";
-        }
+        });
 
-    });
 
-    // Mostra ou esconde o botão "Mostrar mais"
-    if (quantidade >= alertasFiltrados.length) {
+    // =========================
+    // CONTROLE DA PAGINAÇÃO
+    // =========================
+
+    if (totalPaginas <= 1) {
+
+        // Só existe uma página
         botaoMostrarMais.style.display = "none";
-    } else {
+
+    } 
+    else if (paginaAtual === 1) {
+
+        // Primeira página
         botaoMostrarMais.style.display = "flex";
+
+        botaoMostrarMais.innerHTML = `
+            <i class="fa-solid fa-chevron-right"></i>
+        `;
+
+    } 
+    else if (paginaAtual < totalPaginas) {
+
+        // Página do meio
+        botaoMostrarMais.style.display = "flex";
+
+        botaoMostrarMais.innerHTML = `
+            <span onclick="voltarPrimeiraPagina(event)">
+                <i class="fa-solid fa-chevron-left"></i>
+                Primeira página
+            </span>
+
+            <span onclick="proximaPagina(event)">
+                Próxima página
+                <i class="fa-solid fa-chevron-right"></i>
+            </span>
+        `;
+
+    } 
+    else {
+
+        // Última página
+        botaoMostrarMais.style.display = "flex";
+
+        botaoMostrarMais.innerHTML = `
+            <span onclick="voltarPrimeiraPagina(event)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </span>
+        `;
+
     }
+}
+function proximaPagina(event) {
+
+    event.stopPropagation();
+
+    paginaAtual++;
+
+    atualizarAlertas();
 }
 
 
+function voltarPrimeiraPagina(event) {
+
+    event.stopPropagation();
+
+    paginaAtual = 1;
+
+    atualizarAlertas();
+}
+
 // =========================
-// BOTÃO MOSTRAR MAIS
+// BOTÃO DE PAGINAÇÃO
 // =========================
 
 botaoMostrarMais.addEventListener("click", function () {
 
-    quantidade += 5;
+    // Na primeira página, o botão leva para a próxima
+    if (paginaAtual === 1) {
 
-    atualizarAlertas();
+        paginaAtual++;
+        atualizarAlertas();
+
+    }
 
 });
-
 
 // =========================
 // FILTROS
@@ -840,12 +897,11 @@ document.querySelectorAll(".filtro-item").forEach(item => {
 
         filtroAtual = this.dataset.filtro;
 
-        // Ao trocar o filtro, volta para os primeiros 5
-        quantidade = 5;
+        // Sempre começa novamente na página 1
+        paginaAtual = 1;
 
         atualizarAlertas();
 
-        // Fecha o menu
         filtroMenu.classList.remove("show");
 
     });
@@ -853,7 +909,10 @@ document.querySelectorAll(".filtro-item").forEach(item => {
 });
 
 
-// Inicia mostrando os primeiros 5
+// =========================
+// INICIAR
+// =========================
+
 atualizarAlertas();
 
 </script>

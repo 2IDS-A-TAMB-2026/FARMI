@@ -1,8 +1,7 @@
+import 'package:app_base44/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../services/auth_service.dart';
-import 'package:provider/provider.dart';
-import 'theme_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,18 +29,43 @@ class _LoginScreenState extends State<LoginScreen> {
 
     setState(() => _isLoading = true);
 
-    await Future.delayed(const Duration(seconds: 2));
-
-    setState(() => _isLoading = false);
-
-    AuthService.isLoggedIn = true;
-
-    if (mounted) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/dashboard',
-        (route) => false,
+    try {
+      // Correção: _emailController (com o sublinhado inicial)
+      final response = await ApiService.login(
+        _emailController.text.trim(),
+        _passwordController.text,
       );
+
+      // Salva os dados do usuário retornados pelo CodeIgniter
+      AuthService.login(response['user'] ?? response);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login realizado com sucesso!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/dashboard',
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString().replaceAll('Exception: ', '')),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -130,17 +154,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     validator: (value) {
-  if (value == null || value.isEmpty) {
-    return 'Digite seu e-mail';
-  }
+                      if (value == null || value.isEmpty) {
+                        return 'Digite seu e-mail';
+                      }
 
-  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-      .hasMatch(value)) {
-    return 'E-mail inválido';
-  }
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(value)) {
+                        return 'E-mail inválido';
+                      }
 
-  return null;
-},
+                      return null;
+                    },
                   ),
 
                   const SizedBox(height: 15),

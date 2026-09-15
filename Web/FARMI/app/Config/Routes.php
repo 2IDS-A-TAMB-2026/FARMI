@@ -29,7 +29,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/fazenda/novo', 'FazendaController::novo');
     $routes->post('/fazenda/inserir', 'FazendaController::inserir');
     $routes->get('/fazenda/editar/(:num)', 'FazendaController::editar/$1');
-    $routes->post('/fazenda/atualizar/(:num)', 'FazendaController::atualizar/$1');
+    $routes->match(['get', 'post'], '/fazenda/atualizar/(:num)', 'FazendaController::atualizar/$1');
     $routes->get('/fazenda/excluir/(:num)', 'FazendaController::excluir/$1');
 
     // CULTURA
@@ -71,6 +71,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/dashboard-admin', 'SistemaController::dashboard_admin');
     $routes->get('/fazendas-admin', 'FazendaController::index');
     $routes->get('/recuperar-senha-admin', 'SistemaController::recuperar_senha_admin');
+    $routes->get('/relatorio', 'RelatorioController::index'); //Relatório
 
     // SISTEMA - USUÁRIO
     $routes->get('/alertas-usuario', 'AlertaController::alertas_usuario');
@@ -86,6 +87,8 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('/usuario', 'UsuariosController::usuario');
     $routes->get('/usuarios_editar', 'UsuariosController::pagina_editar');
     $routes->get('/dados-graficos', 'SistemaController::dados_graficos');
+    $routes->get('/status-sensores', 'SistemaController::status_sensores');
+    $routes->get('/relatorio', 'RelatorioController::index'); //Relatório
 });
 
 
@@ -94,6 +97,11 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 // =========================
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     $routes->get('dashboard/stats', 'DashboardController::index');
+
+    // Adicione esta linha no seu arquivo de rotas dentro do grupo 'api'
+$routes->resource('sensores', ['controller' => 'MedidasSensoresController']);
+
+
     // Autenticação API
     $routes->options('login', static function () {
         return response()->setStatusCode(200);

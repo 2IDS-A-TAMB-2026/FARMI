@@ -151,7 +151,7 @@
 
         <!-- FORM -->
         <form action="<?= base_url('/fazenda/inserir') ?>" method="post" id="addressForm">
-
+        <?= csrf_field() ?>
             <!-- NOME -->
             <div class="form-group">
 

@@ -128,8 +128,8 @@
                 <i class="fa-solid fa-user-plus"></i>
                 Editar Funcionário
             </h3>
-            <form action="<?= base_url('usuarios/atualizar/'.$usuarios['CPF']) ?>" method="post"
-                id="formUsuario" class="form-grid" >
+            <form action="<?= base_url('usuarios/atualizar/'.$usuarios['CPF']) ?>" method="post" id="formUsuario" class="form-grid" >
+                <?= csrf_field() ?>
                 <div class="form-group">
                     <label for="nome">
                         <i class="fa-solid fa-user"></i>

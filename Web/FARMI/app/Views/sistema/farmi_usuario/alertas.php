@@ -434,38 +434,38 @@ body.contraste .avatar {
 
             <div class="alerts-list">
                 
-                <?php
-foreach($alerta as $a){
-?>
+                <?php foreach($alerta as $a) { 
+                    // 1. Define a classe do card com base na gravidade do alerta
+                    $classeGravidade = 'alert-medio';
+                    if ($a['NIVEL_GRAVIDADE'] == 'Alto') {
+                        $classeGravidade = 'alert-critico';
+                    } elseif ($a['NIVEL_GRAVIDADE'] == 'Baixo') {
+                        $classeGravidade = 'alert-baixo';
+                    }
+                ?>
 
+                <div class="alert-item <?= $classeGravidade ?> alerta" data-sensor="<?= $a['TIPO_SENSOR']; ?>">
 
-<div class="alert-item alert-critico alerta"
-     data-sensor="<?= $a['TIPO_SENSOR']; ?>">
+                    <div class="alert-icon">
+                        <!-- 2. Correção dos Ícones correspondentes -->
+                        <?php if($a['TIPO_SENSOR'] == 'Temperatura'){ ?>
+                            <i class="fa-solid fa-temperature-high"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Umidade'){ ?>
+                            <i class="fa-solid fa-percent"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Luz'){ ?>
+                            <i class="fa-solid fa-sun"></i>
+                        <?php } elseif($a['TIPO_SENSOR'] == 'Solo'){ ?>
+                            <i class="fa-solid fa-droplet"></i>
+                        <?php } else { ?>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        <?php } ?>
+                    </div>
 
-    <div class="alert-icon">
-
-        <?php if($a['TIPO_SENSOR'] == 'Umidade'){ ?>
-            <i class="fa-solid fa-temperature-high"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Temperatura'){ ?>
-            <i class="fa-solid fa-percent"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Luz'){ ?>
-            <i class="fa-solid fa-sun"></i>
-        <?php } ?>
-
-        <?php if($a['TIPO_SENSOR'] == 'Solo'){ ?>
-            <i class="fa-solid fa-droplet"></i>
-        <?php } ?>
-
-    </div>
                     <div class="alert-content">
                         <h4><?= $a['NOME_FAZENDA']; ?></h4>
                         <h4><?= $a['TIPO_ALERTA']; ?> - Cultura <?= $a['NOME_CULTURA']; ?> - <?= $a['TIPO_CULTURA']; ?></h4>
                         <p>
-                            <?= $a['VALOR'].$a['UNIDADE_MEDIDA']; ?> - <?= $a['DESCRICAO']; ?> - <?= $a['NIVEL_GRAVIDADE']; ?>
+                            <?= $a['DESCRICAO']; ?> - Gravidade: <?= $a['NIVEL_GRAVIDADE']; ?>
                         </p>
                         <div class="alert-meta">
                             <span class="alert-time">
@@ -473,32 +473,23 @@ foreach($alerta as $a){
                                 <?= $a['DATA_HORA']; ?>
                             </span>
 
-                            <?php
-                            if($a['STATUS'] == "Ativo"){
-                            ?>
+                            <?php if($a['STATUS'] == "Ativo"){ ?>
                                 <span class="alert-status status-ativo">
                                     <?= $a['STATUS']; ?>
                                 </span>
-                            <?php
-                            }
-                            ?>
-
-                            <?php
-                            if($a['STATUS'] != "Ativo"){
-                            ?>
-                                <span class="btn-warning">
+                            <?php } else { ?>
+                                <span class="alert-status status-resolvido">
                                     <?= $a['STATUS']; ?>
                                 </span>
-                            <?php
-                            }
-                            ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
                             
                         </div>
                     </div>
                 </div>
-                <?php
-                }
-                ?>
                 <div id="mostrarMais" class="mostrar-mais">
                     Mostrar mais
                     <i class="fa-solid fa-chevron-down"></i>
@@ -770,7 +761,7 @@ let filtroAtual = "todos";
 
 function atualizarAlertas() {
 
-    // Primeiro, pega somente os alertas que pertencem ao filtro
+    // Pega somente os alertas do filtro selecionado
     const alertasFiltrados = Array.from(alertas).filter(alerta => {
 
         return (
@@ -780,11 +771,12 @@ function atualizarAlertas() {
 
     });
 
-    // Controla quais alertas serão mostrados
+    // Esconde todos os alertas
     alertas.forEach(alerta => {
         alerta.style.display = "none";
     });
 
+    // Mostra somente a quantidade permitida
     alertasFiltrados.forEach((alerta, indice) => {
 
         if (indice < quantidade) {
@@ -793,14 +785,69 @@ function atualizarAlertas() {
 
     });
 
-    // Mostra ou esconde o botão "Mostrar mais"
-    if (quantidade >= alertasFiltrados.length) {
+    // =========================
+    // MOSTRAR MAIS
+    // =========================
+
+    if (alertasFiltrados.length === 0) {
+
+        // Nenhum alerta
         botaoMostrarMais.style.display = "none";
+
+    } else if (quantidade >= alertasFiltrados.length) {
+
+        // Todos os alertas já estão aparecendo
+        botaoMostrarMais.style.display = "none";
+
     } else {
+
+        // Ainda existem alertas escondidos
         botaoMostrarMais.style.display = "flex";
+
     }
 }
 
+
+// =========================
+// BOTÃO MOSTRAR MAIS
+// =========================
+
+botaoMostrarMais.addEventListener("click", function () {
+
+    quantidade += 5;
+
+    atualizarAlertas();
+
+});
+
+
+// =========================
+// FILTROS
+// =========================
+
+document.querySelectorAll(".filtro-item").forEach(item => {
+
+    item.addEventListener("click", function () {
+
+        filtroAtual = this.dataset.filtro;
+
+        // Volta para os primeiros 5 quando troca o filtro
+        quantidade = 5;
+
+        atualizarAlertas();
+
+        filtroMenu.classList.remove("show");
+
+    });
+
+});
+
+
+// =========================
+// INICIA A PAGINAÇÃO
+// =========================
+
+atualizarAlertas();
 </script>
 
 <script>

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart'; // Adicionado para o High Contrast / Theme
-import '../models/crop.dart'; 
-import 'theme_provider.dart'; // Importado igual à página de cultura
+import '../models/crop.dart';
+import '../models/farm.dart';
+import '../models/sensor.dart';
+import '../models/alert_model.dart';
+import '../services/api_service.dart';
 import 'home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -13,54 +15,14 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  // Lista de culturas simulando os dados reais (Mantida a original do Dashboard)
-  final List<Crop> _crops = [
-    Crop(
-        id: '1',
-        name: 'Soja Parcela Norte',
-        type: 'Soja',
-        status: 'growing',
-        health: 'excellent',
-        area: 120,
-        season: '2025/2026'),
-    Crop(
-        id: '2',
-        name: 'Milho Área A1',
-        type: 'Milho',
-        status: 'harvest',
-        health: 'good',
-        area: 85,
-        season: '2025/2026'),
-    Crop(
-        id: '3',
-        name: 'Café Parcela Sul',
-        type: 'Café',
-        status: 'growing',
-        health: 'regular',
-        area: 45,
-        season: '2024/2025'),
-    Crop(
-        id: '4',
-        name: 'Feijão Área B2',
-        type: 'Feijão',
-        status: 'planting',
-        health: 'good',
-        area: 30,
-        season: '2025/2026'),
-    Crop(
-        id: '5',
-        name: 'Trigo Parcela Leste',
-        type: 'Trigo',
-        status: 'completed',
-        health: 'excellent',
-        area: 60,
-        season: '2025/2025'),
-  ];
+  List<Crop> _crops = [];
+  List<AlertModel> _alerts = [];
+  bool _isLoading = true;
 
-  final Map<String, dynamic> data = {
-    'sensores_totais': '4',
-    'fazendas': '3',
-    'usuarios': '4',
+  Map<String, dynamic> data = {
+    'sensores_totais': '0',
+    'fazendas': '0',
+    'usuarios': '1',
   };
 
   final _statusLabels = {
@@ -71,11 +33,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
   };
 
   static const Color verdeEscuro = Color(0xFF052501);
-  static const Color verdeClaro = Color(0xFF4BC714);
-  static const Color corAzul = Color(0xFF2196F3);
-  static const Color corLaranja = Color(0xFFFF9800);
   static const Color corVermelho = Color(0xFFF44336);
   static const Color bgCinza = Colors.transparent;
+
+  @override
+  void initState() {
+    super.initState();
+    _carregarDadosDashboard();
+  }
+
+  Future<void> _carregarDadosDashboard() async {
+  List<Crop> crops = [];
+  List<Farm> farms = [];
+  List<Sensor> sensors = [];
+  List<AlertModel> alerts = [];
+
+  // Busca cada requisição individualmente protegendo contra retornos nulos
+  try {
+    crops = await ApiService.getCrops();
+  } catch (e) {
+    print('Erro ao buscar culturas: $e');
+  }
+
+  try {
+    farms = await ApiService.getFarms();
+  } catch (e) {
+    print('Erro ao buscar fazendas: $e');
+  }
+
+  try {
+    sensors = await ApiService.getSensors();
+  } catch (e) {
+    print('Erro ao buscar sensores: $e');
+  }
+
+  try {
+    alerts = await ApiService.getAlerts();
+  } catch (e) {
+    print('Erro ao buscar alertas: $e');
+  }
+
+  if (!mounted) return;
+
+  setState(() {
+    _crops = crops;
+    _alerts = alerts;
+    data = {
+      'sensores_totais': sensors.length.toString(),
+      'fazendas': farms.length.toString(),
+      'usuarios': '1',
+    };
+    _isLoading = false;
+  });
+}
 
   Color _statusColor(String? s) {
     switch (s) {
@@ -94,10 +104,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // REFERÊNCIA AO THEME (Igual feito implicitamente ou explicitamente na Cultura)
-    // Se o seu alto contraste muda as cores do Theme padrão do Flutter:
     final theme = Theme.of(context);
-    final isHighContrast = theme.brightness == Brightness.dark; // Ou a lógica do seu ThemeProvider
+    final isHighContrast = theme.brightness == Brightness.dark;
+
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(color: Color(0xFF2E7D52)),
+      );
+    }
 
     return Scaffold(
       backgroundColor: bgCinza,
@@ -124,7 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       'Visão geral do sistema',
                       style: GoogleFonts.inter(
                         fontSize: 13,
-                        color: isHighContrast ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 0, 0, 0), // Adaptável
+                        color: isHighContrast ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
@@ -154,7 +168,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ],
                   child: CircleAvatar(
                     radius: 18,
-                    backgroundColor: isHighContrast ? Colors.white : const Color.fromARGB(255, 46, 125, 82),
+                    backgroundColor: isHighContrast
+                        ? Colors.white
+                        : const Color(0xFF2E7D52),
                     child: Text(
                       '➜',
                       style: TextStyle(
@@ -169,7 +185,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
             const SizedBox(height: 30),
 
-            // STATS GRID
+            // STATS GRID (Valores dinâmicos da API)
             LayoutBuilder(
               builder: (context, constraints) {
                 return GridView.count(
@@ -184,21 +200,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       "Sensores Totais",
                       data['sensores_totais']?.toString() ?? '0',
                       Icons.sensors,
-                      isHighContrast ? theme.colorScheme.primary : const Color.fromARGB(255, 46, 125, 82),
+                      isHighContrast
+                          ? theme.colorScheme.primary
+                          : const Color(0xFF2E7D52),
                       theme,
                     ),
                     _buildStatCard(
                       "Fazendas",
                       data['fazendas']?.toString() ?? '0',
                       Icons.pets,
-                      isHighContrast ? theme.colorScheme.primary : const Color.fromARGB(255, 46, 125, 82),
+                      isHighContrast
+                          ? theme.colorScheme.primary
+                          : const Color(0xFF2E7D52),
                       theme,
                     ),
                     _buildStatCard(
                       "Funcionários",
                       data['usuarios']?.toString() ?? '0',
                       Icons.people,
-                      isHighContrast ? theme.colorScheme.primary : const Color.fromARGB(255, 46, 125, 82),
+                      isHighContrast
+                          ? theme.colorScheme.primary
+                          : const Color(0xFF2E7D52),
                       theme,
                     ),
                   ],
@@ -208,69 +230,54 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
             const SizedBox(height: 20),
 
-            // MONITORAMENTO (GRÁFICO)
+            // CULTURAS ATIVAS (Lista dinâmica da API)
             _buildSectionCard(
-              title: "Monitoramento",
-              icon: Icons.trending_up,
-              theme: theme,
-              child: Container(
-                height: 180,
-                decoration: BoxDecoration(
-                  color: theme.cardColor, // Usa a cor do card do tema atual
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: theme.dividerColor),
-                ),
-                child: Center(
-                  child: Text(
-                    "📊 [Gráfico]",
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: theme.textTheme.bodyLarge?.color,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // CULTURAS ATIVAS
-            _buildSectionCard(
-              title: "Culturas Ativas",
+              title: "Culturas Ativas (${_crops.length})",
               icon: Icons.eco_rounded,
               theme: theme,
-              child: Column(
-                children: List.generate(_crops.length, (index) {
-                  final crop = _crops[index];
-                  
-                  final String name = crop.name ?? 'Sem nome';
-                  final String type = crop.type ?? 'Não informado';
-                  final String statusKey = crop.status ?? 'planting';
-                  final String areaText = crop.area != null ? '${crop.area!.toStringAsFixed(0)} ha' : '-- ha';
+              child: _crops.isEmpty
+                  ? Text(
+                      "Nenhuma cultura encontrada.",
+                      style: TextStyle(color: theme.textTheme.bodyMedium?.color),
+                    )
+                  : Column(
+                      children: List.generate(_crops.length, (index) {
+                        final crop = _crops[index];
 
-                  return Column(
-                    children: [
-                      _buildStatusRow(
-                        Icons.eco_rounded,
-                        name,
-                        _statusLabels[statusKey] ?? 'Plantio',
-                        _statusColor(statusKey),
-                        theme,
-                        subtitle: '$type • $areaText',
-                      ),
-                      if (index < _crops.length - 1)
-                        Divider(height: 16, thickness: 0.5, color: theme.dividerColor),
-                    ],
-                  );
-                }),
-              ),
+                        final String name = crop.name ?? 'Sem nome';
+                        final String type = crop.type ?? 'Não informado';
+                        final String statusKey = crop.status ?? 'planting';
+                        final String areaText = crop.area != null
+                            ? '${crop.area!.toStringAsFixed(0)} ha'
+                            : '-- ha';
+
+                        return Column(
+                          children: [
+                            _buildStatusRow(
+                              Icons.eco_rounded,
+                              name,
+                              _statusLabels[statusKey] ?? 'Plantio',
+                              _statusColor(statusKey),
+                              theme,
+                              subtitle: '$type • $areaText',
+                            ),
+                            if (index < _crops.length - 1)
+                              Divider(
+                                height: 16,
+                                thickness: 0.5,
+                                color: theme.dividerColor,
+                              ),
+                          ],
+                        );
+                      }),
+                    ),
             ),
 
             const SizedBox(height: 20),
 
-            // ALERTAS
+            // ALERTAS ATIVOS (Dinâmicos da API)
             _buildSectionCard(
-              title: "Alertas (3)",
+              title: "Alertas (${_alerts.length})",
               icon: Icons.notifications,
               theme: theme,
               child: Column(
@@ -279,35 +286,44 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: isHighContrast ? theme.cardColor : const Color.fromARGB(255, 255, 255, 255),
+                      color: isHighContrast ? theme.cardColor : Colors.white,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: theme.dividerColor),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "⚠️ Temp alta Estufa A",
-                          style: TextStyle(color: isHighContrast ? Colors.white : corVermelho, fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "🌡️ Umidade baixa Campo B",
-                          style: TextStyle(color: isHighContrast ? Colors.white : corLaranja, fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "💡 Luz fraca Estufa C",
-                          style: TextStyle(color: isHighContrast ? Colors.white : corAzul, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
+                    child: _alerts.isEmpty
+                        ? Text(
+                            "Nenhum alerta ativo no momento.",
+                            style: TextStyle(
+                              color: theme.textTheme.bodyMedium?.color,
+                            ),
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: _alerts.take(4).map((alerta) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(
+                                  "⚠️ ${alerta.cropName ?? 'Alerta'}: ${alerta.farmName ?? 'Atenção nas medições'}",
+                                  style: TextStyle(
+                                    color: isHighContrast
+                                        ? Colors.white
+                                        : corVermelho,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
                   ),
                   const SizedBox(height: 12),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: isHighContrast ? theme.colorScheme.primary : verdeEscuro,
-                      foregroundColor: isHighContrast ? theme.colorScheme.onPrimary : Colors.white,
+                      backgroundColor: isHighContrast
+                          ? theme.colorScheme.primary
+                          : verdeEscuro,
+                      foregroundColor: isHighContrast
+                          ? theme.colorScheme.onPrimary
+                          : Colors.white,
                       minimumSize: const Size(double.infinity, 45),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
@@ -328,9 +344,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Métodos auxiliares de UI recebendo o "theme" dinâmico para respeitar o Alto Contraste
-
-  Widget _buildStatCard(String title, String value, IconData icon, Color iconColor, ThemeData theme) {
+  Widget _buildStatCard(String title, String value, IconData icon,
+      Color iconColor, ThemeData theme) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -347,12 +362,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 14, color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6), fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 value,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: theme.textTheme.bodyLarge?.color),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: theme.textTheme.bodyLarge?.color,
+                ),
               ),
             ],
           ),
@@ -362,7 +385,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildSectionCard({required String title, required IconData icon, required Widget child, required ThemeData theme}) {
+  Widget _buildSectionCard(
+      {required String title,
+      required IconData icon,
+      required Widget child,
+      required ThemeData theme}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -376,11 +403,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           Row(
             children: [
-              Icon(icon, color: theme.iconTheme.color ?? const Color.fromARGB(255, 0, 0, 0), size: 20),
+              Icon(
+                icon,
+                color: theme.iconTheme.color ?? Colors.black,
+                size: 20,
+              ),
               const SizedBox(width: 8),
               Text(
                 title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: theme.textTheme.titleMedium?.color),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: theme.textTheme.titleMedium?.color,
+                ),
               ),
             ],
           ),
@@ -391,7 +426,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildStatusRow(IconData icon, String title, String status, Color statusColor, ThemeData theme, {required String subtitle}) {
+  Widget _buildStatusRow(IconData icon, String title, String status,
+      Color statusColor, ThemeData theme,
+      {required String subtitle}) {
     return Row(
       children: [
         CircleAvatar(
@@ -405,13 +442,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: theme.textTheme.bodyLarge?.color),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: theme.textTheme.bodyLarge?.color,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontSize: 12, color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6)),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -427,48 +471,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           child: Text(
             status,
-            style: TextStyle(color: statusColor, fontWeight: FontWeight.bold, fontSize: 12),
+            style: TextStyle(
+              color: statusColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildActivityItem({
-    required IconData icon,
-    required Color iconColor,
-    required Color bgColor,
-    required String title,
-    required String subtitle,
-    required ThemeData theme,
-    VoidCallback? onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
-              child: Icon(icon, color: iconColor, size: 20),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: theme.textTheme.bodyLarge?.color)),
-                  Text(subtitle, style: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6), fontSize: 12)),
-                ],
-              ),
-            ),
-            if (onTap != null) Icon(Icons.chevron_right, color: theme.iconTheme.color?.withOpacity(0.5) ?? const Color.fromARGB(255, 255, 255, 255), size: 18),
-          ],
-        ),
-      ),
     );
   }
 }

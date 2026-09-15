@@ -161,6 +161,8 @@
         id="formSensor"
         class="form-grid">
 
+        <?= csrf_field() ?>
+
         <div class="form-group">
 
             <label for="NOME">

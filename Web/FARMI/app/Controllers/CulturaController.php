@@ -105,6 +105,13 @@ class CulturaController extends BaseController
     public function atualizar($id)
     {
         $model = new CulturaModel();
+        $cultura = $model->find($id);
+
+        if (!$cultura) {
+            return redirect()->to('/cultura-admin');
+        }
+
+        $fkFazenda = $this->request->getPost('FK_ID_FAZENDA');
 
         $dados = [
             'NOME_CULTURA'         => $this->request->getPost('NOME_CULTURA'),
@@ -117,10 +124,11 @@ class CulturaController extends BaseController
             'SENSOR_CLIMA_UMIDADE' => $this->request->getPost('SENSOR_CLIMA_UMIDADE'),
             'SENSOR_SOLO'          => $this->request->getPost('SENSOR_SOLO'),
             'STATUS'               => $this->request->getPost('STATUS'),
-            'FK_ID_FAZENDA'        => $this->request->getPost('FK_ID_FAZENDA')
+            'FK_ID_FAZENDA'        => !empty($fkFazenda) ? $fkFazenda : $cultura['FK_ID_FAZENDA']
         ];
 
         $model->update($id, $dados);
+
         return redirect()->to('/cultura-admin');
     }
 

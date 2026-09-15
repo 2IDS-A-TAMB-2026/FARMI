@@ -45,32 +45,6 @@ class SistemaController extends BaseController
         return view('sistema/farmi_adm/cultura');
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     public function dashboard_admin()
     {
         $cpfUsuario = session()->get('usuario_cpf');
@@ -363,6 +337,64 @@ class SistemaController extends BaseController
             'datasets_solo' => $datasets_solo,
             'datasets_lux' => $datasets_lux
         ]);
+        
+    }
+
+    public function status_sensores()
+    {
+        $cpfUsuario = session()->get('usuario_cpf');
+        $db = \Config\Database::connect();
+
+        $sensores = $db->query("
+            SELECT
+                s.NOME_SENSOR,
+                s.TIPO_SENSOR,
+                ls.DATA_HORA,
+                TIMESTAMPDIFF(MINUTE, ls.DATA_HORA, NOW()) AS MINUTOS_ATRAS
+            FROM SENSOR s
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            LEFT JOIN LEITURA_SENSOR ls ON ls.ID_LEITURA = (
+                SELECT l2.ID_LEITURA
+                FROM LEITURA_SENSOR l2
+                WHERE l2.FK_ID_SENSOR = s.ID_SENSOR
+                ORDER BY l2.DATA_HORA DESC
+                LIMIT 1
+            )
+            WHERE uf.ID_CPF_USUARIOS = ?
+        ", [$cpfUsuario])->getResultArray();
+
+        $icones = [
+            'Temperatura' => 'fa-temperature-high',
+            'Umidade'     => 'fa-droplet',
+            'Luz'         => 'fa-sun',
+            'Solo'        => 'fa-seedling',
+        ];
+
+        $resultado = [];
+        foreach ($sensores as $s) {
+            // TIMESTAMPDIFF já calcula a diferença direto no MySQL,
+            // evitando divergência de fuso horário entre PHP (time()) e o banco.
+            $minutos = is_null($s['DATA_HORA']) ? null : (int) $s['MINUTOS_ATRAS'];
+
+            $resultado[] = [
+                'nome'          => $s['NOME_SENSOR'],
+                'tipo'          => $s['TIPO_SENSOR'],
+                'icone'         => $icones[$s['TIPO_SENSOR']] ?? 'fa-microchip',
+                'minutos_atras' => $minutos,
+                'tempo_texto'   => $minutos === null ? 'sem leitura' : $this->formatarTempoSensor($minutos),
+            ];
+        }
+
+        return $this->response->setJSON($resultado);
+    }
+
+    private function formatarTempoSensor($minutos)
+    {
+        if ($minutos < 1)  return 'leitura agora';
+        if ($minutos < 60) return 'leitura há ' . round($minutos) . ' min';
+        return 'leitura há ' . round($minutos / 60) . 'h';
     }
 
 
