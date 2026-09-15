@@ -1,5 +1,5 @@
 # FARMI
-![Logo do projeto](./nova_logo_clara_sem_fundo%20(1).png)
+![Logo do projeto](https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/nova_logo_clara_sem_fundo%20(1).png)
 >🌱 Tecnologia que protege e faz sua fazenda crescer
 
 ---
@@ -48,12 +48,23 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 - Sistema de alertas - 100%
 - Painel administrativo - 100%
 
-*Sprint 2* - 
-- Acessibilidade do site - 50%
+*Sprint 2* - 100%
+- Acessibilidade do site - 100%
 - Dashboard do administrador - 100%
+- Telas de cadastro - 100%
 - Melhora na identidade visual - 100%
+- Conteúdo para redes sociais - 100%
+- Vídeo propaganda - 100%
 
-*Sprint 3* -
+*Sprint 3* - 100%
+- Criação e configuração do projeto utilizando CodeIgniter — 100%
+- Desenvolvimento das Models, Controllers, Routes e Views — 100%
+- Implementação do Filter e sistema de autenticação (Auth) — 100%
+- Desenvolvimento do site do Workshop — 100%
+- Desenvolvimento da identidade visual do Workshop — 100%
+- Implementação da acessibilidade com modo de alto contraste — 100%
+- Correção e aprimoramento do Dashboard — 100%
+
 
 ### Mobile
 *Sprint 1* - 100%
@@ -64,22 +75,27 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 - Sistema de alertas - 100%
 - Painel administrativo - 100%
 
-*Sprint 2* - 
-- Identidade visual igual do web - 50%
+*Sprint 2* - 100%
+- Identidade visual igual do web - 100%
+- Dashboard do Usuário - 1000%
+
 
 *Sprint 3* -
+- Integração do Mobile com banco de dados
 
 ### IOT
 *Sprint 1* - 100%
 - Definição dos sensores (temperatura, umidade, luminosidade) - 100%
-- Testes básicos de leitura de dados - 0%
-- Estrutura para envio de dados (HTTP) - 0%
-- Simulação de dados para integração futura - 0%
+- Testes básicos de leitura de dados - 100%
+- Estrutura para envio de dados (HTTP) - 100%
+- Simulação de dados para integração futura - 100%
 
-*Sprint 2* - 
+*Sprint 2* - 100%
+- Vídeo da simulação de dados - 100%
+- Criação do código básico - 100%
 
 *Sprint 3* -
-
+- Criação de protótipos 3D (cases) para os dispositivos IoT - 100%
 ---
 
 
@@ -138,37 +154,41 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 
 | Nome | Função |
 |------|------|
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/thaiene.png" width="40"> Thaiene Tessaro | Programador Full Stack |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/isabella.png" width="40"> Isabella Silva Fernandes Garcia | Programador Full Stack |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/vitor.png" width="50">Vitor Delduca Fernandes | Analista de Sistemas e Design |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/maria.jpg" width="40">Maria Clara Uliana Braga | Analista de Sistemas e Design |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/paula.jpg" width="40">Paula Silva Zito | Programador Back-End |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/vinicius.jpg" width="40">Vinícius Bruno de Lima | Programador Back-End |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/paula.jpg" width="40">Paula Silva Zito | Product Owner |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/thaiene.png" width="40">Thaiene Tessaro | Scrum Master |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/thaiene.jpeg" width="60"> Thaiene Tessaro | Programador Full Stack |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/isabella.jpeg" width="50"> Isabella Silva Fernandes Garcia | Programador Full Stack|
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/vitor.png" width="50">Vitor Delduca Fernandes | Analista de Sistemas e Design |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/maria.jpeg" width="60">Maria Clara Uliana Braga | Analista de Sistemas e Design |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/paula.jpeg" width="50">Paula Silva Zito | Programador Back-End |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/vinicius.png" width="50">Vinícius Bruno de Lima | Programador Back-End |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/paula.jpeg" width="50">Paula Silva Zito | Product Owner |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/thaiene.jpeg" width="60">Thaiene Tessaro | Scrum Master |
 
 ---
 
 ## Diagramas
-### MER 
+### MER
 - Modelo Entidade Relacionamento.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/FARMI_MER_FAZENDA_INTELIGENTE%20(1).png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Banco_dados/MER_ATUALIZADO.jpg" width="700">
 
 ### DER
 - Diagrama Entidade Relacionamento.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Der.jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Banco_dados/DER_ATUALIZADO.jpg" width="700">
 
 ### Diagrama de Classes
 - O Diagrama de Classes representa as classes de um sistema e como elas se relacionam.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_classes.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/diagrama_de_classes.png" width="700">
 
 ### Diagrama de Fluxos
 - O Diagrama de Fluxo representa a sequência de etapas de um processo ou algoritmo.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_fluxos.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/diagrama_de_fluxos.png" width="700">
 
 ## Diagrama de IOT
 - Diagrama IoT que mostra a conexão entre sensores, dispositivos e a nuvem para coleta e análise de dados em tempo real.
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/DiagramaIOT.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/Diagrama_IOT.png" width="700">
+
+## Caixa IOT
+- Serão armazenados os dispositivos IOT do nosso sistema.
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/IoT/Iot_caixa.png" width="700">
 
 ---
 📧 [farmi.tcc2026@gmail.com]<br>
@@ -177,7 +197,7 @@ Desenvolver uma solução para **gestão e monitoramento de fazendas inteligente
 ---
 
 # FARMI
-![Project Logo](./nova_logo_clara_sem_fundo%20(1).png)
+![Project Logo](https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/nova_logo_clara_sem_fundo%20(1).png)
 
 > 🌱 Technology that protects and helps your farm grow
 
@@ -226,46 +246,71 @@ Develop a solution for **smart farm management and monitoring**.
 
 ### Web
 
-**Sprint 1 - 100%**
+*Sprint 1* - 100%
 
-- Login, registration, and password recovery – 100%
-- Dashboard with real-time data – 100%
-- Sensor monitoring – 100%
-- Crop management and reports – 100%
-- Alert system – 100%
-- Administrative panel – 100%
+* Login, registration, and password recovery - 100%
+* Real-time data dashboard - 100%
+* Sensor monitoring - 100%
+* Crop management and reports - 100%
+* Alert system - 100%
+* Administrative panel - 100%
 
-*Sprint 2* -
+*Sprint 2* - 100%
 
+* Website accessibility - 100%
+* Administrator dashboard - 100%
+* Registration screens - 100%
+* Visual identity improvements - 100%
+* Social media content - 100%
+* Promotional video - 100%
 
-*Sprint 3* -
+*Sprint 3* - 100%
 
+* Project creation and configuration using CodeIgniter — 100%
+* Development of Models, Controllers, Routes, and Views — 100%
+* Implementation of Filters and the authentication system (Auth) — 100%
+* Development of the Workshop website — 100%
+* Development of the Workshop visual identity — 100%
+* Implementation of accessibility features with high-contrast mode — 100%
+* Dashboard fixes and improvements — 100%
 
 ### Mobile
-*Sprint 1* - 100%
+
+Sprint 1* - 100%
+
 - Login, registration, and password recovery - 100%
-- Dashboard with real-time data - 100%
+- Real-time data dashboard - 100%
 - Sensor monitoring - 100%
 - Crop management and reports - 100%
 - Alert system - 100%
 - Administrative panel - 100%
 
-*Sprint 2* -
+*Sprint 2* - 100%
+
+*- Visual identity matching the web version - 100%
+- User dashboard - 100%
 
 *Sprint 3* -
+
+- Mobile integration with the database
 
 ### IoT
+
 *Sprint 1* - 100%
-- Sensor definition (temperature, humidity, luminosity) - 100%
-- Basic data reading tests - 0%
-- Data transmission structure (HTTP) - 0%
-- Data simulation for future integration - 0%
 
-*Sprint 2* -
+- Definition of sensors (temperature, humidity, and light intensity) - 100%
+- Basic data reading tests - 100%
+- Data transmission structure (HTTP) - 100%
+- Data simulation for future integration - 100%
 
-*Sprint 3* -
+*Sprint 2* - 100%
 
----
+- Data simulation video - 100%
+- Development of the basic code - 100%
+
+*Sprint 3* - 100%
+
+- Creation of 3D prototypes (cases) for IoT devices - 100%
 
 ---
 
@@ -323,37 +368,41 @@ Develop a solution for **smart farm management and monitoring**.
 
 | Name | Role |
 |------|------|
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/thaiene.png" width="40"> Thaiene Tessaro | Full Stack Developer |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/isabella.png" width="40"> Isabella Silva Fernandes Garcia | Full Stack Developer |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/vitor.png" width="50"> Vitor Delduca Fernandes | Systems Analyst and Design |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/maria.jpg" width="40"> Maria Clara Uliana Braga | Systems Analyst and Design |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/paula.jpg" width="40"> Paula Silva Zito | Back-End Developer |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/vinicius.jpg" width="40"> Vinícius Bruno de Lima | Back-End Developer |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/paula.jpg" width="40"> Paula Silva Zito | Product Owner |
-|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Web/farmi/equipe/thaiene.png" width="40"> Thaiene Tessaro | Scrum Master |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/thaiene.jpeg" width="60"> Thaiene Tessaro | Full Stack Developer |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/isabella.jpeg" width="40"> Isabella Silva Fernandes Garcia | Full Stack Developer |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/vitor.png" width="50"> Vitor Delduca Fernandes | Systems Analyst and Design |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/maria.jpeg" width="60"> Maria Clara Uliana Braga | Systems Analyst and Design |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/paula.jpeg" width="50"> Paula Silva Zito | Back-End Developer |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/vinicius.png" width="50"> Vinícius Bruno de Lima | Back-End Developer |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/paula.jpeg" width="50"> Paula Silva Zito | Product Owner |
+|<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/equipe/thaiene.jpeg" width="60"> Thaiene Tessaro | Scrum Master |
 
 ---
 ## Diagrams
 
 ### MER
 - Entity Relationship Model.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/FARMI_MER_FAZENDA_INTELIGENTE%20(1).png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Banco_dados/MER_ATUALIZADO.jpg" width="700">
 
 ### DER
 - Entity Relationship Diagram.<br>
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Der.jpeg" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Banco_dados/DER_ATUALIZADO.jpg" width="700">
 
 ### Class Diagram
 - The Class Diagram represents the classes of a system and how they relate to each other.<br>  
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_classes.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/diagrama_de_classes.png" width="700">
 
 ### Flowchart
 - The Flowchart represents the sequence of steps in a process or algorithm.<br>  
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/diagrama_de_fluxos.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/diagrama_de_fluxos.png" width="700">
 
 ## IOT Diagram
 - IoT diagram showing the connection between sensors, devices, and the cloud for real-time data collection and analysis.
-<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/DiagramaIOT.png" width="700">
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/Diagramas/Diagrama_IOT.png" width="700">
+
+## IoT Box
+- The IoT devices used in our system will be stored here.
+<img src="https://github.com/2IDS-A-TAMB-2026/FARMI/blob/main/IoT/Iot_caixa.png" width="700">
 
 ---
 
