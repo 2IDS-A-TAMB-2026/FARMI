@@ -214,20 +214,6 @@ body.contraste .avatar {
     background: #fff !important;
     color: #000!important;
 }
-.mostrar-mais{
-    color: var(--verde-escuro);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: 0.3s;
-    background: transparent;
-    cursor: pointer;
-    padding: 10px;
-    background-color: #57c91b;
-    color: #fff;
-}
 .paginacao-container {
     display: flex;
     align-items: center;
@@ -241,6 +227,32 @@ body.contraste .avatar {
     font-size: 16px;
     font-weight: 600;
     color: #57c91b;
+}
+
+.botao-paginacao {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #57c91b;
+    color: white;
+    font-weight: bold;
+    transition: .3s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+.botao-paginacao:hover {
+    transform: scale(1.05);
+}
+
+.botao-paginacao:disabled {
+    display: none;
 }
 
     </style>
@@ -498,7 +510,7 @@ body.contraste .avatar {
                         <div class="alert-meta">
                             <span class="alert-time">
                                 <i class="fa-solid fa-clock"></i>
-                                <?= $a['DATA_HORA']; ?>
+                                <?= date('d/m/Y H:i', strtotime($a['DATA_HORA'])) ?>
                             </span>
 
                             <?php if($a['STATUS'] == "Ativo"){ ?>
@@ -519,13 +531,18 @@ body.contraste .avatar {
                     </div>
                 </div>
                 <div class="paginacao-container">
+                    <button id="paginaAnterior" class="botao-paginacao" type="button">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
                     <div id="paginaInfo" class="pagina-info">
                         Página 1 de 1
                     </div>
 
-                    <div id="mostrarMais" class="mostrar-mais">
+                    <button id="proximaPagina" class="botao-paginacao" type="button">
                         <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                    </button>
+
                 </div>
             </div>
 
@@ -732,7 +749,9 @@ document.addEventListener('click', function(){
 // =========================
 
 const alertas = document.querySelectorAll(".alerta");
-const botaoMostrarMais = document.getElementById("mostrarMais");
+
+const paginaAnterior = document.getElementById("paginaAnterior");
+const proximaPagina = document.getElementById("proximaPagina");
 const paginaInfo = document.getElementById("paginaInfo");
 
 const ALERTAS_POR_PAGINA = 5;
@@ -747,7 +766,6 @@ let filtroAtual = "todos";
 
 function atualizarAlertas() {
 
-    // Pega somente os alertas do filtro escolhido
     const alertasFiltrados = Array.from(alertas).filter(alerta => {
 
         return (
@@ -757,135 +775,157 @@ function atualizarAlertas() {
 
     });
 
-    // Calcula o total de páginas
+
+    // =========================
+    // TOTAL DE PÁGINAS
+    // =========================
+
     const totalPaginas = Math.ceil(
         alertasFiltrados.length / ALERTAS_POR_PAGINA
     );
 
-    // ==========================================
-    // ATUALIZA O TEXTO DA PÁGINA
-    // ==========================================
+
+    // =========================
+    // CORRIGE PÁGINA ATUAL
+    // =========================
+
+    if (totalPaginas === 0) {
+
+        paginaAtual = 1;
+
+    } else if (paginaAtual > totalPaginas) {
+
+        paginaAtual = totalPaginas;
+
+    }
+
+
+    // =========================
+    // TEXTO DA PÁGINA
+    // =========================
 
     if (totalPaginas > 0) {
+
         paginaInfo.textContent =
             `Página ${paginaAtual} de ${totalPaginas}`;
+
     } else {
-        paginaInfo.textContent = "Nenhuma página";
+
+        paginaInfo.textContent =
+            "Nenhuma página";
+
     }
 
 
-    // Se não houver alertas
-    if (totalPaginas === 0) {
-        paginaAtual = 1;
-    }
+    // =========================
+    // ESCONDE TODOS
+    // =========================
 
-    // Evita ficar em uma página que não existe
-    if (paginaAtual > totalPaginas && totalPaginas > 0) {
-        paginaAtual = totalPaginas;
-    }
-
-    // Esconde todos os alertas
     alertas.forEach(alerta => {
+
         alerta.style.display = "none";
+
     });
 
-    // Calcula quais alertas pertencem à página atual
-    const inicio = (paginaAtual - 1) * ALERTAS_POR_PAGINA;
-    const fim = inicio + ALERTAS_POR_PAGINA;
 
-    // Mostra somente os 5 da página atual
+    // =========================
+    // MOSTRA OS 5 DA PÁGINA
+    // =========================
+
+    const inicio =
+        (paginaAtual - 1) * ALERTAS_POR_PAGINA;
+
+    const fim =
+        inicio + ALERTAS_POR_PAGINA;
+
     alertasFiltrados
         .slice(inicio, fim)
         .forEach(alerta => {
+
             alerta.style.display = "flex";
+
         });
 
 
     // =========================
-    // CONTROLE DA PAGINAÇÃO
+    // BOTÃO ANTERIOR
     // =========================
 
-    if (totalPaginas <= 1) {
+    if (paginaAtual <= 1) {
 
-        // Só existe uma página
-        botaoMostrarMais.style.display = "none";
+        paginaAnterior.style.display = "none";
 
-    } 
-    else if (paginaAtual === 1) {
+    } else {
 
-        // Primeira página
-        botaoMostrarMais.style.display = "flex";
-
-        botaoMostrarMais.innerHTML = `
-            <i class="fa-solid fa-chevron-right"></i>
-        `;
-
-    } 
-    else if (paginaAtual < totalPaginas) {
-
-        // Página do meio
-        botaoMostrarMais.style.display = "flex";
-
-        botaoMostrarMais.innerHTML = `
-            <span onclick="voltarPrimeiraPagina(event)">
-                <i class="fa-solid fa-chevron-left"></i>
-                Primeira página
-            </span>
-
-            <span onclick="proximaPagina(event)">
-                Próxima página
-                <i class="fa-solid fa-chevron-right"></i>
-            </span>
-        `;
-
-    } 
-    else {
-
-        // Última página
-        botaoMostrarMais.style.display = "flex";
-
-        botaoMostrarMais.innerHTML = `
-            <span onclick="voltarPrimeiraPagina(event)">
-                <i class="fa-solid fa-chevron-left"></i>
-            </span>
-        `;
+        paginaAnterior.style.display = "flex";
 
     }
+
+
+    // =========================
+    // BOTÃO PRÓXIMO
+    // =========================
+
+    if (paginaAtual >= totalPaginas || totalPaginas === 0) {
+
+        proximaPagina.style.display = "none";
+
+    } else {
+
+        proximaPagina.style.display = "flex";
+
+    }
+
 }
-function proximaPagina(event) {
 
-    event.stopPropagation();
-
-    paginaAtual++;
-
-    atualizarAlertas();
-}
-
-
-function voltarPrimeiraPagina(event) {
-
-    event.stopPropagation();
-
-    paginaAtual = 1;
-
-    atualizarAlertas();
-}
 
 // =========================
-// BOTÃO DE PAGINAÇÃO
+// PÁGINA ANTERIOR
 // =========================
 
-botaoMostrarMais.addEventListener("click", function () {
+paginaAnterior.addEventListener("click", function () {
 
-    // Na primeira página, o botão leva para a próxima
-    if (paginaAtual === 1) {
+    if (paginaAtual > 1) {
 
-        paginaAtual++;
+        paginaAtual--;
+
         atualizarAlertas();
 
     }
 
 });
+
+
+// =========================
+// PRÓXIMA PÁGINA
+// =========================
+
+proximaPagina.addEventListener("click", function () {
+
+    const alertasFiltrados = Array.from(alertas).filter(alerta => {
+
+        return (
+            filtroAtual === "todos" ||
+            alerta.dataset.sensor === filtroAtual
+        );
+
+    });
+
+    const totalPaginas = Math.ceil(
+        alertasFiltrados.length / ALERTAS_POR_PAGINA
+    );
+
+
+    if (paginaAtual < totalPaginas) {
+
+        paginaAtual++;
+
+        atualizarAlertas();
+
+    }
+
+});
+
 
 // =========================
 // FILTROS
@@ -897,7 +937,7 @@ document.querySelectorAll(".filtro-item").forEach(item => {
 
         filtroAtual = this.dataset.filtro;
 
-        // Sempre começa novamente na página 1
+        // Volta para a primeira página
         paginaAtual = 1;
 
         atualizarAlertas();

@@ -129,6 +129,166 @@
         body.contraste #contraste-btn {
             color: #fff !important;
         }
+        .btn-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    background: #ffffff;
+    color: #333333;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+/* BOTÃO GOOGLE */
+
+.separador-login {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 18px 0;
+    color: #777;
+    font-size: 14px;
+}
+
+.separador-login::before,
+.separador-login::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.separador-login span {
+    padding: 0 12px;
+}
+
+/* Link do Google separado do botão Entrar */
+.btn-google {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    box-sizing: border-box;
+
+    background-color: #fff;
+    color: #333;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-google:hover {
+    background-color: #f7f7f7;
+    border-color: #aaa;
+}
+
+.btn-google i {
+    font-size: 17px;
+}
+/* =========================
+   BOTÕES DO LOGIN
+========================= */
+
+.login-botoes {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+}
+
+/* BOTÃO ENTRAR */
+.login-botoes .btn-group {
+    width: 100%;
+    display: block !important;
+}
+
+.login-botoes .btn-primary {
+    width: 100%;
+    display: block !important;
+}
+
+/* SEPARADOR */
+.separador-login {
+    width: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    margin: 18px 0;
+    color: #777;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.separador-login::before,
+.separador-login::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.separador-login span {
+    padding: 0 12px;
+}
+
+/* BOTÃO GOOGLE */
+.login-botoes .btn-google {
+    width: 100%;
+    height: 45px;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 10px;
+    box-sizing: border-box;
+
+    background: #fff;
+    color: #333;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-botoes .btn-google:hover {
+    background: #f7f7f7;
+    border-color: #aaa;
+}
+
+.login-botoes .btn-google i {
+    font-size: 17px;
+}
         </style>
     </head>
 
@@ -156,7 +316,6 @@
 
                 <form method="POST" action="<?= base_url('login/autenticar') ?>">
 
-    <!-- COLOQUE AQUI: Gerador do token de segurança CSRF do CodeIgniter -->
     <?= csrf_field() ?>
 
     <input type="text" name="email" id="email" placeholder="E-mail">
@@ -166,15 +325,39 @@
         <i class="fa-solid fa-eye" id="toggleSenha"></i>
     </div>
 
-    <div class="btn-group">
-        <button type="submit" class="btn btn-primary" id="btnEntrar" disabled>Entrar</button>
+
+    <!-- SOMENTE OS BOTÕES FICAM AQUI -->
+    <div class="login-botoes">
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="btnEntrar" disabled>
+                Entrar
+            </button>
+        </div>
+
+        <div class="separador-login">
+            <span>ou</span>
+        </div>
+
+        <a href="<?= base_url('login/google') ?>" class="btn-google">
+            <i class="fab fa-google"></i>
+            <span>Entrar com Google</span>
+        </a>
+
     </div>
 
-    <a href="<?= base_url('/esqueceu-senha') ?>" class="link-senha">*Esqueceu a senha?</a><br>
+
+    <!-- LINKS FICAM FORA DO login-botoes -->
+    <a href="<?= base_url('/esqueceu-senha') ?>" class="link-senha">
+        Esqueceu a senha?
+    </a>
+
+    <br>
 
     <div class="back">
         <a href="<?= base_url('/') ?>">
-            <i class="fas fa-arrow-left"></i> Voltar a Tela Inicial
+            <i class="fas fa-arrow-left"></i>
+            Voltar a Tela Inicial
         </a>
     </div>
 

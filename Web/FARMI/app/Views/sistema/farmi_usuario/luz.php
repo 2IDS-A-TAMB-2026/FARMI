@@ -435,17 +435,15 @@ Seleciona:
 - todos os <button>
 - elementos com classe .btn
 */
-body.alto-contraste button,
-body.alto-contraste .btn {
-
-    /* fundo branco */
+body.alto-contraste .logout-btn {
     background: #fff !important;
-
-    /* texto preto */
     color: #000 !important;
+    border: none !important;
+}
 
-    /* borda branca */
-    border: 2px solid #fff !important;
+body.alto-contraste .logout-btn *,
+body.alto-contraste .logout-btn i {
+    color: #000 !important;
 }
 
 /* =========================
@@ -565,6 +563,54 @@ body.alto-contraste .chart-container {
 html {
     font-size: 16px;
 }
+
+/* ALTO CONTRASTE - BOTÕES A+, A- E A */
+body.alto-contraste .accessibility-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .accessibility-btn:hover {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+
+/* ALTO CONTRASTE - LOGOUT */
+body.alto-contraste .logout-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .logout-btn i {
+    color: #fff !important;
+}
+
+
+/* ALTO CONTRASTE - BOTÃO DE CONTRASTE */
+body.alto-contraste #contraste-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* ALTO CONTRASTE - AVATAR */
+body.alto-contraste .avatar {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .avatar * {
+    color: #000 !important;
+}
     </style>
 </head>
 <body>
@@ -670,7 +716,7 @@ html {
                     ?>
                 </span>
             </div>
-            <p style="color: #666;">Última leitura: <?= !empty($sensores) ? $sensores[0]['DATA_HORA'] : '-' ?></p>
+            <p style="color: #666;">Última leitura: <?= !empty($sensores) ? date('d/m/Y H:i', strtotime($sensores[0]['DATA_HORA'])) : '-' ?></p>
         </div>
 
         <!-- CARDS DE ESTATÍSTICAS -->
@@ -739,7 +785,7 @@ html {
 
                         <td><?= esc($sensor['NOME_FAZENDA']) ?></td>
 
-                        <td><?= $sensor['DATA_HORA'] ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?></td>
 
                         <td><?= $sensor['VALOR'] ?> Lux</td>
 

@@ -367,12 +367,7 @@ body.contraste .avatar {
                         <i class="fa-solid fa-ruler"></i>
                         Unidade de medida *
                     </label>
-                    <select id="unidade" name="UNIDADE_MEDIDA" required>
-                        <option value="">Selecione a unidade</option>
-                        <option value="%">%</option>
-                        <option value="°C">°C</option>
-                        <option value="Lux">Lux</option>
-                    </select>
+                    <input type="text" id="unidade" name="UNIDADE_MEDIDA" placeholder="Definida pelo tipo de sensor" readonly required>
                 </div>
 
                 <div class="form-group">
@@ -493,6 +488,21 @@ body.contraste .avatar {
             <div class="vw-plugin-top-wrapper"></div>
         </div>
     </div>
+
+    <script>
+    document.getElementById('tipo').addEventListener('change', function() {
+        const unidade = document.getElementById('unidade');
+
+        const unidades = {
+            'Temperatura': '°C',
+            'Umidade': '%',
+            'Luz': 'lux',
+            'Solo': '%'
+        };
+
+        unidade.value = unidades[this.value] || '';
+    });
+    </script>
 
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>

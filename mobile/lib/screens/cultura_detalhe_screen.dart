@@ -217,7 +217,9 @@ class _DetalhesCulturaScreenState extends State<DetalhesCulturaScreen> {
             _buildInfoCard(
               icon: Icons.wb_sunny_outlined,
               title: 'Sensor de luminosidade',
-              value: widget.crop.sensorLight,
+              value: widget.crop.sensorLight.isNotEmpty 
+                  ? '${widget.crop.sensorLight} lux' 
+                  : '',
               cardColor: cardColor,
               textColor: textColor,
               subtitleColor: subtitleColor,
@@ -228,7 +230,9 @@ class _DetalhesCulturaScreenState extends State<DetalhesCulturaScreen> {
             _buildInfoCard(
               icon: Icons.thermostat_outlined,
               title: 'Sensor de temperatura',
-              value: widget.crop.sensorClimateTemperature,
+              value: widget.crop.sensorClimateTemperature.isNotEmpty 
+                  ? '${widget.crop.sensorClimateTemperature}°C' 
+                  : '',
               cardColor: cardColor,
               textColor: textColor,
               subtitleColor: subtitleColor,
@@ -239,7 +243,9 @@ class _DetalhesCulturaScreenState extends State<DetalhesCulturaScreen> {
             _buildInfoCard(
               icon: Icons.water_drop_outlined,
               title: 'Umidade do clima',
-              value: widget.crop.sensorClimateHumidity,
+              value: widget.crop.sensorClimateHumidity.isNotEmpty 
+                  ? '${widget.crop.sensorClimateHumidity}%' 
+                  : '',
               cardColor: cardColor,
               textColor: textColor,
               subtitleColor: subtitleColor,
@@ -250,7 +256,9 @@ class _DetalhesCulturaScreenState extends State<DetalhesCulturaScreen> {
             _buildInfoCard(
               icon: Icons.landscape_outlined,
               title: 'Sensor de solo',
-              value: widget.crop.sensorSoil,
+              value: widget.crop.sensorSoil.isNotEmpty 
+                  ? '${widget.crop.sensorSoil}%' 
+                  : '',
               cardColor: cardColor,
               textColor: textColor,
               subtitleColor: subtitleColor,

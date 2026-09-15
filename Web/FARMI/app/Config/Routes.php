@@ -12,10 +12,16 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'HomeController::index');
 
 $routes->get('/login', 'AuthController::login');
+
+$routes->get('/login/google', 'AuthController::google');
+$routes->get('/login/google-callback', 'AuthController::googleCallback');
+
 $routes->post('/login/autenticar', 'AuthController::autenticar');
+
 $routes->get('/logout', 'AuthController::logout');
 
 $routes->get('/esqueceu-senha', 'EsqueceuSenhaController::index');
+
 $routes->post('/enviar-recuperacao', 'EsqueceuSenhaController::enviar');
 
 

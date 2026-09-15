@@ -569,6 +569,110 @@ body.alto-contraste .chart-container {
 .accessibility-btn:hover {
     background-color: #46A302;
 }
+```css
+/* ==========================================
+   ALTO CONTRASTE - BOTÕES DE ACESSIBILIDADE
+   ========================================== */
+
+body.alto-contraste .accessibility-btn {
+    width: 42px !important;
+    height: 42px !important;
+
+    background: #000 !important;
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 8px !important;
+
+    font-size: 16px !important;
+    font-weight: bold !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer;
+}
+
+body.alto-contraste .accessibility-btn:hover {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+
+/* ==========================================
+   ALTO CONTRASTE - LOGOUT
+   ========================================== */
+
+body.alto-contraste .logout-btn {
+    background: #000 !important;
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 8px !important;
+
+    height: 42px !important;
+    min-width: 42px !important;
+}
+
+body.alto-contraste .logout-btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================
+   ALTO CONTRASTE - PERFIL
+   ========================================== */
+
+body.alto-contraste .avatar {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+
+    background: #fff !important;
+    color: #000 !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 50% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-weight: bold !important;
+    font-size: 16px !important;
+}
+
+body.alto-contraste .avatar i {
+    color: #000 !important;
+}
+/* depois vêm as regras específicas */
+
+body.alto-contraste .accessibility-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* Logout */
+
+body.alto-contraste .logout-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* Perfil */
+
+body.alto-contraste .avatar {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
 
     </style>
 </head>

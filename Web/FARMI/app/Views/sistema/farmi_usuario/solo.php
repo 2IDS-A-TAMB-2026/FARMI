@@ -198,16 +198,6 @@ body.contraste .logout-btn i {
     font-weight: bold;
 }
 
-/* Regras de Alto Contraste específicas para estes botões */
-body.contraste .logout-btn {
-    background: #fff !important;
-    color: #000 !important;
-    border: none !important;
-}
-
-body.contraste .logout-btn i {
-    color: #000 !important;
-}
 
 /* AVATAR DO USUÁRIO */
 .avatar {
@@ -234,8 +224,7 @@ body.contraste .logout-btn i {
 /* ALTO CONTRASTE - BOTÕES DE FONTE */
 body.contraste #aumentar-fonte,
 body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte,
-body.contraste .user-profile .btn-logout {
+body.contraste #resetar-fonte {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
@@ -621,6 +610,59 @@ body.contraste .chart-container {
     border: 2px solid white;
     border-radius: 10px;
 }
+/* ==========================================
+   ALTO CONTRASTE - LOGOUT
+   ========================================== */
+
+body.contraste .logout-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 8px;
+}
+
+body.contraste .logout-btn i {
+    color: #fff !important;
+}
+
+body.contraste .logout-btn:hover {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+
+/* ==========================================
+   ALTO CONTRASTE - PERFIL
+   ========================================== */
+
+body.contraste .avatar {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+
+    background: #fff !important;
+    color: #000 !important;
+
+    border: 2px solid #fff !important;
+    border-radius: 50% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    font-weight: bold;
+}
+
+body.contraste .avatar a {
+    color: #000 !important;
+}
+
+body.contraste .avatar i {
+    color: #000 !important;
+}
 
     </style>
 </head>
@@ -727,7 +769,7 @@ body.contraste .chart-container {
                     ?>
                 </span>
             </div>
-            <p style="color: #666;">Última leitura: <?= !empty($sensores) ? $sensores[0]['DATA_HORA'] : '--' ?></p>
+            <p style="color: #666;">Última leitura: <?= !empty($sensores) ? date('d/m/Y H:i', strtotime($sensores[0]['DATA_HORA'])) : '-' ?></p>
         </div>
 
         <!-- CARDS DE ESTATÍSTICAS -->
@@ -794,7 +836,7 @@ body.contraste .chart-container {
 
                             <td><?= esc($sensor['NOME_FAZENDA']) ?></td>
 
-                            <td><?= $sensor['DATA_HORA'] ?></td>
+                            <td><?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?></td>
 
                             <td><?= number_format($sensor['VALOR'], 1, ',', '.') ?>%</td>
 

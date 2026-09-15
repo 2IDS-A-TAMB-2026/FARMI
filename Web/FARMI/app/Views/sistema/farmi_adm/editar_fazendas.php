@@ -140,11 +140,7 @@
             <p>Preencha os dados do endereço da fazenda</p>
         </div>
 
-        <form action="<?= base_url('fazenda/atualizar/' . $fazenda['ID_FAZENDA']) ?>" method="post">
-                method="post"
-                id="formSensor"
-                class="form-grid">
-
+        
             <?= csrf_field() ?>
 
             <div class="form-group">

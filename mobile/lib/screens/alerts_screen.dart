@@ -46,83 +46,34 @@ class _AlertsScreenState extends State<AlertsScreen> {
     }
   }
 
-  // Marca um alerta específico como lido no banco e localmente
-  Future<void> _markAsRead(String id) async {
-    try {
-      await ApiService.markAlertAsRead(id);
-      if (!mounted) return;
+  IconData _getAlertIcon(AlertModel a) {
+    final text = '${a.type} ${a.title} ${a.sensorName ?? ''}'.toLowerCase();
 
-      setState(() {
-        _alerts = _alerts.map((a) {
-          if (a.id == id) {
-            return AlertModel(
-              id: a.id,
-              title: a.title,
-              message: a.message,
-              type: a.type,
-              severity: a.severity,
-              sensorName: a.sensorName,
-              isRead: true,
-              createdDate: a.createdDate,
-            );
-          }
-          return a;
-        }).toList();
-      });
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao marcar alerta como lido.')),
-      );
+    if (text.contains('temperatura') || text.contains('superaquecimento')) {
+      return Icons.thermostat_rounded;
+    } else if (text.contains('umidade')) {
+      return Icons.percent_rounded;
+    } else if (text.contains('solo')) {
+      return Icons.water_drop_rounded;
+    } else if (text.contains('luz') || text.contains('luminosidade')) {
+      return Icons.wb_sunny_outlined;
     }
+    return Icons.notifications_rounded;
   }
 
-  // Marca todos os alertas como lidos na API e localmente
-  Future<void> _markAllAsRead() async {
-    try {
-      await ApiService.markAllAlertsAsRead();
-      if (!mounted) return;
+  Color _getAlertColor(AlertModel a) {
+    final text = '${a.type} ${a.title} ${a.sensorName ?? ''}'.toLowerCase();
 
-      setState(() {
-        _alerts = _alerts.map((a) {
-          return AlertModel(
-            id: a.id,
-            title: a.title,
-            message: a.message,
-            type: a.type,
-            severity: a.severity,
-            sensorName: a.sensorName,
-            isRead: true,
-            createdDate: a.createdDate,
-          );
-        }).toList();
-      });
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao marcar todos como lidos.')),
-      );
+    if (text.contains('temperatura') || text.contains('superaquecimento')) {
+      return const Color(0xFFD32F2F);
+    } else if (text.contains('umidade')) {
+      return const Color(0xFFE65100);
+    } else if (text.contains('solo')) {
+      return const Color(0xFFC2185B);
+    } else if (text.contains('luz') || text.contains('luminosidade')) {
+      return const Color(0xFFE65100);
     }
-  }
-
-  void _delete(String id) {
-    setState(() => _alerts.removeWhere((a) => a.id == id));
-  }
-
-  IconData _typeIcon(String type) {
-    switch (type) {
-      case 'extreme_temperature':
-        return Icons.thermostat_rounded;
-      case 'low_humidity':
-      case 'high_humidity':
-        return Icons.water_drop_rounded;
-      case 'sensor_failure':
-        return Icons.sensors_off_rounded;
-      case 'low_light':
-        return Icons.wb_cloudy_rounded;
-      default:
-        return Icons.notifications_rounded;
-    }
+    return _severityColor(a.severity);
   }
 
   Color _severityColor(String s) {
@@ -209,21 +160,18 @@ class _AlertsScreenState extends State<AlertsScreen> {
                 ),
               ],
             ),
+            // Botão de Reload no cabeçalho
+            IconButton(
+              onPressed: _loadAlerts,
+              icon: const Icon(
+                Icons.refresh_rounded,
+                color: Colors.black87,
+              ),
+              tooltip: 'Atualizar alertas',
+            ),
           ],
         ),
-
-        if (unread > 0)
-          TextButton.icon(
-            onPressed: _markAllAsRead,
-            icon: const Icon(Icons.done_all_rounded, size: 16),
-            label: const Text('Todos lidos'),
-            style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF2E7D52),
-            ),
-          ),
-
         const SizedBox(height: 16),
-
         Expanded(
           child: _buildBody(),
         ),
@@ -253,7 +201,8 @@ class _AlertsScreenState extends State<AlertsScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2E7D52),
               ),
-              child: const Text('Tentar novamente', style: TextStyle(color: Colors.white)),
+              child: const Text('Tentar novamente',
+                  style: TextStyle(color: Colors.white)),
             ),
           ],
         ),
@@ -277,6 +226,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
         separatorBuilder: (_, __) => const SizedBox(height: 8),
         itemBuilder: (context, i) {
           final a = _alerts[i];
+          final alertColor = _getAlertColor(a);
           final severityColor = _severityColor(a.severity);
           final isResolvido = a.status.toLowerCase() == 'resolvido';
 
@@ -296,16 +246,20 @@ class _AlertsScreenState extends State<AlertsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 40,
-                    height: 40,
+                    width: 44,
+                    height: 44,
                     decoration: BoxDecoration(
-                      color: severityColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
+                      color: alertColor.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: alertColor.withOpacity(0.3),
+                        width: 1.2,
+                      ),
                     ),
                     child: Icon(
-                      _typeIcon(a.type),
-                      color: severityColor,
-                      size: 20,
+                      _getAlertIcon(a),
+                      color: alertColor,
+                      size: 22,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -313,7 +267,6 @@ class _AlertsScreenState extends State<AlertsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Fazenda e Status igual a Web
                         if (a.farmName != null && a.farmName!.isNotEmpty)
                           Text(
                             a.farmName!,
@@ -322,7 +275,6 @@ class _AlertsScreenState extends State<AlertsScreen> {
                               fontSize: 14,
                             ),
                           ),
-
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -361,7 +313,6 @@ class _AlertsScreenState extends State<AlertsScreen> {
                             ),
                           ],
                         ),
-
                         if (a.message != null && a.message!.isNotEmpty) ...[
                           const SizedBox(height: 4),
                           Text(
@@ -372,10 +323,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
                             ),
                           ),
                         ],
-
                         const SizedBox(height: 6),
-
-                        // Exibição de Data e Tag Status (Ativo/Resolvido)
                         Row(
                           children: [
                             if (a.createdDate != null)
@@ -394,7 +342,7 @@ class _AlertsScreenState extends State<AlertsScreen> {
                               ),
                               decoration: BoxDecoration(
                                 color: isResolvido
-                                    ? Colors.red.withOpacity(0.1)
+                                    ? Colors.orange.withOpacity(0.1)
                                     : Colors.green.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(4),
                               ),
@@ -403,29 +351,11 @@ class _AlertsScreenState extends State<AlertsScreen> {
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  color: isResolvido ? Colors.red : Colors.green,
+                                  color: isResolvido
+                                      ? Colors.orange[800]
+                                      : Colors.green,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 8),
-
-                        Row(
-                          children: [
-                            if (!a.isRead)
-                              _actionButton(
-                                Icons.check_circle_outline_rounded,
-                                'Lido',
-                                const Color(0xFF2E7D52),
-                                () => _markAsRead(a.id),
-                              ),
-                            _actionButton(
-                              Icons.delete_outline_rounded,
-                              'Remover',
-                              Colors.red,
-                              () => _delete(a.id),
                             ),
                           ],
                         ),
@@ -437,42 +367,6 @@ class _AlertsScreenState extends State<AlertsScreen> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _actionButton(
-    IconData icon,
-    String label,
-    Color color,
-    VoidCallback onTap,
-  ) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 4,
-        ),
-        decoration: BoxDecoration(
-          color: color.withOpacity(0.08),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, size: 12, color: color),
-            const SizedBox(width: 4),
-            Text(
-              label,
-              style: GoogleFonts.inter(
-                fontSize: 11,
-                color: color,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -486,10 +486,11 @@ canvas{
     padding: 16px 20px;
     color: #ffffff;
     font-family: 'Segoe UI', system-ui, sans-serif;
-    width: 592px;
+    width: 100%;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* Cabeçalho */
@@ -1452,62 +1453,7 @@ body.contraste .chart-card .chart-title i {
     color: #fff !important;
 }
 
-/* =========================================
-   AUTO CONTRASTE - TODOS OS BOTÕES BRANCOS
-   ========================================= */
 
-body.contraste #contraste-btn,
-body.contraste .logout-btn,
-body.contraste .btn-logout,
-body.contraste .accessibility-btn,
-body.contraste #aumentar-fonte,
-body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #ffffff !important;
-}
-
-/* Texto e ícones PRETOS dentro dos botões */
-body.contraste #contraste-btn i,
-body.contraste .logout-btn i,
-body.contraste .btn-logout i,
-body.contraste .accessibility-btn i,
-body.contraste #aumentar-fonte,
-body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte {
-    color: #000000 !important;
-}
-
-/* Hover continua branco */
-body.contraste #contraste-btn:hover,
-body.contraste .logout-btn:hover,
-body.contraste .btn-logout:hover,
-body.contraste .accessibility-btn:hover,
-body.contraste #aumentar-fonte:hover,
-body.contraste #diminuir-fonte:hover,
-body.contraste #resetar-fonte:hover {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border-color: #ffffff !important;
-}
-
-/* Ícones no hover */
-body.contraste #contraste-btn:hover i,
-body.contraste .logout-btn:hover i,
-body.contraste .btn-logout:hover i {
-    color: #000000 !important;
-}
-
-/* =========================================
-   BOTÃO F / AVATAR
-   ========================================= */
-
-body.contraste .avatar {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #ffffff !important;
-}
 
 </style>
 
@@ -1816,7 +1762,7 @@ body.contraste .avatar {
                     </td>
 
                     <td>
-                        <?= $sensor['DATA_HORA'] ?>
+                        <?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?>
                     </td>
 
                     <td>
@@ -2028,13 +1974,6 @@ if (ctxUmidadeSolo) {
 /* =========================
    GRÁFICO LUMINOSIDADE
 ========================= */
-function classificarLux(lux) {
-    if (lux <= 10) return { status: 'Baixa luminosidade', ambiente: 'Noite', cor: '#4b5563' };
-    if (lux <= 500) return { status: 'Baixa luminosidade', ambiente: 'Ambiente interno', cor: '#3b82f6' };
-    if (lux <= 5000) return { status: 'Moderada', ambiente: 'Nublado', cor: '#add1ff' };
-    if (lux <= 25000) return { status: 'Ideal', ambiente: 'Sol indireto', cor: '#84cc16' };
-    return { status: 'Alta luminosidade', ambiente: 'Sol forte', cor: '#dc2626' };
-}
 
 const graficoLuxCanvas = document.getElementById('graficoLux');
 if (graficoLuxCanvas) {
@@ -2058,7 +1997,6 @@ if (graficoLuxCanvas) {
             id: 'gaugeText',
             afterDraw(chart) {
                 const { ctx, chartArea: { width, height } } = chart;
-                const infoLux = classificarLux(valorLuxAtual);
                 const isContraste = document.body.classList.contains('contraste');
 
                 const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
@@ -2070,22 +2008,17 @@ if (graficoLuxCanvas) {
                 ctx.font = 'bold 26px Arial';
                 ctx.fillStyle = corTextoPrincipal;
                 ctx.textAlign = 'center';
-                ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 55);
+                ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 40);
 
                 /* Unidade */
                 ctx.font = '16px Arial';
                 ctx.fillStyle = corTextoSecundario;
-                ctx.fillText('Lux', width / 2, height - 30);
-
-                /* Status */
-                ctx.font = 'bold 15px Arial';
-                ctx.fillStyle = isContraste ? '#ffffff' : infoLux.cor;
-                ctx.fillText(infoLux.status, width / 2, height - 8);
+                ctx.fillText('Lux', width / 2, height - 15);
 
                 /* Ambiente */
                 ctx.font = '13px Arial';
                 ctx.fillStyle = corTextoSecundario;
-                ctx.fillText(infoLux.ambiente, width / 2, height + 15);
+                ctx.fillText(infoLux.ambiente, width / 2, height + 10);
 
                 ctx.restore();
             }

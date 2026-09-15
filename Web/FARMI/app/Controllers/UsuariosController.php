@@ -41,6 +41,7 @@ class UsuariosController extends BaseController
             $cpfGestor
         )
         ->groupBy('USUARIOS.CPF')
+        ->orderBy('USUARIOS.NOME', 'ASC')
         ->findAll();
 
     $fazendaModel = new \App\Models\FazendaModel();

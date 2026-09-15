@@ -328,6 +328,7 @@ body.contraste .avatar {
             </h3>
 
             <form action="<?= base_url('/usuarios/inserir') ?>" method="post" class="form-grid" id="formUsuario" novalidate>
+                <?= csrf_field() ?>
 
                 <div class="form-group">
                     <label for="nome">

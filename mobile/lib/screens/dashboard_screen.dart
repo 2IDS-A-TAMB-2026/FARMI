@@ -88,30 +88,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
   Color _statusColor(String? s) {
-    switch (s) {
-      case 'planting':
-        return Colors.blue;
-      case 'growing':
-        return Colors.green;
-      case 'harvest':
-        return Colors.amber;
-      case 'completed':
-        return Colors.grey;
-      default:
-        return Colors.grey;
-    }
+  switch (s?.toLowerCase()) {
+    case 'planting':
+    case 'plantio':
+      return const Color(0xFF2E7D52); // Verde para Plantio (ou Colors.green)
+    case 'growing':
+    case 'crescimento':
+      return Colors.green;
+    case 'harvest':
+    case 'colheita':
+      return Colors.amber;
+    case 'completed':
+    case 'concluída':
+    case 'concluid':
+      return Colors.grey;
+    default:
+      return const Color(0xFF2E7D52); // Cor padrão vibrante em vez de cinza
   }
+}
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isHighContrast = theme.brightness == Brightness.dark;
+Widget build(BuildContext context) {
+  final theme = Theme.of(context);
+  final isDarkMode = theme.brightness == Brightness.dark;
+  final isHighContrastSystem = MediaQuery.highContrastOf(context);
+  
+  // Combina Dark Mode e Alto Contraste do sistema
+  final isHighContrast = isDarkMode || isHighContrastSystem;
 
-    if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(color: Color(0xFF2E7D52)),
-      );
-    }
+  if (_isLoading) {
+    return Center(
+      child: CircularProgressIndicator(
+        color: isHighContrast ? Colors.grey[300] : const Color(0xFF2E7D52),
+      ),
+    );
+  }
+
 
     return Scaffold(
       backgroundColor: bgCinza,
@@ -208,7 +220,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     _buildStatCard(
                       "Fazendas",
                       data['fazendas']?.toString() ?? '0',
-                      Icons.pets,
+                      Icons.agriculture,
                       isHighContrast
                           ? theme.colorScheme.primary
                           : const Color(0xFF2E7D52),
@@ -386,45 +398,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildSectionCard(
-      {required String title,
-      required IconData icon,
-      required Widget child,
-      required ThemeData theme}) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: theme.cardColor,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: theme.dividerColor, width: 0.5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                icon,
-                color: theme.iconTheme.color ?? Colors.black,
-                size: 20,
+    {required String title,
+    required IconData icon,
+    required Widget child,
+    required ThemeData theme}) {
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: theme.cardColor,
+      borderRadius: BorderRadius.circular(8),
+      border: Border.all(color: theme.dividerColor, width: 0.5),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(
+              icon,
+              color: const Color(0xFF2E7D52), // <-- AQUI: Cor verde para o ícone do título
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: theme.textTheme.titleMedium?.color,
               ),
-              const SizedBox(width: 8),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: theme.textTheme.titleMedium?.color,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          child,
-        ],
-      ),
-    );
-  }
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        child,
+      ],
+    ),
+  );
+}
 
   Widget _buildStatusRow(IconData icon, String title, String status,
       Color statusColor, ThemeData theme,

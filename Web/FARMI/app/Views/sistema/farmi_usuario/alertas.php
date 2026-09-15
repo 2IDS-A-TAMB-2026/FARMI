@@ -214,33 +214,45 @@ body.contraste .avatar {
     background: #fff !important;
     color: #000!important;
 }
-.mostrar-mais{
-    color: var(--verde-escuro);
-    font-weight: 500;
+.paginacao-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    transition: 0.3s;
-    background: transparent;
-    cursor: pointer;
-    padding: 10px;
-    background-color: #57c91b;
-    color: #fff;
+    gap: 20px;
+    margin-top: 15px;
+    flex-wrap: wrap;
 }
-.mostrar-mais{
-    color: var(--verde-escuro);
-    font-weight: 500;
+
+.pagina-info {
+    font-size: 16px;
+    font-weight: 600;
+    color: #57c91b;
+}
+
+.botao-paginacao {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    background-color: #57c91b;
+    color: #fff;
+    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+
+    font-size: 16px;
     transition: 0.3s;
-    background: transparent;
-    cursor: pointer;
-    padding: 10px;
-    background-color: #57c91b;
-    color: #fff;
+}
+
+.botao-paginacao:hover {
+    transform: scale(1.05);
+    background-color: #46a814;
+}
+
+.botao-paginacao:disabled {
+    display: none;
 }
     </style>
 
@@ -470,7 +482,7 @@ body.contraste .avatar {
                         <div class="alert-meta">
                             <span class="alert-time">
                                 <i class="fa-solid fa-clock"></i>
-                                <?= $a['DATA_HORA']; ?>
+                                <?= date('d/m/Y H:i', strtotime($a['DATA_HORA'])) ?>
                             </span>
 
                             <?php if($a['STATUS'] == "Ativo"){ ?>
@@ -490,9 +502,18 @@ body.contraste .avatar {
                         </div>
                     </div>
                 </div>
-                <div id="mostrarMais" class="mostrar-mais">
-                    Mostrar mais
-                    <i class="fa-solid fa-chevron-down"></i>
+                <div class="paginacao-container">
+                    <button id="paginaAnterior" class="botao-paginacao" type="button">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <div id="paginaInfo" class="pagina-info">
+                        Página 1 de 1
+                    </div>
+
+                    <button id="proximaPagina" class="botao-paginacao" type="button">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
 
@@ -515,38 +536,7 @@ body.contraste .avatar {
     <!-- JS -->
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
     <script>
-        // // paginação
-        // const alertas = document.querySelectorAll(".alerta");
-        // const botao = document.getElementById("mostrarMais");
 
-        // let quantidade = 5; // mostra 5 alertas inicialmente
-
-        // function atualizar() {
-
-        //     alertas.forEach((alerta, indice) => {
-
-        //         if(indice < quantidade){
-        //             alerta.style.display = "flex";
-        //         }else{
-        //             alerta.style.display = "none";
-        //         }
-
-        //     });
-
-        //     if(quantidade >= alertas.length){
-        //         botao.style.display = "none";
-        //     }
-        // }
-
-        // atualizar();
-
-        // botao.onclick = function(){
-
-        //     quantidade += 5;
-
-        //     atualizar();
-
-        // };
 /* =========================
    ACESSIBILIDADE - TAMANHO DA FONTE
 ========================= */
@@ -725,39 +715,30 @@ document.addEventListener('click', function(){
     filtroMenu.classList.remove('show');
 
 });
-// document.querySelectorAll('.filtro-item').forEach(item => {
 
-//     item.addEventListener('click', function() {
-
-//         const filtro = this.dataset.filtro;
-
-//         document.querySelectorAll('.alert-item').forEach(alerta => {
-
-//             if (
-//                 filtro === 'todos' ||
-//                 alerta.dataset.sensor === filtro
-//             ) {
-//                 alerta.style.display = '';
-//             } else {
-//                 alerta.style.display = 'none';
-//             }
-
-//         });
-
-//         filtroMenu.classList.remove('show');
-
-//     });
-
-// });
 // =========================
 // FILTRO + MOSTRAR MAIS
 // =========================
 
-const alertas = document.querySelectorAll(".alerta");
-const botaoMostrarMais = document.getElementById("mostrarMais");
+// =========================
+// PAGINAÇÃO + FILTRO
+// =========================
 
-let quantidade = 5;
+const alertas = document.querySelectorAll(".alerta");
+
+const paginaAnterior = document.getElementById("paginaAnterior");
+const proximaPagina = document.getElementById("proximaPagina");
+const paginaInfo = document.getElementById("paginaInfo");
+
+const ALERTAS_POR_PAGINA = 5;
+
+let paginaAtual = 1;
 let filtroAtual = "todos";
+
+
+// =========================
+// ATUALIZAR ALERTAS
+// =========================
 
 function atualizarAlertas() {
 
@@ -771,52 +752,159 @@ function atualizarAlertas() {
 
     });
 
-    // Esconde todos os alertas
-    alertas.forEach(alerta => {
-        alerta.style.display = "none";
-    });
-
-    // Mostra somente a quantidade permitida
-    alertasFiltrados.forEach((alerta, indice) => {
-
-        if (indice < quantidade) {
-            alerta.style.display = "flex";
-        }
-
-    });
 
     // =========================
-    // MOSTRAR MAIS
+    // CALCULA TOTAL DE PÁGINAS
     // =========================
 
-    if (alertasFiltrados.length === 0) {
+    const totalPaginas = Math.ceil(
+        alertasFiltrados.length / ALERTAS_POR_PAGINA
+    );
 
-        // Nenhum alerta
-        botaoMostrarMais.style.display = "none";
 
-    } else if (quantidade >= alertasFiltrados.length) {
+    // =========================
+    // CORRIGE A PÁGINA ATUAL
+    // =========================
 
-        // Todos os alertas já estão aparecendo
-        botaoMostrarMais.style.display = "none";
+    if (totalPaginas === 0) {
+
+        paginaAtual = 1;
+
+    } else if (paginaAtual > totalPaginas) {
+
+        paginaAtual = totalPaginas;
+
+    }
+
+
+    // =========================
+    // ATUALIZA TEXTO DA PÁGINA
+    // =========================
+
+    if (totalPaginas > 0) {
+
+        paginaInfo.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
 
     } else {
 
-        // Ainda existem alertas escondidos
-        botaoMostrarMais.style.display = "flex";
+        paginaInfo.textContent =
+            "Nenhuma página";
 
     }
+
+
+    // =========================
+    // ESCONDE TODOS OS ALERTAS
+    // =========================
+
+    alertas.forEach(alerta => {
+
+        alerta.style.display = "none";
+
+    });
+
+
+    // =========================
+    // CALCULA OS ALERTAS DA PÁGINA
+    // =========================
+
+    const inicio =
+        (paginaAtual - 1) * ALERTAS_POR_PAGINA;
+
+    const fim =
+        inicio + ALERTAS_POR_PAGINA;
+
+
+    // =========================
+    // MOSTRA SOMENTE 5 ALERTAS
+    // =========================
+
+    alertasFiltrados
+        .slice(inicio, fim)
+        .forEach(alerta => {
+
+            alerta.style.display = "flex";
+
+        });
+
+
+    // =========================
+    // CONTROLE DA SETA ANTERIOR
+    // =========================
+
+    if (paginaAtual > 1) {
+
+        paginaAnterior.style.display = "flex";
+
+    } else {
+
+        paginaAnterior.style.display = "none";
+
+    }
+
+
+    // =========================
+    // CONTROLE DA PRÓXIMA SETA
+    // =========================
+
+    if (paginaAtual < totalPaginas) {
+
+        proximaPagina.style.display = "flex";
+
+    } else {
+
+        proximaPagina.style.display = "none";
+
+    }
+
 }
 
 
 // =========================
-// BOTÃO MOSTRAR MAIS
+// PÁGINA ANTERIOR
 // =========================
 
-botaoMostrarMais.addEventListener("click", function () {
+paginaAnterior.addEventListener("click", function () {
 
-    quantidade += 5;
+    if (paginaAtual > 1) {
 
-    atualizarAlertas();
+        paginaAtual--;
+
+        atualizarAlertas();
+
+    }
+
+});
+
+
+// =========================
+// PRÓXIMA PÁGINA
+// =========================
+
+proximaPagina.addEventListener("click", function () {
+
+    const alertasFiltrados = Array.from(alertas).filter(alerta => {
+
+        return (
+            filtroAtual === "todos" ||
+            alerta.dataset.sensor === filtroAtual
+        );
+
+    });
+
+    const totalPaginas = Math.ceil(
+        alertasFiltrados.length / ALERTAS_POR_PAGINA
+    );
+
+
+    if (paginaAtual < totalPaginas) {
+
+        paginaAtual++;
+
+        atualizarAlertas();
+
+    }
 
 });
 
@@ -829,13 +917,16 @@ document.querySelectorAll(".filtro-item").forEach(item => {
 
     item.addEventListener("click", function () {
 
+        // Pega o filtro escolhido
         filtroAtual = this.dataset.filtro;
 
-        // Volta para os primeiros 5 quando troca o filtro
-        quantidade = 5;
+        // Sempre começa na página 1
+        paginaAtual = 1;
 
+        // Atualiza os alertas
         atualizarAlertas();
 
+        // Fecha o menu
         filtroMenu.classList.remove("show");
 
     });

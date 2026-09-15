@@ -196,19 +196,11 @@
         </div>
 
         <div class="form-group">
-
-            <label for="UNIDADE_MEDIDA">
+            <label for="unidade">
                 <i class="fa-solid fa-ruler"></i>
                 Unidade de medida *
             </label>
-
-            <select id="UNIDADE_MEDIDA" name="UNIDADE_MEDIDA" required>
-                <option value="">Selecione a unidade</option>
-                <option value="%" <?= $sensor['UNIDADE_MEDIDA'] == '%' ? 'selected' : '' ?>>%</option>
-                <option value="°C" <?= $sensor['UNIDADE_MEDIDA'] == '°C' ? 'selected' : '' ?>>°C</option>
-                <option value="Lux" <?= $sensor['UNIDADE_MEDIDA'] == 'Lux' ? 'selected' : '' ?>>Lux</option>
-            </select>
-
+            <input type="text" id="unidade" name="UNIDADE_MEDIDA" placeholder="Definida pelo tipo de sensor" readonly required>
         </div>
 
         <div class="form-group">
@@ -335,6 +327,27 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tipo = document.getElementById('TIPO_SENSOR');
+        const unidade = document.getElementById('unidade');
+
+        const unidades = {
+            'Temperatura': '°C',
+            'Umidade': '%',
+            'Luz': 'lux',
+            'Solo': '%'
+        };
+
+        function atualizarUnidade() {
+            unidade.value = unidades[tipo.value] || '';
+        }
+
+        tipo.addEventListener('change', atualizarUnidade);
+
+        atualizarUnidade();
+    });
+    </script>
 
 </body>
 </html>
