@@ -10,12 +10,18 @@ class AuthFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // 1. Ignora requisições para a API (evita redirecionamento HTML em rotas de API/ESP32/Flutter)
-        if ($request->getUri()->getSegment(1) === 'api') {
+        // 1. Libera imediatamente requisições OPTIONS (pré-checagem CORS do Flutter Web)
+        if (strtoupper($request->getMethod()) === 'OPTIONS') {
             return;
         }
 
-        // 2. Verifica se o usuário está autenticado no sistema Web
+        // 2. Ignora requisições para a API (verifica por segmento ou caminho completo da URI)
+        $path = $request->getUri()->getPath();
+        if ($request->getUri()->getSegment(1) === 'api' || str_contains($path, 'api/')) {
+            return;
+        }
+
+        // 3. Verifica se o usuário está autenticado no sistema Web
         if (! session()->get('logado')) {
             return redirect()->to('/login')->with('error', 'Sua sessão expirou. Faça login novamente.');
         }
@@ -23,7 +29,7 @@ class AuthFilter implements FilterInterface
         $perfil = session()->get('usuario_perfil');
         $rota   = $request->getUri()->getSegment(1);
 
-        // 3. GESTOR / ADMIN - Impede acesso às telas exclusivas do usuário comum
+        // 4. GESTOR / ADMIN - Impede acesso às telas exclusivas do usuário comum
         if ($perfil === 'Gestor' && in_array($rota, [
             'dashboard-usuario',
             'usuario',
@@ -38,7 +44,7 @@ class AuthFilter implements FilterInterface
             return redirect()->to('/dashboard-admin');
         }
 
-        // 4. FUNCIONÁRIO / USUÁRIO - Impede acesso às telas administrativas
+        // 5. FUNCIONÁRIO / USUÁRIO - Impede acesso às telas administrativas
         if ($perfil === 'Funcionário' && in_array($rota, [
             'dashboard-admin',
             'fazenda',

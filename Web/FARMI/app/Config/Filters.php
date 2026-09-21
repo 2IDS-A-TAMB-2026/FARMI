@@ -36,19 +36,20 @@ class Filters extends BaseFilters
         ],
     ];
 
-   public array $globals = [
-    'before' => [
-        'csrf' => [
-            'except' => [
-                'api/*',
-                'fazenda/inserir',
+    public array $globals = [
+        'before' => [
+            'cors', // <-- ADICIONADO: Executa o CORS em todas as requisições
+            'csrf' => [
+                'except' => [
+                    'api/*',
+                    'fazenda/inserir',
+                ],
             ],
         ],
-    ],
-    'after' => [
-        'toolbar',
-    ],
-];
+        'after' => [
+            'toolbar',
+        ],
+    ];
 
     public array $filters = [];
 

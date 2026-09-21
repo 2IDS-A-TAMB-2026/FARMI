@@ -319,11 +319,14 @@ class SistemaController extends BaseController
         $total_usuarios = $db->query("SELECT COUNT(DISTINCT uf2.ID_CPF_USUARIOS) AS total FROM USUARIOS_FAZENDA uf1 INNER JOIN USUARIOS_FAZENDA uf2 ON uf2.ID_FAZENDA = uf1.ID_FAZENDA WHERE uf1.ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
         // Total de sensores 
         $total_sensores = count($dadosGerais); 
+        // Total de culturas
+        $total_culturas = $db->query("SELECT COUNT(DISTINCT c.ID_CULTURA) AS total FROM CULTURA c INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = c.FK_ID_FAZENDA WHERE uf.ID_CPF_USUARIOS = ?", [$cpfUsuario])->getRow()->total ?? 0;
 
         return view('sistema/farmi_adm/dashboard', [
             'dadosGerais' => $dadosGerais,
             'total_sensores' => $total_sensores,
             'umidade_atual' => $umidade_atual,
+            'total_culturas' => $total_culturas,
             'lux' => $lux,
             'temperatura_atual' => $temperatura_atual,
             'total_fazendas' => $total_fazendas,
@@ -865,13 +868,6 @@ class SistemaController extends BaseController
             'datasets_lux' => $datasets_lux
         ]);
     }
-
-
-
-
-
-
-
 
 
 

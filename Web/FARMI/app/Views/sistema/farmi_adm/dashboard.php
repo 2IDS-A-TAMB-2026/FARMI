@@ -550,6 +550,109 @@
             .stats-grid { grid-template-columns: 1fr; }
             .chart-container { height: 250px; }
         }
+
+    /* ==========================================================
+   PAGINAÇÃO DOS STATUS DOS SENSORES
+   ========================================================== */
+
+.sensor-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.sensor-pagination button {
+    background: #58CC02;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sensor-pagination button:hover:not(:disabled) {
+    background: #46A302;
+}
+
+.sensor-pagination button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.sensor-pagination .pagina-atual {
+    font-weight: bold;
+    color: #052501;
+    min-width: 70px;
+    text-align: center;
+}
+
+/* Alto contraste */
+body.contraste .sensor-pagination button {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.contraste .sensor-pagination .pagina-atual {
+    color: #fff !important;
+}
+/* ==========================================================
+   PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS
+   ========================================================== */
+
+.system-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.system-pagination button {
+    background: #58CC02;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.system-pagination button:hover:not(:disabled) {
+    background: #46A302;
+}
+
+.system-pagination button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.system-pagination .pagina-atual {
+    font-weight: bold;
+    color: #052501;
+    min-width: 70px;
+    text-align: center;
+}
+
+/* Alto contraste */
+body.contraste .system-pagination button {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.contraste .system-pagination .pagina-atual {
+    color: #fff !important;
+}
     </style>
 </head>
 <body>
@@ -631,6 +734,13 @@
                 <div>
                     <h3>Funcionários</h3>
                     <p><?= $total_usuarios ?></p>
+                </div>
+                <i class="fa-solid fa-users" style="color: var(--verde-claro)"></i>
+            </div>
+            <div class="card">
+                <div>
+                    <h3>Culturas</h3>
+                    <p><?= $total_culturas ?></p>
                 </div>
                 <i class="fa-solid fa-users" style="color: var(--verde-claro)"></i>
             </div>
@@ -721,15 +831,11 @@
             <!-- LUMINOSIDADE -->
             <div class="chart-card">
                 <h3 class="chart-title">
-                    <i class="fa-solid fa-sun"></i> Luminosidade (Lux)
+                    <i class="fa-solid fa-sun"></i>
+                    Luminosidade (Lux)
                 </h3>
-                <div class="grafico-box" style="position: relative;">
-                    <canvas id="graficoLux"></canvas>
-                    <!-- Exibição do valor no centro -->
-                    <div style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: none;">
-                        <span id="valorLuxNum" style="font-size: 32px; font-weight: bold; color: #052501;">0</span>
-                        <small style="display: block; font-size: 14px; color: #666;">Lux</small>
-                    </div>
+                <div class="grafico-box">
+                    <canvas id="graficoLux" width="200"></canvas>
                 </div>
             </div>
 
@@ -748,8 +854,26 @@
                 <h3 class="chart-title">
                     <i class="fa-solid fa-microchip"></i> Status dos Sensores
                 </h3>
+
                 <div class="sensor-status-list" id="sensor-status-list">
-                    <div style="text-align:center; padding:30px; color:#666;">Carregando sensores...</div>
+                    <div style="text-align:center; padding:30px; color:#666;">
+                        Carregando sensores...
+                    </div>
+                </div>
+
+                <!-- PAGINAÇÃO DOS SENSORES -->
+                <div class="sensor-pagination" id="sensor-pagination" style="display:none;">
+                    <button id="sensor-anterior" type="button">
+                        <i class="fa-solid fa-chevron-left"></i> 
+                    </button>
+
+                    <span class="pagina-atual" id="sensor-pagina-atual">
+                        Página 1
+                    </span>
+
+                    <button id="sensor-proxima" type="button">
+                         <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
 
@@ -815,10 +939,24 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-            </table>
-            <div id="mostrarMaisSensores" class="mostrar-mais">
-                Mostrar mais <i class="fa-solid fa-chevron-down"></i>
+                        </table>
+
+            <!-- PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS -->
+            <div class="system-pagination" id="system-pagination" style="display:none;">
+                <button id="system-anterior" type="button">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <span class="pagina-atual" id="system-pagina-atual">
+                    Página 1
+                </span>
+
+                <button id="system-proxima" type="button">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
+
+        </div>
         </div>
     </main>
 
@@ -912,18 +1050,17 @@
             });
         }
 
-        /* ==========================================================
-            (MANTEVE AS CORES ORIGINAIS + EXIBE VALOR)
-        ========================================================== */
-        const graficoLuxCanvas = document.getElementById('graficoLux');
+        /* =========================
+        GRÁFICO LUMINOSIDADE
+        ========================= */
 
+        const graficoLuxCanvas = document.getElementById('graficoLux');
         if (graficoLuxCanvas) {
             chartLux = new Chart(graficoLuxCanvas, {
-                type: 'dougLUMINOSIDADEhnut',
+                type: 'doughnut',
                 data: {
-                    labels: ['Faixa 1', 'Faixa 2', 'Faixa 3', 'Faixa 4', 'Faixa 5'],
                     datasets: [{
-                        data: [5, 10, 20, 30, 35], // Suas faixas de cores originais
+                        data: [5, 10, 20, 30, 35],
                         backgroundColor: ['#4b5563', '#3b82f6', '#add1ff', '#84cc16', '#ef4444'],
                         borderWidth: 0
                     }]
@@ -933,27 +1070,48 @@
                     maintainAspectRatio: false,
                     rotation: -90,
                     circumference: 180,
-                    cutout: '70%',
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false }
+                    cutout: '70%'
+                },
+                plugins: [{
+                    id: 'gaugeText',
+                    afterDraw(chart) {
+                        const { ctx, chartArea: { width, height } } = chart;
+                        const isContraste = document.body.classList.contains('contraste');
+
+                        const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
+                        const corTextoSecundario = isContraste ? '#ffffff' : '#666666';
+
+                        ctx.save();
+
+                        /* Valor Lux */
+                        ctx.font = 'bold 26px Arial';
+                        ctx.fillStyle = corTextoPrincipal;
+                        ctx.textAlign = 'center';
+                        ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 40);
+
+                        /* Unidade */
+                        ctx.font = '16px Arial';
+                        ctx.fillStyle = corTextoSecundario;
+                        ctx.fillText('Lux', width / 2, height - 15);
+
+                        /* Ambiente */
+                        ctx.font = '13px Arial';
+                        ctx.fillStyle = corTextoSecundario;
+                        ctx.fillText(infoLux.ambiente, width / 2, height + 10);
+
+                        ctx.restore();
                     }
-                }
+                }]
             });
         }
 
-        // Função apenas para atualizar o valor lido na tela
+        // Função auxiliar criada para atualizar o gráfico de Luminosidade
         function atualizarLux(novoValor) {
-            valorLuxAtual = Number(novoValor) || 0;
-            
-            const elemTexto = document.getElementById('valorLuxNum');
-            if (elemTexto) {
-                elemTexto.textContent = valorLuxAtual.toLocaleString('pt-BR');
+            valorLuxAtual = novoValor;
+            if (chartLux) {
+                chartLux.update();
             }
         }
-
-        // Atualiza o texto com o valor vindo do PHP na inicialização
-        atualizarLux(valorLuxAtual);
 
         // Atualização Dinâmica dos Gráficos
         async function atualizarGraficos() {
@@ -986,56 +1144,359 @@
             }
         }
 
-        // Status dos Sensores via AJAX
-        async function atualizarStatusSensores() {
-            const lista = document.getElementById('sensor-status-list');
-            if (!lista) return;
+    </script>
 
-            try {
-                const resposta = await fetch('<?= base_url('status-sensores') ?>', { cache: 'no-store' });
-                if (!resposta.ok) throw new Error('Erro ao buscar status');
-                const sensores = await resposta.json();
+    <script>
+    // ==========================================================
+    // STATUS DOS SENSORES + PAGINAÇÃO
+    // ==========================================================
 
-                if (!Array.isArray(sensores) || sensores.length === 0) {
-                    lista.innerHTML = `<div style="text-align:center; padding:30px; color:#666;">Nenhum sensor encontrado.</div>`;
-                    return;
+    let sensoresTodos = [];
+    let paginaSensor = 1;
+
+    const sensoresPorPagina = 4;
+
+    async function atualizarStatusSensores() {
+
+        const lista = document.getElementById('sensor-status-list');
+        const paginacao = document.getElementById('sensor-pagination');
+
+        if (!lista) return;
+
+        try {
+
+            const resposta = await fetch(
+                '<?= base_url('status-sensores') ?>',
+                { cache: 'no-store' }
+            );
+
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar status');
+            }
+
+            const sensores = await resposta.json();
+
+            if (!Array.isArray(sensores) || sensores.length === 0) {
+
+                sensoresTodos = [];
+                paginaSensor = 1;
+
+                lista.innerHTML = `
+                    <div style="text-align:center; padding:30px; color:#666;">
+                        Nenhum sensor encontrado.
+                    </div>
+                `;
+
+                if (paginacao) {
+                    paginacao.style.display = 'none';
                 }
 
-                lista.innerHTML = sensores.map(sensor => {
-                    let circulo = 'offline', badge = 'offline', texto = 'Offline', pulso = '';
+                return;
+            }
 
-                    if (sensor.minutos_atras !== null && Number(sensor.minutos_atras) <= 5) {
-                        circulo = 'online'; badge = 'online'; texto = 'Online';
-                        pulso = '<span class="pulse-dot"></span>';
-                    } else if (sensor.minutos_atras !== null && Number(sensor.minutos_atras) <= 20) {
-                        circulo = 'warning'; badge = 'warning'; texto = 'Oscilando';
-                    }
+            // Guarda todos os sensores
+            sensoresTodos = sensores;
 
-                    return `
-                        <div class="sensor-status-item">
-                            <div class="sensor-left">
-                                <span class="status-circle ${circulo}">
-                                    <i class="fa-solid ${sensor.icone || 'fa-microchip'}"></i>
-                                    ${pulso}
-                                </span>
-                                <div class="sensor-info">
-                                    <h4>${sensor.nome || 'Sensor'}</h4>
-                                    <p>${sensor.tipo || 'Sensor'} · ${sensor.tempo_texto || 'Sem leitura'}</p>
-                                </div>
-                            </div>
-                            <div class="sensor-right">
-                                <span class="signal-bars"><i></i><i></i><i></i></span>
-                                <span class="status-badge ${badge}">${texto}</span>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } catch (erro) {
-                console.error('Erro nos sensores:', erro);
-                lista.innerHTML = `<div style="text-align:center; padding:30px; color:#888;">Erro ao carregar sensores.</div>`;
+            // Se a página atual deixou de existir,
+            // volta para a última página disponível
+            const totalPaginas = Math.ceil(
+                sensoresTodos.length / sensoresPorPagina
+            );
+
+            if (paginaSensor > totalPaginas) {
+                paginaSensor = totalPaginas;
+            }
+
+            mostrarPaginaSensores();
+
+        } catch (erro) {
+
+            console.error('Erro nos sensores:', erro);
+
+            lista.innerHTML = `
+                <div style="text-align:center; padding:30px; color:#888;">
+                    Erro ao carregar sensores.
+                </div>
+            `;
+
+            if (paginacao) {
+                paginacao.style.display = 'none';
             }
         }
+    }
 
+
+    function mostrarPaginaSensores() {
+
+        const lista = document.getElementById('sensor-status-list');
+        const paginacao = document.getElementById('sensor-pagination');
+        const botaoAnterior = document.getElementById('sensor-anterior');
+        const botaoProxima = document.getElementById('sensor-proxima');
+        const textoPagina = document.getElementById('sensor-pagina-atual');
+
+        if (!lista) return;
+
+        // Calcula onde começa e termina a página
+        const inicio = (paginaSensor - 1) * sensoresPorPagina;
+        const fim = inicio + sensoresPorPagina;
+
+        // Pega somente os 5 sensores da página atual
+        const sensoresPagina = sensoresTodos.slice(inicio, fim);
+
+        // Monta os sensores
+        lista.innerHTML = sensoresPagina.map(sensor => {
+
+            let circulo = 'offline';
+            let badge = 'offline';
+            let texto = 'Offline';
+            let pulso = '';
+
+            if (
+                sensor.minutos_atras !== null &&
+                Number(sensor.minutos_atras) <= 5
+            ) {
+
+                circulo = 'online';
+                badge = 'online';
+                texto = 'Online';
+
+                pulso = '<span class="pulse-dot"></span>';
+
+            } else if (
+                sensor.minutos_atras !== null &&
+                Number(sensor.minutos_atras) <= 20
+            ) {
+
+                circulo = 'warning';
+                badge = 'warning';
+                texto = 'Oscilando';
+            }
+
+            return `
+                <div class="sensor-status-item">
+
+                    <div class="sensor-left">
+
+                        <span class="status-circle ${circulo}">
+                            <i class="fa-solid ${sensor.icone || 'fa-microchip'}"></i>
+                            ${pulso}
+                        </span>
+
+                        <div class="sensor-info">
+                            <h4>
+                                ${sensor.nome || 'Sensor'}
+                            </h4>
+
+                            <p>
+                                ${sensor.tipo || 'Sensor'} ·
+                                ${sensor.tempo_texto || 'Sem leitura'}
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="sensor-right">
+
+                        <span class="signal-bars">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </span>
+
+                        <span class="status-badge ${badge}">
+                            ${texto}
+                        </span>
+
+                    </div>
+
+                </div>
+            `;
+
+        }).join('');
+
+
+        // Calcula quantidade de páginas
+        const totalPaginas = Math.ceil(
+            sensoresTodos.length / sensoresPorPagina
+        );
+
+
+        // Se tiver mais de 5 sensores,
+        // mostra a paginação
+        if (paginacao && totalPaginas > 1) {
+
+            paginacao.style.display = 'flex';
+
+            textoPagina.textContent =
+                `Página ${paginaSensor} de ${totalPaginas}`;
+
+            // Desabilita "Anterior" na primeira página
+            botaoAnterior.disabled = paginaSensor === 1;
+
+            // Desabilita "Próxima" na última página
+            botaoProxima.disabled =
+                paginaSensor === totalPaginas;
+
+        } else {
+
+            // 5 sensores ou menos:
+            // não mostra paginação
+            paginacao.style.display = 'none';
+        }
+    }
+
+
+    // ==========================================================
+    // BOTÃO ANTERIOR
+    // ==========================================================
+
+    document.getElementById('sensor-anterior')?.addEventListener(
+        'click',
+        function () {
+
+            if (paginaSensor > 1) {
+
+                paginaSensor--;
+
+                mostrarPaginaSensores();
+            }
+
+        }
+    );
+
+
+    // ==========================================================
+    // BOTÃO PRÓXIMA
+    // ==========================================================
+
+    document.getElementById('sensor-proxima')?.addEventListener(
+        'click',
+        function () {
+
+            const totalPaginas = Math.ceil(
+                sensoresTodos.length / sensoresPorPagina
+            );
+
+            if (paginaSensor < totalPaginas) {
+
+                paginaSensor++;
+
+                mostrarPaginaSensores();
+            }
+
+        }
+    );
+
+
+    // Primeira atualização
+    atualizarStatusSensores();
+
+    // Atualiza os dados a cada 30 segundos
+    setInterval(atualizarStatusSensores, 30 * 1000);
+                    
+</script>
+<script>
+    // ==========================================================
+    // PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS
+    // ==========================================================
+
+    let paginaSistema = 1;
+    const sistemasPorPagina = 4;
+
+    const linhasSistema = document.querySelectorAll('.linha-sensor');
+    const paginacaoSistema = document.getElementById('system-pagination');
+    const botaoSistemaAnterior = document.getElementById('system-anterior');
+    const botaoSistemaProxima = document.getElementById('system-proxima');
+    const textoPaginaSistema = document.getElementById('system-pagina-atual');
+
+    function mostrarPaginaSistemas() {
+
+        const totalSistemas = linhasSistema.length;
+
+        const totalPaginas = Math.ceil(
+            totalSistemas / sistemasPorPagina
+        );
+
+        // Se não houver mais de 5 sistemas,
+        // esconde a paginação
+        if (totalPaginas <= 1) {
+
+            if (paginacaoSistema) {
+                paginacaoSistema.style.display = 'none';
+            }
+
+            linhasSistema.forEach(linha => {
+                linha.style.display = '';
+            });
+
+            return;
+        }
+
+        // Mostra somente os 5 sistemas da página atual
+        const inicio = (paginaSistema - 1) * sistemasPorPagina;
+        const fim = inicio + sistemasPorPagina;
+
+        linhasSistema.forEach((linha, indice) => {
+
+            if (indice >= inicio && indice < fim) {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+
+        });
+
+        // Mostra a paginação
+        paginacaoSistema.style.display = 'flex';
+
+        textoPaginaSistema.textContent =
+            `Página ${paginaSistema} de ${totalPaginas}`;
+
+        // Desabilita anterior na primeira página
+        botaoSistemaAnterior.disabled =
+            paginaSistema === 1;
+
+        // Desabilita próxima na última página
+        botaoSistemaProxima.disabled =
+            paginaSistema === totalPaginas;
+    }
+
+
+    // BOTÃO ANTERIOR
+    botaoSistemaAnterior?.addEventListener('click', function () {
+
+        if (paginaSistema > 1) {
+
+            paginaSistema--;
+
+            mostrarPaginaSistemas();
+        }
+
+    });
+
+
+    // BOTÃO PRÓXIMA
+    botaoSistemaProxima?.addEventListener('click', function () {
+
+        const totalPaginas = Math.ceil(
+            linhasSistema.length / sistemasPorPagina
+        );
+
+        if (paginaSistema < totalPaginas) {
+
+            paginaSistema++;
+
+            mostrarPaginaSistemas();
+        }
+
+    });
+
+
+    // Primeira exibição
+    mostrarPaginaSistemas();
+
+</script>
+    <script>
         // Integração Clima Open-Meteo
         async function buscarClima() {
             const lat = -21.7056, lon = -47.2728;
@@ -1148,27 +1609,6 @@
                 });
             }
 
-            // Paginação da Tabela ("Mostrar Mais")
-            const linhas = document.querySelectorAll('.linha-sensor');
-            const botao = document.getElementById('mostrarMaisSensores');
-            let quantidade = 5;
-
-            function atualizarTabela() {
-                linhas.forEach((linha, indice) => {
-                    linha.style.display = indice < quantidade ? '' : 'none';
-                });
-                if (botao) {
-                    botao.style.display = quantidade >= linhas.length ? 'none' : 'flex';
-                }
-            }
-
-            atualizarTabela();
-            if (botao) {
-                botao.addEventListener('click', function () {
-                    quantidade += 5;
-                    atualizarTabela();
-                });
-            }
         });
     </script>
 

@@ -1453,10 +1453,122 @@ body.contraste .chart-card .chart-title i {
     color: #fff !important;
 }
 
+/* ==========================================================
+   PAGINAÇÃO DO STATUS DOS SENSORES
+   ========================================================== */
 
+.sensor-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
 
+.sensor-pagination button {
+    background: #58CC02;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sensor-pagination button:hover:not(:disabled) {
+    background: #46A302;
+}
+
+.sensor-pagination button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.sensor-pagination .pagina-atual {
+    font-weight: bold;
+    color: #052501;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Alto contraste */
+body.contraste .sensor-pagination button {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.contraste .sensor-pagination button:disabled {
+    background: #000 !important;
+    color: #777 !important;
+    border-color: #777 !important;
+}
+
+body.contraste .sensor-pagination .pagina-atual {
+    color: #fff !important;
+}
+
+/* ==========================================================
+   PAGINAÇÃO DO STATUS DOS SISTEMAS AUTOMATIZADOS
+   ========================================================== */
+
+.sistemas-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.sistemas-pagination button {
+    background: #58CC02;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sistemas-pagination button:hover:not(:disabled) {
+    background: #46A302;
+}
+
+.sistemas-pagination button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.sistemas-pagination .pagina-atual {
+    font-weight: bold;
+    color: #052501;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Alto contraste */
+body.contraste .sistemas-pagination button {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.contraste .sistemas-pagination button:disabled {
+    background: #000 !important;
+    color: #777 !important;
+    border-color: #777 !important;
+}
+
+body.contraste .sistemas-pagination .pagina-atual {
+    color: #fff !important;
+}
 </style>
-
 </head>
 
 <body>
@@ -1669,7 +1781,7 @@ body.contraste .chart-card .chart-title i {
             </div>
             
            <!-- STATUS DOS SENSORES -->
-<div class="activities-card">
+            <div class="activities-card">
 
     <h3 class="chart-title">
         <i class="fa-solid fa-microchip"></i>
@@ -1677,10 +1789,31 @@ body.contraste .chart-card .chart-title i {
     </h3>
 
     <div class="sensor-status-list" id="sensor-status-list">
+        <div style="text-align:center; padding:30px; color:#666;">
+            Carregando sensores...
+        </div>
+
         <!-- Preenchido dinamicamente por atualizarStatusSensores() -->
     </div>
 
-</div>
+    <!-- PAGINAÇÃO DOS SENSORES -->
+    <div class="sensor-pagination" id="sensor-pagination" style="display:none;">
+
+            <button id="sensor-anterior" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <span class="pagina-atual" id="sensor-pagina-atual">
+                Página 1
+            </span>
+
+            <button id="sensor-proxima" type="button">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
+
+    </div>
 
 
             <a href="<?= base_url('/alertas-usuario') ?>"
@@ -1801,10 +1934,22 @@ body.contraste .chart-card .chart-title i {
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <div id="mostrarMaisSensores" class="mostrar-mais">
-                Mostrar mais
-            <i class="fa-solid fa-chevron-down"></i>
-            </div>
+            <!-- PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS -->
+        <div class="sistemas-pagination" id="sistemas-pagination" style="display:none;">
+
+            <button id="sistema-anterior" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <span class="pagina-atual" id="sistema-pagina-atual">
+                Página 1
+            </span>
+
+            <button id="sistema-proxima" type="button">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
         </div>
     </main>
 
@@ -2078,52 +2223,292 @@ async function atualizarGraficos() {
     </script>
 
     <script>
+    //Status Sensores
+    // ==========================================================
+// STATUS DOS SENSORES + PAGINAÇÃO
+// ==========================================================
+
+let sensoresTodos = [];
+let paginaSensor = 1;
+
+const sensoresPorPagina = 4;
+
 async function atualizarStatusSensores() {
+
     try {
+
         const resposta = await fetch('<?= base_url('status-sensores') ?>');
-        if (!resposta.ok) throw new Error('Erro ao buscar status dos sensores');
+
+        if (!resposta.ok) {
+            throw new Error('Erro ao buscar status dos sensores');
+        }
+
         const sensores = await resposta.json();
 
+        sensoresTodos = sensores;
+
         const lista = document.getElementById('sensor-status-list');
+
         if (!lista) return;
 
-        lista.innerHTML = sensores.map(function(s) {
-            let classe, circulo, badge, texto, pulso = '';
+        lista.innerHTML = sensoresTodos.map(function(s) {
+
+            let classe;
+            let circulo;
+            let badge;
+            let texto;
+            let pulso = '';
 
             if (s.minutos_atras === null || s.minutos_atras > 20) {
-                classe = 'is-offline'; circulo = 'offline'; badge = 'offline'; texto = 'Offline';
+
+                classe = 'is-offline';
+                circulo = 'offline';
+                badge = 'offline';
+                texto = 'Offline';
+
             } else if (s.minutos_atras <= 5) {
-                classe = 'is-online'; circulo = 'online'; badge = 'online'; texto = 'Online';
+
+                classe = 'is-online';
+                circulo = 'online';
+                badge = 'online';
+                texto = 'Online';
+
                 pulso = '<span class="pulse-dot"></span>';
+
             } else {
-                classe = 'is-warning'; circulo = 'warning'; badge = 'warning'; texto = 'Oscilando';
+
+                classe = 'is-warning';
+                circulo = 'warning';
+                badge = 'warning';
+                texto = 'Oscilando';
+
             }
 
             return `
+
                 <div class="sensor-status-item ${classe}">
+
                     <div class="sensor-left">
+
                         <span class="status-circle ${circulo}">
+
                             <i class="fa-solid ${s.icone}"></i>
+
                             ${pulso}
+
                         </span>
+
                         <div class="sensor-info">
+
                             <h4>${s.nome}</h4>
+
                             <p>${s.tipo} · ${s.tempo_texto}</p>
+
                         </div>
+
                     </div>
+
                     <div class="sensor-right">
-                        <span class="signal-bars"><i></i><i></i><i></i></span>
-                        <span class="status-badge ${badge}">${texto}</span>
+
+                        <span class="signal-bars">
+                            <i></i><i></i><i></i>
+                        </span>
+
+                        <span class="status-badge ${badge}">
+                            ${texto}
+                        </span>
+
                     </div>
+
                 </div>`;
+
         }).join('');
+
+        // Depois de carregar os sensores,
+        // aplica a paginação
+        atualizarPaginacaoSensores();
+
     } catch (erro) {
-        console.error('Erro ao atualizar status dos sensores:', erro);
+
+        console.error(
+            'Erro ao atualizar status dos sensores:',
+            erro
+        );
+
     }
+
 }
 
+
+// ==========================================================
+// PAGINAÇÃO DOS SENSORES
+// ==========================================================
+
+function atualizarPaginacaoSensores() {
+
+    const itens = document.querySelectorAll(
+        '#sensor-status-list .sensor-status-item'
+    );
+
+    const paginacao = document.getElementById(
+        'sensor-pagination'
+    );
+
+    const botaoAnterior = document.getElementById(
+        'sensor-anterior'
+    );
+
+    const botaoProxima = document.getElementById(
+        'sensor-proxima'
+    );
+
+    const textoPagina = document.getElementById(
+        'sensor-pagina-atual'
+    );
+
+    const totalSensores = itens.length;
+
+    const totalPaginas = Math.ceil(
+        totalSensores / sensoresPorPagina
+    );
+
+
+    // Se tiver 5 sensores ou menos,
+    // não mostra a paginação
+    if (totalPaginas <= 1) {
+
+        if (paginacao) {
+            paginacao.style.display = 'none';
+        }
+
+        itens.forEach(function(item) {
+            item.style.display = '';
+        });
+
+        paginaSensor = 1;
+
+        return;
+    }
+
+
+    // Se a página atual não existir mais,
+    // volta para a última página válida
+    if (paginaSensor > totalPaginas) {
+        paginaSensor = totalPaginas;
+    }
+
+
+    const inicio =
+        (paginaSensor - 1) * sensoresPorPagina;
+
+    const fim =
+        inicio + sensoresPorPagina;
+
+
+    // Mostra somente os 5 sensores da página atual
+    itens.forEach(function(item, indice) {
+
+        if (indice >= inicio && indice < fim) {
+
+            item.style.display = '';
+
+        } else {
+
+            item.style.display = 'none';
+
+        }
+
+    });
+
+
+    // Mostra a paginação
+    if (paginacao) {
+        paginacao.style.display = 'flex';
+    }
+
+
+    // Atualiza o texto
+    if (textoPagina) {
+
+        textoPagina.textContent =
+            `Página ${paginaSensor} de ${totalPaginas}`;
+
+    }
+
+
+    // Botão anterior
+    if (botaoAnterior) {
+
+        botaoAnterior.disabled =
+            paginaSensor === 1;
+
+    }
+
+
+    // Botão próxima
+    if (botaoProxima) {
+
+        botaoProxima.disabled =
+            paginaSensor === totalPaginas;
+
+    }
+
+}
+
+
+// ==========================================================
+// BOTÃO ANTERIOR
+// ==========================================================
+
+document.getElementById('sensor-anterior')?.addEventListener(
+    'click',
+    function() {
+
+        if (paginaSensor > 1) {
+
+            paginaSensor--;
+
+            atualizarPaginacaoSensores();
+
+        }
+
+    }
+);
+
+
+// ==========================================================
+// BOTÃO PRÓXIMA
+// ==========================================================
+
+document.getElementById('sensor-proxima')?.addEventListener(
+    'click',
+    function() {
+
+        const totalPaginas = Math.ceil(
+            sensoresTodos.length / sensoresPorPagina
+        );
+
+        if (paginaSensor < totalPaginas) {
+
+            paginaSensor++;
+
+            atualizarPaginacaoSensores();
+
+        }
+
+    }
+);
+
+
+// Primeira atualização
 atualizarStatusSensores();
-setInterval(atualizarStatusSensores, 30 * 1000);
+
+
+// Atualiza os sensores a cada 30 segundos
+setInterval(
+    atualizarStatusSensores,
+    30 * 1000
+);
     </script>
     
     <script src="./../script.js"></script>
@@ -2173,7 +2558,7 @@ contrasteBtn.addEventListener("click", () => {
         
 
 
-        async function buscarClima() {
+    async function buscarClima() {
     // Coordenadas de Tambaú - SP
     const lat = -21.7056;
     const lon = -47.2728;
@@ -2346,39 +2731,196 @@ setInterval(buscarClima, 10 * 60 * 1000);
 
     });
 
-    const linhas = document.querySelectorAll(".linha-sensor");
-const botao = document.getElementById("mostrarMaisSensores");
+    // ==========================================================
+// PAGINAÇÃO - STATUS DOS SISTEMAS AUTOMATIZADOS
+// ==========================================================
 
-let quantidade = 5; // quantidade inicial
+const linhasSistemas = document.querySelectorAll(".linha-sensor");
 
-function atualizarTabela() {
+const paginacaoSistemas = document.getElementById(
+    "sistemas-pagination"
+);
 
-    linhas.forEach((linha, indice) => {
+const sistemaAnterior = document.getElementById(
+    "sistema-anterior"
+);
 
-        if (indice < quantidade) {
+const sistemaProxima = document.getElementById(
+    "sistema-proxima"
+);
+
+const sistemaPaginaAtual = document.getElementById(
+    "sistema-pagina-atual"
+);
+
+let paginaSistema = 1;
+
+const sistemasPorPagina = 4;
+
+
+// ==========================================================
+// ATUALIZA A PAGINAÇÃO
+// ==========================================================
+
+function atualizarPaginacaoSistemas() {
+
+    const totalSistemas = linhasSistemas.length;
+
+    const totalPaginas = Math.ceil(
+        totalSistemas / sistemasPorPagina
+    );
+
+
+    // Se não houver sistemas
+    if (totalPaginas === 0) {
+
+        if (paginacaoSistemas) {
+            paginacaoSistemas.style.display = "none";
+        }
+
+        return;
+    }
+
+
+    // Se tiver apenas 5 sistemas ou menos,
+    // não mostra os botões de paginação
+    if (totalPaginas <= 1) {
+
+        if (paginacaoSistemas) {
+            paginacaoSistemas.style.display = "none";
+        }
+
+        linhasSistemas.forEach(function(linha) {
             linha.style.display = "";
+        });
+
+        paginaSistema = 1;
+
+        return;
+    }
+
+
+    // Garante que a página atual seja válida
+    if (paginaSistema > totalPaginas) {
+        paginaSistema = totalPaginas;
+    }
+
+
+    // Calcula os itens da página
+    const inicio =
+        (paginaSistema - 1) * sistemasPorPagina;
+
+    const fim =
+        inicio + sistemasPorPagina;
+
+
+    // Mostra somente os 5 sistemas da página atual
+    linhasSistemas.forEach(function(linha, indice) {
+
+        if (indice >= inicio && indice < fim) {
+
+            linha.style.display = "";
+
         } else {
+
             linha.style.display = "none";
+
         }
 
     });
 
-    if (quantidade >= linhas.length) {
-        botao.style.display = "none";
-    } else {
-        botao.style.display = "flex";
+
+    // Mostra a paginação
+    if (paginacaoSistemas) {
+        paginacaoSistemas.style.display = "flex";
     }
+
+
+    // Atualiza o texto
+    if (sistemaPaginaAtual) {
+
+        sistemaPaginaAtual.textContent =
+            `Página ${paginaSistema} de ${totalPaginas}`;
+
+    }
+
+
+    // Botão anterior
+    if (sistemaAnterior) {
+
+        sistemaAnterior.disabled =
+            paginaSistema === 1;
+
+    }
+
+
+    // Botão próxima
+    if (sistemaProxima) {
+
+        sistemaProxima.disabled =
+            paginaSistema === totalPaginas;
+
+    }
+
 }
 
-atualizarTabela();
 
-botao.addEventListener("click", function () {
+// ==========================================================
+// BOTÃO ANTERIOR
+// ==========================================================
 
-    quantidade += 5;
+if (sistemaAnterior) {
 
-    atualizarTabela();
+    sistemaAnterior.addEventListener(
+        "click",
+        function() {
 
-});
+            if (paginaSistema > 1) {
+
+                paginaSistema--;
+
+                atualizarPaginacaoSistemas();
+
+            }
+
+        }
+    );
+
+}
+
+
+// ==========================================================
+// BOTÃO PRÓXIMA
+// ==========================================================
+
+if (sistemaProxima) {
+
+    sistemaProxima.addEventListener(
+        "click",
+        function() {
+
+            const totalPaginas = Math.ceil(
+                linhasSistemas.length / sistemasPorPagina
+            );
+
+            if (paginaSistema < totalPaginas) {
+
+                paginaSistema++;
+
+                atualizarPaginacaoSistemas();
+
+            }
+
+        }
+    );
+
+}
+
+// ==========================================================
+// PRIMEIRA ATUALIZAÇÃO
+// ==========================================================
+
+atualizarPaginacaoSistemas();
     </script>
 </body>
 </html>

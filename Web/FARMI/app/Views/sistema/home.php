@@ -10,6 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
+    <!-- Tag do PWA Manifest -->
+    <link rel="manifest" href="/FARMI/public/manifest.json">
+    <meta name="theme-color" content="#2e7d32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="<?= base_url('assets/img/icon-192.png') ?>">
+
     <!-- === TÍTULO === aba do site -->
     <title>FARMI</title>
 
@@ -592,6 +599,20 @@
                 icon: image
             });
         }
+    </script>
+    <!-- PWA, para instalar -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/FARMI/public/sw.js')
+            .then((reg) => {
+            console.log('Service Worker registrado com sucesso:', reg.scope);
+            })
+            .catch((err) => {
+            console.error('Falha ao registrar o Service Worker:', err);
+            });
+        });
+    }
     </script>
     <!-- google map js -->
     <script src="https://www.google.com/maps/place/Servi%C3%A7o+Social+da+Ind%C3%BAstria-SESI/@-21.7110061,-47.279045,17z/data=!3m1!4b1!4m6!3m5!1s0x94b7efc1347e3265:0x53eb3a234374dc72!8m2!3d-21.7110061!4d-47.2764701!16s%2Fg%2F1q5hrr5y8?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoASAFQAw%3D%3D"></script>

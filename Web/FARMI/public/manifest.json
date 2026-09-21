@@ -1,0 +1,25 @@
+{
+  "short_name": "FARMI",
+  "start_url": "./",
+  "scope": "/FARMI/public/",
+  "name": "FARMI - Gestão Agrícola",
+  "icons": [
+    {
+        "src": "/FARMI/public/assets/images/logo_quadrado.jpg",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "any maskable"
+    },
+    {
+        "src": "/FARMI/public/assets/images/logo_quadrado.jpg",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any maskable"
+    }
+    ],
+  "background_color": "#ffffff",
+  "theme_color": "#2e7d32",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "description": "Sistema de Gestão e Monitoramento de Fazendas e Sensores FARMI"
+}
