@@ -59,6 +59,29 @@
             box-sizing: border-box !important;
         }
 
+        /* O botão #contraste-btn tende a ter uma regra própria por ID no
+           style_recuperar.css externo (maior especificidade que a classe
+           .acessibilidade-container button acima), o que faz o fundo/borda
+           dele não aparecer mesmo com !important. Repetimos o estilo
+           direto no #id para garantir que ele fique igual aos outros
+           três botões (A+, A-, A). */
+        .acessibilidade-container button#contraste-btn {
+            background: #57c91b !important;
+            border: none !important;
+            border-radius: 5px !important;
+            width: 34px !important;
+            height: 34px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #fff !important;
+            font-size: 13px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
+        }
+
         /* Efeito Hover padrão */
         .acessibilidade-container button:hover {
             opacity: .85 !important;
@@ -73,6 +96,11 @@
                 right: 15px !important;
             }
             .acessibilidade-container button {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 11px !important;
+            }
+            .acessibilidade-container button#contraste-btn {
                 width: 30px !important;
                 height: 30px !important;
                 font-size: 11px !important;
@@ -342,13 +370,8 @@ body.alto-contraste input::placeholder {
         }
     });
 
-   const contrasteBtn = document.getElementById('contraste-btn');
 
-contrasteBtn.onclick = function () {
 
-    
-
-};
     // ========================================================
     // REMOVE ESPAÇOS EMAIL
     // ========================================================
@@ -390,6 +413,23 @@ contrasteBtn.onclick = function () {
             tamanhoFonte = 100; aplicarFonte();
         });
     }
+    
+    const btnContraste = document.getElementById('contraste-btn');
+
+    if (localStorage.getItem('altoContraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
+
+    btnContraste.addEventListener('click', () => {
+
+        document.body.classList.toggle('alto-contraste');
+
+        localStorage.setItem(
+            'altoContraste',
+            document.body.classList.contains('alto-contraste')
+        );
+
+    });
     </script>
         
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>

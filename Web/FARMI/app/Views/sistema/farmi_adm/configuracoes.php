@@ -7,10 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meu Perfil - Fazenda Inteligente</title>
+    <title>Configurações - Fazenda Inteligente</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_config.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -120,6 +121,43 @@
             color: #fff !important;
             border-color: #444 !important;
         }
+    /* ==========================================================
+    AJUSTES DO MODO AUTO CONTRASTE
+   ========================================================== */
+
+    /* Texto "Gestor" do perfil */
+    body.contraste .badge-role {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    /* Ícone do Gestor */
+    body.contraste .badge-role i {
+        color: #000 !important;
+    }
+
+    /* Botões "Alterar senha" e "Recuperar senha" */
+    body.contraste .sec-btn {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    /* Ícones dos botões */
+    body.contraste .sec-btn i {
+        color: #fff !important;
+    }
+
+    /* Efeito ao passar o mouse */
+    body.contraste .sec-btn:hover {
+        background: #000 !important;
+        color: #fff !important;
+        border-color: #fff !important;
+    }
+
+    body.contraste .sec-btn:hover i {
+        color: #fff !important;
+    }
 
         /* ==========================================================
            ESTILOS NOVOS DO PERFIL (LAYOUT INSPIRADO)
@@ -514,7 +552,7 @@
             </a>
             <a href="<?= base_url('/configuracoes-admin') ?>" class="menu-item active">
                 <i class="fa-solid fa-user"></i>
-                Meu Perfil
+                Configurações
             </a>
         </nav>
     </aside>
@@ -529,7 +567,7 @@
         <!-- Topo idêntico ao original -->
         <header class="header">
             <div>
-                <h2>Meu Perfil</h2>
+                <h2>Configurações</h2>
                 <p style="color: #666;">Visualize e edite seus dados pessoais.</p>
             </div>
 
@@ -719,12 +757,23 @@
     <script>
         /* Acessibilidade de fonte e contraste */
         document.addEventListener('DOMContentLoaded', () => {
-            const contrasteBtn = document.getElementById('contraste-btn');
-            if (contrasteBtn) {
-                contrasteBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('contraste');
-                });
+            const btnContraste = document.getElementById('contraste-btn');
+
+            if (localStorage.getItem('altoContraste') === 'true') {
+                document.body.classList.add('alto-contraste');
             }
+
+            btnContraste.addEventListener('click', () => {
+
+                document.body.classList.toggle('alto-contraste');
+
+                localStorage.setItem(
+                    'altoContraste',
+                    document.body.classList.contains('alto-contraste')
+                );
+
+            });
+
 
             let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
             document.documentElement.style.fontSize = tamanhoFonte + 'px';

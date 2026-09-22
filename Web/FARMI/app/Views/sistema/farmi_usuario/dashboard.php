@@ -23,8 +23,6 @@
             --sombra: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        
-
         * {
             margin: 0;
             padding: 0;
@@ -107,17 +105,17 @@
             gap: 15px; /* Ajustado de 10px para 15px igual ao dADMIN */
         }
 
-                .header h2 {
-                    color: var(--verde-escuro);
-                }
+        .header h2 {
+            color: var(--verde-escuro);
+        }
 
-                .user-profile {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-                .avatar {
+        .avatar {
             width: 42px; /* Padronizado */
             height: 42px; /* Padronizado */
             background-color: var(--verde-claro);
@@ -259,1315 +257,1309 @@
         }
 
 
-#contraste-btn {
-    background: transparent !important;
-    border: none !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px; /* Padronizado */
-    height: 42px; /* Padronizado */
-    font-size: 20px;
-    color: #000;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none !important;
-    box-shadow: none !important;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
+        #contraste-btn {
+            background: transparent !important;
+            border: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px; /* Padronizado */
+            height: 42px; /* Padronizado */
+            font-size: 20px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none !important;
+            box-shadow: none !important;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
 
-#contraste-btn:hover {
-    color: var(--verde-claro);
-}
+        #contraste-btn:hover {
+            color: var(--verde-claro);
+        }
 
-#contraste-btn:focus,
-#contraste-btn:active,
-#contraste-btn:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-}
+        #contraste-btn:focus,
+        #contraste-btn:active,
+        #contraste-btn:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
     
-    .logout-btn {
-    background: #58CC02;
-    color: white;
-    text-decoration: none;
-    height: 42px; /* Padronizado */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.logout-btn:hover {
-    background: #46A302;
-    color: white;
-}
-
-.accessibility-btn {
-    width: 42px; /* Padronizado */
-    height: 42px; /* Padronizado */
-    background-color: #58CC02;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza perfeitamente o "A+" */
-    transition: 0.3s;
-}
-
-.accessibility-btn:hover {
-    background-color: #46A302;
-}
-
-
-/* =========================
-   GRID PRINCIPAL
-========================= */
-
-.charts-grid{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.chart-card,
-.activities-card{
-    background: var(--branco);
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: var(--sombra);
-}
-
-/* =========================
-   TITULOS
-========================= */
-
-.chart-title{
-    color: var(--verde);
-    margin-bottom: 20px;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* =========================
-   GRÁFICO
-========================= */
-
-
-.grafico-box{
-    width: 100%;
-    min-height: 350px;
-    position: relative;
-    border-radius: 15px;
-    padding: 15px;
-    overflow: hidden;
-}
-
-#graficoMonitoramento{
-    width: 100% !important;
-    height: 100% !important;
-}
-
-canvas{
-    display: block;
-}
-
-/* =========================
-   CULTURAS
-========================= */
-
-.status-item{
-    text-align: center;
+        .logout-btn {
+            background: #58CC02;
+            color: white;
+            text-decoration: none;
+            height: 42px; /* Padronizado */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #46A302;
+            color: white;
+        }
+
+        .accessibility-btn {
+            width: 42px; /* Padronizado */
+            height: 42px; /* Padronizado */
+            background-color: #58CC02;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centraliza perfeitamente o "A+" */
+            transition: 0.3s;
+        }
+
+        .accessibility-btn:hover {
+            background-color: #46A302;
+        }
+
+
+        /* =========================
+        GRID PRINCIPAL
+        ========================= */
+
+        .charts-grid{
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card,
+        .activities-card{
+            background: var(--branco);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--sombra);
+        }
+
+        /* =========================
+        TITULOS
+        ========================= */
+
+        .chart-title{
+            color: var(--verde);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================
+        GRÁFICO
+        ========================= */
+
+
+        .grafico-box{
+            width: 100%;
+            min-height: 350px;
+            position: relative;
+            border-radius: 15px;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        #graficoMonitoramento{
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        canvas{
+            display: block;
+        }
+
+        /* =========================
+        CULTURAS
+        ========================= */
+
+        .status-item{
+            text-align: center;
 
-    padding: 22px;
+            padding: 22px;
 
-    background: #fff;
+            background: #fff;
 
-    border-radius: 15px;
+            border-radius: 15px;
 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 
-    transition: 0.3s;
+            transition: 0.3s;
 
-    margin-bottom: 20px;
-}
+            margin-bottom: 20px;
+        }
 
-.status-item:hover{
-    transform: translateY(-5px);
-}
+        .status-item:hover{
+            transform: translateY(-5px);
+        }
 
-.status-item:last-child{
-    margin-bottom: 0;
-}
+        .status-item:last-child{
+            margin-bottom: 0;
+        }
 
-.status-item h4{
-    margin-top: 10px;
-
-    color: var(--verde);
+        .status-item h4{
+            margin-top: 10px;
+
+            color: var(--verde);
 
-    font-size: 1.2rem;
-}
-
-.status-item p{
-    color: #666;
-
-    font-size: .95rem;
-}
-
-/* =========================
-   BOLINHA STATUS
-========================= */
-
-.status-indicator{
-    width: 75px;
-    height: 75px;
-
-    border-radius: 50%;
-
-    margin: 0 auto 15px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 1.8rem;
-}
-
-/* =========================
-   STATUS CULTURAS
-========================= */
-
-.status-saudavel{
-    background: rgba(76,199,20,.15);
-    border: 3px solid #4bc714;
-}
-
-.status-atencao{
-    background: rgba(255,152,0,.15);
-    border: 3px solid #ff9800;
-}
-
-.status-perigo{
-    background: rgba(220,53,69,.15);
-    border: 3px solid #dc3545;
-}
-
-/* COR DOS ÍCONES */
-
-.status-saudavel i{
-    color: #4bc714 !important;
-}
-
-.status-atencao i{
-    color: #ff9800 !important;
-}
-
-.status-perigo i{
-    color: #dc3545 !important;
-}
-
-.weather-card {
-    background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
-    border-radius: 20px;
-    padding: 16px 20px;
-    color: #ffffff;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    width: 100%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-/* Cabeçalho */
-.weather-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.location-selector {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-}
-
-/* Corpo */
-.weather-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.temp-main {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.temp-main #weather-icon {
-    font-size: 42px;
-    color: #ffc107; /* Cor do sol */
-}
-
-.temp-main #temperatura {
-    font-size: 52px;
-    font-weight: 300;
-    line-height: 1;
-}
-
-.temp-main .unit {
-    font-size: 20px;
-    vertical-align: top;
-    margin-top: -15px;
-}
-
-/* Qualidade do ar */
-.air-quality {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 6px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.air-quality i {
-    color: #ffb300;
-}
-
-.air-text {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Rodapé */
-.weather-footer {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.btn-previsao {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: white;
-    padding: 6px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-previsao:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.weather-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.detail-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-}
-
-.detail-item i {
-    font-size: 18px;
-    margin-bottom: 2px;
-}
-
-.detail-item strong {
-    font-size: 14px;
-}
-
-/* ===========================
-   ALTO CONTRASTE (CORRIGIDO)
-===========================*/
-
-body.contraste{
-    background:#000 !important;
-    color:#fff !important;
-}
-
-body.contraste *{
-    color:#fff !important;
-    border-color:#fff !important;
-}
-
-body.contraste .sidebar{
-    background:#000 !important;
-    border-right:2px solid #fff;
-}
-
-body.contraste .main-content{
-    background:#000 !important;
-}
-
-body.contraste .card,
-body.contraste .table-container,
-body.contraste .chart-card,
-body.contraste .activities-card,
-body.contraste .weather-card,
-body.contraste .status-item{
-    background:#111 !important;
-    color:#fff !important;
-    border:2px solid #fff !important;
-    box-shadow:none !important;
-}
-
-/* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
-body.contraste .activities-card > div {
-    background: #000 !important;
-    border: 1px solid #fff !important;
-}
-/* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
-body.contraste .activities-card .btn {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #ffffff !important;
-}
-
-body.contraste .activities-card .btn:hover {
-    background-color: #e6e6e6 !important;
-    color: #000000 !important;
-}
-
-body.contraste table,
-body.contraste tr,
-body.contraste td,
-body.contraste th{
-    background:#111 !important;
-    color:#fff !important;
-    border:1px solid #fff !important;
-}
-
-body.contraste .status-badge{
-    background:#fff !important;
-    color:#000 !important;
-}
-
-body.contraste .logout-btn,
-body.contraste .accessibility-btn,
-body.contraste .btn,
-body.contraste .mostrar-mais {
-    background:#000 !important;
-    color:#fff !important;
-    border:2px solid #fff !important;
-}
-body.contraste *{
-    color:#fff !important;
-    border-color:#fff !important;
-}
-
-#contraste-btn:hover {
-    color: var(--verde-claro) !important;
-}
-
-body.contraste #contraste-btn:hover {
-    color: #fff !important;
-}
-
-body.contraste .avatar{
-    background:#fff !important;
-    color:#000 !important;
-}
-
-body.contraste input,
-body.contraste select,
-body.contraste textarea{
-    background:#000 !important;
-    color:#fff !important;
-    border:2px solid #fff !important;
-}
-
-/* CORREÇÃO DOS EIXOS DOS GRÁFICOS (X e Y):
-   Aplica o filtro invert para transformar os eixos/textos pretos do Chart.js em brancos */
-
-```css
-/* ==========================================================
-   RESPONSIVO FARMI
-   ========================================================== */
-
-/* BASE - evita elementos ultrapassando a tela */
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-.main-content {
-    min-width: 0;
-    width: calc(100% - 250px);
-}
-
-.stats-grid,
-.charts-grid {
-    width: 100%;
-    min-width: 0;
-}
-
-.card,
-.chart-card,
-.activities-card,
-.weather-card,
-.table-container {
-    min-width: 0;
-    max-width: 100%;
-}
-
-/* GRÁFICOS */
-.grafico-box {
-    width: 100%;
-    max-width: 100%;
-    height: 350px;
-    min-height: 0;
-}
-
-.grafico-box canvas {
-    max-width: 100% !important;
-}
-
-/* CLIMA */
-.weather-card {
-    width: 100%;
-    max-width: 100%;
-}
-
-/* TABELA */
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.table-container table {
-    min-width: 700px;
-}
-
-
-/* ==========================================================
-   ATÉ 1200px
-   ========================================================== */
-
-@media (max-width: 1200px) {
-
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .charts-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .weather-card {
-        width: 100%;
-    }
-}
-
-
-/* ==========================================================
-   TABLET - ATÉ 768px
-   ========================================================== */
-
-@media (max-width: 768px) {
-
-    /* SIDEBAR */
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        left: 0;
-        top: 0;
-        z-index: 1000;
-
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-    }
-
-    .sidebar.active {
-        transform: translateX(0);
-    }
-
-    /* FUNDO ESCURO */
-    .menu-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s;
-    }
-
-    .menu-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* BOTÃO DO MENU */
-    .menu-toggle {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-
-        width: 45px;
-        height: 45px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        background: #052501;
-        color: #ffffff;
-
-        border: none;
-        border-radius: 10px;
-
-        font-size: 20px;
-        cursor: pointer;
-
-        z-index: 1100;
-    }
-
-    .menu-toggle:hover {
-        background: #4bc714;
-    }
-
-    /* CONTEÚDO */
-    .main-content {
-        margin-left: 0 !important;
-        width: 100% !important;
-        max-width: 100%;
-        padding: 75px 20px 30px;
-    }
-
-    /* CABEÇALHO */
-    .header {
-        width: 100%;
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-
-    .header h2 {
-        font-size: 22px;
-    }
-
-    .header-right {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
-    .logout-btn {
-        padding: 0 12px;
-    }
-
-    /* CARDS */
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 15px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    .card-info {
-        min-width: 0;
-    }
-
-    .card-info h3 {
-        font-size: 14px;
-        line-height: 1.3;
-    }
-
-    .card-info p {
-        font-size: 24px;
-        white-space: normal;
-        overflow-wrap: anywhere;
-    }
-
-    .card-icon {
-        font-size: 2rem;
-        flex-shrink: 0;
-        margin-left: 10px;
-    }
-
-    /* GRÁFICOS */
-    .charts-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .chart-card,
-    .activities-card {
-        width: 100%;
-        padding: 18px;
-    }
-
-    .chart-title {
-        font-size: 1.15rem;
-        line-height: 1.4;
-    }
-
-    .grafico-box {
-        width: 100%;
-        height: 300px;
-        padding: 8px;
-    }
-
-    /* CLIMA */
-    .weather-card {
-        width: 100%;
-        padding: 16px;
-    }
-
-    .weather-body {
-        gap: 15px;
-    }
-
-    .temp-main #temperatura {
-        font-size: 44px;
-    }
-
-    .temp-main #weather-icon {
-        font-size: 35px;
-    }
-
-    .air-quality {
-        max-width: 50%;
-    }
-
-    .weather-details-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    /* SENSORES */
-    .sensor-status-item {
-        width: 100%;
-        min-width: 0;
-    }
-
-    .sensor-left {
-        min-width: 0;
-    }
-
-    .sensor-info {
-        min-width: 0;
-    }
-
-    .sensor-info h4,
-    .sensor-info p {
-        overflow-wrap: anywhere;
-    }
-
-    /* TABELA */
-    .table-container {
-        overflow-x: auto;
-    }
-
-    .table-container table {
-        min-width: 700px;
-    }
-}
-
-
-/* ==========================================================
-   CELULAR - ATÉ 600px
-   ========================================================== */
-
-@media (max-width: 600px) {
-
-    .main-content {
-        padding: 70px 12px 25px;
-    }
-
-    /* HEADER */
-    .header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .header h2 {
-        font-size: 21px;
-    }
-
-    .header-right {
-        width: 100%;
-        justify-content: flex-start;
-        gap: 7px;
-    }
-
-    .logout-btn {
-        height: 40px;
-        padding: 0 12px;
-        font-size: 13px;
-    }
-
-    .accessibility-btn,
-    #contraste-btn {
-        width: 40px;
-        height: 40px;
-    }
-
-    /* CARDS */
-    .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .card {
-        min-height: 90px;
-        padding: 16px;
-    }
-
-    .card-info p {
-        font-size: 25px;
-    }
-
-    /* GRÁFICOS */
-    .chart-card,
-    .activities-card {
-        padding: 14px;
-    }
-
-    .chart-title {
-        font-size: 1.05rem;
-        margin-bottom: 15px;
-    }
-
-    .grafico-box {
-        height: 260px;
-        padding: 5px;
-    }
-
-    /* CLIMA */
-    .weather-card {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .weather-header {
-        font-size: 13px;
-    }
-
-    .weather-body {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-
-    .temp-main {
-        justify-content: center;
-    }
-
-    .temp-main #temperatura {
-        font-size: 48px;
-    }
-
-    .air-quality {
-        max-width: 100%;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .weather-details-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .detail-item {
-        padding: 9px 5px;
-        font-size: 11px;
-    }
-
-    /* SENSORES */
-    .sensor-status-item {
-        padding: 12px;
-    }
-
-    .sensor-left {
-        gap: 10px;
-    }
-
-    .status-circle {
-        width: 42px;
-        height: 42px;
-        flex-shrink: 0;
-    }
-
-    .sensor-info h4 {
-        font-size: 14px;
-    }
-
-    .sensor-info p {
-        font-size: 12px;
-    }
-
-    .sensor-right {
-        gap: 6px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .status-badge {
-        padding: 5px 9px;
-        font-size: 11px;
-    }
-}
-
-
-/* ==========================================================
-   CELULAR PEQUENO - ATÉ 480px
-   ========================================================== */
-
-@media (max-width: 480px) {
-
-    .main-content {
-        padding: 68px 10px 20px;
-    }
-
-    .menu-toggle {
-        width: 42px;
-        height: 42px;
-        top: 12px;
-        left: 12px;
-    }
-
-    /* HEADER */
-    .header h2 {
-        font-size: 19px;
-    }
-
-    .header p {
-        font-size: 13px;
-    }
-
-    .header-right {
-        gap: 5px;
-    }
-
-    .logout-btn {
-        padding: 0 10px;
-        font-size: 12px;
-    }
-
-    .logout-btn i {
-        margin-right: 0;
-    }
-
-    .accessibility-btn,
-    #contraste-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 15px;
-    }
-
-    /* CARDS */
-    .card {
-        padding: 14px;
-    }
-
-    .card-info h3 {
-        font-size: 13px;
-    }
-
-    .card-info p {
-        font-size: 23px;
-    }
-
-    .card-icon {
-        font-size: 1.8rem;
-    }
-
-    /* GRÁFICOS */
-    .chart-card,
-    .activities-card {
-        padding: 12px;
-    }
-
-    .chart-title {
-        font-size: 1rem;
-    }
-
-    .grafico-box {
-        height: 230px;
-    }
-
-    /* CLIMA */
-    .weather-card {
-        padding: 13px;
-        border-radius: 15px;
-    }
-
-    .temp-main #temperatura {
-        font-size: 42px;
-    }
-
-    .temp-main #weather-icon {
-        font-size: 30px;
-    }
-
-    .weather-details-grid {
-        gap: 7px;
-    }
-
-    .detail-item {
-        padding: 8px 3px;
-    }
-
-    .detail-item strong {
-        font-size: 12px;
-    }
-
-    /* SENSORES */
-    .sensor-status-item {
-        padding: 10px;
-    }
-
-    .status-circle {
-        width: 38px;
-        height: 38px;
-        font-size: 15px;
-    }
-
-    .sensor-info h4 {
-        font-size: 13px;
-    }
-
-    .sensor-info p {
-        font-size: 11px;
-    }
-
-    .status-badge {
-        font-size: 10px;
-        padding: 4px 7px;
-    }
-
-    /* TABELA */
-    .table-container {
-        padding: 12px;
-    }
-
-    .table-container table {
-        min-width: 650px;
-    }
-}
-
-
-/* ==========================================================
-   CELULAR MUITO PEQUENO - ATÉ 360px
-   ========================================================== */
-
-@media (max-width: 360px) {
-
-    .main-content {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
-    .header-right {
-        flex-wrap: wrap;
-    }
-
-    .logout-btn {
-        width: 100%;
-    }
-
-    .weather-details-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .temp-main #temperatura {
-        font-size: 38px;
-    }
-}
-```
-
-
-/* ==========================================================
-   ALTO CONTRASTE - STATUS DOS SENSORES
-   ========================================================== */
-
-/* Card principal */
-body.contraste .activities-card {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-    box-shadow: none !important;
-}
-
-/* Título */
-body.contraste .activities-card .chart-title {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-body.contraste .activities-card .chart-title i {
-    color: #fff !important;
-}
-
-/* Lista dos sensores */
-body.contraste .sensor-status-list {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-/* Cada sensor */
-body.contraste .sensor-status-item {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-    box-shadow: none !important;
-}
-
-/* Área esquerda */
-body.contraste .sensor-left {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-/* Área direita */
-body.contraste .sensor-right {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-/* Nome do sensor */
-body.contraste .sensor-info h4 {
-    color: #fff !important;
-}
-
-/* Tipo e horário */
-body.contraste .sensor-info p {
-    color: #fff !important;
-}
-
-/* Círculo do sensor */
-body.contraste .status-circle {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-/* Ícone dentro do círculo */
-body.contraste .status-circle i {
-    color: #fff !important;
-}
-
-/* Barras de sinal */
-body.contraste .signal-bars {
-    color: #fff !important;
-}
-
-body.contraste .signal-bars i {
-    background: #fff !important;
-}
-
-/* Status ONLINE / OFFLINE / OSCILANDO */
-body.contraste .sensor-status-item .status-badge {
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #fff !important;
-}
-
-/* Bolinha de pulso do sensor online */
-body.contraste .pulse-dot {
-    background: #fff !important;
-    border: 1px solid #fff !important;
-}
-
-/* Remove cores verde/vermelha/laranja do modo normal */
-body.contraste .sensor-status-item.is-online,
-body.contraste .sensor-status-item.is-offline,
-body.contraste .sensor-status-item.is-warning {
-    background: #000 !important;
-    color: #fff !important;
-    border-color: #fff !important;
-}
-
-/* Hover */
-body.contraste .sensor-status-item:hover {
-    background: #222 !important;
-}
-
-body.contraste .sensor-status-item:hover * {
-    color: #fff !important;
-}
-
-/* ================================
-   GRÁFICOS - ALTO CONTRASTE
-   ================================ */
-
-body.contraste .chart-card,
-body.contraste .grafico-box {
-    background: #000 !important;
-    color: #fff !important;
-    border-color: #fff !important;
-}
-
-/* Área do gráfico permanece preta */
-body.contraste .grafico-box canvas {
-    background: #000 !important;
-}
-
-/* Títulos dos gráficos */
-body.contraste .chart-card .chart-title {
-    color: #fff !important;
-}
-
-body.contraste .chart-card .chart-title i {
-    color: #fff !important;
-}
-
-/* ==========================================================
-   PAGINAÇÃO DO STATUS DOS SENSORES
-   ========================================================== */
-
-.sensor-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.sensor-pagination button {
-    background: #58CC02;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.sensor-pagination button:hover:not(:disabled) {
-    background: #46A302;
-}
-
-.sensor-pagination button:disabled {
-    background: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-.sensor-pagination .pagina-atual {
-    font-weight: bold;
-    color: #052501;
-    min-width: 100px;
-    text-align: center;
-}
-
-/* Alto contraste */
-body.contraste .sensor-pagination button {
-    background: #000 !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
-}
-
-body.contraste .sensor-pagination button:disabled {
-    background: #000 !important;
-    color: #777 !important;
-    border-color: #777 !important;
-}
-
-body.contraste .sensor-pagination .pagina-atual {
-    color: #fff !important;
-}
-
-/* ==========================================================
-   PAGINAÇÃO DO STATUS DOS SISTEMAS AUTOMATIZADOS
-   ========================================================== */
-
-.sistemas-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.sistemas-pagination button {
-    background: #58CC02;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.sistemas-pagination button:hover:not(:disabled) {
-    background: #46A302;
-}
-
-.sistemas-pagination button:disabled {
-    background: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-.sistemas-pagination .pagina-atual {
-    font-weight: bold;
-    color: #052501;
-    min-width: 120px;
-    text-align: center;
-}
-
-/* Alto contraste */
-body.contraste .sistemas-pagination button {
-    background: #000 !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
-}
-
-body.contraste .sistemas-pagination button:disabled {
-    background: #000 !important;
-    color: #777 !important;
-    border-color: #777 !important;
-}
-
-body.contraste .sistemas-pagination .pagina-atual {
-    color: #fff !important;
-}
+            font-size: 1.2rem;
+        }
+
+        .status-item p{
+            color: #666;
+
+            font-size: .95rem;
+        }
+
+        /* =========================
+        BOLINHA STATUS
+        ========================= */
+
+        .status-indicator{
+            width: 75px;
+            height: 75px;
+
+            border-radius: 50%;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 1.8rem;
+        }
+
+        /* =========================
+        STATUS CULTURAS
+        ========================= */
+
+        .status-saudavel{
+            background: rgba(76,199,20,.15);
+            border: 3px solid #4bc714;
+        }
+
+        .status-atencao{
+            background: rgba(255,152,0,.15);
+            border: 3px solid #ff9800;
+        }
+
+        .status-perigo{
+            background: rgba(220,53,69,.15);
+            border: 3px solid #dc3545;
+        }
+
+        /* COR DOS ÍCONES */
+
+        .status-saudavel i{
+            color: #4bc714 !important;
+        }
+
+        .status-atencao i{
+            color: #ff9800 !important;
+        }
+
+        .status-perigo i{
+            color: #dc3545 !important;
+        }
+
+        .weather-card {
+            background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
+            border-radius: 20px;
+            padding: 16px 20px;
+            color: #ffffff;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Cabeçalho */
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .location-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        /* Corpo */
+        .weather-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .temp-main {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .temp-main #weather-icon {
+            font-size: 42px;
+            color: #ffc107; /* Cor do sol */
+        }
+
+        .temp-main #temperatura {
+            font-size: 52px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .temp-main .unit {
+            font-size: 20px;
+            vertical-align: top;
+            margin-top: -15px;
+        }
+
+        /* Qualidade do ar */
+        .air-quality {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .air-quality i {
+            color: #ffb300;
+        }
+
+        .air-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Rodapé */
+        .weather-footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .btn-previsao {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-previsao:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .weather-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+        }
+
+        .detail-item i {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .detail-item strong {
+            font-size: 14px;
+        }
+
+        /* ===========================
+        ALTO CONTRASTE (CORRIGIDO)
+        ===========================*/
+
+        body.contraste{
+            background:#000 !important;
+            color:#fff !important;
+        }
+
+        body.contraste *{
+            color:#fff !important;
+            border-color:#fff !important;
+        }
+
+        body.contraste .sidebar{
+            background:#000 !important;
+            border-right:2px solid #fff;
+        }
+
+        body.contraste .main-content{
+            background:#000 !important;
+        }
+
+        body.contraste .card,
+        body.contraste .table-container,
+        body.contraste .chart-card,
+        body.contraste .activities-card,
+        body.contraste .weather-card,
+        body.contraste .status-item{
+            background:#111 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+            box-shadow:none !important;
+        }
+
+        /* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
+        body.contraste .activities-card > div {
+            background: #000 !important;
+            border: 1px solid #fff !important;
+        }
+        /* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
+        body.contraste .activities-card .btn {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.contraste .activities-card .btn:hover {
+            background-color: #e6e6e6 !important;
+            color: #000000 !important;
+        }
+
+        body.contraste table,
+        body.contraste tr,
+        body.contraste td,
+        body.contraste th{
+            background:#111 !important;
+            color:#fff !important;
+            border:1px solid #fff !important;
+        }
+
+        body.contraste .status-badge{
+            background:#fff !important;
+            color:#000 !important;
+        }
+
+        body.contraste .logout-btn,
+        body.contraste .accessibility-btn,
+        body.contraste .btn,
+        body.contraste .mostrar-mais {
+            background:#000 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+        }
+        body.contraste *{
+            color:#fff !important;
+            border-color:#fff !important;
+        }
+
+        #contraste-btn:hover {
+            color: var(--verde-claro) !important;
+        }
+
+        body.contraste #contraste-btn:hover {
+            color: #fff !important;
+        }
+
+        body.contraste .avatar{
+            background:#fff !important;
+            color:#000 !important;
+        }
+
+        body.contraste input,
+        body.contraste select,
+        body.contraste textarea{
+            background:#000 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+        }
+
+        /* ==========================================================
+        ALTO CONTRASTE - STATUS DOS SENSORES
+        ========================================================== */
+
+        /* Card principal */
+        body.contraste .activities-card {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        /* Título */
+        body.contraste .activities-card .chart-title {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        body.contraste .activities-card .chart-title i {
+            color: #fff !important;
+        }
+
+        /* Lista dos sensores */
+        body.contraste .sensor-status-list {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Cada sensor */
+        body.contraste .sensor-status-item {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        /* Área esquerda */
+        body.contraste .sensor-left {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Área direita */
+        body.contraste .sensor-right {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Nome do sensor */
+        body.contraste .sensor-info h4 {
+            color: #fff !important;
+        }
+
+        /* Tipo e horário */
+        body.contraste .sensor-info p {
+            color: #fff !important;
+        }
+
+        /* Círculo do sensor */
+        body.contraste .status-circle {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* Ícone dentro do círculo */
+        body.contraste .status-circle i {
+            color: #fff !important;
+        }
+
+        /* Barras de sinal */
+        body.contraste .signal-bars {
+            color: #fff !important;
+        }
+
+        body.contraste .signal-bars i {
+            background: #fff !important;
+        }
+
+        /* Status ONLINE / OFFLINE / OSCILANDO */
+        body.contraste .sensor-status-item .status-badge {
+            background: #fff !important;
+            color: #000 !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* Bolinha de pulso do sensor online */
+        body.contraste .pulse-dot {
+            background: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        /* Remove cores verde/vermelha/laranja do modo normal */
+        body.contraste .sensor-status-item.is-online,
+        body.contraste .sensor-status-item.is-offline,
+        body.contraste .sensor-status-item.is-warning {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* Hover */
+        body.contraste .sensor-status-item:hover {
+            background: #222 !important;
+        }
+
+        body.contraste .sensor-status-item:hover * {
+            color: #fff !important;
+        }
+
+        /* ================================
+        GRÁFICOS - ALTO CONTRASTE
+        ================================ */
+
+        body.contraste .chart-card,
+        body.contraste .grafico-box {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* Área do gráfico permanece preta */
+        body.contraste .grafico-box canvas {
+            background: #000 !important;
+        }
+
+        /* Títulos dos gráficos */
+        body.contraste .chart-card .chart-title {
+            color: #fff !important;
+        }
+
+        body.contraste .chart-card .chart-title i {
+            color: #fff !important;
+        }
+
+        /* ==========================================================
+        RESPONSIVO FARMI
+        ========================================================== */
+
+        /* BASE - evita elementos ultrapassando a tela */
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .main-content {
+            min-width: 0;
+            width: calc(100% - 250px);
+        }
+
+        .stats-grid,
+        .charts-grid {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .card,
+        .chart-card,
+        .activities-card,
+        .weather-card,
+        .table-container {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        /* GRÁFICOS */
+        .grafico-box {
+            width: 100%;
+            max-width: 100%;
+            height: 350px;
+            min-height: 0;
+        }
+
+        .grafico-box canvas {
+            max-width: 100% !important;
+        }
+
+        /* CLIMA */
+        .weather-card {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* TABELA */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-container table {
+            min-width: 700px;
+        }
+
+
+        /* ==========================================================
+        ATÉ 1200px
+        ========================================================== */
+
+        @media (max-width: 1200px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .weather-card {
+                width: 100%;
+            }
+        }
+
+
+        /* ==========================================================
+        TABLET - ATÉ 768px
+        ========================================================== */
+
+        @media (max-width: 768px) {
+
+            /* SIDEBAR */
+            .sidebar {
+                width: 250px;
+                height: 100vh;
+                left: 0;
+                top: 0;
+                z-index: 1000;
+
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            /* FUNDO ESCURO */
+            .menu-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+            }
+
+            .menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* BOTÃO DO MENU */
+            .menu-toggle {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+
+                width: 45px;
+                height: 45px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background: #052501;
+                color: #ffffff;
+
+                border: none;
+                border-radius: 10px;
+
+                font-size: 20px;
+                cursor: pointer;
+
+                z-index: 1100;
+            }
+
+            .menu-toggle:hover {
+                background: #4bc714;
+            }
+
+            /* CONTEÚDO */
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+                max-width: 100%;
+                padding: 75px 20px 30px;
+            }
+
+            /* CABEÇALHO */
+            .header {
+                width: 100%;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+
+            .header h2 {
+                font-size: 22px;
+            }
+
+            .header-right {
+                gap: 8px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .logout-btn {
+                padding: 0 12px;
+            }
+
+            /* CARDS */
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .card-info {
+                min-width: 0;
+            }
+
+            .card-info h3 {
+                font-size: 14px;
+                line-height: 1.3;
+            }
+
+            .card-info p {
+                font-size: 24px;
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
+
+            .card-icon {
+                font-size: 2rem;
+                flex-shrink: 0;
+                margin-left: 10px;
+            }
+
+            /* GRÁFICOS */
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .chart-card,
+            .activities-card {
+                width: 100%;
+                padding: 18px;
+            }
+
+            .chart-title {
+                font-size: 1.15rem;
+                line-height: 1.4;
+            }
+
+            .grafico-box {
+                width: 100%;
+                height: 300px;
+                padding: 8px;
+            }
+
+            /* CLIMA */
+            .weather-card {
+                width: 100%;
+                padding: 16px;
+            }
+
+            .weather-body {
+                gap: 15px;
+            }
+
+            .temp-main #temperatura {
+                font-size: 44px;
+            }
+
+            .temp-main #weather-icon {
+                font-size: 35px;
+            }
+
+            .air-quality {
+                max-width: 50%;
+            }
+
+            .weather-details-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            /* SENSORES */
+            .sensor-status-item {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .sensor-left {
+                min-width: 0;
+            }
+
+            .sensor-info {
+                min-width: 0;
+            }
+
+            .sensor-info h4,
+            .sensor-info p {
+                overflow-wrap: anywhere;
+            }
+
+            /* TABELA */
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .table-container table {
+                min-width: 700px;
+            }
+        }
+
+
+            /* ==========================================================
+            CELULAR - ATÉ 600px
+            ========================================================== */
+
+            @media (max-width: 600px) {
+
+                .main-content {
+                    padding: 70px 12px 25px;
+                }
+
+                /* HEADER */
+                .header {
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+
+                .header h2 {
+                    font-size: 21px;
+                }
+
+            .header-right {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 7px;
+            }
+
+            .logout-btn {
+                height: 40px;
+                padding: 0 12px;
+                font-size: 13px;
+            }
+
+            .accessibility-btn,
+            #contraste-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* CARDS */
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .card {
+                min-height: 90px;
+                padding: 16px;
+            }
+
+            .card-info p {
+                font-size: 25px;
+            }
+
+            /* GRÁFICOS */
+            .chart-card,
+            .activities-card {
+                padding: 14px;
+            }
+
+            .chart-title {
+                font-size: 1.05rem;
+                margin-bottom: 15px;
+            }
+
+            .grafico-box {
+                height: 260px;
+                padding: 5px;
+            }
+
+            /* CLIMA */
+            .weather-card {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .weather-header {
+                font-size: 13px;
+            }
+
+            .weather-body {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .temp-main {
+                justify-content: center;
+            }
+
+            .temp-main #temperatura {
+                font-size: 48px;
+            }
+
+            .air-quality {
+                max-width: 100%;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .weather-details-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .detail-item {
+                padding: 9px 5px;
+                font-size: 11px;
+            }
+
+            /* SENSORES */
+            .sensor-status-item {
+                padding: 12px;
+            }
+
+            .sensor-left {
+                gap: 10px;
+            }
+
+            .status-circle {
+                width: 42px;
+                height: 42px;
+                flex-shrink: 0;
+            }
+
+            .sensor-info h4 {
+                font-size: 14px;
+            }
+
+            .sensor-info p {
+                font-size: 12px;
+            }
+
+            .sensor-right {
+                gap: 6px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .status-badge {
+                padding: 5px 9px;
+                font-size: 11px;
+            }
+        }
+
+
+            /* ==========================================================
+            CELULAR PEQUENO - ATÉ 480px
+            ========================================================== */
+
+            @media (max-width: 480px) {
+
+                .main-content {
+                    padding: 68px 10px 20px;
+                }
+
+                .menu-toggle {
+                    width: 42px;
+                    height: 42px;
+                    top: 12px;
+                    left: 12px;
+                }
+
+                /* HEADER */
+                .header h2 {
+                    font-size: 19px;
+                }
+
+                .header p {
+                    font-size: 13px;
+                }
+
+                .header-right {
+                    gap: 5px;
+                }
+
+                .logout-btn {
+                    padding: 0 10px;
+                    font-size: 12px;
+                }
+
+                .logout-btn i {
+                    margin-right: 0;
+                }
+
+                .accessibility-btn,
+                #contraste-btn {
+                    width: 38px;
+                    height: 38px;
+                    font-size: 15px;
+                }
+
+                /* CARDS */
+                .card {
+                    padding: 14px;
+                }
+
+                .card-info h3 {
+                    font-size: 13px;
+                }
+
+                .card-info p {
+                    font-size: 23px;
+                }
+
+                .card-icon {
+                    font-size: 1.8rem;
+                }
+
+                /* GRÁFICOS */
+                .chart-card,
+                .activities-card {
+                    padding: 12px;
+                }
+
+                .chart-title {
+                    font-size: 1rem;
+                }
+
+                .grafico-box {
+                    height: 230px;
+                }
+
+                /* CLIMA */
+                .weather-card {
+                    padding: 13px;
+                    border-radius: 15px;
+                }
+
+                .temp-main #temperatura {
+                    font-size: 42px;
+                }
+
+                .temp-main #weather-icon {
+                    font-size: 30px;
+                }
+
+                .weather-details-grid {
+                    gap: 7px;
+                }
+
+                .detail-item {
+                    padding: 8px 3px;
+                }
+
+                .detail-item strong {
+                    font-size: 12px;
+                }
+
+                /* SENSORES */
+                .sensor-status-item {
+                    padding: 10px;
+                }
+
+                .status-circle {
+                    width: 38px;
+                    height: 38px;
+                    font-size: 15px;
+                }
+
+                .sensor-info h4 {
+                    font-size: 13px;
+                }
+
+                .sensor-info p {
+                    font-size: 11px;
+                }
+
+                .status-badge {
+                    font-size: 10px;
+                    padding: 4px 7px;
+                }
+
+                /* TABELA */
+                .table-container {
+                    padding: 12px;
+                }
+
+                .table-container table {
+                    min-width: 650px;
+                }
+            }
+
+
+            /* ==========================================================
+            CELULAR MUITO PEQUENO - ATÉ 360px
+            ========================================================== */
+
+            @media (max-width: 360px) {
+
+                .main-content {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+
+                .header-right {
+                    flex-wrap: wrap;
+                }
+
+                .logout-btn {
+                    width: 100%;
+                }
+
+                .weather-details-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .temp-main #temperatura {
+                    font-size: 38px;
+                }
+            }
+
+            /* ==========================================================
+            PAGINAÇÃO DO STATUS DOS SENSORES
+            ========================================================== */
+
+            .sensor-pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .sensor-pagination button {
+                background: #58CC02;
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                padding: 8px 14px;
+                font-size: 13px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .sensor-pagination button:hover:not(:disabled) {
+                background: #46A302;
+            }
+
+            .sensor-pagination button:disabled {
+                background: #ccc;
+                color: #666;
+                cursor: not-allowed;
+            }
+
+            .sensor-pagination .pagina-atual {
+                font-weight: bold;
+                color: #052501;
+                min-width: 100px;
+                text-align: center;
+            }
+
+            /* Alto contraste */
+            body.contraste .sensor-pagination button {
+                background: #000 !important;
+                color: #fff !important;
+                border: 1px solid #fff !important;
+            }
+
+            body.contraste .sensor-pagination button:disabled {
+                background: #000 !important;
+                color: #777 !important;
+                border-color: #777 !important;
+            }
+
+            body.contraste .sensor-pagination .pagina-atual {
+                color: #fff !important;
+            }
+
+            /* ==========================================================
+            PAGINAÇÃO DO STATUS DOS SISTEMAS AUTOMATIZADOS
+            ========================================================== */
+
+            .sistemas-pagination {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .sistemas-pagination button {
+                background: #58CC02;
+                color: #fff;
+                border: none;
+                border-radius: 8px;
+                padding: 8px 14px;
+                font-size: 13px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+
+            .sistemas-pagination button:hover:not(:disabled) {
+                background: #46A302;
+            }
+
+            .sistemas-pagination button:disabled {
+                background: #ccc;
+                color: #666;
+                cursor: not-allowed;
+            }
+
+            .sistemas-pagination .pagina-atual {
+                font-weight: bold;
+                color: #052501;
+                min-width: 120px;
+                text-align: center;
+            }
+
+            /* Alto contraste */
+            body.contraste .sistemas-pagination button {
+                background: #000 !important;
+                color: #fff !important;
+                border: 1px solid #fff !important;
+            }
+
+            body.contraste .sistemas-pagination button:disabled {
+                background: #000 !important;
+                color: #777 !important;
+                border-color: #777 !important;
+            }
+
+            body.contraste .sistemas-pagination .pagina-atual {
+                color: #fff !important;
+            }
 </style>
 </head>
 
@@ -2180,6 +2172,27 @@ function atualizarLux(novoValor) {
 }
 
 /* =========================
+   CORES DOS GRÁFICOS NO ALTO CONTRASTE
+========================= */
+function atualizarCoresGraficosContraste() {
+    const ativo = document.body.classList.contains('contraste');
+    const cor   = ativo ? '#ffffff' : '#052501';
+    const grade = ativo ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+    [chartTemperatura, chartUmidade, chartSolo].forEach(function (chart) {
+        if (!chart) return;
+        chart.options.plugins.legend.labels.color = cor;
+        chart.options.scales.x.ticks.color = cor;
+        chart.options.scales.x.grid.color  = grade;
+        chart.options.scales.y.ticks.color = cor;
+        chart.options.scales.y.grid.color  = grade;
+        chart.update();
+    });
+
+    if (chartLux) chartLux.update(); // o texto do gauge já recalcula sozinho no afterDraw
+}
+
+/* =========================
    ATUALIZA OS GRÁFICOS
 ========================= */
 async function atualizarGraficos() {
@@ -2436,22 +2449,28 @@ function atualizarPaginacaoSensores() {
     }
 
 
-    // Botão anterior
-    if (botaoAnterior) {
+    // Botão ANTERIOR
+if (botaoAnterior) {
 
-        botaoAnterior.disabled =
-            paginaSensor === 1;
-
+    if (paginaSensor === 1) {
+        botaoAnterior.style.display = 'none';
+    } else {
+        botaoAnterior.style.display = 'inline-flex';
     }
 
+}
 
-    // Botão próxima
-    if (botaoProxima) {
 
-        botaoProxima.disabled =
-            paginaSensor === totalPaginas;
+// Botão PRÓXIMA
+if (botaoProxima) {
 
+    if (paginaSensor === totalPaginas) {
+        botaoProxima.style.display = 'none';
+    } else {
+        botaoProxima.style.display = 'inline-flex';
     }
+
+}
 
 }
 
@@ -2538,23 +2557,25 @@ setInterval(
             tamanhoFonte = 100;
             aplicarFonte();
         }
-const contrasteBtn = document.getElementById("contraste-btn");
 
-// Carrega o estado salvo
-if (localStorage.getItem("contraste") === "true") {
-    document.body.classList.add("contraste");
-}
+    const contrasteBtn = document.getElementById("contraste-btn");
 
-contrasteBtn.addEventListener("click", () => {
-    document.body.classList.toggle("contraste");
+    // Carrega o estado salvo
+    if (localStorage.getItem("contraste") === "true") {
+        document.body.classList.add("contraste");
+    }
+    atualizarCoresGraficosContraste();
 
-    localStorage.setItem(
-        "contraste",
-        document.body.classList.contains("contraste")
-    );
+    contrasteBtn.addEventListener("click", () => {
+        document.body.classList.toggle("contraste");
 
-    
-});
+        localStorage.setItem(
+            "contraste",
+            document.body.classList.contains("contraste")
+        );
+
+        atualizarCoresGraficosContraste();
+    });
         
 
 
@@ -2845,22 +2866,28 @@ function atualizarPaginacaoSistemas() {
     }
 
 
-    // Botão anterior
-    if (sistemaAnterior) {
+    // Botão ANTERIOR
+if (sistemaAnterior) {
 
-        sistemaAnterior.disabled =
-            paginaSistema === 1;
-
+    if (paginaSistema === 1) {
+        sistemaAnterior.style.display = 'none';
+    } else {
+        sistemaAnterior.style.display = 'inline-flex';
     }
 
+}
 
-    // Botão próxima
-    if (sistemaProxima) {
 
-        sistemaProxima.disabled =
-            paginaSistema === totalPaginas;
+// Botão PRÓXIMA
+if (sistemaProxima) {
 
+    if (paginaSistema === totalPaginas) {
+        sistemaProxima.style.display = 'none';
+    } else {
+        sistemaProxima.style.display = 'inline-flex';
     }
+
+}
 
 }
 

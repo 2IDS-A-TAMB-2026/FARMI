@@ -164,7 +164,58 @@ body.contraste .avatar {
     border-color: #57c91b;
 }
 
+/* =========================
+   PAGINAÇÃO FUNCIONÁRIOS
+   ========================= */
 
+.paginacao-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.pagina-info {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.botao-paginacao {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #57c91b;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.botao-paginacao:hover {
+    transform: scale(1.05);
+}
+
+.botao-paginacao:disabled {
+    display: none;
+}
+
+body.contraste .pagina-info {
+    color: #fff !important;
+}
+
+body.contraste .botao-paginacao {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
 </style>
 
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
@@ -482,7 +533,7 @@ body.contraste .avatar {
 
                 <tbody id="usuariosTable">
                     <?php foreach($usuarios as $usuario): ?>
-                    <tr>
+                    <tr class="usuario-item">
 
                         <td><?= $usuario['CPF']; ?></td>
 
@@ -536,7 +587,20 @@ body.contraste .avatar {
 
             </table>
         </div>
+         <!-- PAGINAÇÃO -->
+        <div class="paginacao-container">
+            <button id="paginaAnterior" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
+            <div id="paginaInfo" class="pagina-info">
+                Página 1 de 1
+            </div>
+
+            <button id="proximaPagina" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
     </main>
 
     <!-- VLibras -->
@@ -558,12 +622,22 @@ body.contraste .avatar {
         // ACESSIBILIDADE: FONTE (AUMENTAR / DIMINUIR)
         // ==========================================
         document.addEventListener('DOMContentLoaded', function () {
-            const contrasteBtn = document.getElementById('contraste-btn');
-    if (contrasteBtn) {
-        contrasteBtn.addEventListener('click', () => {
-            document.body.classList.toggle('contraste');
-        });
-    }
+            const btnContraste = document.getElementById('contraste-btn');
+
+            if (localStorage.getItem('altoContraste') === 'true') {
+                document.body.classList.add('alto-contraste');
+            }
+
+            btnContraste.addEventListener('click', () => {
+
+                document.body.classList.toggle('alto-contraste');
+
+                localStorage.setItem(
+                    'altoContraste',
+                    document.body.classList.contains('alto-contraste')
+                );
+
+            });
 
             const btnAumentar = document.getElementById('aumentar-fonte');
             const btnDiminuir = document.getElementById('diminuir-fonte');
@@ -1059,8 +1133,127 @@ body.contraste .avatar {
         });
     </script>
     <?php endif; ?>
+<script>
+// =========================
+// PAGINAÇÃO FUNCIONÁRIOS
+// =========================
+
+const usuarios = document.querySelectorAll(".usuario-item");
+
+const paginaAnterior = document.getElementById("paginaAnterior");
+const proximaPagina = document.getElementById("proximaPagina");
+const paginaInfo = document.getElementById("paginaInfo");
+
+const USUARIOS_POR_PAGINA = 5;
+
+let paginaAtual = 1;
+
+function atualizarUsuarios() {
+
+    const totalUsuarios = usuarios.length;
+
+    const totalPaginas = Math.ceil(
+        totalUsuarios / USUARIOS_POR_PAGINA
+    );
+
+    // Garante que a página atual nunca fique inválida
+    if (totalPaginas === 0) {
+        paginaAtual = 1;
+    } else if (paginaAtual > totalPaginas) {
+        paginaAtual = totalPaginas;
+    }
+
+    // Atualiza o texto da página
+    if (totalPaginas > 0) {
+        paginaInfo.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
+    } else {
+        paginaInfo.textContent = "Nenhuma página";
+    }
+
+    // Esconde todos os funcionários
+    usuarios.forEach(function(usuario) {
+        usuario.style.display = "none";
+    });
+
+    // Calcula quais funcionários serão exibidos
+    const inicio =
+        (paginaAtual - 1) * USUARIOS_POR_PAGINA;
+
+    const fim =
+        inicio + USUARIOS_POR_PAGINA;
+
+    // Mostra apenas os funcionários da página atual
+    Array.from(usuarios)
+        .slice(inicio, fim)
+        .forEach(function(usuario) {
+            usuario.style.display = "table-row";
+        });
+
+    // =========================
+    // BOTÃO ANTERIOR
+    // =========================
+
+    if (paginaAtual <= 1) {
+        paginaAnterior.style.display = "none";
+    } else {
+        paginaAnterior.style.display = "flex";
+    }
+
+    // =========================
+    // BOTÃO PRÓXIMO
+    // =========================
+
+    if (
+        paginaAtual >= totalPaginas ||
+        totalPaginas === 0
+    ) {
+        proximaPagina.style.display = "none";
+    } else {
+        proximaPagina.style.display = "flex";
+    }
+}
 
 
+// =========================
+// CLIQUE EM ANTERIOR
+// =========================
+
+paginaAnterior.addEventListener("click", function() {
+
+    if (paginaAtual > 1) {
+
+        paginaAtual--;
+
+        atualizarUsuarios();
+    }
+});
+
+
+// =========================
+// CLIQUE EM PRÓXIMO
+// =========================
+
+proximaPagina.addEventListener("click", function() {
+
+    const totalUsuarios = usuarios.length;
+
+    const totalPaginas = Math.ceil(
+        totalUsuarios / USUARIOS_POR_PAGINA
+    );
+
+    if (paginaAtual < totalPaginas) {
+
+        paginaAtual++;
+
+        atualizarUsuarios();
+    }
+});
+
+
+// Inicia a paginação
+atualizarUsuarios();
+</script>
 </body>
 
 </html>

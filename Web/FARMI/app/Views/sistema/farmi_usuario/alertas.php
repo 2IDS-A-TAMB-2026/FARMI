@@ -1,266 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    
     <style>
-    #aumentar-fonte,
-    #diminuir-fonte,
-    #resetar-fonte {
-        width: 42px;
-        height: 42px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        background: #57c91b;
-        color: white;
-        font-weight: bold;
-        transition: .3s;
-        margin-right: 7.5px; 
-        font-size: 16px;
-        
-    }
-    .filtro-dropdown{
-    position: relative;
-}
+            #aumentar-fonte,
+            #diminuir-fonte,
+            #resetar-fonte {
+                width: 42px;
+                height: 42px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                background: #57c91b;
+                color: white;
+                font-weight: bold;
+                transition: .3s;
+                margin-right: 7.5px; 
+                font-size: 16px;
+                
+            }
+            .filtro-dropdown{
+            position: relative;
+        }
 
-.filtro-menu{
-    display: none;
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 230px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.15);
-    overflow: hidden;
-    z-index: 1000;
-    font-size: 16px;
-}
+        #contraste-btn i,
+        .btn-acessibilidade i {
+            color: #000 ;
+        }
 
-.filtro-menu.show{
-    display: block;
-}
+        .filtro-menu{
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            width: 230px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.15);
+            overflow: hidden;
+            z-index: 1000;
+            font-size: 16px;
+        }
 
-.filtro-item{
-    padding: 12px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .filtro-menu.show{
+            display: block;
+        }
 
-.filtro-item:hover{
-    background: #f5f5f5;
-}
+        .filtro-item{
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.filtro-item i{
-    color: #57c91b;
-}
+        .filtro-item:hover{
+            background: #f5f5f5;
+        }
 
-    #aumentar-fonte:hover,
-    #diminuir-fonte:hover,
-    #resetar-fonte:hover {
-        transform: scale(1.05);
-    }
-    .alto-contraste {
-    background: #000 !important;
-    color: #fff !important;
-    }
+        .filtro-item i{
+            color: #57c91b;
+        }
 
-    .alto-contraste * {
-        background-color: #000 !important;
-        color: #fff !important;
-        border-color: #fff !important;
-    }
+            #aumentar-fonte:hover,
+            #diminuir-fonte:hover,
+            #resetar-fonte:hover {
+                transform: scale(1.05);
+            } 
+            
+        .avatar {
+            background: #57c91b;
+            color: #000;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%; /* Transforma em um círculo perfeito */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        #btnFiltro{
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
-    .alto-contraste a,
-    .alto-contraste i {
-        color: #ffff00 !important;
-    }
-    /* BOTÕES NO MODO ALTO CONTRASTE */
-.alto-contraste #aumentar-fonte,
-.alto-contraste #diminuir-fonte,
-.alto-contraste #resetar-fonte,
+            background: #fff;
+            color: #000;
 
-.alto-contraste a[href*="logout"] {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-body.alto-contraste .avatar {
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #fff !important;
-}
+            border: 2px solid #000;
+            border-radius: 10px;
 
-    /* Ícones dos botões */
-    
-    .alto-contraste a[href*="logout"] i {
-        color: #fff !important;
-    }
+            padding: 10px 16px;
 
-    /* Hover */
-    .alto-contraste #aumentar-fonte:hover,
-    .alto-contraste #diminuir-fonte:hover,
-    .alto-contraste #resetar-fonte:hover,
-    
-    .alto-contraste a[href*="logout"]:hover {
-        background: #222 !important;
-    }
-    #contraste-btn{
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 50%;
-    background: #fff;
-    color: #000;
-    cursor: pointer;
-    font-size: 18px;
-}
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            font-size: 16px;
+        }
 
-#contraste-btn i{
-    color: #000;
-}
-.avatar {
-    background: #57c91b;
-    color: #000;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%; /* Transforma em um círculo perfeito */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-#btnFiltro{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    background: #fff;
-    color: #000;
-
-    border: 2px solid #000;
-    border-radius: 10px;
-
-    padding: 10px 16px;
-
-    font-weight: 600;
-    cursor: pointer;
-    transition: .3s;
-    font-size: 16px;
-}
-
-#btnFiltro i{
-    color: #000;
-}
+        #btnFiltro i{
+            color: #000;
+        }
 
 
-/* NORMAL */
-#btnFiltro{
-    background: #57c91b;
-    color: #fff;
-    border: none;
-}
+        /* NORMAL */
+        #btnFiltro{
+            background: #57c91b;
+            color: #fff;
+            border: none;
+        }
 
-#btnFiltro i{
-    color: #fff;
-}
+        #btnFiltro i{
+            color: #fff;
+        }
 
-/* ALTO CONTRASTE */
-.alto-contraste #btnFiltro{
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #fff !important;
-}
 
-.alto-contraste #btnFiltro i{
-    color: #000 !important;
-}
+        /* BOTÃO DE FILTROS DO CONTEXTO DE ALERTAS (VERSÃO AMPLIADA) */
+        .btn-secondary {
+            font-size: 16px !important; /* Aumentou o texto (era 14px) */
+            height: 42px;               /* Mantém o alinhamento vertical com o Dashboard */
+            padding: 0 30px;            /* Aumentou consideravelmente a largura nas laterais (era 15px) */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;                  /* Espaço ligeiramente maior entre o ícone e o texto */
+            border-radius: 10px;
+        }
 
-.alto-contraste #contraste-btn{
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #000 !important;
-}
+        .paginacao-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
 
-.alto-contraste #contraste-btn i{
-    color: #fff !important;
-}
-/* BOTÃO DE FILTROS DO CONTEXTO DE ALERTAS (VERSÃO AMPLIADA) */
-.btn-secondary {
-    font-size: 16px !important; /* Aumentou o texto (era 14px) */
-    height: 42px;               /* Mantém o alinhamento vertical com o Dashboard */
-    padding: 0 30px;            /* Aumentou consideravelmente a largura nas laterais (era 15px) */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;                  /* Espaço ligeiramente maior entre o ícone e o texto */
-    border-radius: 10px;
-}
-.alto-contraste a#btnFiltro,
-.alto-contraste button#btnFiltro {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
+        .pagina-info {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+        }
 
-.alto-contraste a#btnFiltro i,
-.alto-contraste button#btnFiltro i {
-    background: transparent !important;
-    color: #fff !important;
-}
-body.contraste .avatar {
-    background: #fff !important;
-    color: #000!important;
-}
-.paginacao-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 15px;
-    flex-wrap: wrap;
-}
+        .botao-paginacao {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            background-color: #57c91b;
+            color: #fff;
+            cursor: pointer;
 
-.pagina-info {
-    font-size: 16px;
-    font-weight: 600;
-    color: #57c91b;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.botao-paginacao {
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    background-color: #57c91b;
-    color: #fff;
-    cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .botao-paginacao:hover {
+            transform: scale(1.05);
+            background-color: #46a814;
+        }
 
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-.botao-paginacao:hover {
-    transform: scale(1.05);
-    background-color: #46a814;
-}
-
-.botao-paginacao:disabled {
-    display: none;
-}
+        .botao-paginacao:disabled {
+            display: none;
+        }
     </style>
-
 <head>
-    
     <!-- Ícone do site -->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alertas - FARMI Funcionário</title>
@@ -271,6 +180,7 @@ body.contraste .avatar {
 
     <!-- CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alertas.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
 
     <!-- RESPONSIVO -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
@@ -279,12 +189,10 @@ body.contraste .avatar {
 <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
-
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
             FARMI Funcionário
         </div>
-
         <nav>
             <a href="<?= base_url('/dashboard-usuario') ?>" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             <a href="<?= base_url('/luz') ?>" class="menu-item "><i class="fa-solid fa-lightbulb"></i> Luz</a>
@@ -294,35 +202,24 @@ body.contraste .avatar {
             <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item active"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
             <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
-
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
-
         <!-- Menu sanduíche -->
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <i class="fa-solid fa-bars"></i>
         </button>
-
         <!-- HEADER -->
         <header class="header">
-
             <div>
-
                 <h2>Alertas dos Sensores</h2>
-
                 <p style="color: #666;">
-
                     Monitoramento em tempo real dos alertas
-
                 </p>
-
             </div>
-
             <!-- Forçamos o flexbox e o alinhamento central diretamente no pai -->
 <div class="header-actions" style="display: flex; align-items: center; gap: 8px;">
-
     <!-- FILTROS -->
     <div class="filtro-dropdown">
         <button class="btn btn-secondary" id="btnFiltro">
@@ -339,7 +236,7 @@ body.contraste .avatar {
     </div>
 
     <!-- LOGIN (Corrigido o '45 px' para '42px' para casar com o Dashboard) -->
-    <a href="<?= base_url('/logout') ?>"
+    <a class= "btn-logout" href="<?= base_url('/logout') ?>"
        style="background: #57c91b; color: #fff; text-decoration: none; width: 120px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 600; margin-right: 15px; transition: 0.3s ease;">
         <i class="fa-solid fa-right-from-bracket"></i>
         Logout
@@ -357,95 +254,63 @@ body.contraste .avatar {
 
     <!-- AVATAR (Agora no mesmo nível dos outros, centralizado perfeitamente) -->
     <div class="avatar">F</div>
+    </div>
+</header>
 
-</div>
-
-        </header>
-
-        <!-- CARDS -->
+    <!-- CARDS -->
         <div class="stats-grid">
-
-            
             <!-- ALERTAS ATIVOS -->
             <div class="card">
-
                 <div>
-
                     <h3>Alertas Ativos</h3>
-
                     <p style="color: var(--vermelho);">
-    <?= $totalAlertas ?>
-</p>
-
+                    <?= $totalAlertas ?>
+                    </p>
                 </div>
-
                 <i class="fa-solid fa-triangle-exclamation"
                     style="color: var(--vermelho); font-size: 2.5rem;"></i>
-
             </div>
 
             <!-- CRÍTICOS -->
             <div class="card">
-
                 <div>
-
                     <h3>Críticos</h3>
-
                    <p style="color: var(--vermelho);">
-    <?= $totalCriticos ?>
-</p>
-
+                    <?= $totalCriticos ?>
+                    </p>
                 </div>
-
                 <i class="fa-solid fa-fire"
                     style="color: var(--vermelho); font-size: 2.5rem;"></i>
-
             </div>
 
             <!-- MÉDIOS -->
             <div class="card">
-
                 <div>
-
                     <h3>Médios</h3>
-
                     <p style="color: var(--laranja);">
-    <?= $totalMedios ?>
-</p>
-
+                    <?= $totalMedios ?>
+                    </p>
                 </div>
-
                 <i class="fa-solid fa-exclamation-triangle"
                     style="color: var(--laranja); font-size: 2.5rem;"></i>
-
             </div>
 
             <!-- BAIXOS -->
             <div class="card">
-
                 <div>
-
                     <h3>Baixos</h3>
-
                     <p style="color: var(--azul);">
-    <?= $totalBaixos ?>
-</p>
-
+                    <?= $totalBaixos ?>
+                    </p>
                 </div>
-
                 <i class="fa-solid fa-bell"
                     style="color: var(--azul); font-size: 2.5rem;"></i>
-
             </div>
-
         </div>
 
         <!-- ALERTAS -->
-        
         <div class="alerts-container">
-
             <div class="alerts-list">
-                
                 <?php foreach($alerta as $a) { 
                     // 1. Define a classe do card com base na gravidade do alerta
                     $classeGravidade = 'alert-medio';
@@ -485,7 +350,7 @@ body.contraste .avatar {
                                 <?= date('d/m/Y H:i', strtotime($a['DATA_HORA'])) ?>
                             </span>
 
-                            <?php if($a['STATUS'] == "Ativo"){ ?>
+                                <?php if($a['STATUS'] == "Ativo"){ ?>
                                 <span class="alert-status status-ativo">
                                     <?= $a['STATUS']; ?>
                                 </span>
@@ -494,12 +359,12 @@ body.contraste .avatar {
                                     <?= $a['STATUS']; ?>
                                 </span>
                             <?php } ?>
-                        </div>
                     </div>
                 </div>
+            </div>
                 <?php } ?>
                             
-                        </div>
+                </div>
                     </div>
                 </div>
                 <div class="paginacao-container">
@@ -538,33 +403,13 @@ body.contraste .avatar {
     <script>
 
 /* =========================
-   ACESSIBILIDADE - TAMANHO DA FONTE
+   ACESSIBILIDADE - FONTE + CONTRASTE
+   (script limpo: antes havia um DOMContentLoaded
+   duplicado e aninhado dentro do clique de
+   "aumentar-fonte", o que impedia o botão de
+   alto contraste de funcionar)
 ========================= */
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    let tamanhoFonte =
-        parseInt(localStorage.getItem('fonteSite')) || 16;
-
-    document.documentElement.style.fontSize =
-        tamanhoFonte + 'px';
-
-    document
-        .getElementById('aumentar-fonte')
-        .addEventListener('click', () => {
-
-            if (tamanhoFonte < 24) {
-
-                tamanhoFonte += 2;
-
-                document.documentElement.style.fontSize =
-                    tamanhoFonte + 'px';
-
-                localStorage.setItem(
-                    'fonteSite',
-                    tamanhoFonte
-                );
-            }
 document.addEventListener('DOMContentLoaded', () => {
 
     let tamanhoFonte =
@@ -577,8 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONTRASTE
     // =====================
 
-    const btnContraste =
-        document.getElementById('contraste-btn');
+    const btnContraste = document.getElementById('contraste-btn');
 
     if (localStorage.getItem('altoContraste') === 'true') {
         document.body.classList.add('alto-contraste');
@@ -603,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .getElementById('aumentar-fonte')
         .addEventListener('click', () => {
 
-            if (tamanhoFonte < 24) {
+            if (tamanhoFonte < 22) {
 
                 tamanhoFonte += 2;
 
@@ -654,46 +498,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 });
-        });
-
-    document
-        .getElementById('diminuir-fonte')
-        .addEventListener('click', () => {
-
-            if (tamanhoFonte > 12) {
-
-                tamanhoFonte -= 2;
-
-                document.documentElement.style.fontSize =
-                    tamanhoFonte + 'px';
-
-                localStorage.setItem(
-                    'fonteSite',
-                    tamanhoFonte
-                );
-            }
-
-        });
-
-    document
-        .getElementById('resetar-fonte')
-        .addEventListener('click', () => {
-
-            tamanhoFonte = 16;
-
-            document.documentElement.style.fontSize =
-                tamanhoFonte + 'px';
-
-            localStorage.setItem(
-                'fonteSite',
-                tamanhoFonte
-            );
-
-        });
-
-});
-
-
 
 function toggleMenu(){
             const menu = document.getElementById('menu');

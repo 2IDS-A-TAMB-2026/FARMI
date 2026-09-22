@@ -102,23 +102,29 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 // ROTAS DA API (PÚBLICAS / ESP32 / FLUTTER)
 // =========================
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
+    // Tratamento Universal de Preflight (CORS) para Flutter Web
+    $routes->options('(:any)', static function () {
+        return response()
+            ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+            ->setStatusCode(200);
+    });
+
     $routes->get('dashboard/stats', 'DashboardController::index');
 
-    // Adicione esta linha no seu arquivo de rotas dentro do grupo 'api'
-$routes->resource('sensores', ['controller' => 'MedidasSensoresController']);
+    // Rota específica de histórico (Deve vir ANTES do resource de sensores)
+    $routes->get('sensores/(:num)/historico', 'SensoresController::historico/$1');
 
-
-    // Autenticação API
-    $routes->options('login', static function () {
-        return response()->setStatusCode(200);
-    });
-    $routes->get('login', 'AuthController::index');
-    $routes->post('login', 'AuthApiController::login');
-
-    // Recursos
+    // Recursos REST
+    $routes->resource('sensores', ['controller' => 'SensoresController']);
     $routes->resource('fazendas', ['controller' => 'FazendaController']);
     $routes->resource('culturas', ['controller' => 'CulturaController']);
     $routes->resource('medidas_sensores', ['controller' => 'MedidasSensoresController']);
+
+    // Autenticação API
+    $routes->get('login', 'AuthController::index');
+    $routes->post('login', 'AuthApiController::login');
 
     // Endpoints adicionais
     $routes->get('usuarios', 'UsuariosController::index');

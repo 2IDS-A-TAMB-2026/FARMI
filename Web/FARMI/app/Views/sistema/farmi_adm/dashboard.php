@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_dashboard.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -48,18 +49,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 42px;
-            height: 42px;
+            width: 42px; /* Padronizado */
+            height: 42px; /* Padronizado */
             font-size: 20px;
             color: #000;
             cursor: pointer;
             transition: all 0.3s ease;
             outline: none !important;
             box-shadow: none !important;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
 
         #contraste-btn:hover {
-            color: #46A302;
+            color: var(--verde-claro);
+        }
+
+        #contraste-btn:focus,
+        #contraste-btn:active,
+        #contraste-btn:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
         }
 
         /* ==========================================================
@@ -242,70 +254,246 @@
             50% { transform: scale(1.2); opacity: 0.5; }
         }
 
-        /* ==========================================================
-           ALTO CONTRASTE
-           ========================================================== */
-        body.contraste .table-container {
-            background: #191717 !important;
-            border: 1px solid #fff;
+       /* ===========================
+        ALTO CONTRASTE (CORRIGIDO)
+        ===========================*/
+
+        body.contraste{
+            background:#000 !important;
+            color:#fff !important;
         }
 
-        body.contraste .table-container th,
-        body.contraste .table-container td {
-            color: #fff !important;
-            border-bottom: 1px solid #fff;
+        body.contraste *{
+            color:#fff !important;
+            border-color:#fff !important;
         }
 
-        body.contraste .table-container .status-badge,
-        body.contraste .sensor-status-list .status-badge {
-            background: #fff !important;
-            color: #000 !important;
-            border: 1px solid #fff;
+        body.contraste .sidebar{
+            background:#000 !important;
+            border-right:2px solid #fff;
         }
 
-        body.contraste .sensor-status-item {
+        body.contraste .main-content{
+            background:#000 !important;
+        }
+
+        body.contraste .card,
+        body.contraste .table-container,
+        body.contraste .chart-card,
+        body.contraste .activities-card,
+        body.contraste .weather-card,
+        body.contraste .status-item{
+            background:#111 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+            box-shadow:none !important;
+        }
+
+        /* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
+        body.contraste .activities-card > div {
             background: #000 !important;
             border: 1px solid #fff !important;
         }
+        /* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
+        body.contraste .activities-card .btn {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
 
-        body.contraste .sensor-info h4,
+        body.contraste .activities-card .btn:hover {
+            background-color: #e6e6e6 !important;
+            color: #000000 !important;
+        }
+
+        body.contraste table,
+        body.contraste tr,
+        body.contraste td,
+        body.contraste th{
+            background:#111 !important;
+            color:#fff !important;
+            border:1px solid #fff !important;
+        }
+
+        body.contraste .status-badge{
+            background:#fff !important;
+            color:#000 !important;
+        }
+
+        body.contraste .logout-btn,
+        body.contraste .accessibility-btn,
+        body.contraste .btn,
+        body.contraste .mostrar-mais {
+            background:#000 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+        }
+        body.contraste *{
+            color:#fff !important;
+            border-color:#fff !important;
+        }
+
+        #contraste-btn:hover {
+            color: var(--verde-claro) !important;
+        }
+
+        body.contraste #contraste-btn:hover {
+            color: #fff !important;
+        }
+
+        body.contraste .avatar{
+            background:#fff !important;
+            color:#000 !important;
+        }
+
+        body.contraste input,
+        body.contraste select,
+        body.contraste textarea{
+            background:#000 !important;
+            color:#fff !important;
+            border:2px solid #fff !important;
+        }
+
+        /* ==========================================================
+        ALTO CONTRASTE - STATUS DOS SENSORES
+        ========================================================== */
+
+        /* Card principal */
+        body.contraste .activities-card {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        /* Título */
+        body.contraste .activities-card .chart-title {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        body.contraste .activities-card .chart-title i {
+            color: #fff !important;
+        }
+
+        /* Lista dos sensores */
+        body.contraste .sensor-status-list {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Cada sensor */
+        body.contraste .sensor-status-item {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        /* Área esquerda */
+        body.contraste .sensor-left {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Área direita */
+        body.contraste .sensor-right {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        /* Nome do sensor */
+        body.contraste .sensor-info h4 {
+            color: #fff !important;
+        }
+
+        /* Tipo e horário */
         body.contraste .sensor-info p {
             color: #fff !important;
         }
 
+        /* Círculo do sensor */
         body.contraste .status-circle {
-            background: #000 !important;
-            color: #fff !important;
-            border: 1px solid #fff;
-        }
-
-        body.contraste .signal-bars i,
-        body.contraste .pulse-dot {
-            background: #fff !important;
-        }
-
-        body.contraste .avatar {
-            background: #ffffff !important;
-            color: #000000 !important;
-            border: none !important;
-        }
-
-        body.contraste canvas,
-        body.contraste .status-indicator,
-        body.contraste .activity-icon {
-            filter: grayscale(0%) brightness(200%) contrast(300%) !important;
-        }
-
-        body.contraste .btn-logout,
-        body.contraste #aumentar-fonte,
-        body.contraste #diminuir-fonte,
-        body.contraste #resetar-fonte {
             background: #000 !important;
             color: #fff !important;
             border: 2px solid #fff !important;
         }
 
-        body.contraste #contraste-btn {
+        /* Ícone dentro do círculo */
+        body.contraste .status-circle i {
+            color: #fff !important;
+        }
+
+        /* Barras de sinal */
+        body.contraste .signal-bars {
+            color: #fff !important;
+        }
+
+        body.contraste .signal-bars i {
+            background: #fff !important;
+        }
+
+        /* Status ONLINE / OFFLINE / OSCILANDO */
+        body.contraste .sensor-status-item .status-badge {
+            background: #fff !important;
+            color: #000 !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* Bolinha de pulso do sensor online */
+        body.contraste .pulse-dot {
+            background: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        /* Remove cores verde/vermelha/laranja do modo normal */
+        body.contraste .sensor-status-item.is-online,
+        body.contraste .sensor-status-item.is-offline,
+        body.contraste .sensor-status-item.is-warning {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* Hover */
+        body.contraste .sensor-status-item:hover {
+            background: #222 !important;
+        }
+
+        body.contraste .sensor-status-item:hover * {
+            color: #fff !important;
+        }
+
+        /* ================================
+        GRÁFICOS - ALTO CONTRASTE
+        ================================ */
+
+        body.contraste .chart-card,
+        body.contraste .grafico-box {
+            background: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* CORREÇÃO: o container do gráfico (.grafico-box) tinha fundo
+           branco vindo do CSS externo e não estava sendo sobrescrito —
+           só o canvas era coberto, então a área ao redor do gráfico
+           continuava clara no alto contraste. */
+        body.contraste .grafico-box {
+            background: #111 !important;
+        }
+
+        /* Área do gráfico permanece preta */
+        body.contraste .grafico-box canvas {
+            background: #000 !important;
+        }
+
+        /* Títulos dos gráficos */
+        body.contraste .chart-card .chart-title {
+            color: #fff !important;
+        }
+
+        body.contraste .chart-card .chart-title i {
             color: #fff !important;
         }
 
@@ -579,11 +767,6 @@
     background: #46A302;
 }
 
-.sensor-pagination button:disabled {
-    background: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
 
 .sensor-pagination .pagina-atual {
     font-weight: bold;
@@ -592,14 +775,20 @@
     text-align: center;
 }
 
-/* Alto contraste */
-body.contraste .sensor-pagination button {
+ /* Alto contraste */
+body.contraste .sistemas-pagination button {
     background: #000 !important;
     color: #fff !important;
     border: 1px solid #fff !important;
 }
 
-body.contraste .sensor-pagination .pagina-atual {
+body.contraste .sistemas-pagination button:disabled {
+    background: #000 !important;
+    color: #777 !important;
+    border-color: #777 !important;
+}
+
+body.contraste .sistemas-pagination .pagina-atual {
     color: #fff !important;
 }
 /* ==========================================================
@@ -653,6 +842,62 @@ body.contraste .system-pagination button {
 body.contraste .system-pagination .pagina-atual {
     color: #fff !important;
 }
+
+        /* ==========================================================
+           CORREÇÃO: AO SAIR DO ALTO CONTRASTE
+           ========================================================== */
+
+        /* Garante que o modo normal volte a usar as cores originais */
+        body:not(.contraste) {
+            color: #052501;
+            background: #f4f6f8;
+        }
+
+        body:not(.contraste) .section-title,
+        body:not(.contraste) .table-container th,
+        body:not(.contraste) .sensor-info h4,
+        body:not(.contraste) .sensor-info p,
+        body:not(.contraste) .sensor-pagination .pagina-atual,
+        body:not(.contraste) .system-pagination .pagina-atual {
+            color: inherit;
+        }
+
+        body:not(.contraste) .table-container th {
+            color: #052501;
+        }
+
+        body:not(.contraste) .sensor-info h4 {
+            color: #052501;
+        }
+
+        body:not(.contraste) .sensor-info p {
+            color: #666;
+        }
+
+        body:not(.contraste) .section-title {
+            color: #052501;
+        }
+
+        body:not(.contraste) .sensor-pagination .pagina-atual,
+        body:not(.contraste) .system-pagination .pagina-atual {
+            color: #052501;
+        }
+
+        /* Os botões continuam brancos no modo normal */
+        body:not(.contraste) #aumentar-fonte,
+        body:not(.contraste) #diminuir-fonte,
+        body:not(.contraste) #resetar-fonte,
+        body:not(.contraste) .btn-logout,
+        body:not(.contraste) .sensor-pagination button,
+        body:not(.contraste) .system-pagination button {
+            color: #fff;
+        }
+
+        /* O botão de contraste volta a ser preto */
+        body:not(.contraste) #contraste-btn {
+            color: #000;
+        }
+
     </style>
 </head>
 <body>
@@ -983,6 +1228,19 @@ body.contraste .system-pagination .pagina-atual {
         const datasetsLux = <?= json_encode($datasets_lux ?? []) ?>;
         let valorLuxAtual = <?= floatval($lux ?? 0) ?>;
 
+        // CORREÇÃO: a variável "infoLux" não existia em lugar nenhum do código.
+        // O plugin do gráfico de Lux tentava ler "infoLux.ambiente" e isso
+        // lançava um erro (ReferenceError) sempre que o gráfico era redesenhado.
+        // Esse erro interrompia o loop de "atualizarCoresGraficos()" no meio,
+        // e por isso os demais gráficos não recebiam as cores do alto contraste.
+        // Agora calculamos o texto do ambiente a partir do próprio valor do Lux.
+        function obterAmbienteLux(valor) {
+            if (valor < 50) return 'Escuro';
+            if (valor < 1000) return 'Nublado';
+            if (valor < 10000) return 'Claro';
+            return 'Sol direto';
+        }
+
         let chartTemperatura = null;
         let chartUmidade = null;
         let chartSolo = null;
@@ -1095,9 +1353,11 @@ body.contraste .system-pagination .pagina-atual {
                         ctx.fillText('Lux', width / 2, height - 15);
 
                         /* Ambiente */
+                        // CORREÇÃO: usa a função obterAmbienteLux() em vez da
+                        // variável inexistente "infoLux".
                         ctx.font = '13px Arial';
                         ctx.fillStyle = corTextoSecundario;
-                        ctx.fillText(infoLux.ambiente, width / 2, height + 10);
+                        ctx.fillText(obterAmbienteLux(valorLuxAtual), width / 2, height + 10);
 
                         ctx.restore();
                     }
@@ -1139,6 +1399,10 @@ body.contraste .system-pagination .pagina-atual {
                     valorLuxAtual = dados.lux;
                     chartLux.update();
                 }
+
+                // Mantém as cores dos gráficos corretas após atualizar os dados.
+                atualizarCoresGraficos();
+
             } catch (erro) {
                 console.error('Erro ao atualizar gráficos:', erro);
             }
@@ -1240,7 +1504,7 @@ body.contraste .system-pagination .pagina-atual {
         const inicio = (paginaSensor - 1) * sensoresPorPagina;
         const fim = inicio + sensoresPorPagina;
 
-        // Pega somente os 5 sensores da página atual
+        // Pega somente os sensores da página atual
         const sensoresPagina = sensoresTodos.slice(inicio, fim);
 
         // Monta os sensores
@@ -1321,7 +1585,7 @@ body.contraste .system-pagination .pagina-atual {
         );
 
 
-        // Se tiver mais de 5 sensores,
+        // Se tiver mais sensores que o limite por página,
         // mostra a paginação
         if (paginacao && totalPaginas > 1) {
 
@@ -1330,16 +1594,26 @@ body.contraste .system-pagination .pagina-atual {
             textoPagina.textContent =
                 `Página ${paginaSensor} de ${totalPaginas}`;
 
-            // Desabilita "Anterior" na primeira página
-            botaoAnterior.disabled = paginaSensor === 1;
+            // =========================
+            // BOTÃO ANTERIOR
+            // =========================
+            if (paginaSensor <= 1) {
+                botaoAnterior.style.display = 'none';
+            } else {
+                botaoAnterior.style.display = 'flex';
+            }
 
-            // Desabilita "Próxima" na última página
-            botaoProxima.disabled =
-                paginaSensor === totalPaginas;
-
+            // =========================
+            // BOTÃO PRÓXIMA
+            // =========================
+            if (paginaSensor >= totalPaginas) {
+                botaoProxima.style.display = 'none';
+            } else {
+                botaoProxima.style.display = 'flex';
+            }
         } else {
 
-            // 5 sensores ou menos:
+            // Sensores dentro do limite de uma página:
             // não mostra paginação
             paginacao.style.display = 'none';
         }
@@ -1417,7 +1691,7 @@ body.contraste .system-pagination .pagina-atual {
             totalSistemas / sistemasPorPagina
         );
 
-        // Se não houver mais de 5 sistemas,
+        // Se não houver mais sistemas do que o limite por página,
         // esconde a paginação
         if (totalPaginas <= 1) {
 
@@ -1432,7 +1706,7 @@ body.contraste .system-pagination .pagina-atual {
             return;
         }
 
-        // Mostra somente os 5 sistemas da página atual
+        // Mostra somente os sistemas da página atual
         const inicio = (paginaSistema - 1) * sistemasPorPagina;
         const fim = inicio + sistemasPorPagina;
 
@@ -1452,13 +1726,23 @@ body.contraste .system-pagination .pagina-atual {
         textoPaginaSistema.textContent =
             `Página ${paginaSistema} de ${totalPaginas}`;
 
-        // Desabilita anterior na primeira página
-        botaoSistemaAnterior.disabled =
-            paginaSistema === 1;
+        // =========================
+        // BOTÃO ANTERIOR
+        // =========================
+        if (paginaSistema <= 1) {
+            botaoSistemaAnterior.style.display = 'none';
+        } else {
+            botaoSistemaAnterior.style.display = 'flex';
+        }
 
-        // Desabilita próxima na última página
-        botaoSistemaProxima.disabled =
-            paginaSistema === totalPaginas;
+        // =========================
+        // BOTÃO PRÓXIMA
+        // =========================
+        if (paginaSistema >= totalPaginas) {
+            botaoSistemaProxima.style.display = 'none';
+        } else {
+            botaoSistemaProxima.style.display = 'flex';
+        }
     }
 
 
@@ -1527,28 +1811,85 @@ body.contraste .system-pagination .pagina-atual {
             }
         }
 
-        // Alternar Alto Contraste
+        // ==========================================================
+        // ALTERNAR ALTO CONTRASTE
+        // ==========================================================
+
+        function atualizarCoresGraficos() {
+            const eContraste = document.body.classList.contains('contraste');
+
+            const corTexto = eContraste ? '#ffffff' : '#052501';
+            const corGrade = eContraste
+                ? 'rgba(255, 255, 255, 0.2)'
+                : '#dfe6e9';
+
+            // Atualiza também o padrão do Chart.js
+            Chart.defaults.color = corTexto;
+
+            Object.values(Chart.instances).forEach(chart => {
+
+                // CORREÇÃO: envolve cada atualização em try/catch para que
+                // um erro num gráfico específico (como acontecia antes com
+                // o gráfico de Lux, por causa da variável "infoLux") nunca
+                // mais interrompa a atualização de cor dos demais gráficos.
+                try {
+
+                    // Eixo X
+                    if (chart.options?.scales?.x) {
+                        chart.options.scales.x.ticks = {
+                            ...(chart.options.scales.x.ticks || {}),
+                            color: corTexto
+                        };
+
+                        chart.options.scales.x.grid = {
+                            ...(chart.options.scales.x.grid || {}),
+                            color: corGrade
+                        };
+                    }
+
+                    // Eixo Y
+                    if (chart.options?.scales?.y) {
+                        chart.options.scales.y.ticks = {
+                            ...(chart.options.scales.y.ticks || {}),
+                            color: corTexto
+                        };
+
+                        chart.options.scales.y.grid = {
+                            ...(chart.options.scales.y.grid || {}),
+                            color: corGrade
+                        };
+                    }
+
+                    // Legenda
+                    if (chart.options?.plugins?.legend?.labels) {
+                        chart.options.plugins.legend.labels = {
+                            ...(chart.options.plugins.legend.labels || {}),
+                            color: corTexto
+                        };
+                    }
+
+                    // CORREÇÃO: update('none') pulava a animação mas em
+                    // alguns casos não forçava o recálculo completo de
+                    // escalas/legenda. update() sem argumento garante que
+                    // as novas cores sejam realmente redesenhadas.
+                    chart.update();
+
+                } catch (erro) {
+                    console.error('Erro ao recolorir gráfico:', chart, erro);
+                }
+            });
+        }
+
         const contrasteBtn = document.getElementById('contraste-btn');
+
         if (contrasteBtn) {
             contrasteBtn.addEventListener('click', () => {
                 document.body.classList.toggle('contraste');
-                const eContraste = document.body.classList.contains('contraste');
-                const corTexto = eContraste ? '#ffffff' : '#052501';
-                const corGrade = eContraste ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
 
-                Object.values(Chart.instances).forEach(chart => {
-                    if (chart.options.scales?.x) {
-                        chart.options.scales.x.ticks.color = corTexto;
-                        chart.options.scales.x.grid.color = corGrade;
-                    }
-                    if (chart.options.scales?.y) {
-                        chart.options.scales.y.ticks.color = corTexto;
-                        chart.options.scales.y.grid.color = corGrade;
-                    }
-                    if (chart.options.plugins?.legend) {
-                        chart.options.plugins.legend.labels.color = corTexto;
-                    }
-                    chart.update();
+                // Espera o navegador aplicar a classe antes
+                // de redesenhar os gráficos.
+                requestAnimationFrame(() => {
+                    atualizarCoresGraficos();
                 });
             });
         }

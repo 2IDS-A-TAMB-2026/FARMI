@@ -87,6 +87,49 @@
                 font-size: 11px !important;
             }
         }
+
+        /* ========================================================
+        BOTÃO DE AUTO CONTRASTE - MODO NORMAL
+        ======================================================== */
+
+        #contraste-btn {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: #000000 !important;
+            color: #ffffff !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Mantém o botão visível quando o contraste está DESATIVADO */
+        body:not(.contraste) #contraste-btn {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        /* Quando o contraste está ATIVADO */
+        body.contraste #contraste-btn {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
+
+        /* Evita que o clique/foco faça o botão desaparecer */
+        #contraste-btn:focus,
+        #contraste-btn:active,
+        #contraste-btn:hover {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
     </style>
 </head>
 
@@ -214,6 +257,23 @@
                 aplicarFonte();
             });
         }
+
+        const btnContraste = document.getElementById('contraste-btn');
+
+        if (localStorage.getItem('altoContraste') === 'true') {
+            document.body.classList.add('alto-contraste');
+        }
+
+        btnContraste.addEventListener('click', () => {
+
+            document.body.classList.toggle('alto-contraste');
+
+            localStorage.setItem(
+                'altoContraste',
+                document.body.classList.contains('alto-contraste')
+            );
+
+        });
 
         /* ========================================================
            VALIDAÇÃO DO FORMULÁRIO COM SWEETALERT

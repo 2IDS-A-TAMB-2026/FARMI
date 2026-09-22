@@ -910,11 +910,16 @@ class SistemaController extends BaseController
             WHERE uf.ID_CPF_USUARIOS = ?
             AND s.TIPO_SENSOR = 'Luz'
 
-            ORDER BY s.NOME_SENSOR
+            /* MUDANÇA AQUI: Ordena pelas leituras mais recentes primeiro */
+            ORDER BY ls.DATA_HORA DESC 
         ", [$cpfUsuario])->getResultArray();
 
+        // Pega o valor da leitura mais recente para passar como $lux (igual ao dashboard)
+        $lux = !empty($sensores) ? ($sensores[0]['VALOR'] ?? 0) : 0;
+
         return view('sistema/farmi_usuario/luz', [
-            'sensores' => $sensores
+            'sensores' => $sensores,
+            'lux'      => $lux
         ]);
     }
 
@@ -922,6 +927,7 @@ class SistemaController extends BaseController
     {
         return view('sistema/farmi_usuario/recuperar_senha');
     }
+
     public function salvar_senha_usuario()
     {
         $model = new \App\Models\UsuariosModel();
@@ -1008,6 +1014,7 @@ class SistemaController extends BaseController
         $cpfUsuario = session()->get('usuario_cpf');
         $db = \Config\Database::connect();
 
+        // 1. Lista de todos os sensores de Temperatura
         $sensores = $db->query("
             SELECT
                 s.ID_SENSOR,
@@ -1044,8 +1051,25 @@ class SistemaController extends BaseController
             ORDER BY s.NOME_SENSOR
         ", [$cpfUsuario])->getResultArray();
 
+        // 2. Última temperatura registrada (idêntico ao Dashboard)
+        $ultimaTemperatura = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Temperatura'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
+
+        $temperatura_atual = $ultimaTemperatura['VALOR'] ?? 0;
+
         return view('sistema/farmi_usuario/temperatura', [
-            'sensores' => $sensores
+            'sensores'          => $sensores,
+            'temperatura_atual' => $temperatura_atual
         ]);
     }
 
@@ -1054,6 +1078,7 @@ class SistemaController extends BaseController
         $cpfUsuario = session()->get('usuario_cpf');
         $db = \Config\Database::connect();
 
+        // 1. Lista de todos os sensores de Umidade
         $sensores = $db->query("
             SELECT
                 s.ID_SENSOR,
@@ -1090,8 +1115,25 @@ class SistemaController extends BaseController
             ORDER BY s.NOME_SENSOR
         ", [$cpfUsuario])->getResultArray();
 
+        // 2. Última umidade registrada (idêntico ao Dashboard)
+        $ultimaUmidade = $db->query("
+            SELECT ls.VALOR
+            FROM LEITURA_SENSOR ls
+            INNER JOIN SENSOR s ON s.ID_SENSOR = ls.FK_ID_SENSOR
+            INNER JOIN CULTURA c ON c.ID_CULTURA = s.FK_ID_CULTURA
+            INNER JOIN FAZENDA f ON f.ID_FAZENDA = c.FK_ID_FAZENDA
+            INNER JOIN USUARIOS_FAZENDA uf ON uf.ID_FAZENDA = f.ID_FAZENDA
+            WHERE uf.ID_CPF_USUARIOS = ?
+            AND s.TIPO_SENSOR = 'Umidade'
+            ORDER BY ls.DATA_HORA DESC
+            LIMIT 1
+        ", [$cpfUsuario])->getRowArray();
+
+        $umidade_atual = $ultimaUmidade['VALOR'] ?? 0;
+
         return view('sistema/farmi_usuario/umidade', [
-            'sensores' => $sensores
+            'sensores'      => $sensores,
+            'umidade_atual' => $umidade_atual
         ]);
     }
 

@@ -443,6 +443,8 @@
         .avatar {
             width: 42px;
             height: 42px;
+            min-width: 42px;
+            min-height: 42px;
             background-color: var(--verde-claro);
             border-radius: 50%;
             display: flex;
@@ -450,7 +452,9 @@
             align-items: center;
             color: var(--verde-escuro);
             font-weight: bold;
+            font-size: 16px;
             flex-shrink: 0;
+            overflow: hidden;
         }
 
         /* ==========================================================
@@ -527,6 +531,14 @@
             background: #fff !important;
             color: #000 !important;
         }
+        body.contraste .badge-role {
+        background: #fff !important;
+        color: #000 !important;
+        }
+
+body.contraste .badge-role i {
+    color: #000 !important;
+}
 
         body.contraste i {
             color: #fff !important;
@@ -889,6 +901,9 @@
 
             /* ==========================================
                2. ACESSIBILIDADE: TAMANHO DA FONTE
+               (passo reduzido de 10 para 5, e limites
+               ajustados de 70-150 para 85-120, para não
+               estourar o layout)
                ========================================== */
             let tamanhoFonte = parseInt(localStorage.getItem('tamanhoFonteDashboard')) || 100;
             document.documentElement.style.fontSize = tamanhoFonte + '%';
@@ -904,8 +919,8 @@
 
             if (aumentarFonte) {
                 aumentarFonte.addEventListener('click', () => {
-                    if (tamanhoFonte < 150) {
-                        tamanhoFonte += 10;
+                    if (tamanhoFonte < 120) {
+                        tamanhoFonte += 5;
                         aplicarFonte();
                     }
                 });
@@ -913,8 +928,8 @@
 
             if (diminuirFonte) {
                 diminuirFonte.addEventListener('click', () => {
-                    if (tamanhoFonte > 70) {
-                        tamanhoFonte -= 10;
+                    if (tamanhoFonte > 85) {
+                        tamanhoFonte -= 5;
                         aplicarFonte();
                     }
                 });

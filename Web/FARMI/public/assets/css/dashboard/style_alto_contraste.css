@@ -1,0 +1,253 @@
+/* ========================================================
+   ESTILOS GLOBAIS DE ALTO CONTRASTE
+   Ativado quando a classe .alto-contraste (ou .contraste) está no body
+   ======================================================== */
+
+/* Botão de Alto Contraste no Modo Normal (Texto Preto) */
+#contraste-btn {
+    background: transparent !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px; /* Padronizado */
+    height: 42px; /* Padronizado */
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none !important;
+    box-shadow: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#contraste-btn:hover {
+    color: var(--verde-claro);
+}
+
+#contraste-btn:focus,
+#contraste-btn:active,
+#contraste-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+
+body.alto-contraste,
+body.contraste{
+    background-color: #000000;
+    color: #ffffff !important;
+}
+
+/* Força fundo preto, texto branco e bordas visíveis para todos os elementos */
+body.alto-contraste *,
+body.contraste * {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Links e Ícones de Destaque (Amarelo de Alto Contraste) */
+body.alto-contraste a,
+body.contraste a,
+body.alto-contraste i,
+body.contraste i {
+    color: #ffffff !important;
+}
+
+/* Inputs, Textareas e Selects */
+body.alto-contraste input,
+body.contraste input,
+body.alto-contraste select,
+body.contraste select,
+body.alto-contraste textarea,
+body.contraste textarea {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste input::placeholder,
+body.contraste input::placeholder {
+    color: #cccccc !important;
+}
+
+/* Botões Globais */
+body.alto-contraste button,
+body.contraste button,
+body.alto-contraste .btn,
+body.contraste .btn,
+body.alto-contraste .btn-primary,
+body.contraste .btn-primary,
+body.alto-contraste .btn-secondary,
+body.contraste .btn-secondary,
+body.alto-contraste .btn-logout,
+body.contraste .btn-logout,
+body.alto-contraste .logout-btn,
+body.contraste .logout-btn,
+body.alto-contraste .sec-btn,
+body.contraste .sec-btn,
+body.alto-contraste #aumentar-fonte,
+body.contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte,
+body.contraste #resetar-fonte {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Hover nos Botões */
+body.alto-contraste button:hover,
+body.contraste button:hover,
+body.alto-contraste .btn:hover,
+body.contraste .btn:hover,
+body.alto-contraste a:hover,
+body.contraste a:hover {
+  
+    color: #ffffff !important;
+}
+
+/* Badges e Status */
+body.alto-contraste .status-badge,
+body.contraste .status-badge,
+body.alto-contraste .badge-role,
+body.contraste .badge-role,
+body.alto-contraste .avatar,
+body.contraste .avatar,
+body.alto-contraste .profile-avatar-large,
+body.contraste .profile-avatar-large {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+body.alto-contraste .status-badge *,
+body.contraste .status-badge *,
+body.alto-contraste .badge-role *,
+body.contraste .badge-role *,
+body.alto-contraste .avatar *,
+body.contraste .avatar * {
+    color: #000000 !important;
+}
+
+/* Tabelas e Cards */
+body.alto-contraste .card,
+body.contraste .card,
+body.alto-contraste .profile-card,
+body.contraste .profile-card,
+body.alto-contraste .profile-hero,
+body.contraste .profile-hero,
+body.alto-contraste .chart-card,
+body.contraste .chart-card,
+body.alto-contraste .activities-card,
+body.contraste .activities-card,
+body.alto-contraste .table-container,
+body.contraste .table-container,
+body.alto-contraste table,
+body.contraste table,
+body.alto-contraste tr,
+body.contraste tr,
+body.alto-contraste td,
+body.contraste td,
+body.alto-contraste th,
+body.contraste th {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+}
+
+/* Gráficos Canvas */
+body.alto-contraste canvas,
+body.contraste canvas {
+    background-color: #000000 !important;
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* Banners Indicadores */
+body.alto-contraste .light-indicator,
+body.contraste .light-indicator,
+body.alto-contraste .soil-indicator,
+body.contraste .soil-indicator,
+body.alto-contraste .humidity-indicator,
+body.contraste .humidity-indicator,
+body.alto-contraste .temperature-indicator,
+body.contraste .temperature-indicator {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Medidores Circulares (Luz, Solo, Umidade, Temperatura) */
+body.alto-contraste .light-meter,
+body.contraste .light-meter,
+body.alto-contraste .soil-meter,
+body.contraste .soil-meter,
+body.alto-contraste .humidity-meter,
+body.contraste .humidity-meter,
+body.alto-contraste .temperature-meter,
+body.contraste .temperature-meter {
+    background: #000000 !important;
+    border: 8px solid #ffffff !important;
+    box-shadow: none !important;
+}
+
+/* Status dentro dos medidores e Badges da Tabela */
+body.alto-contraste .status-optimal,
+body.contraste .status-optimal,
+body.alto-contraste .status-low,
+body.contraste .status-low,
+body.alto-contraste .status-high,
+body.contraste .status-high,
+body.alto-contraste .status-dry,
+body.contraste .status-dry,
+body.alto-contraste .status-wet,
+body.contraste .status-wet,
+body.alto-contraste .status-ok,
+body.contraste .status-ok,
+body.alto-contraste .status-alert,
+body.contraste .status-alert,
+body.alto-contraste .status-warning,
+body.contraste .status-warning {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ffffff !important;
+}
+
+/* Botões de Acessibilidade da Fonte */
+body.alto-contraste .accessibility-btn,
+body.contraste .accessibility-btn {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Paginação */
+body.alto-contraste .pagina-info,
+body.contraste .pagina-info {
+    color: #ffffff !important;
+}
+
+body.alto-contraste .botao-paginacao,
+body.contraste .botao-paginacao {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* Menu Mobile (Sanduíche) */
+body.alto-contraste .menu-toggle,
+body.contraste .menu-toggle {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+
+

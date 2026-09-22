@@ -233,12 +233,6 @@ class _AlertsScreenState extends State<AlertsScreen> {
           return Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
-              side: a.isRead
-                  ? BorderSide.none
-                  : BorderSide(
-                      color: const Color(0xFF2E7D52).withOpacity(0.5),
-                      width: 1.5,
-                    ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(14),

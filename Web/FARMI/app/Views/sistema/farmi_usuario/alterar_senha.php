@@ -62,10 +62,35 @@
             box-sizing: border-box !important;
         }
 
-        /* Botão de Contraste (Totalmente Preto com ícone Branco) */
-        #contraste-btn {
-            background: #000000 !important;
-            color: #ffffff !important;
+        /* Botão de Contraste: usa o mesmo estilo verde dos outros botões
+           enquanto o modo claro estiver ativo. A aparência preta só é
+           aplicada quando o alto contraste está realmente ligado
+           (ver regra "body.contraste .acessibilidade-container button"
+           mais abaixo) — antes essa cor preta era fixa e nunca mudava. */
+
+        /* O botão #contraste-btn é mais antigo que os outros e o
+           style_alterar.css externo tem uma regra específica por ID
+           para ele (especificidade maior que .acessibilidade-container
+           button), então o fundo/borda/tamanho definidos acima nunca
+           chegavam a aparecer de fato — só o ícone ficava visível,
+           "flutuando" sem o quadradinho verde ao redor, em qualquer
+           estado (claro, escuro, hover). Repetimos o estilo direto no
+           #id para garantir que ele vença esse conflito. */
+        .acessibilidade-container button#contraste-btn {
+            background: #57c91b !important;
+            border: none !important;
+            border-radius: 5px !important;
+            width: 34px !important;
+            height: 34px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #fff !important;
+            font-size: 13px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
         }
 
         /* Efeito Hover padrão */
@@ -86,6 +111,56 @@
                 height: 30px !important;
                 font-size: 11px !important;
             }
+            .acessibilidade-container button#contraste-btn {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 11px !important;
+            }
+        }
+
+        /* ========================================================
+           ALTO CONTRASTE (antes não existia nenhuma regra aqui,
+           então o botão não tinha efeito visual nenhum na página)
+           ======================================================== */
+        body.contraste {
+            background: #000 !important;
+        }
+
+        body.contraste .container {
+            background: #000 !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.contraste * {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        body.contraste input {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.contraste input::placeholder {
+            color: #ccc !important;
+        }
+
+        body.contraste .btn-primary {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.contraste .acessibilidade-container button,
+        body.contraste .acessibilidade-container button#contraste-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.contraste .back-link a {
+            color: #fff!important;
         }
     </style>
 </head>
@@ -148,7 +223,7 @@
 </form>
 
         <div class="back-link">
-            <a href="<?= base_url('/configuracoes-admin') ?>">
+            <a href="<?= base_url('/configuracoes-usuario') ?>">
                 <i class="fas fa-arrow-left"></i>
                 Voltar às Configurações
             </a>
@@ -192,8 +267,8 @@
 
         if (aumentarFonte) {
             aumentarFonte.addEventListener('click', () => {
-                if (tamanhoFonte < 150) {
-                    tamanhoFonte += 10;
+                if (tamanhoFonte < 120) {
+                    tamanhoFonte += 5;
                     aplicarFonte();
                 }
             });
@@ -201,8 +276,8 @@
 
         if (diminuirFonte) {
             diminuirFonte.addEventListener('click', () => {
-                if (tamanhoFonte > 70) {
-                    tamanhoFonte -= 10;
+                if (tamanhoFonte > 85) {
+                    tamanhoFonte -= 5;
                     aplicarFonte();
                 }
             });
@@ -214,6 +289,30 @@
                 aplicarFonte();
             });
         }
+
+        /* ========================================================
+           ALTO CONTRASTE
+           (antes não existia — o botão não tinha nenhum
+           listener de clique nem lia/gravava o estado salvo
+           pelas outras páginas, por isso não funcionava e
+           não acompanhava o estado ao navegar entre telas)
+           ======================================================== */
+        const btnContraste = document.getElementById('contraste-btn');
+
+        if (localStorage.getItem('altoContraste') === 'true') {
+            document.body.classList.add('alto-contraste');
+        }
+
+        btnContraste.addEventListener('click', () => {
+
+            document.body.classList.toggle('alto-contraste');
+
+            localStorage.setItem(
+                'altoContraste',
+                document.body.classList.contains('alto-contraste')
+            );
+
+        });
 
         /* ========================================================
            VALIDAÇÃO DO FORMULÁRIO COM SWEETALERT
@@ -270,7 +369,7 @@
             }).then((result) => {
                 if(result.isConfirmed){
                     Swal.fire({
-                        title: 'Senha altered!',
+                        title: 'Senha alterada!',
                         text: 'Sua senha foi atualizada com sucesso.',
                         icon: 'success',
                         timer: 1500,

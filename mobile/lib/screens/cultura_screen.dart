@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/crop.dart';
 import '../services/api_service.dart';
 import 'cultura_detalhe_screen.dart';
-import 'alerts_screen.dart';
 
 class CulturaScreen extends StatefulWidget {
   const CulturaScreen({super.key});
@@ -15,10 +14,9 @@ class CulturaScreen extends StatefulWidget {
 class _CulturaScreenState extends State<CulturaScreen> {
   List<Crop> _crops = [];
   bool _isLoadingCrops = true;
+  String? _errorMessage;
 
-  Future<void> _fetchCrops() => _carregarCulturas();
-
-  get _errorMessage => null;
+  static const Color primaryGreen = Color(0xFF2E7D52);
 
   @override
   void initState() {
@@ -27,6 +25,11 @@ class _CulturaScreenState extends State<CulturaScreen> {
   }
 
   Future<void> _carregarCulturas() async {
+    setState(() {
+      _isLoadingCrops = true;
+      _errorMessage = null;
+    });
+
     try {
       final cropsData = await ApiService.getCrops();
       if (!mounted) return;
@@ -36,51 +39,53 @@ class _CulturaScreenState extends State<CulturaScreen> {
         _isLoadingCrops = false;
       });
     } catch (e) {
-      print('Erro ao carregar culturas: $e');
+      debugPrint('Erro ao carregar culturas: $e');
 
+      if (!mounted) return;
       setState(() {
         _isLoadingCrops = false;
+        _errorMessage = 'Não foi possível carregar as culturas.';
       });
     }
   }
 
-  Color _healthColor(String h) {
-    switch (h) {
-      case 'excellent':
-        return Colors.green;
-      case 'good':
-        return const Color(0xFF2E7D52);
-      case 'regular':
-        return Colors.amber;
-      case 'poor':
-        return Colors.orange;
-      case 'critical':
-        return Colors.red;
-      default:
-        return Colors.grey;
+  /// Retorna um ícone específico conforme o nome ou tipo da cultura
+  IconData _getCropIcon(String name, String type) {
+    final text = '${name.toLowerCase()} ${type.toLowerCase()}';
+
+    if (text.contains('milho')) return Icons.grain_rounded;
+    if (text.contains('soja')) return Icons.spa_rounded;
+    if (text.contains('feijão') || text.contains('feijao')) return Icons.blur_on_rounded;
+    if (text.contains('algodão') || text.contains('algodao') || text.contains('fibra')) {
+      return Icons.filter_vintage_rounded;
     }
+    if (text.contains('melancia') || text.contains('fruta') || text.contains('maçã') || text.contains('maca')) {
+      return Icons.yard_rounded;
+    }
+    if (text.contains('café') || text.contains('cafe')) return Icons.coffee_rounded;
+    if (text.contains('trigo') || text.contains('arroz')) return Icons.grass_rounded;
+
+    return Icons.eco_rounded;
   }
 
   Color _statusColor(String status) {
     switch (status.toLowerCase()) {
       case 'ativa':
-        return const Color(0xFF2E7D52);
-
-      case 'inativa':
-        return Colors.grey;
-
+      case 'planting':
       case 'plantio':
-        return Colors.blue;
-
-      case 'colheita':
-        return Colors.amber;
-
+        return primaryGreen;
+      case 'inativa':
       case 'concluída':
       case 'concluida':
         return Colors.grey;
-
+      case 'crescimento':
+      case 'growing':
+        return Colors.green;
+      case 'colheita':
+      case 'harvest':
+        return Colors.amber[800]!;
       default:
-        return Colors.grey;
+        return primaryGreen;
     }
   }
 
@@ -112,8 +117,8 @@ class _CulturaScreenState extends State<CulturaScreen> {
               ],
             ),
             IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () => _fetchCrops(),
+              icon: const Icon(Icons.refresh_rounded),
+              onPressed: _carregarCulturas,
               tooltip: 'Recarregar',
             ),
           ],
@@ -129,7 +134,7 @@ class _CulturaScreenState extends State<CulturaScreen> {
   Widget _buildBody() {
     if (_isLoadingCrops) {
       return const Center(
-        child: CircularProgressIndicator(color: Color(0xFF2E7D52)),
+        child: CircularProgressIndicator(color: primaryGreen),
       );
     }
 
@@ -138,18 +143,24 @@ class _CulturaScreenState extends State<CulturaScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: Colors.red),
+            const Icon(Icons.error_outline_rounded, size: 48, color: Colors.red),
             const SizedBox(height: 12),
-            Text(_errorMessage!,
-                style: GoogleFonts.inter(color: Colors.grey[700])),
+            Text(
+              _errorMessage!,
+              style: GoogleFonts.inter(color: Colors.grey[700]),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => _fetchCrops(),
+              onPressed: _carregarCulturas,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2E7D52),
+                backgroundColor: primaryGreen,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              child: const Text('Tentar Novamente',
-                  style: TextStyle(color: Colors.white)),
+              child: const Text('Tentar Novamente'),
             ),
           ],
         ),
@@ -166,7 +177,8 @@ class _CulturaScreenState extends State<CulturaScreen> {
     }
 
     return RefreshIndicator(
-      onRefresh: _fetchCrops,
+      color: primaryGreen,
+      onRefresh: _carregarCulturas,
       child: ListView.separated(
         itemCount: _crops.length,
         separatorBuilder: (_, __) => const SizedBox(height: 10),
@@ -174,40 +186,43 @@ class _CulturaScreenState extends State<CulturaScreen> {
           final crop = _crops[i];
 
           return Card(
-  elevation: 1,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(12),
-  ),
-  child: InkWell(
-    borderRadius: BorderRadius.circular(12),
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetalhesCulturaScreen(crop: crop),
-        ),
-      );
-    },
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Row(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: BorderSide(
+                color: Theme.of(context).dividerColor.withOpacity(0.1),
+              ),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetalhesCulturaScreen(crop: crop),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
                   children: [
-                    // ... (Restante do seu código original do Row, Container, Icon, etc. continua igual)
+                    // ÍCONE DINÂMICO
                     Container(
-                      width: 44,
-                      height: 44,
+                      width: 46,
+                      height: 46,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2E7D52).withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
+                        color: primaryGreen.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(
-                        Icons.eco_rounded,
-                        color: Color(0xFF2E7D52),
-                        size: 22,
+                      child: Icon(
+                        _getCropIcon(crop.name, crop.type),
+                        color: primaryGreen,
+                        size: 24,
                       ),
                     ),
 
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 14),
 
                     Expanded(
                       child: Column(
@@ -217,30 +232,29 @@ class _CulturaScreenState extends State<CulturaScreen> {
                           Text(
                             crop.name,
                             style: GoogleFonts.inter(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
                             ),
                           ),
 
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 3),
 
                           // Tipo + Área
                           Text(
-                            '${crop.type} • '
-                            '${crop.area.toStringAsFixed(2)} ha',
+                            '${crop.type} • ${crop.area.toStringAsFixed(1)} ha',
                             style: GoogleFonts.inter(
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Colors.grey[600],
                             ),
                           ),
 
-                          const SizedBox(height: 4),
+                          const SizedBox(height: 2),
 
                           // Fazenda
                           Text(
                             'Fazenda: ${crop.farmName}',
                             style: GoogleFonts.inter(
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Colors.grey[600],
                             ),
                           ),
@@ -256,12 +270,18 @@ class _CulturaScreenState extends State<CulturaScreen> {
                               const SizedBox(width: 6),
                               _buildChip(
                                 '${crop.productiveCycle} dias',
-                                Colors.blue,
+                                Colors.blue[700]!,
                               ),
                             ],
                           ),
                         ],
                       ),
+                    ),
+                    const SizedBox(width: 8),
+                    Icon(
+                      Icons.chevron_right_rounded,
+                      color: Colors.grey[400],
+                      size: 24,
                     ),
                   ],
                 ),
@@ -284,7 +304,7 @@ class _CulturaScreenState extends State<CulturaScreen> {
       child: Text(
         label,
         style: GoogleFonts.inter(
-          fontSize: 10,
+          fontSize: 11,
           color: color,
           fontWeight: FontWeight.w600,
         ),

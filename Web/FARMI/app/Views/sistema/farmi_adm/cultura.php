@@ -190,6 +190,49 @@
             color: #000 !important;
             border: 2px solid #fff !important;
         }
+
+        /* =========================
+        PAGINAÇÃO DAS CULTURAS
+        ========================= */
+
+        .paginacao-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .pagina-info {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+        }
+
+        .botao-paginacao {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #57c91b;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .botao-paginacao:hover {
+            transform: scale(1.05);
+        }
+
+        .botao-paginacao:disabled {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -403,40 +446,101 @@
                     </tr>
                 </thead>
                 <tbody id="culturasTable">
-                    <?php if(!empty($culturas)): ?>
-                    <?php foreach($culturas as $c): ?>
-                    <tr>
-                        <td><?= $c['ID_CULTURA'] ?></td>
-                        <td>
-                            <i class="fa-solid fa-seedling" style="color: var(--verde-claro); margin-right: 8px;"></i>
-                            <?= $c['NOME_CULTURA'] ?>
-                        </td>
-                        <td><?= date('d/m/Y', strtotime($c['DATA_PLANTIO'])); ?></td>
-                        <td><?= $c['CICLO_PRODUTIVO'] ?> dias</td>
-                        <td><?= $c['TIPO_CULTURA'] ?></td>
-                        <td><?= $c['AREA_CULTIVADA'] ?> ha</td>
-                        <td><?= $c['STATUS'] ?></td>
-                        <td>
-                            <button class="btn btn-primary" onclick="detalhesSensores('<?= $c['NOME_FAZENDA'] ?>', '<?= $c['SENSOR_LUZ'] ?>', '<?= $c['SENSOR_CLIMA_TEMPO'] ?>', '<?= $c['SENSOR_CLIMA_UMIDADE'] ?>', '<?= $c['SENSOR_SOLO'] ?>')">
-                                <i class="fa-solid fa-microchip"></i>
-                                Ver
-                            </button>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="<?= base_url('/cultura/editar_culturas/'.$c['ID_CULTURA']) ?>" class="btn btn-primary">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <a href="javascript:void(0)" class="btn btn-danger" onclick="excluirCultura(<?= $c['ID_CULTURA'] ?>)">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
-                </tbody>
+
+                <?php if(!empty($culturas)): ?>
+
+                <?php foreach($culturas as $c): ?>
+
+                <tr class="cultura-item">
+
+                    <td><?= $c['ID_CULTURA'] ?></td>
+
+                    <td>
+                        <i class="fa-solid fa-seedling" style="color: var(--verde-claro); margin-right: 8px;"></i>
+                        <?= $c['NOME_CULTURA'] ?>
+                    </td>
+
+                    <td><?= date('d/m/Y', strtotime($c['DATA_PLANTIO'])); ?></td>
+
+                    <td><?= $c['CICLO_PRODUTIVO'] ?> dias</td>
+
+                    <td><?= $c['TIPO_CULTURA'] ?></td>
+
+                    <td><?= $c['AREA_CULTIVADA'] ?> ha</td>
+
+                    <td><?= $c['STATUS'] ?></td>
+
+                    <td>
+                        <button class="btn btn-primary"
+                            onclick="detalhesSensores(
+                                '<?= $c['NOME_FAZENDA'] ?>',
+                                '<?= $c['SENSOR_LUZ'] ?>',
+                                '<?= $c['SENSOR_CLIMA_TEMPO'] ?>',
+                                '<?= $c['SENSOR_CLIMA_UMIDADE'] ?>',
+                                '<?= $c['SENSOR_SOLO'] ?>'
+                            )">
+
+                            <i class="fa-solid fa-microchip"></i>
+                            Ver
+
+                        </button>
+                    </td>
+
+                    <td>
+
+                        <div class="btn-group">
+
+                            <a href="<?= base_url('/cultura/editar_culturas/'.$c['ID_CULTURA']) ?>"
+                            class="btn btn-primary">
+
+                                <i class="fa-solid fa-edit"></i>
+
+                            </a>
+
+                            <a href="javascript:void(0)"
+                            class="btn btn-danger"
+                            onclick="excluirCultura(<?= $c['ID_CULTURA'] ?>)">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                <?php endforeach; ?>
+
+                <?php endif; ?>
+
+            </tbody>
             </table>
+        </div>
+        <!-- PAGINAÇÃO -->
+        <div class="paginacao-container">
+
+            <button id="paginaAnterior"
+                    class="botao-paginacao"
+                    type="button">
+
+                <i class="fa-solid fa-chevron-left"></i>
+
+            </button>
+
+            <div id="paginaInfo" class="pagina-info">
+                Página 1 de 1
+            </div>
+
+            <button id="proximaPagina"
+                    class="botao-paginacao"
+                    type="button">
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
         </div>
         <!-- VLibras -->
         <div vw class="enabled">
@@ -759,5 +863,203 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
         localStorage.setItem('fonteSite', tamanhoFonte);
     });
+    const btnContraste = document.getElementById('contraste-btn');
+
+    if (localStorage.getItem('altoContraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
+
+    btnContraste.addEventListener('click', () => {
+
+        document.body.classList.toggle('alto-contraste');
+
+        localStorage.setItem(
+            'altoContraste',
+            document.body.classList.contains('alto-contraste')
+        );
+
+    });
 });
+</script>
+<script>
+
+/* =========================
+   PAGINAÇÃO DAS CULTURAS
+========================= */
+
+const culturas = document.querySelectorAll(".cultura-item");
+
+const paginaAnterior = document.getElementById("paginaAnterior");
+
+const proximaPagina = document.getElementById("proximaPagina");
+
+const paginaInfo = document.getElementById("paginaInfo");
+
+const CULTURAS_POR_PAGINA = 5;
+
+let paginaAtual = 1;
+
+
+/* =========================
+   ATUALIZAR CULTURAS
+========================= */
+
+function atualizarCulturas() {
+
+    const totalCulturas = culturas.length;
+
+    /* =========================
+       TOTAL DE PÁGINAS
+    ========================= */
+
+    const totalPaginas = Math.ceil(
+        totalCulturas / CULTURAS_POR_PAGINA
+    );
+
+
+    /* =========================
+       CORRIGE PÁGINA ATUAL
+    ========================= */
+
+    if (totalPaginas === 0) {
+
+        paginaAtual = 1;
+
+    } else if (paginaAtual > totalPaginas) {
+
+        paginaAtual = totalPaginas;
+
+    }
+
+
+    /* =========================
+       TEXTO DA PÁGINA
+    ========================= */
+
+    if (totalPaginas > 0) {
+
+        paginaInfo.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
+
+    } else {
+
+        paginaInfo.textContent =
+            "Nenhuma página";
+
+    }
+
+
+    /* =========================
+       ESCONDE TODAS AS CULTURAS
+    ========================= */
+
+    culturas.forEach(cultura => {
+
+        cultura.style.display = "none";
+
+    });
+
+
+    /* =========================
+       MOSTRA AS 5 DA PÁGINA
+    ========================= */
+
+    const inicio =
+        (paginaAtual - 1) * CULTURAS_POR_PAGINA;
+
+    const fim =
+        inicio + CULTURAS_POR_PAGINA;
+
+
+    Array.from(culturas)
+        .slice(inicio, fim)
+        .forEach(cultura => {
+
+            cultura.style.display = "table-row";
+
+        });
+
+
+    /* =========================
+       BOTÃO ANTERIOR
+    ========================= */
+
+    if (paginaAtual <= 1) {
+
+        paginaAnterior.style.display = "none";
+
+    } else {
+
+        paginaAnterior.style.display = "flex";
+
+    }
+
+
+    /* =========================
+       BOTÃO PRÓXIMO
+    ========================= */
+
+    if (
+        paginaAtual >= totalPaginas ||
+        totalPaginas === 0
+    ) {
+
+        proximaPagina.style.display = "none";
+
+    } else {
+
+        proximaPagina.style.display = "flex";
+
+    }
+
+}
+
+
+/* =========================
+   PÁGINA ANTERIOR
+========================= */
+
+paginaAnterior.addEventListener("click", function () {
+
+    if (paginaAtual > 1) {
+
+        paginaAtual--;
+
+        atualizarCulturas();
+
+    }
+
+});
+
+
+/* =========================
+   PRÓXIMA PÁGINA
+========================= */
+
+proximaPagina.addEventListener("click", function () {
+
+    const totalCulturas = culturas.length;
+
+    const totalPaginas = Math.ceil(
+        totalCulturas / CULTURAS_POR_PAGINA
+    );
+
+
+    if (paginaAtual < totalPaginas) {
+
+        paginaAtual++;
+
+        atualizarCulturas();
+
+    }
+
+});
+
+
+/* =========================
+   INICIAR
+========================= */
+
+atualizarCulturas();
+
 </script>

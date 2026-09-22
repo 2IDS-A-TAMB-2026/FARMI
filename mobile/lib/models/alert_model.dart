@@ -73,4 +73,6 @@ class AlertModel {
               : null,
     );
   }
+
+  get createdAt => null;
 }

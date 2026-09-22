@@ -178,15 +178,7 @@ body.alto-contraste .avatar {
     color: #000 !important;
 }
 
-.alto-contraste #contraste-btn{
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #000 !important;
-}
 
-.alto-contraste #contraste-btn i{
-    color: #fff !important;
-}
 /* BOTÃO DE FILTROS DO CONTEXTO DE ALERTAS (VERSÃO AMPLIADA) */
 .btn-secondary {
     font-size: 16px !important; /* Aumentou o texto (era 14px) */
@@ -214,6 +206,8 @@ body.contraste .avatar {
     background: #fff !important;
     color: #000!important;
 }
+
+
 .paginacao-container {
     display: flex;
     align-items: center;
@@ -226,7 +220,7 @@ body.contraste .avatar {
 .pagina-info {
     font-size: 16px;
     font-weight: 600;
-    color: #57c91b;
+    color: #000000;
 }
 
 .botao-paginacao {
@@ -255,6 +249,75 @@ body.contraste .avatar {
     display: none;
 }
 
+/* =========================
+   BOTÃO DE CONTRASTE
+   ALTO CONTRASTE
+========================= */
+
+body.alto-contraste #contraste-btn {
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Ícone */
+body.alto-contraste #contraste-btn i {
+    background: transparent !important;
+    color: #fff !important;
+}
+
+/* Quando clicar no botão */
+body.alto-contraste #contraste-btn:focus,
+body.alto-contraste #contraste-btn:active,
+body.alto-contraste #contraste-btn:focus-visible {
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Quando passar o mouse */
+body.alto-contraste #contraste-btn:hover {
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste #contraste-btn:hover i {
+    background: transparent !important;
+    color: #fff !important;
+}
+
+/* =========================
+   PAGINAÇÃO - ALTO CONTRASTE
+========================= */
+
+body.alto-contraste .botao-paginacao {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+/* Seta da paginação */
+body.alto-contraste .botao-paginacao i {
+    background: transparent !important;
+    color: #fff !important;
+}
+
+/* Hover da paginação */
+body.alto-contraste .botao-paginacao:hover {
+    background: #222 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste .botao-paginacao:hover i {
+    color: #fff !important;
+}
+
     </style>
 
 <head>
@@ -272,6 +335,7 @@ body.contraste .avatar {
 
     <!-- CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alertas.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
 
     <!-- RESPONSIVO -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
@@ -367,7 +431,7 @@ body.contraste .avatar {
     </div>
 
     <!-- LOGIN (Corrigido o '45 px' para '42px' para casar com o Dashboard) -->
-    <a href="<?= base_url('/logout') ?>"
+    <a class="btn-logout" href="<?= base_url('/logout') ?>"
        style="background: #57c91b; color: #fff; text-decoration: none; width: 120px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 600; margin-right: 15px; transition: 0.3s ease;">
         <i class="fa-solid fa-right-from-bracket"></i>
         Logout
@@ -606,8 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // CONTRASTE
     // =====================
 
-    const btnContraste =
-        document.getElementById('contraste-btn');
+    const btnContraste = document.getElementById('contraste-btn');
 
     if (localStorage.getItem('altoContraste') === 'true') {
         document.body.classList.add('alto-contraste');
@@ -623,6 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
     });
+
 
     // =====================
     // FONTE

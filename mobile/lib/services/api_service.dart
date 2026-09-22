@@ -9,7 +9,7 @@ import '../models/sensor.dart';
 class ApiService {
   // Rota base
   static const String baseUrl =
-      'http://10.141.130.78/FARMI/public/index.php/api';
+      'http://10.141.130.59/FARMI/public/index.php/api';
 
   static Future<Map<String, dynamic>> login(
       String email, String password) async {
@@ -132,12 +132,9 @@ class ApiService {
     }
   }
 
-// Dentro da classe ApiService:
   static Future<List<Sensor>> getSensors() async {
     try {
       final url = Uri.parse('$baseUrl/sensores');
-
-      print('--> REQUISIÇÃO SENSORES: $url');
 
       final token = AuthService.currentUser?['token'] ?? '';
       final Map<String, String> headers = {
@@ -147,10 +144,7 @@ class ApiService {
         headers['Authorization'] = 'Bearer $token';
       }
 
-      final response = await http.get(
-        url,
-        headers: headers,
-      );
+      final response = await http.get(url, headers: headers);
 
       if (response.statusCode != 200) {
         throw Exception('Erro ${response.statusCode}: ${response.body}');
@@ -159,12 +153,9 @@ class ApiService {
       final decodedBody = jsonDecode(response.body);
 
       List<dynamic> listData = [];
-
       if (decodedBody is Map<String, dynamic>) {
         final data = decodedBody['data'];
-        if (data is List) {
-          listData = data;
-        }
+        if (data is List) listData = data;
       } else if (decodedBody is List) {
         listData = decodedBody;
       }
@@ -175,14 +166,12 @@ class ApiService {
         try {
           final sensor = Sensor.fromJson(Map<String, dynamic>.from(json));
           allSensors.add(sensor);
-        } catch (e, stack) {
+        } catch (e) {
           print('❌ ERRO AO CONVERTER SENSOR: $json');
         }
       }
 
-      // ==========================================
-      // 1. DEDUPLICAÇÃO (Remove registros repetidos trazidos das medições)
-      // ==========================================
+      // 1. DEDUPLICAÇÃO
       final Map<String, Sensor> uniqueSensorsMap = {};
       for (var sensor in allSensors) {
         if (sensor.id.isNotEmpty && !uniqueSensorsMap.containsKey(sensor.id)) {
@@ -191,19 +180,23 @@ class ApiService {
       }
       final uniqueSensors = uniqueSensorsMap.values.toList();
 
-      // ==========================================
       // 2. FILTRO POR CULTURAS DO USUÁRIO
-      // ==========================================
-      final myCrops = await getCrops();
-      final myCropIds = myCrops.map((crop) => crop.id.toString()).toSet();
+      try {
+        final myCrops = await getCrops();
+        final myCropIds = myCrops.map((crop) => crop.id.toString()).toSet();
 
-      final filteredSensors = uniqueSensors.where((sensor) {
-        return myCropIds.contains(sensor.cropId.toString());
-      }).toList();
+        if (myCropIds.isNotEmpty) {
+          final filteredSensors = uniqueSensors.where((sensor) {
+            return sensor.cropId.isEmpty ||
+                myCropIds.contains(sensor.cropId.toString());
+          }).toList();
+          return filteredSensors;
+        }
+      } catch (e) {
+        print('⚠️ Erro ao aplicar filtro de culturas nos sensores: $e');
+      }
 
-      print('TOTAL DE SENSORES FILTRADOS: ${filteredSensors.length}');
-
-      return filteredSensors;
+      return uniqueSensors;
     } catch (e, stack) {
       print('❌ ERRO EM GETSENSORES: $e');
       print(stack);
@@ -366,17 +359,23 @@ class ApiService {
 
       // 4. Aplica os filtros de propriedade
       final filteredAlerts = uniqueAlerts.where((alert) {
-        final hasFarm = alert.farmName != null && alert.farmName!.trim().isNotEmpty;
-        if (hasFarm && !myFarmNames.contains(alert.farmName!.toLowerCase().trim())) {
+        final hasFarm =
+            alert.farmName != null && alert.farmName!.trim().isNotEmpty;
+        if (hasFarm &&
+            !myFarmNames.contains(alert.farmName!.toLowerCase().trim())) {
           return false;
         }
 
-        final hasCrop = alert.cropName != null && alert.cropName!.trim().isNotEmpty;
-        if (hasCrop && !myCropNames.contains(alert.cropName!.toLowerCase().trim())) {
+        final hasCrop =
+            alert.cropName != null && alert.cropName!.trim().isNotEmpty;
+        if (hasCrop &&
+            !myCropNames.contains(alert.cropName!.toLowerCase().trim())) {
           return false;
         }
 
-        final hasSensor = alert.sensorId != null && alert.sensorId!.trim().isNotEmpty && alert.sensorId != '0';
+        final hasSensor = alert.sensorId != null &&
+            alert.sensorId!.trim().isNotEmpty &&
+            alert.sensorId != '0';
         if (hasSensor && !mySensorIds.contains(alert.sensorId.toString())) {
           return false;
         }
@@ -409,4 +408,41 @@ class ApiService {
       throw Exception('Falha ao marcar todos alertas como lidos');
     }
   }
+
+  static Future<List<Map<String, dynamic>>> getSensorHistory(String sensorId) async {
+  try {
+    // Endpoint para buscar o histórico do sensor no backend PHP
+    final url = Uri.parse('$baseUrl/sensores/$sensorId/historico');
+
+    final token = AuthService.currentUser?['token'] ?? '';
+    final Map<String, String> headers = {
+      'Accept': 'application/json',
+    };
+    if (token.toString().isNotEmpty) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode != 200) {
+      throw Exception('Erro ao buscar histórico: ${response.statusCode}');
+    }
+
+    final decodedBody = jsonDecode(response.body);
+
+    List<dynamic> listData = [];
+    if (decodedBody is Map<String, dynamic>) {
+      final data = decodedBody['data'];
+      if (data is List) listData = data;
+    } else if (decodedBody is List) {
+      listData = decodedBody;
+    }
+
+    return listData.map((json) => Map<String, dynamic>.from(json)).toList();
+  } catch (e, stack) {
+    print('❌ ERRO EM GETSENSORHISTORY: $e');
+    print(stack);
+    rethrow;
+  }
+}
 }

@@ -88,55 +88,75 @@ canvas {
 
 
 /* ==========================================================
-   TABLET
-   769px ATÉ 1100px
+   TABLET (769px ATÉ 1100px) - CORRIGIDO
    ========================================================== */
 
 @media (min-width: 769px) and (max-width: 1100px) {
 
-    /* SIDEBAR */
-
+    /* 1. SIDEBAR (Escondida por padrão para liberar espaço na tela) */
     .sidebar {
-        width: 210px;
-        padding: 15px;
+        position: fixed;
+        top: 0;
+        left: -280px; /* Oculta a barra fora da tela */
+        width: 260px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        padding: 20px;
     }
 
-    /* CONTEÚDO */
+    .sidebar.active {
+        left: 0; /* Exibe ao clicar no menu sanduíche */
+    }
 
+    /* 2. BOTÃO DO MENU SANDUÍCHE (Visível no tablet) */
+    .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+
+    /* 3. CONTEÚDO PRINCIPAL (Ocupa 100% da largura) */
     .main-content {
-        margin-left: 210px !important;
-        width: calc(100% - 210px) !important;
-        max-width: calc(100% - 210px);
-        min-width: 0;
-        padding: 25px 20px;
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px;
+        box-sizing: border-box;
     }
 
-    /* HEADER */
+    /* 4. HEADER & AÇÕES DE ACESSIBILIDADE */
 
     .header {
         width: 100%;
         min-width: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start; /* Alinha o topo das seções à esquerda */
+        text-align: left !important; /* Garante alinhamento do texto à esquerda */
         gap: 15px;
     }
 
-    .header > div:last-child {
-        display: flex !important;
-        align-items: center;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        gap: 7px;
-        min-width: 0;
+    /* Força a div do Título/Subtítulo a alinhar todo texto à esquerda */
+    .header > div:first-child {
+        text-align: left !important;
     }
 
-    .btn-logout {
-        margin-right: 0;
+    .header h2,
+    .header p {
+        text-align: left !important;
     }
 
-    /* CARDS */
-
+    /* 5. CARDS DE ESTATÍSTICAS (2 Colunas) */
     .stats-grid {
         width: 100%;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 15px;
     }
 
@@ -145,60 +165,78 @@ canvas {
         width: 100%;
     }
 
-    /* FORMULÁRIO */
+    /* 6. GRID DE FAZENDAS (Adicionado: 2 Colunas para não quebrar) */
+    .fazendas-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px;
+        width: 100%;
+        margin-top: 20px;
+    }
 
+    .fazenda-card {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* 7. BARRA DE PESQUISA */
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    .search-input {
+        flex: 1;
+    }
+
+    /* 8. FORMULÁRIO E TABELAS */
     .form-grid {
         width: 100%;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px;
     }
 
-    .form-group {
-        min-width: 0;
-        width: 100%;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-    }
-
-    /* Botões */
-
-    .form-grid > div:last-child {
-        min-width: 0;
-        flex-wrap: wrap;
-    }
-
-    /* TABELA */
-
     .table-container {
         width: 100%;
-        max-width: 100%;
         overflow-x: auto;
-        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
     }
 
     .table-container table {
-        min-width: 950px;
+        min-width: 800px;
     }
 
     /* GRÁFICOS */
 
+   /* Container dos gráficos em 1 ou 2 colunas dependendo do layout */
     .charts-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important; /* Ou 1fr se quiser ocupando a largura total */
+        gap: 20px;
         width: 100%;
     }
 
     .chart-card,
-    .activities-card,
     .grafico-box {
-        min-width: 0;
-        width: 100%;
+        width: 100% !important;
+        min-height: 320px !important; /* Garante altura mínima para o gráfico renderizar */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Força a tag canvas/svg a respeitar o container pai */
+    .chart-card canvas,
+    .grafico-box canvas,
+    .chart-card svg,
+    .grafico-box svg {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 260px !important; /* Altura ideal para telas de tablet */
+        object-fit: contain;
     }
 }
 
@@ -214,6 +252,7 @@ canvas {
 
     .menu-toggle {
         display: flex;
+        background: transparent;
     }
 
     .sidebar {
@@ -262,6 +301,11 @@ canvas {
         min-width: 0;
     }
 
+    .user-avatar, 
+    .avatar {
+        display: none !important;
+    }
+
     .header h2 {
         font-size: 22px;
         line-height: 1.3;
@@ -282,10 +326,10 @@ canvas {
         width: 100% !important;
         max-width: 100%;
         display: flex !important;
-        flex-wrap: wrap;
         align-items: center;
         justify-content: flex-start;
-        gap: 8px;
+        gap: 7px;
+        flex-wrap: nowrap;
     }
 
     .btn-logout {

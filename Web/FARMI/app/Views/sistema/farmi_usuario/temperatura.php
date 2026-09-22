@@ -8,6 +8,7 @@
     <title>Monitoramento de Temperatura - Fazenda Inteligente</title>
     <!-- RESPONSIVO -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
     <!-- Ícones (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -94,20 +95,20 @@
         }
 
         .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
 
-/* agrupa avatar + botão */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Ajustado de 10px para 15px igual ao dADMIN */
-}
+        /* agrupa avatar + botão */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Ajustado de 10px para 15px igual ao dADMIN */
+        }
         .user-profile {
             display: flex;
             align-items: center;
@@ -115,16 +116,16 @@
         }
 
         .avatar {
-    width: 42px; /* Padronizado */
-    height: 42px; /* Padronizado */
-    background-color: var(--verde-claro);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--verde-escuro);
-    font-weight: bold;
-}
+            width: 42px; /* Padronizado */
+            height: 42px; /* Padronizado */
+            background-color: var(--verde-claro);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--verde-escuro);
+            font-weight: bold;
+        }
 
         /* --- CARDS DE ESTATÍSTICAS --- */
         .stats-grid {
@@ -335,323 +336,86 @@
             background: linear-gradient(135deg, #d32f2f, #b71c1c);
             color: white;
         }
+
+        .logout-btn {
+            background: #58CC02;
+            color: white;
+            text-decoration: none;
+            height: 42px; /* Padronizado */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #46A302;
+            color: white;
+        }
+
+        .accessibility-btn {
+            width: 42px; /* Padronizado */
+            height: 42px; /* Padronizado */
+            background-color: #58CC02;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centraliza perfeitamente o "A+" */
+            transition: 0.3s;
+        }
+
+        .accessibility-btn:hover {
+            background-color: #46A302;
+        }
+
         /* =========================
-   TODOS OS ELEMENTOS
-========================= */
+        PAGINAÇÃO
+        ========================= */
 
-/* 
-Seleciona TODOS os elementos dentro do body
-quando o alto contraste estiver ativo
+        .paginacao-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
 
-O * significa "todos os elementos"
-*/
-body.alto-contraste * {
+        .pagina-info {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+        }
 
-    /* deixa todos os textos brancos */
-    color: #fff !important;
+        .botao-paginacao {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            background-color: #57c91b;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: 0.3s;
+        }
 
-    /* muda a cor das bordas para branco */
-    border-color: #fff !important;
-}
-
-/* =========================
-   CONTAINERS
-========================= */
-
-/* 
-Seleciona vários tipos de containers:
-div, section, main, aside, nav, etc.
-*/
-body.alto-contraste div,
-body.alto-contraste section,
-body.alto-contraste main,
-body.alto-contraste aside,
-body.alto-contraste nav,
-body.alto-contraste header,
-body.alto-contraste footer,
-body.alto-contraste form {
-
-    /* fundo preto para todos esses containers */
-    background: #000 !important;
-}
-
-/* =========================
-   INPUTS
-========================= */
-
-/* 
-Seleciona:
-- input
-- select
-- textarea
-*/
-body.alto-contraste input,
-body.alto-contraste select,
-body.alto-contraste textarea {
-
-    /* fundo escuro */
-    background: #000000 !important;
-
-    /* texto branco */
-    color: #fff !important;
-
-    /* borda branca */
-    border: 2px solid #fff !important;
-}
-
-/* =========================
-   PLACEHOLDER
-========================= */
-
-/* 
-Seleciona o placeholder do input
-
-Ex:
-<input placeholder="Digite seu nome">
-*/
-body.alto-contraste input::placeholder {
-
-    /* cor cinza clara */
-    color: #ccc !important;
-}
-
-/* =========================
-   BOTÕES
-========================= */
-
-/* 
-Seleciona:
-- todos os <button>
-- elementos com classe .btn
-*/
-body.alto-contraste button,
-body.alto-contraste .btn {
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #fff !important;
-}
-
-body.alto-contraste .accessibility-btn {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-/* =========================
-   TABELAS
-========================= */
-
-/* 
-Seleciona:
-- table
-- thead
-- tbody
-- tr
-- td
-- th
-*/
-body.alto-contraste table,
-body.alto-contraste thead,
-body.alto-contraste tbody,
-body.alto-contraste tr,
-body.alto-contraste td,
-body.alto-contraste th {
-
-    /* fundo preto */
-    background: #191717 !important;
-
-    /* texto branco */
-    color: #fff !important;
-
-    /* bordas brancas */
-    border: 1px solid #fff !important;
-}
-
-/* =========================
-   ÍCONES
-========================= */
-
-/* 
-Seleciona todos os ícones <i>
-
-Ex:
-<i class="fa-solid fa-user"></i>
-*/
-body.alto-contraste i {
-
-    /* deixa os ícones brancos */
-    color: #fff !important;
-}
-body.alto-contraste .chart-container {
-    background: #222426 !important;
-    border: 2px solid white;
-    border-radius: 10px;
-}
-
-#contraste-btn {
-    background: transparent !important;
-    border: none !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px; /* Padronizado */
-    height: 42px; /* Padronizado */
-    font-size: 20px;
-    color: #000;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none !important;
-    box-shadow: none !important;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-#contraste-btn:hover {
-    color: var(--verde-claro);
-}
-
-#contraste-btn:focus,
-#contraste-btn:active,
-#contraste-btn:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-}
-
-.logout-btn {
-    background: #58CC02;
-    color: white;
-    text-decoration: none;
-    height: 42px; /* Padronizado */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
-    border-radius: 10px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.logout-btn:hover {
-    background: #46A302;
-    color: white;
-}
-
-.accessibility-btn {
-    width: 42px; /* Padronizado */
-    height: 42px; /* Padronizado */
-    background-color: #58CC02;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza perfeitamente o "A+" */
-    transition: 0.3s;
-}
-
-.accessibility-btn:hover {
-    background-color: #46A302;
-}
-```css
-/* =======================================================
-   ALTO CONTRASTE - BOTÕES DE ACESSIBILIDADE
-   ======================================================= */
-
-body.alto-contraste .accessibility-btn {
-    width: 42px !important;
-    height: 42px !important;
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-    border-radius: 8px !important;
-    font-size: 16px !important;
-    font-weight: bold !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer;
-}
-
-body.alto-contraste .accessibility-btn:hover {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-
-/* =======================================================
-   ALTO CONTRASTE - LOGOUT
-   ======================================================= */
-
-body.alto-contraste .logout-btn {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-    border-radius: 8px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-body.alto-contraste .logout-btn,
-body.alto-contraste .logout-btn *,
-body.alto-contraste .logout-btn i {
-    color: #fff !important;
-}
-
-
-/* =======================================================
-   ALTO CONTRASTE - PERFIL
-   ======================================================= */
-
-body.alto-contraste .avatar {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    min-height: 42px !important;
-
-    background: #fff !important;
-    color: #000 !important;
-
-    border: 2px solid #fff !important;
-    border-radius: 50% !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    font-weight: bold !important;
-    font-size: 16px !important;
-}
-
-body.alto-contraste .avatar i {
-    color: #000 !important;
-}
-
-
-/* =======================================================
-   ALTO CONTRASTE - BOTÃO DE CONTRASTE
-   ======================================================= */
-
-body.alto-contraste #contraste-btn {
-    background: #000 !important;
-    color: #fff !important;
-    border: none !important;
-}
-
-body.alto-contraste #contraste-btn i {
-    color: #fff !important;
-}
-.accessibility-btn:hover {
-    background-color: #46A302;
-}
+        .botao-paginacao:hover {
+            transform: scale(1.05);
+            background-color: #46a814;
+        }
 
     </style>
 </head>
@@ -723,11 +487,8 @@ body.alto-contraste #contraste-btn i {
         </div>
 
         <?php
+            $temperatura = (float)($temperatura_atual ?? 0);
             $sensorPrincipal = $sensores[0] ?? null;
-
-            $temperatura = isset($sensorPrincipal['VALOR'])
-                ? (float)$sensorPrincipal['VALOR']
-                : 0;
 
             if ($temperatura < 18) {
                 $status = 'low';
@@ -860,6 +621,22 @@ body.alto-contraste #contraste-btn i {
                 </tbody>
             </table>
         </div>
+         <!-- PAGINAÇÃO -->
+        <div class="paginacao-container">
+
+            <button id="paginaAnterior" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div id="paginaInfo" class="pagina-info">
+                Página 1 de 1
+            </div>
+
+            <button id="proximaPagina" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+        </div>
     </main>
 
     <!-- VLibras -->
@@ -990,6 +767,106 @@ document.getElementById("contraste-btn").addEventListener("click", function () {
 
     });
     </script>
-    
+    <script>
+/* =========================
+   PAGINAÇÃO DOS SENSORES
+========================= */
+
+const sensores = document.querySelectorAll("tbody tr");
+
+const paginaAnterior = document.getElementById("paginaAnterior");
+const proximaPagina = document.getElementById("proximaPagina");
+const paginaInfo = document.getElementById("paginaInfo");
+
+const SENSORES_POR_PAGINA = 5;
+
+let paginaAtual = 1;
+
+function atualizarSensores() {
+
+    const totalPaginas = Math.ceil(
+        sensores.length / SENSORES_POR_PAGINA
+    );
+
+    // Garante que a página atual seja válida
+    if (totalPaginas === 0) {
+        paginaAtual = 1;
+    } else if (paginaAtual > totalPaginas) {
+        paginaAtual = totalPaginas;
+    }
+
+    // Atualiza o texto da página
+    if (totalPaginas > 0) {
+        paginaInfo.textContent =
+            `Página ${paginaAtual} de ${totalPaginas}`;
+    } else {
+        paginaInfo.textContent =
+            "Nenhuma página";
+    }
+
+    // Esconde todos os sensores
+    sensores.forEach(sensor => {
+        sensor.style.display = "none";
+    });
+
+    // Define quais sensores serão mostrados
+    const inicio =
+        (paginaAtual - 1) * SENSORES_POR_PAGINA;
+
+    const fim =
+        inicio + SENSORES_POR_PAGINA;
+
+    Array.from(sensores)
+        .slice(inicio, fim)
+        .forEach(sensor => {
+            sensor.style.display = "table-row";
+        });
+
+    // ANTERIOR
+    if (paginaAtual > 1) {
+        paginaAnterior.style.display = "flex";
+    } else {
+        paginaAnterior.style.display = "none";
+    }
+
+    // PRÓXIMA
+    if (paginaAtual < totalPaginas) {
+        proximaPagina.style.display = "flex";
+    } else {
+        proximaPagina.style.display = "none";
+    }
+}
+
+
+// Botão ANTERIOR
+paginaAnterior.addEventListener("click", function () {
+
+    if (paginaAtual > 1) {
+        paginaAtual--;
+        atualizarSensores();
+    }
+
+});
+
+
+// Botão PRÓXIMA
+proximaPagina.addEventListener("click", function () {
+
+    const totalPaginas = Math.ceil(
+        sensores.length / SENSORES_POR_PAGINA
+    );
+
+    if (paginaAtual < totalPaginas) {
+        paginaAtual++;
+        atualizarSensores();
+    }
+
+});
+
+
+// Inicia a paginação
+atualizarSensores();
+
+</script>
 </body>
 </html>
