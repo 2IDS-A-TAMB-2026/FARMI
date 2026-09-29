@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Ícone do site-->
+    <!-- Ícone do site -->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
     <title>Funcionário - Painel Visual</title>
-    <!-- Ícones  -->
+
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- RESPONSIVO -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_dashboard.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
-    
+
     <style>
         :root {
             --verde-escuro: #052501;
@@ -27,7 +29,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:  'Arial';
+            font-family: 'Arial';
         }
 
         body {
@@ -36,7 +38,6 @@
             min-height: 100vh;
             transition: all 0.3s ease;
         }
-
 
         /* --- SIDEBAR --- */
         .sidebar {
@@ -99,10 +100,11 @@
             align-items: center;
             margin-bottom: 30px;
         }
+
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px; /* Ajustado de 10px para 15px igual ao dADMIN */
+            gap: 15px;
         }
 
         .header h2 {
@@ -116,8 +118,8 @@
         }
 
         .avatar {
-            width: 42px; /* Padronizado */
-            height: 42px; /* Padronizado */
+            width: 42px;
+            height: 42px;
             background-color: var(--verde-claro);
             border-radius: 50%;
             display: flex;
@@ -215,7 +217,6 @@
         }
 
         /* --- BOTÕES DE AÇÃO --- */
-
         .btn {
             width: 100%;
             padding: 12px 20px;
@@ -223,7 +224,7 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            background-color: #052501;
+            background-color: #58CC02;
             color: #fff;
             transition: .3s;
             display: inline-flex;
@@ -233,7 +234,7 @@
             text-decoration: none;
         }
 
-        .btn:hover{
+        .btn:hover {
             background: var(--verde-claro);
             transform: translateY(-2px);
         }
@@ -256,15 +257,14 @@
             background-color: var(--verde-claro-hover);
         }
 
-
         #contraste-btn {
             background: transparent !important;
             border: none !important;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 42px; /* Padronizado */
-            height: 42px; /* Padronizado */
+            width: 42px;
+            height: 42px;
             font-size: 20px;
             color: #000;
             cursor: pointer;
@@ -287,17 +287,17 @@
             box-shadow: none !important;
             background: transparent !important;
         }
-    
+
         .logout-btn {
             background: #58CC02;
             color: white;
             text-decoration: none;
-            height: 42px; /* Padronizado */
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
+            padding: 0 18px;
             border-radius: 10px;
             font-weight: bold;
             transition: 0.3s;
@@ -309,8 +309,8 @@
         }
 
         .accessibility-btn {
-            width: 42px; /* Padronizado */
-            height: 42px; /* Padronizado */
+            width: 42px;
+            height: 42px;
             background-color: #58CC02;
             color: white;
             border: none;
@@ -320,7 +320,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centraliza perfeitamente o "A+" */
+            justify-content: center;
             transition: 0.3s;
         }
 
@@ -328,12 +328,30 @@
             background-color: #46A302;
         }
 
+        /* Coluna esquerda: gráfico de umidade do solo + botão Ver Alertas embaixo */
+        .coluna-solo {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .coluna-solo .btn {
+            width: 100%;
+        }
+
+        /* Ações no fim do card de sensores */
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
 
         /* =========================
-        GRID PRINCIPAL
+           GRID PRINCIPAL
         ========================= */
-
-        .charts-grid{
+        .charts-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 20px;
@@ -341,7 +359,7 @@
         }
 
         .chart-card,
-        .activities-card{
+        .activities-card {
             background: var(--branco);
             padding: 25px;
             border-radius: 15px;
@@ -349,11 +367,10 @@
         }
 
         /* =========================
-        TITULOS
+           TÍTULOS
         ========================= */
-
-        .chart-title{
-            color: var(--verde);
+        .chart-title {
+            color: var(--verde-escuro);
             margin-bottom: 20px;
             font-size: 1.3rem;
             display: flex;
@@ -362,11 +379,9 @@
         }
 
         /* =========================
-        GRÁFICO
+           GRÁFICO
         ========================= */
-
-
-        .grafico-box{
+        .grafico-box {
             width: 100%;
             min-height: 350px;
             position: relative;
@@ -375,109 +390,214 @@
             overflow: hidden;
         }
 
-        #graficoMonitoramento{
+        #graficoMonitoramento {
             width: 100% !important;
             height: 100% !important;
         }
 
-        canvas{
+        canvas {
             display: block;
         }
 
         /* =========================
-        CULTURAS
+           CULTURAS
         ========================= */
-
-        .status-item{
+        .status-item {
             text-align: center;
-
             padding: 22px;
-
             background: #fff;
-
             border-radius: 15px;
-
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-
             transition: 0.3s;
-
             margin-bottom: 20px;
         }
 
-        .status-item:hover{
+        .status-item:hover {
             transform: translateY(-5px);
         }
 
-        .status-item:last-child{
+        .status-item:last-child {
             margin-bottom: 0;
         }
 
-        .status-item h4{
+        .status-item h4 {
             margin-top: 10px;
-
-            color: var(--verde);
-
+            color: var(--verde-escuro);
             font-size: 1.2rem;
         }
 
-        .status-item p{
+        .status-item p {
             color: #666;
-
             font-size: .95rem;
         }
 
         /* =========================
-        BOLINHA STATUS
+           BOLINHA STATUS
         ========================= */
-
-        .status-indicator{
+        .status-indicator {
             width: 75px;
             height: 75px;
-
             border-radius: 50%;
-
             margin: 0 auto 15px;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             font-size: 1.8rem;
         }
 
-        /* =========================
-        STATUS CULTURAS
-        ========================= */
-
-        .status-saudavel{
+        .status-saudavel {
             background: rgba(76,199,20,.15);
             border: 3px solid #4bc714;
         }
 
-        .status-atencao{
+        .status-atencao {
             background: rgba(255,152,0,.15);
             border: 3px solid #ff9800;
         }
 
-        .status-perigo{
+        .status-perigo {
             background: rgba(220,53,69,.15);
             border: 3px solid #dc3545;
         }
 
-        /* COR DOS ÍCONES */
+        .status-saudavel i { color: #4bc714 !important; }
+        .status-atencao i  { color: #ff9800 !important; }
+        .status-perigo i   { color: #dc3545 !important; }
 
-        .status-saudavel i{
-            color: #4bc714 !important;
+        /* ==========================================================
+           STATUS DOS SENSORES (base)
+           Estas regras não existiam neste arquivo, só as de alto
+           contraste e mobile. Agora o bloco não depende do CSS externo.
+        ========================================================== */
+        .sensor-status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
         }
 
-        .status-atencao i{
-            color: #ff9800 !important;
+        .sensor-status-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .status-perigo i{
-            color: #dc3545 !important;
+        .sensor-status-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
         }
 
+        .sensor-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .status-circle {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .status-circle.online  { background: #e8f8df; color: #58CC02; }
+        .status-circle.warning { background: #fff3cd; color: #f0ad00; }
+        .status-circle.offline { background: #ffe5e5; color: #dc3545; }
+
+        .sensor-info { min-width: 0; }
+
+        .sensor-info h4 {
+            margin: 0;
+            font-size: 14px;
+            color: #052501;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .sensor-info p {
+            margin: 3px 0 0;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .sensor-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .signal-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 16px;
+        }
+
+        .signal-bars i {
+            display: block;
+            width: 4px;
+            background: #58CC02;
+            border-radius: 2px;
+        }
+
+        .signal-bars i:nth-child(1) { height: 5px; }
+        .signal-bars i:nth-child(2) { height: 10px; }
+        .signal-bars i:nth-child(3) { height: 15px; }
+
+        .sensor-status-list .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .sensor-status-list .status-badge.online  { background: #e8f8df; color: #328000; }
+        .sensor-status-list .status-badge.warning { background: #fff3cd; color: #946c00; }
+        .sensor-status-list .status-badge.offline { background: #ffe5e5; color: #c62828; }
+
+        .pulse-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #58CC02;
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            animation: pulsarSensor 1.5s infinite;
+        }
+
+        @keyframes pulsarSensor {
+            0%, 100% { transform: scale(0.8); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+        }
+
+        .sensor-status-vazio {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+
+        /* =========================
+           CLIMA
+        ========================= */
         .weather-card {
             background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
             border-radius: 20px;
@@ -491,7 +611,6 @@
             box-sizing: border-box;
         }
 
-        /* Cabeçalho */
         .weather-header {
             display: flex;
             justify-content: space-between;
@@ -507,7 +626,6 @@
             cursor: pointer;
         }
 
-        /* Corpo */
         .weather-body {
             display: flex;
             justify-content: space-between;
@@ -523,7 +641,7 @@
 
         .temp-main #weather-icon {
             font-size: 42px;
-            color: #ffc107; /* Cor do sol */
+            color: #ffc107;
         }
 
         .temp-main #temperatura {
@@ -538,7 +656,6 @@
             margin-top: -15px;
         }
 
-        /* Qualidade do ar */
         .air-quality {
             display: flex;
             align-items: center;
@@ -559,7 +676,6 @@
             flex-direction: column;
         }
 
-        /* Rodapé */
         .weather-footer {
             text-align: center;
             margin-top: 10px;
@@ -610,245 +726,198 @@
         }
 
         /* ===========================
-        ALTO CONTRASTE (CORRIGIDO)
+           ALTO CONTRASTE
+           (classe única: alto-contraste, igual às demais telas)
         ===========================*/
-
-        body.contraste{
-            background:#000 !important;
-            color:#fff !important;
+        body.alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
         }
 
-        body.contraste *{
-            color:#fff !important;
-            border-color:#fff !important;
+        body.alto-contraste * {
+            color: #fff !important;
+            border-color: #fff !important;
         }
 
-        body.contraste .sidebar{
-            background:#000 !important;
-            border-right:2px solid #fff;
+        body.alto-contraste .sidebar {
+            background: #000 !important;
+            border-right: 2px solid #fff;
         }
 
-        body.contraste .main-content{
-            background:#000 !important;
+        body.alto-contraste .main-content {
+            background: #000 !important;
         }
 
-        body.contraste .card,
-        body.contraste .table-container,
-        body.contraste .chart-card,
-        body.contraste .activities-card,
-        body.contraste .weather-card,
-        body.contraste .status-item{
-            background:#111 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
-            box-shadow:none !important;
+        body.alto-contraste .card,
+        body.alto-contraste .table-container,
+        body.alto-contraste .chart-card,
+        body.alto-contraste .activities-card,
+        body.alto-contraste .weather-card,
+        body.alto-contraste .status-item {
+            background: #111 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
         }
 
-        /* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
-        body.contraste .activities-card > div {
+        body.alto-contraste .activities-card > div {
             background: #000 !important;
             border: 1px solid #fff !important;
         }
-        /* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
-        body.contraste .activities-card .btn {
+
+        body.alto-contraste .activities-card .btn {
             background-color: #ffffff !important;
             color: #000000 !important;
             border: 2px solid #ffffff !important;
         }
 
-        body.contraste .activities-card .btn:hover {
+        body.alto-contraste .activities-card .btn:hover {
             background-color: #e6e6e6 !important;
             color: #000000 !important;
         }
 
-        body.contraste table,
-        body.contraste tr,
-        body.contraste td,
-        body.contraste th{
-            background:#111 !important;
-            color:#fff !important;
-            border:1px solid #fff !important;
+        body.alto-contraste table,
+        body.alto-contraste tr,
+        body.alto-contraste td,
+        body.alto-contraste th {
+            background: #111 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
         }
 
-        body.contraste .status-badge{
-            background:#fff !important;
-            color:#000 !important;
+        body.alto-contraste .status-badge {
+            background: #fff !important;
+            color: #000 !important;
         }
 
-        body.contraste .logout-btn,
-        body.contraste .accessibility-btn,
-        body.contraste .btn,
-        body.contraste .mostrar-mais {
-            background:#000 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
-        }
-        body.contraste *{
-            color:#fff !important;
-            border-color:#fff !important;
+        body.alto-contraste .logout-btn,
+        body.alto-contraste .accessibility-btn,
+        body.alto-contraste .btn,
+        body.alto-contraste .mostrar-mais {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
         }
 
-        #contraste-btn:hover {
-            color: var(--verde-claro) !important;
-        }
-
-        body.contraste #contraste-btn:hover {
+        body.alto-contraste #contraste-btn,
+        body.alto-contraste #contraste-btn:hover {
             color: #fff !important;
         }
 
-        body.contraste .avatar{
-            background:#fff !important;
-            color:#000 !important;
+        body.alto-contraste .avatar {
+            background: #fff !important;
+            color: #000 !important;
         }
 
-        body.contraste input,
-        body.contraste select,
-        body.contraste textarea{
-            background:#000 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
+        body.alto-contraste input,
+        body.alto-contraste select,
+        body.alto-contraste textarea {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
         }
 
-        /* ==========================================================
-        ALTO CONTRASTE - STATUS DOS SENSORES
-        ========================================================== */
-
-        /* Card principal */
-        body.contraste .activities-card {
+        /* --- Status dos sensores --- */
+        body.alto-contraste .activities-card {
             background: #000 !important;
             color: #fff !important;
             border: 2px solid #fff !important;
             box-shadow: none !important;
         }
 
-        /* Título */
-        body.contraste .activities-card .chart-title {
+        body.alto-contraste .activities-card .chart-title {
             background: #000 !important;
             color: #fff !important;
         }
 
-        body.contraste .activities-card .chart-title i {
+        body.alto-contraste .activities-card .chart-title i {
             color: #fff !important;
         }
 
-        /* Lista dos sensores */
-        body.contraste .sensor-status-list {
+        body.alto-contraste .sensor-status-list,
+        body.alto-contraste .sensor-left,
+        body.alto-contraste .sensor-right {
             background: #000 !important;
             color: #fff !important;
         }
 
-        /* Cada sensor */
-        body.contraste .sensor-status-item {
+        body.alto-contraste .sensor-status-item {
             background: #000 !important;
             color: #fff !important;
             border: 2px solid #fff !important;
             box-shadow: none !important;
         }
 
-        /* Área esquerda */
-        body.contraste .sensor-left {
-            background: #000 !important;
+        body.alto-contraste .sensor-info h4,
+        body.alto-contraste .sensor-info p {
             color: #fff !important;
         }
 
-        /* Área direita */
-        body.contraste .sensor-right {
-            background: #000 !important;
-            color: #fff !important;
-        }
-
-        /* Nome do sensor */
-        body.contraste .sensor-info h4 {
-            color: #fff !important;
-        }
-
-        /* Tipo e horário */
-        body.contraste .sensor-info p {
-            color: #fff !important;
-        }
-
-        /* Círculo do sensor */
-        body.contraste .status-circle {
+        body.alto-contraste .status-circle {
             background: #000 !important;
             color: #fff !important;
             border: 2px solid #fff !important;
         }
 
-        /* Ícone dentro do círculo */
-        body.contraste .status-circle i {
+        body.alto-contraste .status-circle i {
             color: #fff !important;
         }
 
-        /* Barras de sinal */
-        body.contraste .signal-bars {
+        body.alto-contraste .signal-bars {
             color: #fff !important;
         }
 
-        body.contraste .signal-bars i {
+        body.alto-contraste .signal-bars i {
             background: #fff !important;
         }
 
-        /* Status ONLINE / OFFLINE / OSCILANDO */
-        body.contraste .sensor-status-item .status-badge {
+        body.alto-contraste .sensor-status-item .status-badge {
             background: #fff !important;
             color: #000 !important;
             border: 2px solid #fff !important;
         }
 
-        /* Bolinha de pulso do sensor online */
-        body.contraste .pulse-dot {
+        body.alto-contraste .pulse-dot {
             background: #fff !important;
             border: 1px solid #fff !important;
         }
 
-        /* Remove cores verde/vermelha/laranja do modo normal */
-        body.contraste .sensor-status-item.is-online,
-        body.contraste .sensor-status-item.is-offline,
-        body.contraste .sensor-status-item.is-warning {
+        body.alto-contraste .sensor-status-item.is-online,
+        body.alto-contraste .sensor-status-item.is-offline,
+        body.alto-contraste .sensor-status-item.is-warning {
             background: #000 !important;
             color: #fff !important;
             border-color: #fff !important;
         }
 
-        /* Hover */
-        body.contraste .sensor-status-item:hover {
+        body.alto-contraste .sensor-status-item:hover {
             background: #222 !important;
         }
 
-        body.contraste .sensor-status-item:hover * {
+        body.alto-contraste .sensor-status-item:hover * {
             color: #fff !important;
         }
 
-        /* ================================
-        GRÁFICOS - ALTO CONTRASTE
-        ================================ */
-
-        body.contraste .chart-card,
-        body.contraste .grafico-box {
+        /* --- Gráficos --- */
+        body.alto-contraste .chart-card,
+        body.alto-contraste .grafico-box {
             background: #000 !important;
             color: #fff !important;
             border-color: #fff !important;
         }
 
-        /* Área do gráfico permanece preta */
-        body.contraste .grafico-box canvas {
+        body.alto-contraste .grafico-box canvas {
             background: #000 !important;
         }
 
-        /* Títulos dos gráficos */
-        body.contraste .chart-card .chart-title {
-            color: #fff !important;
-        }
-
-        body.contraste .chart-card .chart-title i {
+        body.alto-contraste .chart-card .chart-title,
+        body.alto-contraste .chart-card .chart-title i {
             color: #fff !important;
         }
 
         /* ==========================================================
-        RESPONSIVO FARMI
+           RESPONSIVO FARMI
         ========================================================== */
-
-        /* BASE - evita elementos ultrapassando a tela */
         html,
         body {
             width: 100%;
@@ -876,7 +945,6 @@
             max-width: 100%;
         }
 
-        /* GRÁFICOS */
         .grafico-box {
             width: 100%;
             max-width: 100%;
@@ -888,13 +956,11 @@
             max-width: 100% !important;
         }
 
-        /* CLIMA */
         .weather-card {
             width: 100%;
             max-width: 100%;
         }
 
-        /* TABELA */
         .table-container {
             width: 100%;
             overflow-x: auto;
@@ -905,13 +971,8 @@
             min-width: 700px;
         }
 
-
-        /* ==========================================================
-        ATÉ 1200px
-        ========================================================== */
-
+        /* ATÉ 1200px */
         @media (max-width: 1200px) {
-
             .stats-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -925,21 +986,15 @@
             }
         }
 
-
-        /* ==========================================================
-        TABLET - ATÉ 768px
-        ========================================================== */
-
+        /* TABLET - ATÉ 768px */
         @media (max-width: 768px) {
 
-            /* SIDEBAR */
             .sidebar {
                 width: 250px;
                 height: 100vh;
                 left: 0;
                 top: 0;
                 z-index: 1000;
-
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
             }
@@ -948,13 +1003,11 @@
                 transform: translateX(0);
             }
 
-            /* FUNDO ESCURO */
             .menu-overlay {
                 position: fixed;
                 inset: 0;
                 background: rgba(0, 0, 0, 0.5);
                 z-index: 999;
-
                 opacity: 0;
                 visibility: hidden;
                 transition: 0.3s;
@@ -965,28 +1018,21 @@
                 visibility: visible;
             }
 
-            /* BOTÃO DO MENU */
             .menu-toggle {
                 position: fixed;
                 top: 15px;
                 left: 15px;
-
                 width: 45px;
                 height: 45px;
-
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
                 background: #052501;
                 color: #ffffff;
-
                 border: none;
                 border-radius: 10px;
-
                 font-size: 20px;
                 cursor: pointer;
-
                 z-index: 1100;
             }
 
@@ -994,7 +1040,6 @@
                 background: #4bc714;
             }
 
-            /* CONTEÚDO */
             .main-content {
                 margin-left: 0 !important;
                 width: 100% !important;
@@ -1002,7 +1047,6 @@
                 padding: 75px 20px 30px;
             }
 
-            /* CABEÇALHO */
             .header {
                 width: 100%;
                 gap: 15px;
@@ -1023,7 +1067,6 @@
                 padding: 0 12px;
             }
 
-            /* CARDS */
             .stats-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 15px;
@@ -1054,7 +1097,6 @@
                 margin-left: 10px;
             }
 
-            /* GRÁFICOS */
             .charts-grid {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -1077,7 +1119,6 @@
                 padding: 8px;
             }
 
-            /* CLIMA */
             .weather-card {
                 width: 100%;
                 padding: 16px;
@@ -1104,16 +1145,12 @@
                 gap: 10px;
             }
 
-            /* SENSORES */
             .sensor-status-item {
                 width: 100%;
                 min-width: 0;
             }
 
-            .sensor-left {
-                min-width: 0;
-            }
-
+            .sensor-left,
             .sensor-info {
                 min-width: 0;
             }
@@ -1123,7 +1160,10 @@
                 overflow-wrap: anywhere;
             }
 
-            /* TABELA */
+            .signal-bars {
+                display: none;
+            }
+
             .table-container {
                 overflow-x: auto;
             }
@@ -1133,26 +1173,21 @@
             }
         }
 
+        /* CELULAR - ATÉ 600px */
+        @media (max-width: 600px) {
 
-            /* ==========================================================
-            CELULAR - ATÉ 600px
-            ========================================================== */
+            .main-content {
+                padding: 70px 12px 25px;
+            }
 
-            @media (max-width: 600px) {
+            .header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
 
-                .main-content {
-                    padding: 70px 12px 25px;
-                }
-
-                /* HEADER */
-                .header {
-                    align-items: flex-start;
-                    flex-direction: column;
-                }
-
-                .header h2 {
-                    font-size: 21px;
-                }
+            .header h2 {
+                font-size: 21px;
+            }
 
             .header-right {
                 width: 100%;
@@ -1172,7 +1207,6 @@
                 height: 40px;
             }
 
-            /* CARDS */
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
@@ -1187,7 +1221,6 @@
                 font-size: 25px;
             }
 
-            /* GRÁFICOS */
             .chart-card,
             .activities-card {
                 padding: 14px;
@@ -1203,7 +1236,6 @@
                 padding: 5px;
             }
 
-            /* CLIMA */
             .weather-card {
                 width: 100%;
                 padding: 15px;
@@ -1242,7 +1274,6 @@
                 font-size: 11px;
             }
 
-            /* SENSORES */
             .sensor-status-item {
                 padding: 12px;
             }
@@ -1278,289 +1309,223 @@
             }
         }
 
+        /* CELULAR PEQUENO - ATÉ 480px */
+        @media (max-width: 480px) {
 
-            /* ==========================================================
-            CELULAR PEQUENO - ATÉ 480px
-            ========================================================== */
-
-            @media (max-width: 480px) {
-
-                .main-content {
-                    padding: 68px 10px 20px;
-                }
-
-                .menu-toggle {
-                    width: 42px;
-                    height: 42px;
-                    top: 12px;
-                    left: 12px;
-                }
-
-                /* HEADER */
-                .header h2 {
-                    font-size: 19px;
-                }
-
-                .header p {
-                    font-size: 13px;
-                }
-
-                .header-right {
-                    gap: 5px;
-                }
-
-                .logout-btn {
-                    padding: 0 10px;
-                    font-size: 12px;
-                }
-
-                .logout-btn i {
-                    margin-right: 0;
-                }
-
-                .accessibility-btn,
-                #contraste-btn {
-                    width: 38px;
-                    height: 38px;
-                    font-size: 15px;
-                }
-
-                /* CARDS */
-                .card {
-                    padding: 14px;
-                }
-
-                .card-info h3 {
-                    font-size: 13px;
-                }
-
-                .card-info p {
-                    font-size: 23px;
-                }
-
-                .card-icon {
-                    font-size: 1.8rem;
-                }
-
-                /* GRÁFICOS */
-                .chart-card,
-                .activities-card {
-                    padding: 12px;
-                }
-
-                .chart-title {
-                    font-size: 1rem;
-                }
-
-                .grafico-box {
-                    height: 230px;
-                }
-
-                /* CLIMA */
-                .weather-card {
-                    padding: 13px;
-                    border-radius: 15px;
-                }
-
-                .temp-main #temperatura {
-                    font-size: 42px;
-                }
-
-                .temp-main #weather-icon {
-                    font-size: 30px;
-                }
-
-                .weather-details-grid {
-                    gap: 7px;
-                }
-
-                .detail-item {
-                    padding: 8px 3px;
-                }
-
-                .detail-item strong {
-                    font-size: 12px;
-                }
-
-                /* SENSORES */
-                .sensor-status-item {
-                    padding: 10px;
-                }
-
-                .status-circle {
-                    width: 38px;
-                    height: 38px;
-                    font-size: 15px;
-                }
-
-                .sensor-info h4 {
-                    font-size: 13px;
-                }
-
-                .sensor-info p {
-                    font-size: 11px;
-                }
-
-                .status-badge {
-                    font-size: 10px;
-                    padding: 4px 7px;
-                }
-
-                /* TABELA */
-                .table-container {
-                    padding: 12px;
-                }
-
-                .table-container table {
-                    min-width: 650px;
-                }
+            .main-content {
+                padding: 68px 10px 20px;
             }
 
-
-            /* ==========================================================
-            CELULAR MUITO PEQUENO - ATÉ 360px
-            ========================================================== */
-
-            @media (max-width: 360px) {
-
-                .main-content {
-                    padding-left: 8px;
-                    padding-right: 8px;
-                }
-
-                .header-right {
-                    flex-wrap: wrap;
-                }
-
-                .logout-btn {
-                    width: 100%;
-                }
-
-                .weather-details-grid {
-                    grid-template-columns: 1fr 1fr;
-                }
-
-                .temp-main #temperatura {
-                    font-size: 38px;
-                }
+            .menu-toggle {
+                width: 42px;
+                height: 42px;
+                top: 12px;
+                left: 12px;
             }
 
-            /* ==========================================================
-            PAGINAÇÃO DO STATUS DOS SENSORES
-            ========================================================== */
-
-            .sensor-pagination {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                margin-top: 15px;
+            .header h2 {
+                font-size: 19px;
             }
 
-            .sensor-pagination button {
-                background: #58CC02;
-                color: #fff;
-                border: none;
-                border-radius: 8px;
-                padding: 8px 14px;
+            .header p {
                 font-size: 13px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: 0.3s;
             }
 
-            .sensor-pagination button:hover:not(:disabled) {
-                background: #46A302;
+            .header-right {
+                gap: 5px;
             }
 
-            .sensor-pagination button:disabled {
-                background: #ccc;
-                color: #666;
-                cursor: not-allowed;
+            .logout-btn {
+                padding: 0 10px;
+                font-size: 12px;
             }
 
-            .sensor-pagination .pagina-atual {
-                font-weight: bold;
-                color: #052501;
-                min-width: 100px;
-                text-align: center;
+            .logout-btn i {
+                margin-right: 0;
             }
 
-            /* Alto contraste */
-            body.contraste .sensor-pagination button {
-                background: #000 !important;
-                color: #fff !important;
-                border: 1px solid #fff !important;
+            .accessibility-btn,
+            #contraste-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
             }
 
-            body.contraste .sensor-pagination button:disabled {
-                background: #000 !important;
-                color: #777 !important;
-                border-color: #777 !important;
+            .card {
+                padding: 14px;
             }
 
-            body.contraste .sensor-pagination .pagina-atual {
-                color: #fff !important;
-            }
-
-            /* ==========================================================
-            PAGINAÇÃO DO STATUS DOS SISTEMAS AUTOMATIZADOS
-            ========================================================== */
-
-            .sistemas-pagination {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                margin-top: 15px;
-            }
-
-            .sistemas-pagination button {
-                background: #58CC02;
-                color: #fff;
-                border: none;
-                border-radius: 8px;
-                padding: 8px 14px;
+            .card-info h3 {
                 font-size: 13px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: 0.3s;
             }
 
-            .sistemas-pagination button:hover:not(:disabled) {
-                background: #46A302;
+            .card-info p {
+                font-size: 23px;
             }
 
-            .sistemas-pagination button:disabled {
-                background: #ccc;
-                color: #666;
-                cursor: not-allowed;
+            .card-icon {
+                font-size: 1.8rem;
             }
 
-            .sistemas-pagination .pagina-atual {
-                font-weight: bold;
-                color: #052501;
-                min-width: 120px;
-                text-align: center;
+            .chart-card,
+            .activities-card {
+                padding: 12px;
             }
 
-            /* Alto contraste */
-            body.contraste .sistemas-pagination button {
-                background: #000 !important;
-                color: #fff !important;
-                border: 1px solid #fff !important;
+            .chart-title {
+                font-size: 1rem;
             }
 
-            body.contraste .sistemas-pagination button:disabled {
-                background: #000 !important;
-                color: #777 !important;
-                border-color: #777 !important;
+            .grafico-box {
+                height: 230px;
             }
 
-            body.contraste .sistemas-pagination .pagina-atual {
-                color: #fff !important;
+            .weather-card {
+                padding: 13px;
+                border-radius: 15px;
             }
-</style>
+
+            .temp-main #temperatura {
+                font-size: 42px;
+            }
+
+            .temp-main #weather-icon {
+                font-size: 30px;
+            }
+
+            .weather-details-grid {
+                gap: 7px;
+            }
+
+            .detail-item {
+                padding: 8px 3px;
+            }
+
+            .detail-item strong {
+                font-size: 12px;
+            }
+
+            .sensor-status-item {
+                padding: 10px;
+            }
+
+            .status-circle {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+
+            .sensor-info h4 {
+                font-size: 13px;
+            }
+
+            .sensor-info p {
+                font-size: 11px;
+            }
+
+            .status-badge {
+                font-size: 10px;
+                padding: 4px 7px;
+            }
+
+            .table-container {
+                padding: 12px;
+            }
+
+            .table-container table {
+                min-width: 650px;
+            }
+        }
+
+        /* CELULAR MUITO PEQUENO - ATÉ 360px */
+        @media (max-width: 360px) {
+
+            .main-content {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .header-right {
+                flex-wrap: wrap;
+            }
+
+            .logout-btn {
+                width: 100%;
+            }
+
+            .weather-details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .temp-main #temperatura {
+                font-size: 38px;
+            }
+        }
+
+        /* ==========================================================
+           PAGINAÇÃO - SENSORES E SISTEMAS
+        ========================================================== */
+        .sensor-pagination,
+        .sistemas-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .sensor-pagination button,
+        .sistemas-pagination button {
+            background: #58CC02;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .sensor-pagination button:hover:not(:disabled),
+        .sistemas-pagination button:hover:not(:disabled) {
+            background: #46A302;
+        }
+
+        .sensor-pagination button:disabled,
+        .sistemas-pagination button:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .sensor-pagination .pagina-atual,
+        .sistemas-pagination .pagina-atual {
+            font-weight: bold;
+            color: #052501;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        body.alto-contraste .sensor-pagination button,
+        body.alto-contraste .sistemas-pagination button {
+            background: #000 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.alto-contraste .sensor-pagination button:disabled,
+        body.alto-contraste .sistemas-pagination button:disabled {
+            background: #000 !important;
+            color: #777 !important;
+            border-color: #777 !important;
+        }
+
+        body.alto-contraste .sensor-pagination .pagina-atual,
+        body.alto-contraste .sistemas-pagination .pagina-atual {
+            color: #fff !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -1573,11 +1538,11 @@
         </div>
         <nav>
             <a href="<?= base_url('/dashboard-usuario') ?>" class="menu-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            <a href="<?= base_url('/luz') ?>" class="menu-item "><i class="fa-solid fa-lightbulb"></i> Luz</a>
+            <a href="<?= base_url('/luz') ?>" class="menu-item"><i class="fa-solid fa-lightbulb"></i> Luz</a>
             <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
             <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
             <a href="<?= base_url('/solo') ?>" class="menu-item"><i class="fa-solid fa-chart-pie"></i> Solo</a>
-            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
             <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
     </aside>
@@ -1585,47 +1550,50 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-        
-    <header class="header">
+        <!-- Menu sanduíche -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-        <div>
-            <h2>Dashboard</h2>
-            <p style="color: #666;">
-                Status geral do Sistema.
-            </p>
-        </div>
-        <div class="header-right">
+        <!-- CABEÇALHO -->
+        <header class="header">
 
-            <a href="<?= base_url('/logout') ?>" class="logout-btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-            </a>
-
-            <button id="contraste-btn" aria-label="Alterar contraste">
-                <i class="fa-solid fa-circle-half-stroke"></i>
-            </button>
-
-            <button class="accessibility-btn" onclick="aumentarFonte()">A+</button>
-            <button class="accessibility-btn" onclick="diminuirFonte()">A-</button>
-            <button class="accessibility-btn" onclick="resetarFonte()">A</button>
-
-            <div class="user-profile">
-                <div class="avatar">F</div>
+            <div>
+                <h2>Dashboard</h2>
+                <p style="color: #666;">
+                    Status geral do Sistema.
+                </p>
             </div>
 
-        </div>
+            <div class="header-right">
 
-    </header>
+                <a href="<?= base_url('/logout') ?>" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+
+                <button id="contraste-btn" aria-label="Alterar contraste">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </button>
+
+                <button class="accessibility-btn" onclick="aumentarFonte()">A+</button>
+                <button class="accessibility-btn" onclick="diminuirFonte()">A-</button>
+                <button class="accessibility-btn" onclick="resetarFonte()">A</button>
+
+                <div class="user-profile">
+                    <div class="avatar">F</div>
+                </div>
+
+            </div>
+
+        </header>
 
         <!-- CARDS DE ESTATÍSTICAS -->
         <div class="stats-grid">
             <div class="card">
                 <div class="card-info">
                     <h3>Temperatura Atual</h3>
-                    <p><?= number_format($temperatura_atual, 1, ',', '.') ?>°C </p>
+                    <p><?= number_format($temperatura_atual, 1, ',', '.') ?>°C</p>
                 </div>
                 <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
             </div>
@@ -1643,7 +1611,7 @@
                     <h3>Luminosidade</h3>
                     <p><?= number_format($lux, 0, ',', '.') ?> Lux</p>
                 </div>
-                <div class="card-icon"><i class="fa-solid fa-sun"></i></i></div>
+                <div class="card-icon"><i class="fa-solid fa-sun"></i></div>
             </div>
 
             <div class="card">
@@ -1653,13 +1621,12 @@
                 </div>
                 <div class="card-icon"><i class="fa-solid fa-wifi"></i></div>
             </div>
-
         </div>
 
         <!-- GRÁFICOS -->
-        <div class="charts-grid">   
+        <div class="charts-grid">
 
-            <!-- TEMPERATURA - MONITORAMENTO -->
+            <!-- TEMPERATURA -->
             <div class="chart-card">
                 <h3 class="chart-title">
                     <i class="fa-solid fa-chart-line"></i>
@@ -1671,73 +1638,74 @@
             </div>
 
             <!-- CLIMA -->
-        <div class="weather-card" id="weather-widget">
-    <!-- CABEÇALHO (Cidade e Opções) -->
-    <div class="weather-header">
-        <div class="location-selector">
-            <i class="fa-solid fa-location-arrow"></i>
-            <span id="cidade-nome">Tambaú</span>
-        </div>
-    </div>
+            <div class="weather-card" id="weather-widget">
 
-    <!-- CORPO (Temperatura e Qualidade do Ar) -->
-    <div class="weather-body">
-        <div class="temp-main">
-            <i class="fa-solid fa-sun" id="weather-icon"></i>
-            <span id="temperatura">--</span><span class="unit">°C</span>
-        </div>
+                <!-- CABEÇALHO (Cidade) -->
+                <div class="weather-header">
+                    <div class="location-selector">
+                        <i class="fa-solid fa-location-arrow"></i>
+                        <span id="cidade-nome">Tambaú</span>
+                    </div>
+                </div>
 
-        <div class="air-quality" id="btn-qualidade-ar">
-            <i class="fa-solid fa-bars-staggered"></i>
-            <div class="air-text">
-                <span class="air-title">Qualidade do ar</span>
-                <span id="qualidade-ar">Carregando...</span>
+                <!-- CORPO (Temperatura e Qualidade do Ar) -->
+                <div class="weather-body">
+                    <div class="temp-main">
+                        <i class="fa-solid fa-sun" id="weather-icon"></i>
+                        <span id="temperatura">--</span><span class="unit">°C</span>
+                    </div>
+
+                    <div class="air-quality" id="btn-qualidade-ar">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                        <div class="air-text">
+                            <span class="air-title">Qualidade do ar</span>
+                            <span id="qualidade-ar">Carregando...</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+
+                <!-- RODAPÉ DO CLIMA -->
+                <div class="weather-footer">
+                    <button class="btn-previsao" id="btn-previsao-completa">Ver a previsão completa</button>
+                </div>
+
+                <!-- MÉTRICAS ADICIONAIS -->
+                <div class="weather-details-grid">
+                    <div class="detail-item">
+                        <i class="fa-solid fa-wind"></i>
+                        <span>Vento</span>
+                        <strong id="dado-vento">-- km/h</strong>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>Umidade</span>
+                        <strong id="dado-umidade">--%</strong>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-cloud-rain"></i>
+                        <span>Chuva</span>
+                        <strong id="dado-chuva">-- mm</strong>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-sun"></i>
+                        <span>Índice UV</span>
+                        <strong id="dado-uv">--</strong>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-temperature-half"></i>
+                        <span>Sensação</span>
+                        <strong id="dado-sensacao">-- °C</strong>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-temperature-arrow-down"></i>
+                        <span>Orvalho</span>
+                        <strong id="dado-orvalho">-- °C</strong>
+                    </div>
+                </div>
             </div>
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
-    </div>
 
-    <!-- RODAPÉ DO CLIMA -->
-    <div class="weather-footer">
-        <button class="btn-previsao" id="btn-previsao-completa">Ver a previsão completa</button>
-    </div>
-
-    <!-- METRICAS AGRÍCOLAS ADICIONAIS -->
-    <div class="weather-details-grid">
-    <div class="detail-item">
-        <i class="fa-solid fa-wind"></i>
-        <span>Vento</span>
-        <strong id="dado-vento">-- km/h</strong>
-    </div>
-    <div class="detail-item">
-        <i class="fa-solid fa-droplet"></i>
-        <span>Umidade</span>
-        <strong id="dado-umidade">--%</strong>
-    </div>
-    <div class="detail-item">
-        <i class="fa-solid fa-cloud-rain"></i>
-        <span>Chuva</span>
-        <strong id="dado-chuva">-- mm</strong>
-    </div>
-    <div class="detail-item">
-        <i class="fa-solid fa-sun"></i>
-        <span>Índice UV</span>
-        <strong id="dado-uv">--</strong>
-    </div>
-    <div class="detail-item">
-        <i class="fa-solid fa-temperature-half"></i>
-        <span>Sensação</span>
-        <strong id="dado-sensacao">-- °C</strong>
-    </div>
-    <div class="detail-item">
-        <i class="fa-solid fa-temperature-arrow-down"></i>
-        <span>Orvalho</span>
-        <strong id="dado-orvalho">-- °C</strong>
-    </div>
-</div>
-</div>
-
-            <!-- UMIDADE DO Ar -->
+            <!-- UMIDADE DO AR -->
             <div class="chart-card">
                 <h3 class="chart-title">
                     <i class="fa-solid fa-droplet"></i>
@@ -1747,8 +1715,6 @@
                     <canvas id="graficoUmidade"></canvas>
                 </div>
             </div>
-
-        
 
             <!-- LUMINOSIDADE -->
             <div class="chart-card">
@@ -1761,67 +1727,62 @@
                 </div>
             </div>
 
-            <!-- UMIDADE DO Solo -->
-            <div class="chart-card">
-                <h3 class="chart-title">
-                    <i class="fa-solid fa-seedling"></i>
-                    Umidade do Solo (%)
-                </h3>
-                <div class="grafico-box">
-                    <canvas id="graficoUmidadeSolo"></canvas>
+            <!-- UMIDADE DO SOLO + BOTÃO VER ALERTAS -->
+            <div class="coluna-solo">
+
+                <div class="chart-card">
+                    <h3 class="chart-title">
+                        <i class="fa-solid fa-seedling"></i>
+                        Umidade do Solo (%)
+                    </h3>
+                    <div class="grafico-box">
+                        <canvas id="graficoUmidadeSolo"></canvas>
+                    </div>
                 </div>
+
+                <a href="<?= base_url('/alertas-usuario') ?>" class="btn">
+                    Ver Alertas
+                </a>
+
             </div>
-            
-           <!-- STATUS DOS SENSORES -->
+
+            <!-- STATUS DOS SENSORES -->
             <div class="activities-card">
 
-    <h3 class="chart-title">
-        <i class="fa-solid fa-microchip"></i>
-        Status dos Sensores
-    </h3>
+                <h3 class="chart-title">
+                    <i class="fa-solid fa-microchip"></i>
+                    Status dos Sensores
+                </h3>
 
-    <div class="sensor-status-list" id="sensor-status-list">
-        <div style="text-align:center; padding:30px; color:#666;">
-            Carregando sensores...
-        </div>
+                <div class="sensor-status-list" id="sensor-status-list">
+                    <div class="sensor-status-vazio">Carregando sensores...</div>
+                    <!-- Preenchido dinamicamente por atualizarStatusSensores() -->
+                </div>
 
-        <!-- Preenchido dinamicamente por atualizarStatusSensores() -->
-    </div>
+                <!-- PAGINAÇÃO DOS SENSORES -->
+                <div class="sensor-pagination" id="sensor-pagination" style="display:none;">
+                    <button id="sensor-anterior" type="button" aria-label="Página anterior">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
 
-    <!-- PAGINAÇÃO DOS SENSORES -->
-    <div class="sensor-pagination" id="sensor-pagination" style="display:none;">
+                    <span class="pagina-atual" id="sensor-pagina-atual">Página 1</span>
 
-            <button id="sensor-anterior" type="button">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
+                    <button id="sensor-proxima" type="button" aria-label="Próxima página">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
 
-            <span class="pagina-atual" id="sensor-pagina-atual">
-                Página 1
-            </span>
+                <!-- AÇÕES -->
+                <div class="card-actions">
+                    <a href="<?= base_url('/relatorio') ?>" class="logout-btn">
+                        <i class="fa-solid fa-print"></i>
+                        Imprimir Relatório
+                    </a>
+                </div>
 
-            <button id="sensor-proxima" type="button">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-        </div>
-
-    </div>
-
-
-            <a href="<?= base_url('/alertas-usuario') ?>"
-               class="btn">
-                Ver Alertas
-            </a>
-            <a href="<?= base_url('/relatorio') ?>" class="logout-btn">
-                <i class="fa-solid fa-print"></i>
-                Imprimir Relatório
-            </a>
+            </div>
 
         </div>
-
-        </div>
-        
-        
 
         <!-- TABELA DE STATUS DOS SISTEMAS -->
         <h3 class="section-title">Status dos Sistemas Automatizados</h3>
@@ -1865,83 +1826,79 @@
 
                     <tr class="linha-sensor">
 
-                    <td>
-                        <?= esc($sensor['ID_SENSOR']) ?>
-                    </td>
+                        <td>
+                            <?= esc($sensor['ID_SENSOR']) ?>
+                        </td>
 
-                    <td>
-                        <i class="fa-solid <?= $icone ?>"
-                        style="color: var(--verde-claro); margin-right: 8px;">
-                        </i>
+                        <td>
+                            <i class="fa-solid <?= $icone ?>"
+                               style="color: var(--verde-claro); margin-right: 8px;"></i>
+                            <?= esc($sensor['NOME_SENSOR']) ?>
+                        </td>
 
-                        <?= esc($sensor['NOME_SENSOR']) ?>
-                    </td>
+                        <td>
+                            <?= esc($sensor['NOME_CULTURA']) ?>
+                            <small>ID: <?= esc($sensor['ID_CULTURA']) ?></small>
+                        </td>
 
-                    <td>
-                        <?= esc($sensor['NOME_CULTURA']) ?>
-                        <small>ID: <?= esc($sensor['ID_CULTURA']) ?></small>
-                    </td>
+                        <td>
+                            <?= esc($sensor['NOME_FAZENDA']) ?>
+                        </td>
 
-                    <td>
-                        <?= esc($sensor['NOME_FAZENDA']) ?>
-                    </td>
+                        <td>
+                            <?= !empty($sensor['DATA_HORA'])
+                                ? date('d/m/Y H:i', strtotime($sensor['DATA_HORA']))
+                                : '--' ?>
+                        </td>
 
-                    <td>
-                        <?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?>
-                    </td>
+                        <td>
+                            <?php
+                            switch ($sensor['TIPO_SENSOR']) {
+                                case 'Temperatura':
+                                    echo number_format((float)$sensor['VALOR'], 1, ',', '.') . ' °C';
+                                    break;
 
-                    <td>
-                        <?php
-                        switch ($sensor['TIPO_SENSOR']) {
-                            case 'Temperatura':
-                                echo number_format($sensor['VALOR'], 1, ',', '.') . ' °C';
-                                break;
+                                case 'Umidade':
+                                case 'Solo':
+                                    echo number_format((float)$sensor['VALOR'], 1, ',', '.') . ' %';
+                                    break;
 
-                            case 'Umidade':
-                                echo number_format($sensor['VALOR'], 1, ',', '.') . ' %';
-                                break;
+                                case 'Luz':
+                                    echo number_format((float)$sensor['VALOR'], 0, ',', '.') . ' Lux';
+                                    break;
 
-                            case 'Solo':
-                                echo number_format($sensor['VALOR'], 1, ',', '.') . ' %';
-                                break;
+                                default:
+                                    echo esc($sensor['VALOR']);
+                            }
+                            ?>
+                        </td>
 
-                            case 'Luz':
-                                echo number_format($sensor['VALOR'], 0, ',', '.') . ' Lux';
-                                break;
+                        <td>
+                            <span class="status-badge status-ok">
+                                <?= esc($sensor['STATUS']) ?>
+                            </span>
+                        </td>
 
-                            default:
-                                echo $sensor['VALOR'];
-                        }
-                        ?>
-                    </td>
-
-                    <td>
-                        <span class="status-badge status-ok">
-                            <?= $sensor['STATUS'] ?>
-                        </span>
-                    </td>
-
-                </tr>
+                    </tr>
 
                 <?php endforeach; ?>
                 </tbody>
             </table>
+
             <!-- PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS -->
-        <div class="sistemas-pagination" id="sistemas-pagination" style="display:none;">
+            <div class="sistemas-pagination" id="sistemas-pagination" style="display:none;">
+                <button id="sistema-anterior" type="button">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
 
-            <button id="sistema-anterior" type="button">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
+                <span class="pagina-atual" id="sistema-pagina-atual">
+                    Página 1
+                </span>
 
-            <span class="pagina-atual" id="sistema-pagina-atual">
-                Página 1
-            </span>
-
-            <button id="sistema-proxima" type="button">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
-        </div>
+                <button id="sistema-proxima" type="button">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
     </main>
 
@@ -1960,720 +1917,614 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- ==========================================================
+         GRÁFICOS
+    ========================================================== -->
     <script>
-// 1. CAPTURA AS VARIÁVEIS ESTRUTURADAS VINDAS DO CONTROLLER
-// Detecta se o modo alto contraste já está ativo
-const isContraste = document.body.classList.contains('contraste');
-const corEixos = isContraste ? '#ffffff' : '#052501';
-const corGrade = isContraste ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+    // Estado do alto contraste (lido direto do localStorage, pois a classe
+    // ainda não foi aplicada no body quando os gráficos são criados)
+    const contrasteAtivoInicial = localStorage.getItem('altoContraste') === 'true';
+    const corEixos = contrasteAtivoInicial ? '#ffffff' : '#052501';
+    const corGrade = contrasteAtivoInicial ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
 
-const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
-const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
-const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
-const datasetsSolo = <?= json_encode($datasets_solo ?? []) ?>;
-const datasetsLux = <?= json_encode($datasets_lux ?? []) ?>;
-let valorLuxAtual = <?= floatval($lux ?? 0) ?>;
+    // Dados vindos do controller
+    const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
+    const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
+    const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
+    const datasetsSolo = <?= json_encode($datasets_solo ?? []) ?>;
+    const datasetsLux = <?= json_encode($datasets_lux ?? []) ?>;
+    let valorLuxAtual = <?= floatval($lux ?? 0) ?>;
 
-// Declarando as variáveis globais para permitir atualização do Chart.js
-let chartTemperatura = null;
-let chartUmidade = null;
-let chartSolo = null;
-let chartLux = null;
+    const ultimas10Labels = labelsEixoX.slice(-10);
 
-/* =========================
-   GRÁFICO - TEMPERATURA
-========================= */
-const ctxTemperatura = document.getElementById('graficoMonitoramento');
-if (ctxTemperatura) {
-    chartTemperatura = new Chart(ctxTemperatura, {
-        type: 'line',
-        data: {
-            labels: labelsEixoX,
-            datasets: datasetsTemperatura
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: { 
-                        color: '#052501', 
-                        callback: function(value) { return value + 'ºC'; } 
+    const datasetsTemperatura10 = datasetsTemperatura.map(dataset => ({
+        ...dataset,
+        data: dataset.data.slice(-10)
+    }));
+
+    const datasetsUmidade10 = datasetsUmidade.map(dataset => ({
+        ...dataset,
+        data: dataset.data.slice(-10)
+    }));
+
+    const datasetsSolo10 = datasetsSolo.map(dataset => ({
+        ...dataset,
+        data: dataset.data.slice(-10)
+    }));
+
+    // Variáveis globais para permitir atualização do Chart.js
+    let chartTemperatura = null;
+    let chartUmidade = null;
+    let chartSolo = null;
+    let chartLux = null;
+
+    /* =========================
+       GRÁFICO - TEMPERATURA
+    ========================= */
+    const ctxTemperatura = document.getElementById('graficoMonitoramento');
+    if (ctxTemperatura) {
+        chartTemperatura = new Chart(ctxTemperatura, {
+            type: 'line',
+            data: { labels: ultimas10Labels, datasets: datasetsTemperatura10 },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: corEixos,
+                            callback: function (value) { return value + 'ºC'; }
+                        },
+                        grid: { color: corGrade }
                     },
-                    grid: { color: '#dfe6e9' }
-                },
-                x: {
-                    ticks: { color: '#052501' },
-                    grid: { color: '#dfe6e9' }
-                }
-            }
-        }
-    });
-}
-
-/* =========================
-   GRÁFICO UMIDADE DO AR
-========================= */
-const ctxUmidade = document.getElementById('graficoUmidade');
-if (ctxUmidade) {
-    chartUmidade = new Chart(ctxUmidade, {
-        type: 'line',
-        data: {
-            labels: labelsEixoX,
-            datasets: datasetsUmidade
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: { 
-                        color: '#052501',
-                        callback: function(value) { return value + '%'; } 
-                    },
-                    grid: { color: '#dfe6e9' }
-                },
-                x: {
-                    ticks: { color: '#052501' },
-                    grid: { color: '#dfe6e9' }
-                }
-            }
-        }
-    });
-}
-
-/* =========================
-   GRÁFICO UMIDADE DO SOLO
-========================= */
-const ctxUmidadeSolo = document.getElementById('graficoUmidadeSolo');
-if (ctxUmidadeSolo) {
-    chartSolo = new Chart(ctxUmidadeSolo, {
-        type: 'line',
-        data: {
-            labels: labelsEixoX,
-            datasets: datasetsSolo
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: { color: '#052501', font: { size: 13, weight: 'bold' } }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + context.parsed.y + '%';
-                        }
+                    x: {
+                        ticks: { color: corEixos },
+                        grid: { color: corGrade }
                     }
                 }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    min: 0,
-                    max: 100,
-                    ticks: {
-                        color: '#052501',
-                        callback: function(value) { return value + '%'; }
-                    },
-                    grid: { color: '#dfe6e9' }
+            }
+        });
+    }
+
+    /* =========================
+       GRÁFICO - UMIDADE DO AR
+    ========================= */
+    const ctxUmidade = document.getElementById('graficoUmidade');
+    if (ctxUmidade) {
+        chartUmidade = new Chart(ctxUmidade, {
+            type: 'line',
+            data: { labels: ultimas10Labels, datasets: datasetsUmidade10 },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                    }
                 },
-                x: {
-                    ticks: { color: '#052501' },
-                    grid: { color: '#dfe6e9' }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: corEixos,
+                            callback: function (value) { return value + '%'; }
+                        },
+                        grid: { color: corGrade }
+                    },
+                    x: {
+                        ticks: { color: corEixos },
+                        grid: { color: corGrade }
+                    }
                 }
             }
-        }
-    });
-}
+        });
+    }
 
-/* =========================
-   GRÁFICO LUMINOSIDADE
-========================= */
-
-const graficoLuxCanvas = document.getElementById('graficoLux');
-if (graficoLuxCanvas) {
-    chartLux = new Chart(graficoLuxCanvas, {
-        type: 'doughnut',
-        data: {
-            datasets: [{
-                data: [5, 10, 20, 30, 35],
-                backgroundColor: ['#4b5563', '#3b82f6', '#add1ff', '#84cc16', '#ef4444'],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            rotation: -90,
-            circumference: 180,
-            cutout: '70%'
-        },
-        plugins: [{
-            id: 'gaugeText',
-            afterDraw(chart) {
-                const { ctx, chartArea: { width, height } } = chart;
-                const isContraste = document.body.classList.contains('contraste');
-
-                const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
-                const corTextoSecundario = isContraste ? '#ffffff' : '#666666';
-
-                ctx.save();
-
-                /* Valor Lux */
-                ctx.font = 'bold 26px Arial';
-                ctx.fillStyle = corTextoPrincipal;
-                ctx.textAlign = 'center';
-                ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 40);
-
-                /* Unidade */
-                ctx.font = '16px Arial';
-                ctx.fillStyle = corTextoSecundario;
-                ctx.fillText('Lux', width / 2, height - 15);
-
-                /* Ambiente */
-                ctx.font = '13px Arial';
-                ctx.fillStyle = corTextoSecundario;
-                ctx.fillText(infoLux.ambiente, width / 2, height + 10);
-
-                ctx.restore();
+    /* =========================
+       GRÁFICO - UMIDADE DO SOLO
+    ========================= */
+    const ctxUmidadeSolo = document.getElementById('graficoUmidadeSolo');
+    if (ctxUmidadeSolo) {
+        chartSolo = new Chart(ctxUmidadeSolo, {
+            type: 'line',
+            data: { labels: ultimas10Labels, datasets: datasetsSolo10 },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return context.dataset.label + ': ' + context.parsed.y + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: 0,
+                        max: 100,
+                        ticks: {
+                            color: corEixos,
+                            callback: function (value) { return value + '%'; }
+                        },
+                        grid: { color: corGrade }
+                    },
+                    x: {
+                        ticks: { color: corEixos },
+                        grid: { color: corGrade }
+                    }
+                }
             }
-        }]
-    });
-}
-
-// Função auxiliar criada para atualizar o gráfico de Luminosidade
-function atualizarLux(novoValor) {
-    valorLuxAtual = novoValor;
-    if (chartLux) {
-        chartLux.update();
+        });
     }
-}
 
-/* =========================
-   CORES DOS GRÁFICOS NO ALTO CONTRASTE
-========================= */
-function atualizarCoresGraficosContraste() {
-    const ativo = document.body.classList.contains('contraste');
-    const cor   = ativo ? '#ffffff' : '#052501';
-    const grade = ativo ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+    /* =========================
+       GRÁFICO - LUMINOSIDADE
+    ========================= */
+    const graficoLuxCanvas = document.getElementById('graficoLux');
 
-    [chartTemperatura, chartUmidade, chartSolo].forEach(function (chart) {
-        if (!chart) return;
-        chart.options.plugins.legend.labels.color = cor;
-        chart.options.scales.x.ticks.color = cor;
-        chart.options.scales.x.grid.color  = grade;
-        chart.options.scales.y.ticks.color = cor;
-        chart.options.scales.y.grid.color  = grade;
-        chart.update();
-    });
+    if (graficoLuxCanvas) {
+        chartLux = new Chart(graficoLuxCanvas, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                        Math.min(Number(valorLuxAtual), 25000),
+                        Math.max(25000 - Number(valorLuxAtual), 0)
+                    ],
+                    backgroundColor: ['#4bc714', '#e5e7eb'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '82%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            },
+            plugins: [{
+                id: 'radialLux',
+                afterDraw(chart) {
+                    const { ctx, chartArea } = chart;
+                    const centroX = (chartArea.left + chartArea.right) / 2;
+                    const centroY = (chartArea.top + chartArea.bottom) / 2;
+                    const contraste = document.body.classList.contains('alto-contraste');
 
-    if (chartLux) chartLux.update(); // o texto do gauge já recalcula sozinho no afterDraw
-}
+                    ctx.save();
 
-/* =========================
-   ATUALIZA OS GRÁFICOS
-========================= */
-async function atualizarGraficos() {
-    try {
-        const resposta = await fetch('<?= base_url('dados-graficos') ?>');
-        if (!resposta.ok) throw new Error('Erro ao buscar dados dos gráficos');
+                    // Ícone de sol
+                    ctx.font = '32px Arial';
+                    ctx.fillStyle = contraste ? '#ffffff' : '#052501';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('☼', centroX, centroY - 28);
 
-        const dados = await resposta.json();
+                    // Valor
+                    ctx.font = 'bold 28px Arial';
+                    ctx.fillStyle = contraste ? '#ffffff' : '#052501';
+                    ctx.fillText(
+                        Number(valorLuxAtual).toLocaleString('pt-BR'),
+                        centroX,
+                        centroY + 18
+                    );
 
-        // TEMPERATURA
-        if (chartTemperatura && dados.temperatura) {
-            chartTemperatura.data.labels = dados.horarios;
-            chartTemperatura.data.datasets = dados.temperatura;
-            chartTemperatura.update();
-        }
+                    // Unidade
+                    ctx.font = '16px Arial';
+                    ctx.fillStyle = contraste ? '#ffffff' : '#666666';
+                    ctx.fillText('Lux', centroX, centroY + 43);
 
-        // UMIDADE DO AR
-        if (chartUmidade && dados.umidade) {
-            chartUmidade.data.labels = dados.horarios;
-            chartUmidade.data.datasets = dados.umidade;
-            chartUmidade.update();
-        }
-
-        // UMIDADE DO SOLO (Garantindo atualização dos dados no gráfico)
-        if (chartSolo && dados.solo) {
-            chartSolo.data.labels = dados.horarios;
-            chartSolo.data.datasets = dados.solo;
-            chartSolo.update();
-        }
-
-        // LUX (Garantindo que a medição mais recente atualize o velocímetro/gauge)
-        if (dados.lux !== undefined && chartLux) {
-            atualizarLux(dados.lux);
-        }
-
-    } catch (erro) {
-        console.error('Erro ao atualizar gráficos:', erro);
+                    ctx.restore();
+                }
+            }]
+        });
     }
-}
 
+    // Atualiza o gráfico de luminosidade
+    function atualizarLux(novoValor) {
+        valorLuxAtual = Number(novoValor);
+
+        if (chartLux) {
+            chartLux.data.datasets[0].data = [
+                Math.min(valorLuxAtual, 25000),
+                Math.max(25000 - valorLuxAtual, 0)
+            ];
+
+            chartLux.update();
+        }
+    }
+
+    /* =========================
+       CORES DOS GRÁFICOS NO ALTO CONTRASTE
+    ========================= */
+    function atualizarCoresGraficosContraste() {
+        const ativo = document.body.classList.contains('alto-contraste');
+        const cor   = ativo ? '#ffffff' : '#052501';
+        const grade = ativo ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+        [chartTemperatura, chartUmidade, chartSolo].forEach(function (chart) {
+            if (!chart) return;
+            chart.options.plugins.legend.labels.color = cor;
+            chart.options.scales.x.ticks.color = cor;
+            chart.options.scales.x.grid.color  = grade;
+            chart.options.scales.y.ticks.color = cor;
+            chart.options.scales.y.grid.color  = grade;
+            chart.update();
+        });
+
+        // O texto do gauge é recalculado sozinho no afterDraw
+        if (chartLux) chartLux.update();
+    }
+
+    /* =========================
+       ATUALIZA OS GRÁFICOS
+    ========================= */
+    async function atualizarGraficos() {
+        try {
+            const resposta = await fetch('<?= base_url('dados-graficos') ?>');
+            if (!resposta.ok) throw new Error('Erro ao buscar dados dos gráficos');
+
+            const dados = await resposta.json();
+
+            // TEMPERATURA
+            if (chartTemperatura && dados.temperatura) {
+                chartTemperatura.data.labels = dados.horarios;
+                chartTemperatura.data.datasets = dados.temperatura;
+                chartTemperatura.update();
+            }
+
+            // UMIDADE DO AR
+            if (chartUmidade && dados.umidade) {
+                chartUmidade.data.labels = dados.horarios;
+                chartUmidade.data.datasets = dados.umidade;
+                chartUmidade.update();
+            }
+
+            // UMIDADE DO SOLO
+            if (chartSolo && dados.solo) {
+                chartSolo.data.labels = dados.horarios;
+                chartSolo.data.datasets = dados.solo;
+                chartSolo.update();
+            }
+
+            // LUX
+            if (dados.lux !== undefined && chartLux) {
+                atualizarLux(dados.lux);
+            }
+
+        } catch (erro) {
+            console.error('Erro ao atualizar gráficos:', erro);
+        }
+    }
     </script>
 
+    <!-- ==========================================================
+         STATUS DOS SENSORES + PAGINAÇÃO
+    ========================================================== -->
     <script>
-    //Status Sensores
-    // ==========================================================
-// STATUS DOS SENSORES + PAGINAÇÃO
-// ==========================================================
+    let sensoresTodos = [];
+    let paginaSensor = 1;
+    const sensoresPorPagina = 4;
 
-let sensoresTodos = [];
-let paginaSensor = 1;
+    // Evita injeção de HTML vindo da API
+    function escaparHtml(valor) {
+        return String(valor ?? '').replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
 
-const sensoresPorPagina = 4;
+    // Só aceita classes de ícone seguras (fa-xxx)
+    function iconeSeguro(icone) {
+        return /^fa-[a-z0-9-]+$/i.test(icone || '') ? icone : 'fa-microchip';
+    }
 
-async function atualizarStatusSensores() {
+    function totalPaginasSensores() {
+        return Math.max(1, Math.ceil(sensoresTodos.length / sensoresPorPagina));
+    }
 
-    try {
+    // Converte minutos_atras em estado; qualquer valor inválido = offline
+    function classificarSensor(minutosAtras) {
+        const minutos = (minutosAtras === null || minutosAtras === undefined || minutosAtras === '')
+            ? NaN
+            : Number(minutosAtras);
 
-        const resposta = await fetch('<?= base_url('status-sensores') ?>');
-
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar status dos sensores');
+        if (Number.isNaN(minutos) || minutos > 20) {
+            return { estado: 'offline', classe: 'is-offline', texto: 'Offline', pulso: '' };
         }
+        if (minutos <= 5) {
+            return { estado: 'online', classe: 'is-online', texto: 'Online', pulso: '<span class="pulse-dot"></span>' };
+        }
+        return { estado: 'warning', classe: 'is-warning', texto: 'Oscilando', pulso: '' };
+    }
 
-        const sensores = await resposta.json();
-
-        sensoresTodos = sensores;
-
+    async function atualizarStatusSensores() {
         const lista = document.getElementById('sensor-status-list');
+        if (!lista) return;
+
+        try {
+            const resposta = await fetch('<?= base_url('status-sensores') ?>', { cache: 'no-store' });
+
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar status dos sensores');
+            }
+
+            const dados = await resposta.json();
+
+            if (!Array.isArray(dados)) {
+                throw new Error('Resposta inválida em status-sensores');
+            }
+
+            sensoresTodos = dados;
+
+            // Se a página atual deixou de existir, volta para a última
+            if (paginaSensor > totalPaginasSensores()) {
+                paginaSensor = totalPaginasSensores();
+            }
+
+            mostrarPaginaSensores();
+
+        } catch (erro) {
+            console.error('Erro ao atualizar status dos sensores:', erro);
+
+            // Se já havia dados na tela, mantém; senão avisa
+            if (sensoresTodos.length === 0) {
+                lista.innerHTML = '<div class="sensor-status-vazio">Erro ao carregar sensores.</div>';
+
+                const paginacao = document.getElementById('sensor-pagination');
+                if (paginacao) paginacao.style.display = 'none';
+            }
+        }
+    }
+
+    function mostrarPaginaSensores() {
+        const lista = document.getElementById('sensor-status-list');
+        const paginacao = document.getElementById('sensor-pagination');
+        const botaoAnterior = document.getElementById('sensor-anterior');
+        const botaoProxima = document.getElementById('sensor-proxima');
+        const textoPagina = document.getElementById('sensor-pagina-atual');
 
         if (!lista) return;
 
-        lista.innerHTML = sensoresTodos.map(function(s) {
+        if (sensoresTodos.length === 0) {
+            lista.innerHTML = '<div class="sensor-status-vazio">Nenhum sensor encontrado.</div>';
+            if (paginacao) paginacao.style.display = 'none';
+            return;
+        }
 
-            let classe;
-            let circulo;
-            let badge;
-            let texto;
-            let pulso = '';
+        const inicio = (paginaSensor - 1) * sensoresPorPagina;
+        const sensoresPagina = sensoresTodos.slice(inicio, inicio + sensoresPorPagina);
 
-            if (s.minutos_atras === null || s.minutos_atras > 20) {
-
-                classe = 'is-offline';
-                circulo = 'offline';
-                badge = 'offline';
-                texto = 'Offline';
-
-            } else if (s.minutos_atras <= 5) {
-
-                classe = 'is-online';
-                circulo = 'online';
-                badge = 'online';
-                texto = 'Online';
-
-                pulso = '<span class="pulse-dot"></span>';
-
-            } else {
-
-                classe = 'is-warning';
-                circulo = 'warning';
-                badge = 'warning';
-                texto = 'Oscilando';
-
-            }
+        lista.innerHTML = sensoresPagina.map(function (s) {
+            const st = classificarSensor(s.minutos_atras);
 
             return `
-
-                <div class="sensor-status-item ${classe}">
-
+                <div class="sensor-status-item ${st.classe}">
                     <div class="sensor-left">
-
-                        <span class="status-circle ${circulo}">
-
-                            <i class="fa-solid ${s.icone}"></i>
-
-                            ${pulso}
-
+                        <span class="status-circle ${st.estado}">
+                            <i class="fa-solid ${iconeSeguro(s.icone)}"></i>
+                            ${st.pulso}
                         </span>
-
                         <div class="sensor-info">
-
-                            <h4>${s.nome}</h4>
-
-                            <p>${s.tipo} · ${s.tempo_texto}</p>
-
+                            <h4>${escaparHtml(s.nome || 'Sensor')}</h4>
+                            <p>${escaparHtml(s.tipo || 'Sensor')} · ${escaparHtml(s.tempo_texto || 'Sem leitura')}</p>
                         </div>
-
                     </div>
-
                     <div class="sensor-right">
-
-                        <span class="signal-bars">
-                            <i></i><i></i><i></i>
-                        </span>
-
-                        <span class="status-badge ${badge}">
-                            ${texto}
-                        </span>
-
+                        <span class="signal-bars"><i></i><i></i><i></i></span>
+                        <span class="status-badge ${st.estado}">${st.texto}</span>
                     </div>
-
                 </div>`;
-
         }).join('');
 
-        // Depois de carregar os sensores,
-        // aplica a paginação
-        atualizarPaginacaoSensores();
+        const totalPaginas = totalPaginasSensores();
 
-    } catch (erro) {
-
-        console.error(
-            'Erro ao atualizar status dos sensores:',
-            erro
-        );
-
-    }
-
-}
-
-
-// ==========================================================
-// PAGINAÇÃO DOS SENSORES
-// ==========================================================
-
-function atualizarPaginacaoSensores() {
-
-    const itens = document.querySelectorAll(
-        '#sensor-status-list .sensor-status-item'
-    );
-
-    const paginacao = document.getElementById(
-        'sensor-pagination'
-    );
-
-    const botaoAnterior = document.getElementById(
-        'sensor-anterior'
-    );
-
-    const botaoProxima = document.getElementById(
-        'sensor-proxima'
-    );
-
-    const textoPagina = document.getElementById(
-        'sensor-pagina-atual'
-    );
-
-    const totalSensores = itens.length;
-
-    const totalPaginas = Math.ceil(
-        totalSensores / sensoresPorPagina
-    );
-
-
-    // Se tiver 5 sensores ou menos,
-    // não mostra a paginação
-    if (totalPaginas <= 1) {
-
-        if (paginacao) {
+        // Só mostra a paginação se houver mais de uma página
+        if (paginacao && totalPaginas > 1) {
+            paginacao.style.display = 'flex';
+            textoPagina.textContent = `Página ${paginaSensor} de ${totalPaginas}`;
+            botaoAnterior.style.display = paginaSensor <= 1 ? 'none' : 'inline-flex';
+            botaoProxima.style.display = paginaSensor >= totalPaginas ? 'none' : 'inline-flex';
+        } else if (paginacao) {
             paginacao.style.display = 'none';
         }
-
-        itens.forEach(function(item) {
-            item.style.display = '';
-        });
-
-        paginaSensor = 1;
-
-        return;
     }
 
-
-    // Se a página atual não existir mais,
-    // volta para a última página válida
-    if (paginaSensor > totalPaginas) {
-        paginaSensor = totalPaginas;
-    }
-
-
-    const inicio =
-        (paginaSensor - 1) * sensoresPorPagina;
-
-    const fim =
-        inicio + sensoresPorPagina;
-
-
-    // Mostra somente os 5 sensores da página atual
-    itens.forEach(function(item, indice) {
-
-        if (indice >= inicio && indice < fim) {
-
-            item.style.display = '';
-
-        } else {
-
-            item.style.display = 'none';
-
-        }
-
-    });
-
-
-    // Mostra a paginação
-    if (paginacao) {
-        paginacao.style.display = 'flex';
-    }
-
-
-    // Atualiza o texto
-    if (textoPagina) {
-
-        textoPagina.textContent =
-            `Página ${paginaSensor} de ${totalPaginas}`;
-
-    }
-
-
-    // Botão ANTERIOR
-if (botaoAnterior) {
-
-    if (paginaSensor === 1) {
-        botaoAnterior.style.display = 'none';
-    } else {
-        botaoAnterior.style.display = 'inline-flex';
-    }
-
-}
-
-
-// Botão PRÓXIMA
-if (botaoProxima) {
-
-    if (paginaSensor === totalPaginas) {
-        botaoProxima.style.display = 'none';
-    } else {
-        botaoProxima.style.display = 'inline-flex';
-    }
-
-}
-
-}
-
-
-// ==========================================================
-// BOTÃO ANTERIOR
-// ==========================================================
-
-document.getElementById('sensor-anterior')?.addEventListener(
-    'click',
-    function() {
-
+    document.getElementById('sensor-anterior')?.addEventListener('click', function () {
         if (paginaSensor > 1) {
-
             paginaSensor--;
-
-            atualizarPaginacaoSensores();
-
+            mostrarPaginaSensores();
         }
+    });
 
-    }
-);
-
-
-// ==========================================================
-// BOTÃO PRÓXIMA
-// ==========================================================
-
-document.getElementById('sensor-proxima')?.addEventListener(
-    'click',
-    function() {
-
-        const totalPaginas = Math.ceil(
-            sensoresTodos.length / sensoresPorPagina
-        );
-
-        if (paginaSensor < totalPaginas) {
-
+    document.getElementById('sensor-proxima')?.addEventListener('click', function () {
+        if (paginaSensor < totalPaginasSensores()) {
             paginaSensor++;
-
-            atualizarPaginacaoSensores();
-
+            mostrarPaginaSensores();
         }
+    });
 
-    }
-);
-
-
-// Primeira atualização
-atualizarStatusSensores();
-
-
-// Atualiza os sensores a cada 30 segundos
-setInterval(
-    atualizarStatusSensores,
-    30 * 1000
-);
+    // Primeira atualização e depois a cada 30 segundos
+    atualizarStatusSensores();
+    setInterval(atualizarStatusSensores, 30 * 1000);
     </script>
-    
-    <script src="./../script.js"></script>
 
+    <!-- JS compartilhado das telas -->
+    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
+
+    <!-- ==========================================================
+         ALTO CONTRASTE + FONTE (mesma chave e classe das outras telas)
+    ========================================================== -->
     <script>
-        let tamanhoFonte = 100;
+    /* =========================
+       ALTO CONTRASTE (um único toggle, com persistência)
+    ========================= */
+    (function () {
+        const CHAVE = 'altoContraste';
 
-        function aplicarFonte() {
-            document.body.style.fontSize = tamanhoFonte + "%";
+        // Aplica o estado salvo ao abrir a tela
+        if (localStorage.getItem(CHAVE) === 'true') {
+            document.body.classList.add('alto-contraste');
         }
-
-        function aumentarFonte() {
-            if (tamanhoFonte < 150) {
-                tamanhoFonte += 10;
-                aplicarFonte();
-            }
-        }
-
-        function diminuirFonte() {
-            if (tamanhoFonte > 80) {
-                tamanhoFonte -= 10;
-                aplicarFonte();
-            }
-        }
-
-        function resetarFonte() {
-            tamanhoFonte = 100;
-            aplicarFonte();
-        }
-
-    const contrasteBtn = document.getElementById("contraste-btn");
-
-    // Carrega o estado salvo
-    if (localStorage.getItem("contraste") === "true") {
-        document.body.classList.add("contraste");
-    }
-    atualizarCoresGraficosContraste();
-
-    contrasteBtn.addEventListener("click", () => {
-        document.body.classList.toggle("contraste");
-
-        localStorage.setItem(
-            "contraste",
-            document.body.classList.contains("contraste")
-        );
-
         atualizarCoresGraficosContraste();
-    });
-        
 
+        // Captura o clique antes de qualquer outro código tratar o botão
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#contraste-btn')) return;
 
-    async function buscarClima() {
-    // Coordenadas de Tambaú - SP
-    const lat = -21.7056;
-    const lon = -47.2728;
+            e.stopImmediatePropagation();
 
-    try {
-        // Busca Temperatura, Vento, Umidade, Chuva, UV, Sensação Térmica e Ponto de Orvalho
-        const resClima = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,uv_index,apparent_temperature,dewpoint_2m`
-        );
-        const dataClima = await resClima.json();
-        const atual = dataClima.current;
+            const ativo = document.body.classList.toggle('alto-contraste');
+            localStorage.setItem(CHAVE, ativo);
+            atualizarCoresGraficosContraste();
+        }, true);
+    })();
 
-        // Temperatura principal
-        document.getElementById('temperatura').textContent = Math.round(atual.temperature_2m);
+    /* =========================
+       FONTE (mesma chave e limites das outras telas)
+    ========================= */
+    let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
+    document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
-        // Preenchimento das 6 métricas em tempo real
-        if (document.getElementById('dado-vento')) {
-            document.getElementById('dado-vento').textContent = `${Math.round(atual.wind_speed_10m)} km/h`;
-        }
-        if (document.getElementById('dado-umidade')) {
-            document.getElementById('dado-umidade').textContent = `${atual.relative_humidity_2m}%`;
-        }
-        if (document.getElementById('dado-chuva')) {
-            document.getElementById('dado-chuva').textContent = `${atual.precipitation} mm`;
-        }
-        if (document.getElementById('dado-uv')) {
-            document.getElementById('dado-uv').textContent = Math.round(atual.uv_index);
-        }
-        if (document.getElementById('dado-sensacao')) {
-            document.getElementById('dado-sensacao').textContent = `${Math.round(atual.apparent_temperature)} °C`;
-        }
-        if (document.getElementById('dado-orvalho')) {
-            document.getElementById('dado-orvalho').textContent = `${Math.round(atual.dewpoint_2m)} °C`;
-        }
-
-        // Qualidade do Ar
-        const resAr = await fetch(
-            `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`
-        );
-        const dataAr = await resAr.json();
-        const aqi = dataAr.current.european_aqi;
-
-        let textoAr = "Boa";
-        if (aqi > 20 && aqi <= 40) textoAr = "Moderada";
-        if (aqi > 40) textoAr = "Ruim";
-
-        document.getElementById('qualidade-ar').textContent = textoAr;
-
-    } catch (erro) {
-        console.error("Erro ao carregar dados do clima:", erro);
-        
-        // Contingência em caso de falha
-        document.getElementById('temperatura').textContent = "23";
-        document.getElementById('qualidade-ar').textContent = "Moderada";
-
-        if (document.getElementById('dado-vento')) document.getElementById('dado-vento').textContent = "-- km/h";
-        if (document.getElementById('dado-umidade')) document.getElementById('dado-umidade').textContent = "--%";
-        if (document.getElementById('dado-chuva')) document.getElementById('dado-chuva').textContent = "0.0 mm";
-        if (document.getElementById('dado-uv')) document.getElementById('dado-uv').textContent = "--";
-        if (document.getElementById('dado-sensacao')) document.getElementById('dado-sensacao').textContent = "-- °C";
-        if (document.getElementById('dado-orvalho')) document.getElementById('dado-orvalho').textContent = "-- °C";
+    function salvarFonte() {
+        document.documentElement.style.fontSize = tamanhoFonte + 'px';
+        localStorage.setItem('fonteSite', tamanhoFonte);
     }
-}
 
-// --- AÇÕES DOS BOTÕES ---
+    function aumentarFonte() {
+        if (tamanhoFonte < 24) {
+            tamanhoFonte += 2;
+            salvarFonte();
+        }
+    }
 
-const btnPrevisao = document.getElementById('btn-previsao-completa');
-if (btnPrevisao) {
-    btnPrevisao.addEventListener('click', () => {
-        const urlPrevisao = 'https://www.msn.com/pt-br/clima/forecast/in-Tamba%C3%BA,S%C3%A3o-Paulo,Brasil';
-        window.open(urlPrevisao, '_blank');
-    });
-}
+    function diminuirFonte() {
+        if (tamanhoFonte > 12) {
+            tamanhoFonte -= 2;
+            salvarFonte();
+        }
+    }
 
-const btnAr = document.getElementById('btn-qualidade-ar');
-if (btnAr) {
-    btnAr.addEventListener('click', () => {
-        const urlQualidadeAr = 'https://www.iqair.com/br/brazil/sao-paulo/tambau';
-        window.open(urlQualidadeAr, '_blank');
-    });
-}
-
-// Execução inicial e atualização a cada 10 minutos
-buscarClima();
-setInterval(buscarClima, 10 * 60 * 1000);
-
-// Atualiza os dados automaticamente a cada 10 minutos
-setInterval(buscarClima, 10 * 60 * 1000);
+    function resetarFonte() {
+        tamanhoFonte = 16;
+        salvarFonte();
+    }
     </script>
 
+    <!-- ==========================================================
+         CLIMA
+    ========================================================== -->
     <script>
-    // =========================
-    // MENU SANDUÍCHE
-    // =========================
+    async function buscarClima() {
+        // Coordenadas de Tambaú - SP
+        const lat = -21.7056;
+        const lon = -47.2728;
+
+        try {
+            // Temperatura, vento, umidade, chuva, UV, sensação térmica e ponto de orvalho
+            const resClima = await fetch(
+                `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,uv_index,apparent_temperature,dewpoint_2m`
+            );
+            const dataClima = await resClima.json();
+            const atual = dataClima.current;
+
+            document.getElementById('temperatura').textContent = Math.round(atual.temperature_2m);
+
+            if (document.getElementById('dado-vento')) {
+                document.getElementById('dado-vento').textContent = `${Math.round(atual.wind_speed_10m)} km/h`;
+            }
+            if (document.getElementById('dado-umidade')) {
+                document.getElementById('dado-umidade').textContent = `${atual.relative_humidity_2m}%`;
+            }
+            if (document.getElementById('dado-chuva')) {
+                document.getElementById('dado-chuva').textContent = `${atual.precipitation} mm`;
+            }
+            if (document.getElementById('dado-uv')) {
+                document.getElementById('dado-uv').textContent = Math.round(atual.uv_index);
+            }
+            if (document.getElementById('dado-sensacao')) {
+                document.getElementById('dado-sensacao').textContent = `${Math.round(atual.apparent_temperature)} °C`;
+            }
+            if (document.getElementById('dado-orvalho')) {
+                document.getElementById('dado-orvalho').textContent = `${Math.round(atual.dewpoint_2m)} °C`;
+            }
+
+            // Qualidade do ar
+            const resAr = await fetch(
+                `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`
+            );
+            const dataAr = await resAr.json();
+            const aqi = dataAr.current.european_aqi;
+
+            let textoAr = "Boa";
+            if (aqi > 20 && aqi <= 40) textoAr = "Moderada";
+            if (aqi > 40) textoAr = "Ruim";
+
+            document.getElementById('qualidade-ar').textContent = textoAr;
+
+        } catch (erro) {
+            console.error("Erro ao carregar dados do clima:", erro);
+
+            // Contingência em caso de falha
+            document.getElementById('temperatura').textContent = "23";
+            document.getElementById('qualidade-ar').textContent = "Moderada";
+
+            if (document.getElementById('dado-vento')) document.getElementById('dado-vento').textContent = "-- km/h";
+            if (document.getElementById('dado-umidade')) document.getElementById('dado-umidade').textContent = "--%";
+            if (document.getElementById('dado-chuva')) document.getElementById('dado-chuva').textContent = "0.0 mm";
+            if (document.getElementById('dado-uv')) document.getElementById('dado-uv').textContent = "--";
+            if (document.getElementById('dado-sensacao')) document.getElementById('dado-sensacao').textContent = "-- °C";
+            if (document.getElementById('dado-orvalho')) document.getElementById('dado-orvalho').textContent = "-- °C";
+        }
+    }
+
+    // Ações dos botões do clima
+    const btnPrevisao = document.getElementById('btn-previsao-completa');
+    if (btnPrevisao) {
+        btnPrevisao.addEventListener('click', () => {
+            window.open('https://www.msn.com/pt-br/clima/forecast/in-Tamba%C3%BA,S%C3%A3o-Paulo,Brasil', '_blank');
+        });
+    }
+
+    const btnAr = document.getElementById('btn-qualidade-ar');
+    if (btnAr) {
+        btnAr.addEventListener('click', () => {
+            window.open('https://www.iqair.com/br/brazil/sao-paulo/tambau', '_blank');
+        });
+    }
+
+    // Execução inicial e atualização a cada 10 minutos
+    buscarClima();
+    setInterval(buscarClima, 10 * 60 * 1000);
+    </script>
+
+    <!-- ==========================================================
+         MENU SANDUÍCHE + PAGINAÇÃO DOS SISTEMAS
+    ========================================================== -->
+    <script>
+    /* =========================
+       MENU SANDUÍCHE
+    ========================= */
     document.addEventListener('DOMContentLoaded', function () {
 
         const menuToggle = document.getElementById('menuToggle');
@@ -2682,9 +2533,14 @@ setInterval(buscarClima, 10 * 60 * 1000);
         // Cria o fundo escuro
         const overlay = document.createElement('div');
         overlay.classList.add('menu-overlay');
-
         document.body.appendChild(overlay);
 
+        function fecharMenu() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+        }
 
         // Abrir e fechar menu
         menuToggle.addEventListener('click', function () {
@@ -2692,10 +2548,7 @@ setInterval(buscarClima, 10 * 60 * 1000);
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
 
-            const aberto = sidebar.classList.contains('active');
-
-            // Troca o ícone
-            if (aberto) {
+            if (sidebar.classList.contains('active')) {
                 menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 menuToggle.setAttribute('aria-label', 'Fechar menu');
             } else {
@@ -2705,249 +2558,116 @@ setInterval(buscarClima, 10 * 60 * 1000);
 
         });
 
-
         // Fecha ao clicar no fundo escuro
-        overlay.addEventListener('click', function () {
+        overlay.addEventListener('click', fecharMenu);
 
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-
-            menuToggle.innerHTML =
-                '<i class="fa-solid fa-bars"></i>';
-
-            menuToggle.setAttribute(
-                'aria-label',
-                'Abrir menu'
-            );
-
+        // Fecha o menu ao clicar em um item (mobile)
+        document.querySelectorAll('.sidebar .menu-item').forEach(function (item) {
+            item.addEventListener('click', function () {
+                if (window.innerWidth <= 768) {
+                    fecharMenu();
+                }
+            });
         });
 
+    });
 
-        // Fecha o menu ao clicar em um item
-        const menuItems =
-            document.querySelectorAll('.sidebar .menu-item');
+    /* =========================
+       PAGINAÇÃO - STATUS DOS SISTEMAS AUTOMATIZADOS
+    ========================= */
+    const linhasSistemas = document.querySelectorAll(".linha-sensor");
 
-        menuItems.forEach(function (item) {
+    const paginacaoSistemas = document.getElementById("sistemas-pagination");
+    const sistemaAnterior = document.getElementById("sistema-anterior");
+    const sistemaProxima = document.getElementById("sistema-proxima");
+    const sistemaPaginaAtual = document.getElementById("sistema-pagina-atual");
 
-            item.addEventListener('click', function () {
+    let paginaSistema = 1;
 
-                if (window.innerWidth <= 768) {
+    const sistemasPorPagina = 4;
 
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
+    function atualizarPaginacaoSistemas() {
 
-                    menuToggle.innerHTML =
-                        '<i class="fa-solid fa-bars"></i>';
+        const totalPaginas = Math.ceil(linhasSistemas.length / sistemasPorPagina);
 
-                    menuToggle.setAttribute(
-                        'aria-label',
-                        'Abrir menu'
-                    );
+        // Sem sistemas
+        if (totalPaginas === 0) {
 
-                }
+            if (paginacaoSistemas) {
+                paginacaoSistemas.style.display = "none";
+            }
 
+            return;
+        }
+
+        // Se couber tudo em uma página, não mostra os botões
+        if (totalPaginas <= 1) {
+
+            if (paginacaoSistemas) {
+                paginacaoSistemas.style.display = "none";
+            }
+
+            linhasSistemas.forEach(function (linha) {
+                linha.style.display = "";
             });
 
+            paginaSistema = 1;
+
+            return;
+        }
+
+        // Garante que a página atual seja válida
+        if (paginaSistema > totalPaginas) {
+            paginaSistema = totalPaginas;
+        }
+
+        const inicio = (paginaSistema - 1) * sistemasPorPagina;
+        const fim = inicio + sistemasPorPagina;
+
+        // Mostra somente os sistemas da página atual
+        linhasSistemas.forEach(function (linha, indice) {
+            linha.style.display = (indice >= inicio && indice < fim) ? "" : "none";
         });
 
-    });
-
-    // ==========================================================
-// PAGINAÇÃO - STATUS DOS SISTEMAS AUTOMATIZADOS
-// ==========================================================
-
-const linhasSistemas = document.querySelectorAll(".linha-sensor");
-
-const paginacaoSistemas = document.getElementById(
-    "sistemas-pagination"
-);
-
-const sistemaAnterior = document.getElementById(
-    "sistema-anterior"
-);
-
-const sistemaProxima = document.getElementById(
-    "sistema-proxima"
-);
-
-const sistemaPaginaAtual = document.getElementById(
-    "sistema-pagina-atual"
-);
-
-let paginaSistema = 1;
-
-const sistemasPorPagina = 4;
-
-
-// ==========================================================
-// ATUALIZA A PAGINAÇÃO
-// ==========================================================
-
-function atualizarPaginacaoSistemas() {
-
-    const totalSistemas = linhasSistemas.length;
-
-    const totalPaginas = Math.ceil(
-        totalSistemas / sistemasPorPagina
-    );
-
-
-    // Se não houver sistemas
-    if (totalPaginas === 0) {
-
         if (paginacaoSistemas) {
-            paginacaoSistemas.style.display = "none";
+            paginacaoSistemas.style.display = "flex";
         }
 
-        return;
-    }
-
-
-    // Se tiver apenas 5 sistemas ou menos,
-    // não mostra os botões de paginação
-    if (totalPaginas <= 1) {
-
-        if (paginacaoSistemas) {
-            paginacaoSistemas.style.display = "none";
+        if (sistemaPaginaAtual) {
+            sistemaPaginaAtual.textContent = `Página ${paginaSistema} de ${totalPaginas}`;
         }
 
-        linhasSistemas.forEach(function(linha) {
-            linha.style.display = "";
-        });
-
-        paginaSistema = 1;
-
-        return;
-    }
-
-
-    // Garante que a página atual seja válida
-    if (paginaSistema > totalPaginas) {
-        paginaSistema = totalPaginas;
-    }
-
-
-    // Calcula os itens da página
-    const inicio =
-        (paginaSistema - 1) * sistemasPorPagina;
-
-    const fim =
-        inicio + sistemasPorPagina;
-
-
-    // Mostra somente os 5 sistemas da página atual
-    linhasSistemas.forEach(function(linha, indice) {
-
-        if (indice >= inicio && indice < fim) {
-
-            linha.style.display = "";
-
-        } else {
-
-            linha.style.display = "none";
-
+        if (sistemaAnterior) {
+            sistemaAnterior.style.display = paginaSistema === 1 ? 'none' : 'inline-flex';
         }
 
-    });
-
-
-    // Mostra a paginação
-    if (paginacaoSistemas) {
-        paginacaoSistemas.style.display = "flex";
-    }
-
-
-    // Atualiza o texto
-    if (sistemaPaginaAtual) {
-
-        sistemaPaginaAtual.textContent =
-            `Página ${paginaSistema} de ${totalPaginas}`;
+        if (sistemaProxima) {
+            sistemaProxima.style.display = paginaSistema === totalPaginas ? 'none' : 'inline-flex';
+        }
 
     }
 
-
-    // Botão ANTERIOR
-if (sistemaAnterior) {
-
-    if (paginaSistema === 1) {
-        sistemaAnterior.style.display = 'none';
-    } else {
-        sistemaAnterior.style.display = 'inline-flex';
-    }
-
-}
-
-
-// Botão PRÓXIMA
-if (sistemaProxima) {
-
-    if (paginaSistema === totalPaginas) {
-        sistemaProxima.style.display = 'none';
-    } else {
-        sistemaProxima.style.display = 'inline-flex';
-    }
-
-}
-
-}
-
-
-// ==========================================================
-// BOTÃO ANTERIOR
-// ==========================================================
-
-if (sistemaAnterior) {
-
-    sistemaAnterior.addEventListener(
-        "click",
-        function() {
-
+    if (sistemaAnterior) {
+        sistemaAnterior.addEventListener("click", function () {
             if (paginaSistema > 1) {
-
                 paginaSistema--;
-
                 atualizarPaginacaoSistemas();
-
             }
+        });
+    }
 
-        }
-    );
-
-}
-
-
-// ==========================================================
-// BOTÃO PRÓXIMA
-// ==========================================================
-
-if (sistemaProxima) {
-
-    sistemaProxima.addEventListener(
-        "click",
-        function() {
-
-            const totalPaginas = Math.ceil(
-                linhasSistemas.length / sistemasPorPagina
-            );
+    if (sistemaProxima) {
+        sistemaProxima.addEventListener("click", function () {
+            const totalPaginas = Math.ceil(linhasSistemas.length / sistemasPorPagina);
 
             if (paginaSistema < totalPaginas) {
-
                 paginaSistema++;
-
                 atualizarPaginacaoSistemas();
-
             }
+        });
+    }
 
-        }
-    );
-
-}
-
-// ==========================================================
-// PRIMEIRA ATUALIZAÇÃO
-// ==========================================================
-
-atualizarPaginacaoSistemas();
+    atualizarPaginacaoSistemas();
     </script>
 </body>
 </html>

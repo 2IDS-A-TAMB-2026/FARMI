@@ -20,9 +20,10 @@ $routes->post('/login/autenticar', 'AuthController::autenticar');
 
 $routes->get('/logout', 'AuthController::logout');
 
-$routes->get('/esqueceu-senha', 'EsqueceuSenhaController::index');
-
-$routes->post('/enviar-recuperacao', 'EsqueceuSenhaController::enviar');
+$routes->post(
+    'fazenda/atualizar/(:num)',
+    'FazendaController::atualizar/$1'
+);
 
 
 // =========================

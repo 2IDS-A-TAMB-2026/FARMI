@@ -585,7 +585,7 @@
                 <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
                 <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
-                <div class="avatar"><?= strtoupper(substr($usuario['NOME'] ?? 'U', 0, 1)) ?></div>
+                <div class="avatar">G</div>
             </div>
         </header>
 
@@ -726,11 +726,6 @@
                     <a href="<?= base_url('/alterar-senha-admin') ?>" class="sec-btn">
                         <i class="fa-solid fa-lock"></i>
                         Alterar senha
-                    </a>
-
-                    <a href="<?= base_url('/recuperar-senha-admin') ?>" class="sec-btn">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                        Recuperar senha
                     </a>
                 </div>
             </div>

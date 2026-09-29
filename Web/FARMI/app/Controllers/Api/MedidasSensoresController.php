@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers\Api;
+date_default_timezone_set('America/Sao_Paulo'); //Para colocar hora certa
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\SensorModel; // Use o Model da tabela SENSOR
@@ -173,23 +174,36 @@ class MedidasSensoresController extends ResourceController
                     ->getRowArray();
 
                 if (!$alertaAtivo) {
-                    // Cria o alerta com a gravidade calculada
-                    $db->table('ALERTA')->insert([
+                    $dadosAlerta = [
                         'TIPO_ALERTA' => $sensor['TIPO_SENSOR'],
                         'DESCRICAO' => $descricao,
                         'NIVEL_GRAVIDADE' => $nivelGravidade,
                         'DATA_HORA' => date('Y-m-d H:i:s'),
                         'STATUS' => 'Ativo',
                         'FK_ID_SENSOR' => $sensorId
-                    ]);
+                    ];
+
+                    $inserido = $db->table('ALERTA')->insert($dadosAlerta);
+
+                    if (!$inserido) {
+                        return $this->fail([
+                            'mensagem' => 'Erro ao inserir alerta',
+                            'erro' => $db->error(),
+                            'dados' => $dadosAlerta
+                        ], 500);
+                    }
                 } else {
                     // Se a gravidade mudou (ex: de Médio para Alto), atualiza o alerta existente
-                    if ($alertaAtivo['NIVEL_GRAVIDADE'] !== $nivelGravidade) {
+                    if (
+                        $alertaAtivo['NIVEL_GRAVIDADE'] !== $nivelGravidade ||
+                        $alertaAtivo['DESCRICAO'] !== $descricao
+                    ) {
                         $db->table('ALERTA')
                             ->where('ID_ALERTA', $alertaAtivo['ID_ALERTA'])
                             ->update([
                                 'NIVEL_GRAVIDADE' => $nivelGravidade,
-                                'DESCRICAO' => $descricao
+                                'DESCRICAO' => $descricao,
+                                'DATA_HORA' => date('Y-m-d H:i:s')
                             ]);
                     }
                 }

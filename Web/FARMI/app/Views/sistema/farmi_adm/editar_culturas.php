@@ -73,67 +73,60 @@
             display: block;
         }
 
-        /* CORREÇÃO: Alinhamento e espaçamento do contêiner dos botões */
-       /* BOTÕES DE ALTERAR FONTE (VERDES COM LETRAS BRANCAS) */
-#aumentar-fonte,
-#diminuir-fonte,
-#resetar-fonte {
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #57c91b;
-    color: white; /* Letras brancas */
-    font-weight: bold;
-    margin-left: 5px;
-    transition: .3s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* ========================================================
+           BARRA DE ACESSIBILIDADE (IGUAL À TELA DE EDITAR FAZENDA)
+           ======================================================== */
+        .user-profile {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            gap: 6px !important;
+        }
 
-/* BOTÃO DE CONTRASTE (TOTALMENTE PRETO) */
-#contraste-btn {
-    width: 42px;
-    height: 42px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: #000; /* Fundo Preto */
-    color: #000;      /* Ícone Preto (faz o ícone sumir/ficar totalmente preto) */
-    margin-left: 5px;
-    transition: .3s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Estilo base idêntico para todos os botões */
+        .user-profile button {
+            background: #57c91b !important;
+            border: none !important;
+            border-radius: 5px !important;
+            width: 34px !important;
+            height: 34px !important;
+            font-weight: bold !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: 0.2s !important;
+            color: #fff !important;
+            font-size: 13px !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            box-sizing: border-box !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
 
-/* Espaço entre o último botão (A) e o Avatar G */
-#resetar-fonte {
-    margin-right: 15px; 
-}
+        /* APENAS o botão de contraste fica preto com ícone branco */
+        #contraste-btn {
+            background: #000000 !important;
+            color: #ffffff !important;
+        }
 
-/* Efeito de hover mantendo as cores pretas no botão de contraste */
-#contraste-btn:hover {
-    transform: scale(1.05);
-    background: #000; /* Mantém fundo preto no hover */
-    color: #000;      /* Mantém ícone preto no hover */
-}
+        /* Efeito de hover padrão */
+        .user-profile button:hover {
+            opacity: .85 !important;
+        }
 
-/* Efeito de hover dos botões verdes */
-#aumentar-fonte:hover,
-#diminuir-fonte:hover,
-#resetar-fonte:hover {
-    transform: scale(1.05);
-}
+        /* Espaço entre o último botão (A) e o Avatar G */
+        #resetar-fonte {
+            margin-right: 9px !important;
+        }
 
-/* Alinhamento do contêiner */
-.user-profile {
-    display: flex;
-    align-items: center;
-}
-
+        @media (max-width: 768px) {
+            .user-profile button {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 11px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -167,20 +160,12 @@
 
     <div class="user-profile">
 
-        <button id="contraste-btn" aria-label="Alterar contraste">
+        <button id="contraste-btn" type="button" aria-label="Alterar contraste">
             <i class="fa-solid fa-circle-half-stroke"></i>
         </button>
-        <button id="aumentar-fonte" aria-label="Aumentar fonte">
-            A+
-        </button>
-
-        <button id="diminuir-fonte" aria-label="Diminuir fonte">
-            A-
-        </button>
-
-        <button id="resetar-fonte" aria-label="Resetar fonte">
-            A
-        </button>
+        <button id="aumentar-fonte" type="button" aria-label="Aumentar fonte">A+</button>
+        <button id="diminuir-fonte" type="button" aria-label="Diminuir fonte">A-</button>
+        <button id="resetar-fonte" type="button" aria-label="Resetar fonte">A</button>
 
         <div class="avatar">G</div>
 
@@ -390,37 +375,58 @@
     </script>
 
     <script>
-        // Lógica de Alto Contraste
+        // ========================================================
+        // ACESSIBILIDADE: CONTRASTE
+        // ========================================================
+        // O estado fica salvo no navegador e vale para todas as páginas
+        // que tiverem este mesmo trecho (chave: altoContraste)
         const btnContraste = document.getElementById('contraste-btn');
-        btnContraste.addEventListener('click', () => {
-            document.body.classList.toggle('alto-contraste');
-        });
 
-        // Lógica de Tamanho da Fonte
-        let tamanhoAtual = 100; // Porcentagem inicial da fonte
+        if (localStorage.getItem('altoContraste') === 'true') {
+            document.body.classList.add('alto-contraste');
+        }
 
-        const btnAumentar = document.getElementById('aumentar-fonte');
-        const btnDiminuir = document.getElementById('diminuir-fonte');
-        const btnResetar = document.getElementById('resetar-fonte');
+        if (btnContraste) {
+            btnContraste.addEventListener('click', () => {
+                const ativo = document.body.classList.toggle('alto-contraste');
+                localStorage.setItem('altoContraste', ativo);
+            });
+        }
 
-        btnAumentar.addEventListener('click', () => {
-            if (tamanhoAtual < 140) { // Limite máximo de aumento
-                tamanhoAtual += 10;
-                document.body.style.fontSize = tamanhoAtual + '%';
-            }
-        });
+        // ========================================================
+        // ACESSIBILIDADE DE FONTE (IGUAL À TELA DE EDITAR FAZENDA)
+        // ========================================================
+        let tamanhoFonte = 100;
+        const aumentarFonte = document.getElementById('aumentar-fonte');
+        const diminuirFonte = document.getElementById('diminuir-fonte');
+        const resetarFonte = document.getElementById('resetar-fonte');
 
-        btnDiminuir.addEventListener('click', () => {
-            if (tamanhoAtual > 80) { // Limite mínimo de diminuição
-                tamanhoAtual -= 10;
-                document.body.style.fontSize = tamanhoAtual + '%';
-            }
-        });
+        function aplicarFonte() {
+            document.documentElement.style.fontSize = tamanhoFonte + '%';
+            localStorage.setItem('tamanhoFonteCultura', tamanhoFonte);
+        }
 
-        btnResetar.addEventListener('click', () => {
-            tamanhoAtual = 100;
-            document.body.style.fontSize = '100%';
-        });
+        const fonteSalva = localStorage.getItem('tamanhoFonteCultura');
+        if (fonteSalva) {
+            tamanhoFonte = parseInt(fonteSalva);
+            aplicarFonte();
+        }
+
+        if (aumentarFonte) {
+            aumentarFonte.addEventListener('click', () => {
+                if (tamanhoFonte < 150) { tamanhoFonte += 10; aplicarFonte(); }
+            });
+        }
+        if (diminuirFonte) {
+            diminuirFonte.addEventListener('click', () => {
+                if (tamanhoFonte > 70) { tamanhoFonte -= 10; aplicarFonte(); }
+            });
+        }
+        if (resetarFonte) {
+            resetarFonte.addEventListener('click', () => {
+                tamanhoFonte = 100; aplicarFonte();
+            });
+        }
     </script>
 </body>
 </html>

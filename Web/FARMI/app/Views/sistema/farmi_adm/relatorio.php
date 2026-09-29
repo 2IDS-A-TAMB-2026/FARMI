@@ -41,7 +41,7 @@
 
 		.filtros {
 			display: grid;
-			grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(5, 1fr);
 			gap: 15px;
 			align-items: end;
 		}
@@ -394,6 +394,25 @@
 							<?php endforeach; ?>
 						</select>
 					</div>
+
+					<div class="campo">
+						<label for="intervalo">Intervalo das medições</label>
+						<select id="intervalo" name="intervalo">
+							<option value="todos" <?= ($intervalo ?? 'todos') === 'todos' ? 'selected' : '' ?>>
+								Todos os horários
+							</option>
+							<option value="10" <?= ($intervalo ?? '') === '10' ? 'selected' : '' ?>>
+								A cada 10 minutos
+							</option>
+							<option value="30" <?= ($intervalo ?? '') === '30' ? 'selected' : '' ?>>
+								A cada 30 minutos
+							</option>
+							<option value="60" <?= ($intervalo ?? '') === '60' ? 'selected' : '' ?>>
+								A cada 1 hora
+							</option>
+						</select>
+					</div>
+
 				</div>
 
 				<div class="botoes">

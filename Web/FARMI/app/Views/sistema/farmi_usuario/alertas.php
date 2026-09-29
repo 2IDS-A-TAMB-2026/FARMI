@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
+    <!-- Ícone do site -->
+    <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas - FARMI Funcionário</title>
+
+    <!-- Ícones -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alertas.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
+
+    <!-- RESPONSIVO -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
+
     <style>
-            #aumentar-fonte,
-            #diminuir-fonte,
-            #resetar-fonte {
-                width: 42px;
-                height: 42px;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                background: #57c91b;
-                color: white;
-                font-weight: bold;
-                transition: .3s;
-                margin-right: 7.5px; 
-                font-size: 16px;
-                
-            }
-            .filtro-dropdown{
+        /* =========================
+           BOTÕES DE FONTE
+        ========================= */
+        #aumentar-fonte,
+        #diminuir-fonte,
+        #resetar-fonte {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #57c91b;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+            margin-right: 7.5px;
+            font-size: 16px;
+        }
+
+        #aumentar-fonte:hover,
+        #diminuir-fonte:hover,
+        #resetar-fonte:hover {
+            transform: scale(1.05);
+        }
+
+        /* =========================
+           FILTRO
+        ========================= */
+        .filtro-dropdown {
             position: relative;
         }
 
-        #contraste-btn i,
-        .btn-acessibilidade i {
-            color: #000 ;
-        }
-
-        .filtro-menu{
+        .filtro-menu {
             display: none;
             position: absolute;
             top: 50px;
@@ -40,11 +66,11 @@
             font-size: 16px;
         }
 
-        .filtro-menu.show{
+        .filtro-menu.show {
             display: block;
         }
 
-        .filtro-item{
+        .filtro-item {
             padding: 12px 16px;
             cursor: pointer;
             display: flex;
@@ -52,80 +78,78 @@
             gap: 10px;
         }
 
-        .filtro-item:hover{
+        .filtro-item:hover {
             background: #f5f5f5;
         }
 
-        .filtro-item i{
+        .filtro-item i {
             color: #57c91b;
         }
 
-            #aumentar-fonte:hover,
-            #diminuir-fonte:hover,
-            #resetar-fonte:hover {
-                transform: scale(1.05);
-            } 
-            
-        .avatar {
-            background: #57c91b;
-            color: #000;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%; /* Transforma em um círculo perfeito */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        #btnFiltro{
+        #btnFiltro {
             display: flex;
             align-items: center;
             gap: 8px;
-
-            background: #fff;
-            color: #000;
-
-            border: 2px solid #000;
+            background: #57c91b;
+            color: #fff;
+            border: none;
             border-radius: 10px;
-
             padding: 10px 16px;
-
             font-weight: 600;
             cursor: pointer;
             transition: .3s;
             font-size: 16px;
         }
 
-        #btnFiltro i{
-            color: #000;
-        }
-
-
-        /* NORMAL */
-        #btnFiltro{
-            background: #57c91b;
-            color: #fff;
-            border: none;
-        }
-
-        #btnFiltro i{
+        #btnFiltro i {
             color: #fff;
         }
 
-
-        /* BOTÃO DE FILTROS DO CONTEXTO DE ALERTAS (VERSÃO AMPLIADA) */
         .btn-secondary {
-            font-size: 16px !important; /* Aumentou o texto (era 14px) */
-            height: 42px;               /* Mantém o alinhamento vertical com o Dashboard */
-            padding: 0 30px;            /* Aumentou consideravelmente a largura nas laterais (era 15px) */
+            font-size: 16px !important;
+            height: 42px;
+            padding: 0 30px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;                  /* Espaço ligeiramente maior entre o ícone e o texto */
+            gap: 10px;
             border-radius: 10px;
         }
 
+        /* =========================
+           CONTRASTE / AVATAR
+        ========================= */
+        #contraste-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            color: #000;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #contraste-btn i {
+            color: #000;
+        }
+
+        .avatar {
+            background: #57c91b;
+            color: #000;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* =========================
+           PAGINAÇÃO
+        ========================= */
         .paginacao-container {
             display: flex;
             align-items: center;
@@ -146,125 +170,241 @@
             height: 42px;
             border: none;
             border-radius: 8px;
-            background-color: #57c91b;
-            color: #fff;
             cursor: pointer;
-
+            background: #57c91b;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 16px;
-            transition: 0.3s;
         }
 
         .botao-paginacao:hover {
             transform: scale(1.05);
-            background-color: #46a814;
         }
 
         .botao-paginacao:disabled {
             display: none;
         }
+
+        /* =========================
+           ALTO CONTRASTE
+        ========================= */
+        .alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        .alto-contraste * {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        .alto-contraste a,
+        .alto-contraste i {
+            color: #ffff00 !important;
+        }
+
+        /* Botões */
+        .alto-contraste #aumentar-fonte,
+        .alto-contraste #diminuir-fonte,
+        .alto-contraste #resetar-fonte,
+        .alto-contraste a[href*="logout"] {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        .alto-contraste a[href*="logout"] i {
+            color: #fff !important;
+        }
+
+        .alto-contraste #aumentar-fonte:hover,
+        .alto-contraste #diminuir-fonte:hover,
+        .alto-contraste #resetar-fonte:hover,
+        .alto-contraste a[href*="logout"]:hover {
+            background: #222 !important;
+        }
+
+        /* Avatar */
+        body.alto-contraste .avatar {
+            background: #fff !important;
+            color: #000 !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* Filtro */
+        .alto-contraste a#btnFiltro,
+        .alto-contraste button#btnFiltro {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        .alto-contraste a#btnFiltro i,
+        .alto-contraste button#btnFiltro i {
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        /* Botão de contraste */
+        body.alto-contraste #contraste-btn,
+        body.alto-contraste #contraste-btn:hover,
+        body.alto-contraste #contraste-btn:focus,
+        body.alto-contraste #contraste-btn:active,
+        body.alto-contraste #contraste-btn:focus-visible {
+            background: transparent !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        body.alto-contraste #contraste-btn i,
+        body.alto-contraste #contraste-btn:hover i {
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        /* Paginação */
+        body.alto-contraste .botao-paginacao {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.alto-contraste .botao-paginacao i,
+        body.alto-contraste .botao-paginacao:hover i {
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste .botao-paginacao:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
     </style>
-<head>
-    <!-- Ícone do site -->
-    <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alertas - FARMI Funcionário</title>
-
-    <!-- Ícones -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alertas.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
-
-    <!-- RESPONSIVO -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
 </head>
 
 <body>
     <!-- SIDEBAR -->
     <aside class="sidebar">
+
         <div class="logo">
             <i class="fa-solid fa-leaf"></i>
             FARMI Funcionário
         </div>
+
         <nav>
-            <a href="<?= base_url('/dashboard-usuario') ?>" class="menu-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-            <a href="<?= base_url('/luz') ?>" class="menu-item "><i class="fa-solid fa-lightbulb"></i> Luz</a>
-            <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
-            <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
-            <a href="<?= base_url('/solo') ?>" class="menu-item"><i class="fa-solid fa-chart-pie"></i> Solo</a>
-            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item active"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
-            <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+            <a href="<?= base_url('/dashboard-usuario') ?>" class="menu-item">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="<?= base_url('/luz') ?>" class="menu-item">
+                <i class="fa-solid fa-lightbulb"></i>
+                Luz
+            </a>
+
+            <a href="<?= base_url('/temperatura') ?>" class="menu-item">
+                <i class="fa-solid fa-temperature-high"></i>
+                Temperatura
+            </a>
+
+            <a href="<?= base_url('/umidade') ?>" class="menu-item">
+                <i class="fa-solid fa-droplet"></i>
+                Umidade
+            </a>
+
+            <a href="<?= base_url('/solo') ?>" class="menu-item">
+                <i class="fa-solid fa-chart-pie"></i>
+                Solo
+            </a>
+
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item active">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Alertas
+            </a>
+
+            <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                Configurações
+            </a>
         </nav>
+
     </aside>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
+
         <!-- Menu sanduíche -->
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <i class="fa-solid fa-bars"></i>
         </button>
+
         <!-- HEADER -->
         <header class="header">
+
             <div>
                 <h2>Alertas dos Sensores</h2>
                 <p style="color: #666;">
                     Monitoramento em tempo real dos alertas
                 </p>
             </div>
-            <!-- Forçamos o flexbox e o alinhamento central diretamente no pai -->
-<div class="header-actions" style="display: flex; align-items: center; gap: 8px;">
-    <!-- FILTROS -->
-    <div class="filtro-dropdown">
-        <button class="btn btn-secondary" id="btnFiltro">
-            <i class="fa-solid fa-filter"></i>
-            Filtros
-        </button>
-        <div class="filtro-menu" id="filtroMenu">
-            <div class="filtro-item" data-filtro="todos"><i class="fa-solid fa-list"></i> Todos os Sensores</div>
-            <div class="filtro-item" data-filtro="Temperatura"><i class="fa-solid fa-temperature-half"></i> Temperatura</div>
-            <div class="filtro-item" data-filtro="Umidade"><i class="fa-solid fa-cloud-rain"></i> Umidade</div>
-            <div class="filtro-item" data-filtro="Solo"><i class="fa-solid fa-seedling"></i> Solo</div>
-            <div class="filtro-item" data-filtro="Luz"><i class="fa-solid fa-sun"></i> Luz</div>
-        </div>
-    </div>
 
-    <!-- LOGIN (Corrigido o '45 px' para '42px' para casar com o Dashboard) -->
-    <a class= "btn-logout" href="<?= base_url('/logout') ?>"
-       style="background: #57c91b; color: #fff; text-decoration: none; width: 120px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 600; margin-right: 15px; transition: 0.3s ease;">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        Logout
-    </a>
+            <div class="header-actions" style="display: flex; align-items: center; gap: 8px;">
 
-    <!-- CONTRASTE -->
-    <button id="contraste-btn" aria-label="Alterar contraste">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-    </button>
+                <!-- FILTROS -->
+                <div class="filtro-dropdown">
+                    <button class="btn btn-secondary" id="btnFiltro">
+                        <i class="fa-solid fa-filter"></i>
+                        Filtros
+                    </button>
+                    <div class="filtro-menu" id="filtroMenu">
+                        <div class="filtro-item" data-filtro="todos"><i class="fa-solid fa-list"></i> Todos os Sensores</div>
+                        <div class="filtro-item" data-filtro="Temperatura"><i class="fa-solid fa-temperature-half"></i> Temperatura</div>
+                        <div class="filtro-item" data-filtro="Umidade"><i class="fa-solid fa-cloud-rain"></i> Umidade</div>
+                        <div class="filtro-item" data-filtro="Solo"><i class="fa-solid fa-seedling"></i> Solo</div>
+                        <div class="filtro-item" data-filtro="Luz"><i class="fa-solid fa-sun"></i> Luz</div>
+                    </div>
+                </div>
 
-    <!-- FONTES -->
-    <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
-    <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
-    <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
+                <!-- LOGOUT -->
+                <a class="btn-logout" href="<?= base_url('/logout') ?>"
+                   style="background: #57c91b; color: #fff; text-decoration: none; width: 120px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 600; margin-right: 15px; transition: 0.3s ease;">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
 
-    <!-- AVATAR (Agora no mesmo nível dos outros, centralizado perfeitamente) -->
-    <div class="avatar">F</div>
-    </div>
-</header>
+                <!-- CONTRASTE -->
+                <button id="contraste-btn" aria-label="Alterar contraste">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </button>
 
-    <!-- CARDS -->
+                <!-- FONTES -->
+                <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
+                <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
+                <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
+
+                <!-- AVATAR -->
+                <div class="avatar">F</div>
+
+            </div>
+
+        </header>
+
+        <!-- CARDS -->
         <div class="stats-grid">
+
             <!-- ALERTAS ATIVOS -->
             <div class="card">
                 <div>
                     <h3>Alertas Ativos</h3>
                     <p style="color: var(--vermelho);">
-                    <?= $totalAlertas ?>
+                        <?= $totalAlertas ?>
                     </p>
                 </div>
                 <i class="fa-solid fa-triangle-exclamation"
@@ -275,8 +415,8 @@
             <div class="card">
                 <div>
                     <h3>Críticos</h3>
-                   <p style="color: var(--vermelho);">
-                    <?= $totalCriticos ?>
+                    <p style="color: var(--vermelho);">
+                        <?= $totalCriticos ?>
                     </p>
                 </div>
                 <i class="fa-solid fa-fire"
@@ -288,7 +428,7 @@
                 <div>
                     <h3>Médios</h3>
                     <p style="color: var(--laranja);">
-                    <?= $totalMedios ?>
+                        <?= $totalMedios ?>
                     </p>
                 </div>
                 <i class="fa-solid fa-exclamation-triangle"
@@ -300,19 +440,22 @@
                 <div>
                     <h3>Baixos</h3>
                     <p style="color: var(--azul);">
-                    <?= $totalBaixos ?>
+                        <?= $totalBaixos ?>
                     </p>
                 </div>
                 <i class="fa-solid fa-bell"
                     style="color: var(--azul); font-size: 2.5rem;"></i>
             </div>
+
         </div>
 
         <!-- ALERTAS -->
         <div class="alerts-container">
+
             <div class="alerts-list">
-                <?php foreach($alerta as $a) { 
-                    // 1. Define a classe do card com base na gravidade do alerta
+
+                <?php foreach($alerta as $a) {
+                    // Define a classe do card com base na gravidade do alerta
                     $classeGravidade = 'alert-medio';
                     if ($a['NIVEL_GRAVIDADE'] == 'Alto') {
                         $classeGravidade = 'alert-critico';
@@ -324,7 +467,6 @@
                 <div class="alert-item <?= $classeGravidade ?> alerta" data-sensor="<?= $a['TIPO_SENSOR']; ?>">
 
                     <div class="alert-icon">
-                        <!-- 2. Correção dos Ícones correspondentes -->
                         <?php if($a['TIPO_SENSOR'] == 'Temperatura'){ ?>
                             <i class="fa-solid fa-temperature-high"></i>
                         <?php } elseif($a['TIPO_SENSOR'] == 'Umidade'){ ?>
@@ -350,7 +492,7 @@
                                 <?= date('d/m/Y H:i', strtotime($a['DATA_HORA'])) ?>
                             </span>
 
-                                <?php if($a['STATUS'] == "Ativo"){ ?>
+                            <?php if($a['STATUS'] == "Ativo"){ ?>
                                 <span class="alert-status status-ativo">
                                     <?= $a['STATUS']; ?>
                                 </span>
@@ -359,30 +501,30 @@
                                     <?= $a['STATUS']; ?>
                                 </span>
                             <?php } ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+
                 <?php } ?>
-                            
-                </div>
-                    </div>
-                </div>
-                <div class="paginacao-container">
-                    <button id="paginaAnterior" class="botao-paginacao" type="button">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
 
-                    <div id="paginaInfo" class="pagina-info">
-                        Página 1 de 1
-                    </div>
+            </div>
+        </div>
 
-                    <button id="proximaPagina" class="botao-paginacao" type="button">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
+        <!-- PAGINAÇÃO -->
+        <div class="paginacao-container">
+            <button id="paginaAnterior" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div id="paginaInfo" class="pagina-info">
+                Página 1 de 1
             </div>
 
+            <button id="proximaPagina" class="botao-paginacao" type="button">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
+
     </main>
 
     <!-- VLibras -->
@@ -398,357 +540,154 @@
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
-    <!-- JS -->
+    <!-- JS (o alto contraste é controlado por este arquivo, igual ao gestor) -->
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
+
     <script>
+    /* =========================
+       ACESSIBILIDADE - TAMANHO DA FONTE
+    ========================= */
+    document.addEventListener('DOMContentLoaded', () => {
 
-/* =========================
-   ACESSIBILIDADE - FONTE + CONTRASTE
-   (script limpo: antes havia um DOMContentLoaded
-   duplicado e aninhado dentro do clique de
-   "aumentar-fonte", o que impedia o botão de
-   alto contraste de funcionar)
-========================= */
+        let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
 
-document.addEventListener('DOMContentLoaded', () => {
+        document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
-    let tamanhoFonte =
-        parseInt(localStorage.getItem('fonteSite')) || 16;
-
-    document.documentElement.style.fontSize =
-        tamanhoFonte + 'px';
-
-    // =====================
-    // CONTRASTE
-    // =====================
-
-    const btnContraste = document.getElementById('contraste-btn');
-
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste');
-    }
-
-    btnContraste.addEventListener('click', () => {
-
-        document.body.classList.toggle('alto-contraste');
-
-        localStorage.setItem(
-            'altoContraste',
-            document.body.classList.contains('alto-contraste')
-        );
-
-    });
-
-    // =====================
-    // FONTE
-    // =====================
-
-    document
-        .getElementById('aumentar-fonte')
-        .addEventListener('click', () => {
-
-            if (tamanhoFonte < 22) {
-
+        document.getElementById('aumentar-fonte').addEventListener('click', () => {
+            if (tamanhoFonte < 24) {
                 tamanhoFonte += 2;
-
-                document.documentElement.style.fontSize =
-                    tamanhoFonte + 'px';
-
-                localStorage.setItem(
-                    'fonteSite',
-                    tamanhoFonte
-                );
+                document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                localStorage.setItem('fonteSite', tamanhoFonte);
             }
-
         });
 
-    document
-        .getElementById('diminuir-fonte')
-        .addEventListener('click', () => {
-
+        document.getElementById('diminuir-fonte').addEventListener('click', () => {
             if (tamanhoFonte > 12) {
-
                 tamanhoFonte -= 2;
-
-                document.documentElement.style.fontSize =
-                    tamanhoFonte + 'px';
-
-                localStorage.setItem(
-                    'fonteSite',
-                    tamanhoFonte
-                );
+                document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                localStorage.setItem('fonteSite', tamanhoFonte);
             }
-
         });
 
-    document
-        .getElementById('resetar-fonte')
-        .addEventListener('click', () => {
-
+        document.getElementById('resetar-fonte').addEventListener('click', () => {
             tamanhoFonte = 16;
+            document.documentElement.style.fontSize = tamanhoFonte + 'px';
+            localStorage.setItem('fonteSite', tamanhoFonte);
+        });
 
-            document.documentElement.style.fontSize =
-                tamanhoFonte + 'px';
+    });
 
-            localStorage.setItem(
-                'fonteSite',
-                tamanhoFonte
+    /* =========================
+       MENU DE FILTRO
+    ========================= */
+    const btnFiltro = document.getElementById('btnFiltro');
+    const filtroMenu = document.getElementById('filtroMenu');
+
+    btnFiltro.addEventListener('click', function (e) {
+        e.stopPropagation();
+        filtroMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function () {
+        filtroMenu.classList.remove('show');
+    });
+
+    /* =========================
+       PAGINAÇÃO + FILTRO
+    ========================= */
+    const alertas = document.querySelectorAll(".alerta");
+
+    const paginaAnterior = document.getElementById("paginaAnterior");
+    const proximaPagina = document.getElementById("proximaPagina");
+    const paginaInfo = document.getElementById("paginaInfo");
+
+    const ALERTAS_POR_PAGINA = 5;
+
+    let paginaAtual = 1;
+    let filtroAtual = "todos";
+
+    function getAlertasFiltrados() {
+        return Array.from(alertas).filter(alerta => {
+            return (
+                filtroAtual === "todos" ||
+                alerta.dataset.sensor === filtroAtual
             );
-
         });
+    }
 
-});
+    function atualizarAlertas() {
 
-function toggleMenu(){
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('show');
+        const alertasFiltrados = getAlertasFiltrados();
+
+        const totalPaginas = Math.ceil(
+            alertasFiltrados.length / ALERTAS_POR_PAGINA
+        );
+
+        // Corrige a página atual
+        if (totalPaginas === 0) {
+            paginaAtual = 1;
+        } else if (paginaAtual > totalPaginas) {
+            paginaAtual = totalPaginas;
         }
-        const btnFiltro = document.getElementById('btnFiltro');
-const filtroMenu = document.getElementById('filtroMenu');
 
-btnFiltro.addEventListener('click', function(e){
+        // Texto da página
+        paginaInfo.textContent = totalPaginas > 0
+            ? `Página ${paginaAtual} de ${totalPaginas}`
+            : "Nenhuma página";
 
-    e.stopPropagation();
-
-    filtroMenu.classList.toggle('show');
-
-});
-
-document.addEventListener('click', function(){
-
-    filtroMenu.classList.remove('show');
-
-});
-
-// =========================
-// FILTRO + MOSTRAR MAIS
-// =========================
-
-// =========================
-// PAGINAÇÃO + FILTRO
-// =========================
-
-const alertas = document.querySelectorAll(".alerta");
-
-const paginaAnterior = document.getElementById("paginaAnterior");
-const proximaPagina = document.getElementById("proximaPagina");
-const paginaInfo = document.getElementById("paginaInfo");
-
-const ALERTAS_POR_PAGINA = 5;
-
-let paginaAtual = 1;
-let filtroAtual = "todos";
-
-
-// =========================
-// ATUALIZAR ALERTAS
-// =========================
-
-function atualizarAlertas() {
-
-    // Pega somente os alertas do filtro selecionado
-    const alertasFiltrados = Array.from(alertas).filter(alerta => {
-
-        return (
-            filtroAtual === "todos" ||
-            alerta.dataset.sensor === filtroAtual
-        );
-
-    });
-
-
-    // =========================
-    // CALCULA TOTAL DE PÁGINAS
-    // =========================
-
-    const totalPaginas = Math.ceil(
-        alertasFiltrados.length / ALERTAS_POR_PAGINA
-    );
-
-
-    // =========================
-    // CORRIGE A PÁGINA ATUAL
-    // =========================
-
-    if (totalPaginas === 0) {
-
-        paginaAtual = 1;
-
-    } else if (paginaAtual > totalPaginas) {
-
-        paginaAtual = totalPaginas;
-
-    }
-
-
-    // =========================
-    // ATUALIZA TEXTO DA PÁGINA
-    // =========================
-
-    if (totalPaginas > 0) {
-
-        paginaInfo.textContent =
-            `Página ${paginaAtual} de ${totalPaginas}`;
-
-    } else {
-
-        paginaInfo.textContent =
-            "Nenhuma página";
-
-    }
-
-
-    // =========================
-    // ESCONDE TODOS OS ALERTAS
-    // =========================
-
-    alertas.forEach(alerta => {
-
-        alerta.style.display = "none";
-
-    });
-
-
-    // =========================
-    // CALCULA OS ALERTAS DA PÁGINA
-    // =========================
-
-    const inicio =
-        (paginaAtual - 1) * ALERTAS_POR_PAGINA;
-
-    const fim =
-        inicio + ALERTAS_POR_PAGINA;
-
-
-    // =========================
-    // MOSTRA SOMENTE 5 ALERTAS
-    // =========================
-
-    alertasFiltrados
-        .slice(inicio, fim)
-        .forEach(alerta => {
-
-            alerta.style.display = "flex";
-
+        // Esconde todos e mostra só os da página atual
+        alertas.forEach(alerta => {
+            alerta.style.display = "none";
         });
 
+        const inicio = (paginaAtual - 1) * ALERTAS_POR_PAGINA;
+        const fim = inicio + ALERTAS_POR_PAGINA;
 
-    // =========================
-    // CONTROLE DA SETA ANTERIOR
-    // =========================
+        alertasFiltrados.slice(inicio, fim).forEach(alerta => {
+            alerta.style.display = "flex";
+        });
 
-    if (paginaAtual > 1) {
+        // Setas
+        paginaAnterior.style.display = paginaAtual <= 1 ? "none" : "flex";
 
-        paginaAnterior.style.display = "flex";
-
-    } else {
-
-        paginaAnterior.style.display = "none";
-
+        proximaPagina.style.display =
+            (paginaAtual >= totalPaginas || totalPaginas === 0) ? "none" : "flex";
     }
 
+    paginaAnterior.addEventListener("click", function () {
+        if (paginaAtual > 1) {
+            paginaAtual--;
+            atualizarAlertas();
+        }
+    });
 
-    // =========================
-    // CONTROLE DA PRÓXIMA SETA
-    // =========================
-
-    if (paginaAtual < totalPaginas) {
-
-        proximaPagina.style.display = "flex";
-
-    } else {
-
-        proximaPagina.style.display = "none";
-
-    }
-
-}
-
-
-// =========================
-// PÁGINA ANTERIOR
-// =========================
-
-paginaAnterior.addEventListener("click", function () {
-
-    if (paginaAtual > 1) {
-
-        paginaAtual--;
-
-        atualizarAlertas();
-
-    }
-
-});
-
-
-// =========================
-// PRÓXIMA PÁGINA
-// =========================
-
-proximaPagina.addEventListener("click", function () {
-
-    const alertasFiltrados = Array.from(alertas).filter(alerta => {
-
-        return (
-            filtroAtual === "todos" ||
-            alerta.dataset.sensor === filtroAtual
+    proximaPagina.addEventListener("click", function () {
+        const totalPaginas = Math.ceil(
+            getAlertasFiltrados().length / ALERTAS_POR_PAGINA
         );
 
+        if (paginaAtual < totalPaginas) {
+            paginaAtual++;
+            atualizarAlertas();
+        }
     });
 
-    const totalPaginas = Math.ceil(
-        alertasFiltrados.length / ALERTAS_POR_PAGINA
-    );
-
-
-    if (paginaAtual < totalPaginas) {
-
-        paginaAtual++;
-
-        atualizarAlertas();
-
-    }
-
-});
-
-
-// =========================
-// FILTROS
-// =========================
-
-document.querySelectorAll(".filtro-item").forEach(item => {
-
-    item.addEventListener("click", function () {
-
-        // Pega o filtro escolhido
-        filtroAtual = this.dataset.filtro;
-
-        // Sempre começa na página 1
-        paginaAtual = 1;
-
-        // Atualiza os alertas
-        atualizarAlertas();
-
-        // Fecha o menu
-        filtroMenu.classList.remove("show");
-
+    document.querySelectorAll(".filtro-item").forEach(item => {
+        item.addEventListener("click", function () {
+            filtroAtual = this.dataset.filtro;
+            paginaAtual = 1;
+            atualizarAlertas();
+            filtroMenu.classList.remove("show");
+        });
     });
 
-});
+    atualizarAlertas();
+    </script>
 
-
-// =========================
-// INICIA A PAGINAÇÃO
-// =========================
-
-atualizarAlertas();
-</script>
-
-<script>
-    // =========================
-    // MENU SANDUÍCHE
-    // =========================
+    <script>
+    /* =========================
+       MENU SANDUÍCHE
+    ========================= */
     document.addEventListener('DOMContentLoaded', function () {
 
         const menuToggle = document.getElementById('menuToggle');
@@ -757,9 +696,14 @@ atualizarAlertas();
         // Cria o fundo escuro
         const overlay = document.createElement('div');
         overlay.classList.add('menu-overlay');
-
         document.body.appendChild(overlay);
 
+        function fecharMenu() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+        }
 
         // Abrir e fechar menu
         menuToggle.addEventListener('click', function () {
@@ -767,10 +711,7 @@ atualizarAlertas();
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
 
-            const aberto = sidebar.classList.contains('active');
-
-            // Troca o ícone
-            if (aberto) {
+            if (sidebar.classList.contains('active')) {
                 menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 menuToggle.setAttribute('aria-label', 'Fechar menu');
             } else {
@@ -780,52 +721,40 @@ atualizarAlertas();
 
         });
 
-
         // Fecha ao clicar no fundo escuro
-        overlay.addEventListener('click', function () {
+        overlay.addEventListener('click', fecharMenu);
 
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-
-            menuToggle.innerHTML =
-                '<i class="fa-solid fa-bars"></i>';
-
-            menuToggle.setAttribute(
-                'aria-label',
-                'Abrir menu'
-            );
-
-        });
-
-
-        // Fecha o menu ao clicar em um item
-        const menuItems =
-            document.querySelectorAll('.sidebar .menu-item');
-
-        menuItems.forEach(function (item) {
-
+        // Fecha o menu ao clicar em um item (mobile)
+        document.querySelectorAll('.sidebar .menu-item').forEach(function (item) {
             item.addEventListener('click', function () {
-
                 if (window.innerWidth <= 768) {
-
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-
-                    menuToggle.innerHTML =
-                        '<i class="fa-solid fa-bars"></i>';
-
-                    menuToggle.setAttribute(
-                        'aria-label',
-                        'Abrir menu'
-                    );
-
+                    fecharMenu();
                 }
-
             });
-
         });
 
     });
     </script>
+    <script>
+(function () {
+    const CHAVE = 'altoContraste';
+
+    // Aplica o estado salvo ao abrir a tela
+    if (localStorage.getItem(CHAVE) === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
+
+    // Captura o clique antes de qualquer outro código tratar o botão
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('#contraste-btn');
+        if (!btn) return;
+
+        e.stopImmediatePropagation();
+
+        const ativo = document.body.classList.toggle('alto-contraste');
+        localStorage.setItem(CHAVE, ativo);
+    }, true);
+})();
+</script>
 </body>
 </html>

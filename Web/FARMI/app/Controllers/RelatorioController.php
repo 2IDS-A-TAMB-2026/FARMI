@@ -20,6 +20,7 @@ class RelatorioController extends BaseController
         $dataFim = $this->request->getGet('data_fim');
         $idFazenda = $this->request->getGet('fazenda');
         $idCultura = $this->request->getGet('cultura');
+        $intervalo = $this->request->getGet('intervalo') ?? 'todos';
 
         if (empty($dataInicio)) {
             $dataInicio = date('Y-m-d', strtotime('-7 days'));
@@ -177,6 +178,19 @@ class RelatorioController extends BaseController
 
         $leituras = $db->query($sqlLeituras, $paramsLeituras)->getResultArray();
 
+        if ($intervalo !== 'todos') {
+            $minutos = (int)$intervalo;
+
+            foreach ($leituras as $chave => $leitura) {
+                $dataHora = strtotime($leitura['DATA_HORA']);
+                $minuto = (int)date('i', $dataHora);
+
+                if ($minuto % $minutos !== 0) {
+                    unset($leituras[$chave]);
+                }
+            }
+        }
+
         // ==========================================
         // AGRUPA POR FAZENDA + CULTURA
         // ==========================================
@@ -272,7 +286,8 @@ class RelatorioController extends BaseController
             'dataInicio' => $dataInicio,
             'dataFim' => $dataFim,
             'idFazenda' => $idFazenda,
-            'idCultura' => $idCultura
+            'idCultura' => $idCultura,
+            'intervalo' => $intervalo
         ]);
     }
 }

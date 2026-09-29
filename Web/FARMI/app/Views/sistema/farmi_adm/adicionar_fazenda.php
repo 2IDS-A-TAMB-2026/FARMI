@@ -109,6 +109,56 @@
 
 }
 
+/* =========================
+   ALTO CONTRASTE
+========================= */
+body.alto-contraste {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste .recover-container {
+    background: #000 !important;
+    border: 2px solid #ffff00 !important;
+    box-shadow: none !important;
+}
+
+body.alto-contraste .logo,
+body.alto-contraste .recover-header h2,
+body.alto-contraste .recover-header p,
+body.alto-contraste label,
+body.alto-contraste .back-link a {
+    color: #ffff00 !important;
+}
+
+body.alto-contraste input {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #ffff00 !important;
+}
+
+body.alto-contraste input::placeholder {
+    color: #cfcfcf !important;
+}
+
+body.alto-contraste .btn-primary {
+    background: #ffff00 !important;
+    color: #000 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+body.alto-contraste .btn-secondary {
+    background: #000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+/* botão de contraste fica visível no modo escuro */
+body.alto-contraste #contraste-btn {
+    background: #fff !important;
+    color: #000 !important;
+}
+
     </style>
 </head>
 
@@ -555,22 +605,24 @@ if (resetarFonte) {
     });
 }
 
+/* =========================
+   ALTO CONTRASTE (salvo entre páginas)
+========================= */
 const btnContraste = document.getElementById('contraste-btn');
 
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste');
-    }
+if (localStorage.getItem('altoContraste') === 'true') {
+    document.body.classList.add('alto-contraste');
+}
 
-    btnContraste.addEventListener('click', () => {
+if (btnContraste) {
+    btnContraste.addEventListener('click', (e) => {
+        // impede que outro script (ex: script.js) alterne de novo e anule o clique
+        e.stopImmediatePropagation();
 
-        document.body.classList.toggle('alto-contraste');
-
-        localStorage.setItem(
-            'altoContraste',
-            document.body.classList.contains('alto-contraste')
-        );
-
+        const ativo = document.body.classList.toggle('alto-contraste');
+        localStorage.setItem('altoContraste', ativo);
     });
+}
 
 </script>
 

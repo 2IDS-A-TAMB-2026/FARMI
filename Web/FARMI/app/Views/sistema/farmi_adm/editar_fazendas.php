@@ -141,6 +141,8 @@
         </div>
 
         
+        <form id="formEndereco" method="POST"
+    action="<?= base_url('fazenda/atualizar/' . $fazenda['ID_FAZENDA']) ?>">
             <?= csrf_field() ?>
 
             <div class="form-group">
@@ -293,25 +295,30 @@
     // ========================================================
     // SWEET ALERT FORM
     // ========================================================
-    const formSensor = document.getElementById('formSensor');
-    if(formSensor){
-        formSensor.addEventListener('submit', function(e){
-            e.preventDefault();
-            const btn = this.querySelector('.btn-primary');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
-            btn.disabled = true;
+    const formEndereco = document.getElementById('formEndereco');
 
-            Swal.fire({
-                title: 'Endereço salvo!',
-                text: 'Os dados da fazenda foram atualizados com sucesso.',
-                icon: 'success',
-                confirmButtonColor: '#2e7d32',
-                confirmButtonText: 'OK'
-            }).then(() => {
-                formSensor.submit();
-            });
+if (formEndereco) {
+    formEndereco.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const btn = this.querySelector('.btn-primary');
+
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+        btn.disabled = true;
+
+        Swal.fire({
+            title: 'Salvando...',
+            text: 'Atualizando os dados da fazenda.',
+            icon: 'info',
+            showConfirmButton: false,
+            allowOutsideClick: false
         });
-    }
+
+        setTimeout(() => {
+            formEndereco.submit();
+        }, 500);
+    });
+}
 
 
     /* =========================

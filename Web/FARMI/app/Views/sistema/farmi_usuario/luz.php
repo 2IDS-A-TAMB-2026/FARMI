@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Ícone do site-->
+    <!-- Ícone do site -->
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
     <title>Monitoramento de Luz - Fazenda Inteligente</title>
+
     <!-- RESPONSIVO -->
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
+
     <!-- Ícones (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             --verde-escuro: #052501;
@@ -26,7 +28,6 @@
             --luz-media: #ffe600;
             --luz-alta: #29de32;
         }
-        
 
         * {
             margin: 0;
@@ -95,37 +96,86 @@
         }
 
         .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        gap: 20px;
-        flex-wrap: wrap;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        /* agrupa avatar + botão */
-        .header-right {
+        .header-actions {
             display: flex;
             align-items: center;
-            gap: 15px; /* Ajustado de 10px para 15px igual ao dADMIN */
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .avatar {
-        width: 42px; /* Padronizado */
-        height: 42px; /* Padronizado */
-        background-color: var(--verde-claro);
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--verde-escuro);
-        font-weight: bold;
+            width: 42px;
+            height: 42px;
+            background-color: var(--verde-claro);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* --- BOTÕES DO CABEÇALHO --- */
+        .btn-logout {
+            background: #57c91b;
+            color: #fff;
+            text-decoration: none;
+            width: 120px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: 0.3s ease;
+        }
+
+        #contraste-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            color: #000;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #contraste-btn i {
+            color: #000;
+        }
+
+        #aumentar-fonte,
+        #diminuir-fonte,
+        #resetar-fonte {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #57c91b;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+            margin-right: 7.5px;
+            font-size: 16px;
+        }
+
+        #aumentar-fonte:hover,
+        #diminuir-fonte:hover,
+        #resetar-fonte:hover {
+            transform: scale(1.05);
         }
 
         /* --- CARDS DE ESTATÍSTICAS --- */
@@ -282,37 +332,6 @@
             color: #f57f17;
         }
 
-        /* --- BOTÕES DE AÇÃO --- */
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background-color: var(--verde-escuro);
-            color: var(--branco);
-        }
-
-        .btn-primary:hover {
-            background-color: #1b5e20;
-        }
-
-        .btn-secondary {
-            background-color: var(--verde-claro);
-            color: var(--verde-escuro);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--verde-claro-hover);
-        }
-
         /* --- INDICADOR DE LUZ --- */
         .light-indicator {
             display: flex;
@@ -338,57 +357,10 @@
             background: linear-gradient(135deg, #ffeb3b, #f57f17);
             color: #333;
         }
-        
-
-
-        .logout-btn {
-            background: #58CC02;
-            color: white;
-            text-decoration: none;
-            height: 42px; /* Padronizado */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 18px; /* Padding vertical zerado porque a altura já está fixa */
-            border-radius: 10px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #46A302;
-            color: white;
-        }
-
-        .accessibility-btn {
-            width: 42px; /* Padronizado */
-            height: 42px; /* Padronizado */
-            background-color: #58CC02;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Centraliza perfeitamente o "A+" */
-            transition: 0.3s;
-        }
-
-        .accessibility-btn:hover {
-            background-color: #46A302;
-        }
-
-        html {
-            font-size: 16px;
-        }
 
         /* =========================
-        PAGINAÇÃO
+           PAGINAÇÃO
         ========================= */
-
         .paginacao-container {
             display: flex;
             align-items: center;
@@ -424,6 +396,90 @@
             transform: scale(1.05);
             background-color: #46a814;
         }
+
+        /* =========================
+           ALTO CONTRASTE
+        ========================= */
+        .alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        .alto-contraste * {
+            background-color: #000 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        .alto-contraste a,
+        .alto-contraste i {
+            color: #ffff00 !important;
+        }
+
+        /* Botões */
+        .alto-contraste #aumentar-fonte,
+        .alto-contraste #diminuir-fonte,
+        .alto-contraste #resetar-fonte,
+        .alto-contraste a[href*="logout"] {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        .alto-contraste a[href*="logout"] i {
+            color: #fff !important;
+        }
+
+        .alto-contraste #aumentar-fonte:hover,
+        .alto-contraste #diminuir-fonte:hover,
+        .alto-contraste #resetar-fonte:hover,
+        .alto-contraste a[href*="logout"]:hover {
+            background: #222 !important;
+        }
+
+        /* Avatar */
+        body.alto-contraste .avatar {
+            background: #fff !important;
+            color: #000 !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* Botão de contraste */
+        body.alto-contraste #contraste-btn,
+        body.alto-contraste #contraste-btn:hover,
+        body.alto-contraste #contraste-btn:focus,
+        body.alto-contraste #contraste-btn:active,
+        body.alto-contraste #contraste-btn:focus-visible {
+            background: transparent !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        body.alto-contraste #contraste-btn i,
+        body.alto-contraste #contraste-btn:hover i {
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        /* Paginação */
+        body.alto-contraste .botao-paginacao {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.alto-contraste .botao-paginacao i,
+        body.alto-contraste .botao-paginacao:hover i {
+            background: transparent !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste .botao-paginacao:hover {
+            background: #222 !important;
+            color: #fff !important;
+        }
     </style>
 </head>
 <body>
@@ -440,7 +496,7 @@
             <a href="<?= base_url('/temperatura') ?>" class="menu-item"><i class="fa-solid fa-temperature-high"></i> Temperatura</a>
             <a href="<?= base_url('/umidade') ?>" class="menu-item"><i class="fa-solid fa-droplet"></i> Umidade</a>
             <a href="<?= base_url('/solo') ?>" class="menu-item"><i class="fa-solid fa-chart-pie"></i> Solo</a>
-            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i>Alertas</a>
+            <a href="<?= base_url('/alertas-usuario') ?>" class="menu-item"><i class="fa-solid fa-triangle-exclamation"></i> Alertas</a>
             <a href="<?= base_url('/configuracoes-usuario') ?>" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a>
         </nav>
     </aside>
@@ -452,34 +508,59 @@
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <i class="fa-solid fa-bars"></i>
         </button>
-        
+
         <!-- CABEÇALHO -->
         <header class="header">
             <div>
                 <h2>Monitoramento de Luz</h2>
-                <p style="color: #666;"> Dados em tempo real dos sensores de luminosidade. </p>
+                <p style="color: #666;">
+                    Dados em tempo real dos sensores de luminosidade.
+                </p>
             </div>
 
-            <div class="header-right">
+            <div class="header-actions">
 
-                <a href="<?= base_url('/logout') ?>" class="logout-btn">
+                <!-- LOGOUT -->
+                <a class="btn-logout" href="<?= base_url('/logout') ?>">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Logout
                 </a>
 
+                <!-- CONTRASTE -->
                 <button id="contraste-btn" aria-label="Alterar contraste">
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </button>
 
-                <button class="accessibility-btn" onclick="aumentarFonte()">A+</button>
-                <button class="accessibility-btn" onclick="diminuirFonte()">A-</button>
-                <button class="accessibility-btn" onclick="resetarFonte()">A</button>
+                <!-- FONTES -->
+                <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
+                <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
+                <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
-                <div class="avatar">  F </div>
+                <!-- AVATAR -->
+                <div class="avatar">F</div>
 
             </div>
-
         </header>
+
+        <?php
+            $lux = !empty($sensores) ? (float)$sensores[0]['VALOR'] : 0;
+
+            $status = 'optimal';
+
+            if ($lux < 5000) {
+                $status = 'low';
+            } elseif ($lux > 12000) {
+                $status = 'high';
+            }
+
+            $ultimaLeitura = (!empty($sensores) && !empty($sensores[0]['DATA_HORA']))
+                ? date('d/m/Y H:i', strtotime($sensores[0]['DATA_HORA']))
+                : '--';
+
+            $sensores_ativos = count(array_filter($sensores, function ($s) {
+                return $s['STATUS'] == 'Ativo';
+            }));
+        ?>
 
         <!-- INDICADOR DE LUZ -->
         <div style="margin-bottom: 20px;">
@@ -489,42 +570,26 @@
             </div>
         </div>
 
-        <?php
-            $lux = !empty($sensores) ? $sensores[0]['VALOR'] : 0;
-
-            $status = 'optimal';
-
-            if ($lux < 5000) {
-                $status = 'low';
-            } elseif ($lux > 12000) {
-                $status = 'high';
-            }
-        ?>
-
-        <?php
-            $total_sensores = count($sensores);
-
-            $sensores_ativos = count(array_filter($sensores, function($s){
-                return $s['STATUS'] == 'Ativo';
-            }));
-        ?>
-
         <!-- VISUALIZAÇÃO DO SENSOR -->
         <div class="sensor-visualization">
             <h3><i class="fa-solid fa-lightbulb"></i> Medidor de Luz</h3>
             <div class="light-meter">
                 <span class="lux-value"><?= number_format($lux, 0, ',', '.') ?></span>
                 <span class="lux-unit">LUZ</span>
-                <span class="status status-status-<?= $status ?>">
-                    <i class="fa-solid fa-check"></i> 
-                    <?php 
-                        if($status == 'optimal') echo 'Ótimo';
-                        elseif($status == 'low') echo 'Baixa';
-                        else echo 'Alta';
+                <span class="status status-<?= $status ?>">
+                    <i class="fa-solid fa-check"></i>
+                    <?php
+                        if ($status == 'optimal') {
+                            echo 'Ótimo';
+                        } elseif ($status == 'low') {
+                            echo 'Baixa';
+                        } else {
+                            echo 'Alta';
+                        }
                     ?>
                 </span>
             </div>
-            <p style="color: #666;">Última leitura: <?= !empty($sensores) ? date('d/m/Y H:i', strtotime($sensores[0]['DATA_HORA'])) : '-' ?></p>
+            <p style="color: #666;">Última leitura: <?= $ultimaLeitura ?></p>
         </div>
 
         <!-- CARDS DE ESTATÍSTICAS -->
@@ -554,7 +619,7 @@
             </div>
         </div>
 
-        <!-- TABELA DE STATUS DOS SISTEMAS -->
+        <!-- TABELA DE STATUS DOS SENSORES -->
         <h3 class="section-title">Status dos Sensores de Luz</h3>
         <div class="table-container">
             <table>
@@ -571,44 +636,48 @@
                 </thead>
                 <tbody>
                     <?php foreach ($sensores as $sensor): ?>
+                        <tr>
+                            <td>
+                                <?= esc($sensor['ID_SENSOR']) ?>
+                            </td>
 
-                    <tr>
+                            <td>
+                                <i class="fa-solid fa-lightbulb"
+                                   style="color: var(--verde-claro); margin-right: 8px;"></i>
+                                <?= esc($sensor['NOME_SENSOR']) ?>
+                            </td>
 
-                        <td>
-                            <?= esc($sensor['ID_SENSOR']) ?>
-                        </td>
-                        
-                        <td>
-                            <i class="fa-solid fa-lightbulb"
-                            style="color: var(--verde-claro); margin-right: 8px;">
-                            </i>
+                            <td>
+                                <?= esc($sensor['NOME_CULTURA']) ?>
+                                <small>ID: <?= esc($sensor['ID_CULTURA']) ?></small>
+                            </td>
 
-                            <?= esc($sensor['NOME_SENSOR']) ?>
-                        </td>
+                            <td>
+                                <?= esc($sensor['NOME_FAZENDA']) ?>
+                            </td>
 
-                        <td>
-                            <?= esc($sensor['NOME_CULTURA']) ?>
-                            <small>ID: <?= esc($sensor['ID_CULTURA']) ?></small>
-                        </td>
+                            <td>
+                                <?= !empty($sensor['DATA_HORA'])
+                                    ? date('d/m/Y H:i', strtotime($sensor['DATA_HORA']))
+                                    : '--' ?>
+                            </td>
 
-                        <td><?= esc($sensor['NOME_FAZENDA']) ?></td>
+                            <td>
+                                <?= isset($sensor['VALOR']) ? esc($sensor['VALOR']) . ' Lux' : '--' ?>
+                            </td>
 
-                        <td><?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?></td>
-
-                        <td><?= $sensor['VALOR'] ?> Lux</td>
-
-                        <td>
-                            <span class="status-badge status-ok">
-                                <?= esc($sensor['STATUS']) ?>
-                            </span>
-                        </td>
-
-                    </tr>
-
+                            <td>
+                                <span class="status-badge status-ok">
+                                    <?= esc($sensor['STATUS']) ?>
+                                </span>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+
+        <!-- PAGINAÇÃO -->
         <div class="paginacao-container">
             <button id="paginaAnterior" class="botao-paginacao" type="button">
                 <i class="fa-solid fa-chevron-left"></i>
@@ -636,50 +705,72 @@
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
-    
-    <script src="./../script.js"></script>
 
-<script>
-let tamanho = 100;
+    <!-- JS compartilhado das telas -->
+    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
 
-function aumentarFonte() {
-    tamanho += 10;
+    <script>
+    /* =========================
+       ALTO CONTRASTE (um único toggle, com persistência)
+    ========================= */
+    (function () {
+        const CHAVE = 'altoContraste';
 
-    if (tamanho > 130) {
-        tamanho = 130;
-    }
+        // Aplica o estado salvo ao abrir a tela
+        if (localStorage.getItem(CHAVE) === 'true') {
+            document.body.classList.add('alto-contraste');
+        }
 
-    document.documentElement.style.fontSize = tamanho + "%";
-}
+        // Captura o clique antes de qualquer outro código tratar o botão
+        document.addEventListener('click', function (e) {
+            const btn = e.target.closest('#contraste-btn');
+            if (!btn) return;
 
-function diminuirFonte() {
-    tamanho -= 10;
+            e.stopImmediatePropagation();
 
-    if (tamanho < 70) {
-        tamanho = 70;
-    }
+            const ativo = document.body.classList.toggle('alto-contraste');
+            localStorage.setItem(CHAVE, ativo);
+        }, true);
+    })();
 
-    document.documentElement.style.fontSize = tamanho + "%";
-}
+    /* =========================
+       ACESSIBILIDADE - TAMANHO DA FONTE
+    ========================= */
+    document.addEventListener('DOMContentLoaded', () => {
 
-function resetarFonte() {
-    tamanho = 100;
-    document.documentElement.style.fontSize = tamanho + "%";
-}
-</script>
+        let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
 
-<script>
-const btnContraste = document.getElementById('contraste-btn');
+        document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
-btnContraste.addEventListener('click', () => {
-    document.body.classList.toggle('alto-contraste');
-});
-</script>
+        document.getElementById('aumentar-fonte').addEventListener('click', () => {
+            if (tamanhoFonte < 24) {
+                tamanhoFonte += 2;
+                document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                localStorage.setItem('fonteSite', tamanhoFonte);
+            }
+        });
 
- <script>
-    // =========================
-    // MENU SANDUÍCHE
-    // =========================
+        document.getElementById('diminuir-fonte').addEventListener('click', () => {
+            if (tamanhoFonte > 12) {
+                tamanhoFonte -= 2;
+                document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                localStorage.setItem('fonteSite', tamanhoFonte);
+            }
+        });
+
+        document.getElementById('resetar-fonte').addEventListener('click', () => {
+            tamanhoFonte = 16;
+            document.documentElement.style.fontSize = tamanhoFonte + 'px';
+            localStorage.setItem('fonteSite', tamanhoFonte);
+        });
+
+    });
+    </script>
+
+    <script>
+    /* =========================
+       MENU SANDUÍCHE
+    ========================= */
     document.addEventListener('DOMContentLoaded', function () {
 
         const menuToggle = document.getElementById('menuToggle');
@@ -688,9 +779,14 @@ btnContraste.addEventListener('click', () => {
         // Cria o fundo escuro
         const overlay = document.createElement('div');
         overlay.classList.add('menu-overlay');
-
         document.body.appendChild(overlay);
 
+        function fecharMenu() {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            menuToggle.setAttribute('aria-label', 'Abrir menu');
+        }
 
         // Abrir e fechar menu
         menuToggle.addEventListener('click', function () {
@@ -698,10 +794,7 @@ btnContraste.addEventListener('click', () => {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
 
-            const aberto = sidebar.classList.contains('active');
-
-            // Troca o ícone
-            if (aberto) {
+            if (sidebar.classList.contains('active')) {
                 menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
                 menuToggle.setAttribute('aria-label', 'Fechar menu');
             } else {
@@ -711,153 +804,89 @@ btnContraste.addEventListener('click', () => {
 
         });
 
-
         // Fecha ao clicar no fundo escuro
-        overlay.addEventListener('click', function () {
+        overlay.addEventListener('click', fecharMenu);
 
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-
-            menuToggle.innerHTML =
-                '<i class="fa-solid fa-bars"></i>';
-
-            menuToggle.setAttribute(
-                'aria-label',
-                'Abrir menu'
-            );
-
-        });
-
-
-        // Fecha o menu ao clicar em um item
-        const menuItems =
-            document.querySelectorAll('.sidebar .menu-item');
-
-        menuItems.forEach(function (item) {
-
+        // Fecha o menu ao clicar em um item (mobile)
+        document.querySelectorAll('.sidebar .menu-item').forEach(function (item) {
             item.addEventListener('click', function () {
-
                 if (window.innerWidth <= 768) {
-
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-
-                    menuToggle.innerHTML =
-                        '<i class="fa-solid fa-bars"></i>';
-
-                    menuToggle.setAttribute(
-                        'aria-label',
-                        'Abrir menu'
-                    );
-
+                    fecharMenu();
                 }
-
             });
-
         });
 
     });
     </script>
-<script>
-/* =========================
-   PAGINAÇÃO DOS SENSORES
-========================= */
 
-const sensores = document.querySelectorAll("tbody tr");
+    <script>
+    /* =========================
+       PAGINAÇÃO DOS SENSORES
+    ========================= */
+    const sensores = document.querySelectorAll("tbody tr");
 
-const paginaAnterior = document.getElementById("paginaAnterior");
-const proximaPagina = document.getElementById("proximaPagina");
-const paginaInfo = document.getElementById("paginaInfo");
+    const paginaAnterior = document.getElementById("paginaAnterior");
+    const proximaPagina = document.getElementById("proximaPagina");
+    const paginaInfo = document.getElementById("paginaInfo");
 
-const SENSORES_POR_PAGINA = 5;
+    const SENSORES_POR_PAGINA = 5;
 
-let paginaAtual = 1;
+    let paginaAtual = 1;
 
-function atualizarSensores() {
+    function atualizarSensores() {
 
-    const totalPaginas = Math.ceil(
-        sensores.length / SENSORES_POR_PAGINA
-    );
+        const totalPaginas = Math.ceil(
+            sensores.length / SENSORES_POR_PAGINA
+        );
 
-    // Garante que a página atual seja válida
-    if (totalPaginas === 0) {
-        paginaAtual = 1;
-    } else if (paginaAtual > totalPaginas) {
-        paginaAtual = totalPaginas;
-    }
+        // Garante que a página atual seja válida
+        if (totalPaginas === 0) {
+            paginaAtual = 1;
+        } else if (paginaAtual > totalPaginas) {
+            paginaAtual = totalPaginas;
+        }
 
-    // Atualiza o texto da página
-    if (totalPaginas > 0) {
-        paginaInfo.textContent =
-            `Página ${paginaAtual} de ${totalPaginas}`;
-    } else {
-        paginaInfo.textContent =
-            "Nenhuma página";
-    }
+        // Texto da página
+        paginaInfo.textContent = totalPaginas > 0
+            ? `Página ${paginaAtual} de ${totalPaginas}`
+            : "Nenhuma página";
 
-    // Esconde todos os sensores
-    sensores.forEach(sensor => {
-        sensor.style.display = "none";
-    });
+        // Esconde todos e mostra só os da página atual
+        sensores.forEach(sensor => {
+            sensor.style.display = "none";
+        });
 
-    // Define quais sensores serão mostrados
-    const inicio =
-        (paginaAtual - 1) * SENSORES_POR_PAGINA;
+        const inicio = (paginaAtual - 1) * SENSORES_POR_PAGINA;
+        const fim = inicio + SENSORES_POR_PAGINA;
 
-    const fim =
-        inicio + SENSORES_POR_PAGINA;
-
-    Array.from(sensores)
-        .slice(inicio, fim)
-        .forEach(sensor => {
+        Array.from(sensores).slice(inicio, fim).forEach(sensor => {
             sensor.style.display = "table-row";
         });
 
-    // ANTERIOR
-    if (paginaAtual > 1) {
-        paginaAnterior.style.display = "flex";
-    } else {
-        paginaAnterior.style.display = "none";
+        // Setas
+        paginaAnterior.style.display = paginaAtual > 1 ? "flex" : "none";
+        proximaPagina.style.display = paginaAtual < totalPaginas ? "flex" : "none";
     }
 
-    // PRÓXIMA
-    if (paginaAtual < totalPaginas) {
-        proximaPagina.style.display = "flex";
-    } else {
-        proximaPagina.style.display = "none";
-    }
-}
+    paginaAnterior.addEventListener("click", function () {
+        if (paginaAtual > 1) {
+            paginaAtual--;
+            atualizarSensores();
+        }
+    });
 
+    proximaPagina.addEventListener("click", function () {
+        const totalPaginas = Math.ceil(
+            sensores.length / SENSORES_POR_PAGINA
+        );
 
-// Botão ANTERIOR
-paginaAnterior.addEventListener("click", function () {
+        if (paginaAtual < totalPaginas) {
+            paginaAtual++;
+            atualizarSensores();
+        }
+    });
 
-    if (paginaAtual > 1) {
-        paginaAtual--;
-        atualizarSensores();
-    }
-
-});
-
-
-// Botão PRÓXIMA
-proximaPagina.addEventListener("click", function () {
-
-    const totalPaginas = Math.ceil(
-        sensores.length / SENSORES_POR_PAGINA
-    );
-
-    if (paginaAtual < totalPaginas) {
-        paginaAtual++;
-        atualizarSensores();
-    }
-
-});
-
-
-// Inicia a paginação
-atualizarSensores();
-
-</script>
+    atualizarSensores();
+    </script>
 </body>
 </html>

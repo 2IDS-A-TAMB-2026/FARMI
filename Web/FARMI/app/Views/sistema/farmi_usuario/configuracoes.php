@@ -713,7 +713,7 @@ body.contraste .badge-role i {
                 <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
                 <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
-                <div class="avatar"><?= strtoupper(substr($usuario['NOME'] ?? 'F', 0, 1)) ?></div>
+                <div class="avatar">F</div>
             </div>
         </header>
 
@@ -852,11 +852,6 @@ body.contraste .badge-role i {
                     <a href="<?= base_url('/alterar-senha') ?>" class="sec-btn">
                         <i class="fa-solid fa-lock"></i>
                         Alterar senha
-                    </a>
-
-                    <a href="<?= base_url('/recuperar-senha') ?>" class="sec-btn">
-                        <i class="fa-solid fa-envelope-open-text"></i>
-                        Recuperar senha
                     </a>
                 </div>
             </div>

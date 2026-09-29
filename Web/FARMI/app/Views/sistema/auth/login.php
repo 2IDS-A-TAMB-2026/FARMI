@@ -201,12 +201,6 @@
 
     </div>
 
-
-    <!-- LINKS FICAM FORA DO login-botoes -->
-    <a href="<?= base_url('/esqueceu-senha') ?>" class="link-senha">
-        Esqueceu a senha?
-    </a>
-
     <br>
 
     <div class="back">

@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - FARMI Gestor</title>
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
-    
+
     <!-- Font Awesome & CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_dashboard.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_alto_contraste.css') ?>">
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /* ==========================================================
            BOTÕES DE FONTE & CONTRASTE
-           ========================================================== */
+        ========================================================== */
         #aumentar-fonte,
         #diminuir-fonte,
         #resetar-fonte {
@@ -49,8 +49,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 42px; /* Padronizado */
-            height: 42px; /* Padronizado */
+            width: 42px;
+            height: 42px;
             font-size: 20px;
             color: #000;
             cursor: pointer;
@@ -76,7 +76,7 @@
 
         /* ==========================================================
            TABELA DE SISTEMAS
-           ========================================================== */
+        ========================================================== */
         .section-title {
             color: #052501;
             margin-bottom: 15px;
@@ -131,7 +131,7 @@
 
         /* ==========================================================
            STATUS DOS SENSORES
-           ========================================================== */
+        ========================================================== */
         .sensor-status-list {
             display: flex;
             flex-direction: column;
@@ -178,7 +178,7 @@
             font-size: 16px;
         }
 
-        .status-circle.online { background: #e8f8df; color: #58CC02; }
+        .status-circle.online  { background: #e8f8df; color: #58CC02; }
         .status-circle.warning { background: #fff3cd; color: #f0ad00; }
         .status-circle.offline { background: #ffe5e5; color: #dc3545; }
 
@@ -234,7 +234,7 @@
             white-space: nowrap;
         }
 
-        .sensor-status-list .status-badge.online { background: #e8f8df; color: #328000; }
+        .sensor-status-list .status-badge.online  { background: #e8f8df; color: #328000; }
         .sensor-status-list .status-badge.warning { background: #fff3cd; color: #946c00; }
         .sensor-status-list .status-badge.offline { background: #ffe5e5; color: #c62828; }
 
@@ -254,252 +254,9 @@
             50% { transform: scale(1.2); opacity: 0.5; }
         }
 
-       /* ===========================
-        ALTO CONTRASTE (CORRIGIDO)
-        ===========================*/
-
-        body.contraste{
-            background:#000 !important;
-            color:#fff !important;
-        }
-
-        body.contraste *{
-            color:#fff !important;
-            border-color:#fff !important;
-        }
-
-        body.contraste .sidebar{
-            background:#000 !important;
-            border-right:2px solid #fff;
-        }
-
-        body.contraste .main-content{
-            background:#000 !important;
-        }
-
-        body.contraste .card,
-        body.contraste .table-container,
-        body.contraste .chart-card,
-        body.contraste .activities-card,
-        body.contraste .weather-card,
-        body.contraste .status-item{
-            background:#111 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
-            box-shadow:none !important;
-        }
-
-        /* CORREÇÃO DO ALERTA: Troca o fundo rosa/branco do alerta por preto */
-        body.contraste .activities-card > div {
-            background: #000 !important;
-            border: 1px solid #fff !important;
-        }
-        /* Sobrescreve o botão 'Ver Alertas' exclusivamente no Alto Contraste */
-        body.contraste .activities-card .btn {
-            background-color: #ffffff !important;
-            color: #000000 !important;
-            border: 2px solid #ffffff !important;
-        }
-
-        body.contraste .activities-card .btn:hover {
-            background-color: #e6e6e6 !important;
-            color: #000000 !important;
-        }
-
-        body.contraste table,
-        body.contraste tr,
-        body.contraste td,
-        body.contraste th{
-            background:#111 !important;
-            color:#fff !important;
-            border:1px solid #fff !important;
-        }
-
-        body.contraste .status-badge{
-            background:#fff !important;
-            color:#000 !important;
-        }
-
-        body.contraste .logout-btn,
-        body.contraste .accessibility-btn,
-        body.contraste .btn,
-        body.contraste .mostrar-mais {
-            background:#000 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
-        }
-        body.contraste *{
-            color:#fff !important;
-            border-color:#fff !important;
-        }
-
-        #contraste-btn:hover {
-            color: var(--verde-claro) !important;
-        }
-
-        body.contraste #contraste-btn:hover {
-            color: #fff !important;
-        }
-
-        body.contraste .avatar{
-            background:#fff !important;
-            color:#000 !important;
-        }
-
-        body.contraste input,
-        body.contraste select,
-        body.contraste textarea{
-            background:#000 !important;
-            color:#fff !important;
-            border:2px solid #fff !important;
-        }
-
         /* ==========================================================
-        ALTO CONTRASTE - STATUS DOS SENSORES
+           COMPONENTES GERAIS & CLIMA
         ========================================================== */
-
-        /* Card principal */
-        body.contraste .activities-card {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-            box-shadow: none !important;
-        }
-
-        /* Título */
-        body.contraste .activities-card .chart-title {
-            background: #000 !important;
-            color: #fff !important;
-        }
-
-        body.contraste .activities-card .chart-title i {
-            color: #fff !important;
-        }
-
-        /* Lista dos sensores */
-        body.contraste .sensor-status-list {
-            background: #000 !important;
-            color: #fff !important;
-        }
-
-        /* Cada sensor */
-        body.contraste .sensor-status-item {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-            box-shadow: none !important;
-        }
-
-        /* Área esquerda */
-        body.contraste .sensor-left {
-            background: #000 !important;
-            color: #fff !important;
-        }
-
-        /* Área direita */
-        body.contraste .sensor-right {
-            background: #000 !important;
-            color: #fff !important;
-        }
-
-        /* Nome do sensor */
-        body.contraste .sensor-info h4 {
-            color: #fff !important;
-        }
-
-        /* Tipo e horário */
-        body.contraste .sensor-info p {
-            color: #fff !important;
-        }
-
-        /* Círculo do sensor */
-        body.contraste .status-circle {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-        }
-
-        /* Ícone dentro do círculo */
-        body.contraste .status-circle i {
-            color: #fff !important;
-        }
-
-        /* Barras de sinal */
-        body.contraste .signal-bars {
-            color: #fff !important;
-        }
-
-        body.contraste .signal-bars i {
-            background: #fff !important;
-        }
-
-        /* Status ONLINE / OFFLINE / OSCILANDO */
-        body.contraste .sensor-status-item .status-badge {
-            background: #fff !important;
-            color: #000 !important;
-            border: 2px solid #fff !important;
-        }
-
-        /* Bolinha de pulso do sensor online */
-        body.contraste .pulse-dot {
-            background: #fff !important;
-            border: 1px solid #fff !important;
-        }
-
-        /* Remove cores verde/vermelha/laranja do modo normal */
-        body.contraste .sensor-status-item.is-online,
-        body.contraste .sensor-status-item.is-offline,
-        body.contraste .sensor-status-item.is-warning {
-            background: #000 !important;
-            color: #fff !important;
-            border-color: #fff !important;
-        }
-
-        /* Hover */
-        body.contraste .sensor-status-item:hover {
-            background: #222 !important;
-        }
-
-        body.contraste .sensor-status-item:hover * {
-            color: #fff !important;
-        }
-
-        /* ================================
-        GRÁFICOS - ALTO CONTRASTE
-        ================================ */
-
-        body.contraste .chart-card,
-        body.contraste .grafico-box {
-            background: #000 !important;
-            color: #fff !important;
-            border-color: #fff !important;
-        }
-
-        /* CORREÇÃO: o container do gráfico (.grafico-box) tinha fundo
-           branco vindo do CSS externo e não estava sendo sobrescrito —
-           só o canvas era coberto, então a área ao redor do gráfico
-           continuava clara no alto contraste. */
-        body.contraste .grafico-box {
-            background: #111 !important;
-        }
-
-        /* Área do gráfico permanece preta */
-        body.contraste .grafico-box canvas {
-            background: #000 !important;
-        }
-
-        /* Títulos dos gráficos */
-        body.contraste .chart-card .chart-title {
-            color: #fff !important;
-        }
-
-        body.contraste .chart-card .chart-title i {
-            color: #fff !important;
-        }
-
-        /* ==========================================================
-           COMPONENTES GERAIS & WEATHER
-           ========================================================== */
         .btn-logout {
             background: #58CC02;
             color: white;
@@ -532,6 +289,61 @@
             justify-content: center;
             font-weight: bold;
             font-size: 16px;
+        }
+
+        /* Ações no fim do card de sensores */
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .card-actions .btn-logout {
+            margin-right: 0;
+        }
+
+        /* ==========================================================
+           POSIÇÕES DO GRID: SOLO + ALERTAS (esquerda) | STATUS (direita)
+           Posições explícitas evitam o buraco vazio ao lado do card
+        ========================================================== */
+        .card-solo {
+            grid-column: 1;
+            grid-row: 3;
+        }
+
+        .alertas-externo {
+            grid-column: 1;
+            grid-row: 4;
+            display: flex;
+            justify-content: center;
+            align-self: start;
+            margin: 0 0 20px;
+        }
+
+        .card-status {
+            grid-column: 2;
+            grid-row: 3 / span 2;
+            align-self: start;
+        }
+
+        .alertas-externo .btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 25px;
+            border-radius: 10px;
+            background: #58CC02;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        .alertas-externo .btn:hover {
+            background: #46A302;
         }
 
         .weather-card {
@@ -667,9 +479,9 @@
 
         /* ==========================================================
            GRID & RESPONSIVIDADE
-           ========================================================== */
+        ========================================================== */
         .dashboard-container { width: 100%; max-width: 100%; min-width: 0; }
-        
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -724,6 +536,14 @@
         @media (max-width: 1200px) {
             .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .charts-grid { grid-template-columns: 1fr; }
+
+            /* Grid de 1 coluna: volta ao fluxo normal */
+            .card-solo,
+            .alertas-externo,
+            .card-status {
+                grid-column: 1;
+                grid-row: auto;
+            }
         }
 
         @media (max-width: 768px) {
@@ -739,168 +559,289 @@
             .chart-container { height: 250px; }
         }
 
-    /* ==========================================================
-   PAGINAÇÃO DOS STATUS DOS SENSORES
-   ========================================================== */
+        /* ==========================================================
+           PAGINAÇÃO - SENSORES E SISTEMAS
+        ========================================================== */
+        .sensor-pagination,
+        .system-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
 
-.sensor-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-}
+        .sensor-pagination button,
+        .system-pagination button {
+            background: #58CC02;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.sensor-pagination button {
-    background: #58CC02;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        .sensor-pagination button:hover:not(:disabled),
+        .system-pagination button:hover:not(:disabled) {
+            background: #46A302;
+        }
 
-.sensor-pagination button:hover:not(:disabled) {
-    background: #46A302;
-}
+        .sensor-pagination button:disabled,
+        .system-pagination button:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
 
-
-.sensor-pagination .pagina-atual {
-    font-weight: bold;
-    color: #052501;
-    min-width: 70px;
-    text-align: center;
-}
-
- /* Alto contraste */
-body.contraste .sistemas-pagination button {
-    background: #000 !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
-}
-
-body.contraste .sistemas-pagination button:disabled {
-    background: #000 !important;
-    color: #777 !important;
-    border-color: #777 !important;
-}
-
-body.contraste .sistemas-pagination .pagina-atual {
-    color: #fff !important;
-}
-/* ==========================================================
-   PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS
-   ========================================================== */
-
-.system-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.system-pagination button {
-    background: #58CC02;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.system-pagination button:hover:not(:disabled) {
-    background: #46A302;
-}
-
-.system-pagination button:disabled {
-    background: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-.system-pagination .pagina-atual {
-    font-weight: bold;
-    color: #052501;
-    min-width: 70px;
-    text-align: center;
-}
-
-/* Alto contraste */
-body.contraste .system-pagination button {
-    background: #000 !important;
-    color: #fff !important;
-    border: 1px solid #fff !important;
-}
-
-body.contraste .system-pagination .pagina-atual {
-    color: #fff !important;
-}
+        .sensor-pagination .pagina-atual,
+        .system-pagination .pagina-atual {
+            font-weight: bold;
+            color: #052501;
+            min-width: 70px;
+            text-align: center;
+        }
 
         /* ==========================================================
-           CORREÇÃO: AO SAIR DO ALTO CONTRASTE
-           ========================================================== */
+           ALTO CONTRASTE
+           (classe única: alto-contraste, igual às demais telas)
+        ========================================================== */
+        body.alto-contraste {
+            background: #000 !important;
+            color: #fff !important;
+        }
 
-        /* Garante que o modo normal volte a usar as cores originais */
-        body:not(.contraste) {
+        body.alto-contraste * {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        body.alto-contraste .sidebar {
+            background: #000 !important;
+            border-right: 2px solid #fff;
+        }
+
+        body.alto-contraste .main-content {
+            background: #000 !important;
+        }
+
+        body.alto-contraste .card,
+        body.alto-contraste .table-container,
+        body.alto-contraste .chart-card,
+        body.alto-contraste .activities-card,
+        body.alto-contraste .weather-card,
+        body.alto-contraste .status-item {
+            background: #111 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        body.alto-contraste .activities-card > div {
+            background: #000 !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.alto-contraste .activities-card .btn {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #ffffff !important;
+        }
+
+        body.alto-contraste .activities-card .btn:hover {
+            background-color: #e6e6e6 !important;
+            color: #000000 !important;
+        }
+
+        body.alto-contraste table,
+        body.alto-contraste tr,
+        body.alto-contraste td,
+        body.alto-contraste th {
+            background: #111 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.alto-contraste .status-badge {
+            background: #fff !important;
+            color: #000 !important;
+        }
+
+        body.alto-contraste .btn-logout,
+        body.alto-contraste .logout-btn,
+        body.alto-contraste .accessibility-btn,
+        body.alto-contraste #aumentar-fonte,
+        body.alto-contraste #diminuir-fonte,
+        body.alto-contraste #resetar-fonte,
+        body.alto-contraste .btn,
+        body.alto-contraste .mostrar-mais {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.alto-contraste #contraste-btn,
+        body.alto-contraste #contraste-btn:hover {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .avatar {
+            background: #fff !important;
+            color: #000 !important;
+        }
+
+        body.alto-contraste input,
+        body.alto-contraste select,
+        body.alto-contraste textarea {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        /* --- Status dos sensores --- */
+        body.alto-contraste .activities-card {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        body.alto-contraste .activities-card .chart-title {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste .activities-card .chart-title i {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .sensor-status-list,
+        body.alto-contraste .sensor-left,
+        body.alto-contraste .sensor-right {
+            background: #000 !important;
+            color: #fff !important;
+        }
+
+        body.alto-contraste .sensor-status-item {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+            box-shadow: none !important;
+        }
+
+        body.alto-contraste .sensor-info h4,
+        body.alto-contraste .sensor-info p {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .status-circle {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.alto-contraste .status-circle i {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .signal-bars {
+            color: #fff !important;
+        }
+
+        body.alto-contraste .signal-bars i {
+            background: #fff !important;
+        }
+
+        body.alto-contraste .sensor-status-item .status-badge {
+            background: #fff !important;
+            color: #000 !important;
+            border: 2px solid #fff !important;
+        }
+
+        body.alto-contraste .pulse-dot {
+            background: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.alto-contraste .sensor-status-item:hover {
+            background: #222 !important;
+        }
+
+        body.alto-contraste .sensor-status-item:hover * {
+            color: #fff !important;
+        }
+
+        /* --- Gráficos --- */
+        body.alto-contraste .chart-card,
+        body.alto-contraste .grafico-box {
+            background: #111 !important;
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+
+        /* Neutraliza qualquer "filter: invert" vindo de CSS externo */
+        body.alto-contraste .grafico-box canvas {
+            background: transparent !important;
+            filter: none !important;
+        }
+
+        body.alto-contraste .chart-card .chart-title,
+        body.alto-contraste .chart-card .chart-title i {
+            color: #fff !important;
+        }
+
+        /* --- Paginação --- */
+        body.alto-contraste .sensor-pagination button,
+        body.alto-contraste .system-pagination button {
+            background: #000 !important;
+            color: #fff !important;
+            border: 1px solid #fff !important;
+        }
+
+        body.alto-contraste .sensor-pagination button:disabled,
+        body.alto-contraste .system-pagination button:disabled {
+            background: #000 !important;
+            color: #777 !important;
+            border-color: #777 !important;
+        }
+
+        body.alto-contraste .sensor-pagination .pagina-atual,
+        body.alto-contraste .system-pagination .pagina-atual {
+            color: #fff !important;
+        }
+
+        /* ==========================================================
+           MODO NORMAL (ao sair do alto contraste)
+        ========================================================== */
+        body:not(.alto-contraste) {
             color: #052501;
             background: #f4f6f8;
         }
 
-        body:not(.contraste) .section-title,
-        body:not(.contraste) .table-container th,
-        body:not(.contraste) .sensor-info h4,
-        body:not(.contraste) .sensor-info p,
-        body:not(.contraste) .sensor-pagination .pagina-atual,
-        body:not(.contraste) .system-pagination .pagina-atual {
-            color: inherit;
-        }
-
-        body:not(.contraste) .table-container th {
-            color: #052501;
-        }
-
-        body:not(.contraste) .sensor-info h4 {
-            color: #052501;
-        }
-
-        body:not(.contraste) .sensor-info p {
-            color: #666;
-        }
-
-        body:not(.contraste) .section-title {
-            color: #052501;
-        }
-
-        body:not(.contraste) .sensor-pagination .pagina-atual,
-        body:not(.contraste) .system-pagination .pagina-atual {
-            color: #052501;
-        }
-
-        /* Os botões continuam brancos no modo normal */
-        body:not(.contraste) #aumentar-fonte,
-        body:not(.contraste) #diminuir-fonte,
-        body:not(.contraste) #resetar-fonte,
-        body:not(.contraste) .btn-logout,
-        body:not(.contraste) .sensor-pagination button,
-        body:not(.contraste) .system-pagination button {
+        body:not(.alto-contraste) #aumentar-fonte,
+        body:not(.alto-contraste) #diminuir-fonte,
+        body:not(.alto-contraste) #resetar-fonte,
+        body:not(.alto-contraste) .btn-logout,
+        body:not(.alto-contraste) .sensor-pagination button,
+        body:not(.alto-contraste) .system-pagination button {
             color: #fff;
         }
 
-        /* O botão de contraste volta a ser preto */
-        body:not(.contraste) #contraste-btn {
+        body:not(.alto-contraste) #contraste-btn {
             color: #000;
         }
-
     </style>
 </head>
 <body>
+
+    <!-- Aplica o alto contraste salvo o mais cedo possível (evita "piscar") -->
+    <script>
+        if (localStorage.getItem('altoContraste') === 'true') {
+            document.body.classList.add('alto-contraste');
+        }
+    </script>
 
     <!-- SIDEBAR -->
     <aside class="sidebar">
@@ -934,7 +875,7 @@ body.contraste .system-pagination .pagina-atual {
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <button class="menu-toggle" id="menuToggle">
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
             <i class="fas fa-bars"></i>
         </button>
         <div class="menu-overlay" id="menuOverlay"></div>
@@ -949,7 +890,7 @@ body.contraste .system-pagination .pagina-atual {
                 <a href="<?= base_url('/logout') ?>" class="btn-logout">
                     <i class="fa-solid fa-right-from-bracket"></i> Logout
                 </a>
-                <button id="contraste-btn" style="margin-right: 5px;">
+                <button id="contraste-btn" aria-label="Alterar contraste" style="margin-right: 5px;">
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </button>
                 <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
@@ -987,12 +928,13 @@ body.contraste .system-pagination .pagina-atual {
                     <h3>Culturas</h3>
                     <p><?= $total_culturas ?></p>
                 </div>
-                <i class="fa-solid fa-users" style="color: var(--verde-claro)"></i>
+                <i class="fa-solid fa-seedling" style="color: var(--verde-claro)"></i>
             </div>
         </div>
 
-        <!-- GRÁFICOS & WEATHER -->
+        <!-- GRÁFICOS & CLIMA -->
         <div class="charts-grid">
+
             <!-- TEMPERATURA -->
             <div class="chart-card">
                 <h3 class="chart-title">
@@ -1076,8 +1018,7 @@ body.contraste .system-pagination .pagina-atual {
             <!-- LUMINOSIDADE -->
             <div class="chart-card">
                 <h3 class="chart-title">
-                    <i class="fa-solid fa-sun"></i>
-                    Luminosidade (Lux)
+                    <i class="fa-solid fa-sun"></i> Luminosidade (Lux)
                 </h3>
                 <div class="grafico-box">
                     <canvas id="graficoLux" width="200"></canvas>
@@ -1085,7 +1026,7 @@ body.contraste .system-pagination .pagina-atual {
             </div>
 
             <!-- UMIDADE DO SOLO -->
-            <div class="chart-card">
+            <div class="chart-card card-solo">
                 <h3 class="chart-title">
                     <i class="fa-solid fa-seedling"></i> Umidade do Solo (%)
                 </h3>
@@ -1094,8 +1035,16 @@ body.contraste .system-pagination .pagina-atual {
                 </div>
             </div>
 
+            <!-- BOTÃO DE ALERTAS (único, abaixo do gráfico de solo) -->
+            <div class="alertas-externo">
+                <a href="<?= base_url('/alertas-admin') ?>" class="btn">
+                    Ver Alertas
+                </a>
+            </div>
+
             <!-- STATUS DOS SENSORES -->
-            <div class="activities-card">
+            <div class="activities-card card-status">
+
                 <h3 class="chart-title">
                     <i class="fa-solid fa-microchip"></i> Status dos Sensores
                 </h3>
@@ -1108,25 +1057,25 @@ body.contraste .system-pagination .pagina-atual {
 
                 <!-- PAGINAÇÃO DOS SENSORES -->
                 <div class="sensor-pagination" id="sensor-pagination" style="display:none;">
-                    <button id="sensor-anterior" type="button">
-                        <i class="fa-solid fa-chevron-left"></i> 
+                    <button id="sensor-anterior" type="button" aria-label="Página anterior">
+                        <i class="fa-solid fa-chevron-left"></i>
                     </button>
 
-                    <span class="pagina-atual" id="sensor-pagina-atual">
-                        Página 1
-                    </span>
+                    <span class="pagina-atual" id="sensor-pagina-atual">Página 1</span>
 
-                    <button id="sensor-proxima" type="button">
-                         <i class="fa-solid fa-chevron-right"></i>
+                    <button id="sensor-proxima" type="button" aria-label="Próxima página">
+                        <i class="fa-solid fa-chevron-right"></i>
                     </button>
+                </div>
+
+                <!-- AÇÃO DO RELATÓRIO -->
+                <div class="card-actions">
+                    <a href="<?= base_url('/relatorio') ?>" class="btn-logout">
+                        <i class="fa-solid fa-print"></i> Imprimir Relatório
+                    </a>
                 </div>
             </div>
 
-            <!-- BOTÕES -->
-            <a href="<?= base_url('/alertas-admin') ?>" class="btn">Ver Alertas</a>
-            <a href="<?= base_url('/relatorio') ?>" class="btn-logout">
-                <i class="fa-solid fa-print"></i> Imprimir Relatório
-            </a>
         </div>
 
         <!-- TABELA PRINCIPAL -->
@@ -1166,25 +1115,36 @@ body.contraste .system-pagination .pagina-atual {
                                 <small>ID: <?= esc($sensor['ID_CULTURA']) ?></small>
                             </td>
                             <td><?= esc($sensor['NOME_FAZENDA']) ?></td>
-                            <td><?= date('d/m/Y H:i', strtotime($sensor['DATA_HORA'])) ?></td>
+                            <td>
+                                <?= !empty($sensor['DATA_HORA'])
+                                    ? date('d/m/Y H:i', strtotime($sensor['DATA_HORA']))
+                                    : '--' ?>
+                            </td>
                             <td>
                                 <?php
                                     switch ($sensor['TIPO_SENSOR']) {
-                                        case 'Temperatura': echo number_format($sensor['VALOR'], 1, ',', '.') . ' °C'; break;
+                                        case 'Temperatura':
+                                            echo number_format((float)$sensor['VALOR'], 1, ',', '.') . ' °C';
+                                            break;
                                         case 'Umidade':
-                                        case 'Solo':        echo number_format($sensor['VALOR'], 1, ',', '.') . ' %'; break;
-                                        case 'Luz':         echo number_format($sensor['VALOR'], 0, ',', '.') . ' Lux'; break;
-                                        default:            echo $sensor['VALOR'];
+                                        case 'Solo':
+                                            echo number_format((float)$sensor['VALOR'], 1, ',', '.') . ' %';
+                                            break;
+                                        case 'Luz':
+                                            echo number_format((float)$sensor['VALOR'], 0, ',', '.') . ' Lux';
+                                            break;
+                                        default:
+                                            echo esc($sensor['VALOR']);
                                     }
                                 ?>
                             </td>
                             <td>
-                                <span class="status-badge status-ok"><?= $sensor['STATUS'] ?></span>
+                                <span class="status-badge status-ok"><?= esc($sensor['STATUS']) ?></span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-                        </table>
+            </table>
 
             <!-- PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS -->
             <div class="system-pagination" id="system-pagination" style="display:none;">
@@ -1200,8 +1160,6 @@ body.contraste .system-pagination .pagina-atual {
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
             </div>
-
-        </div>
         </div>
     </main>
 
@@ -1217,10 +1175,16 @@ body.contraste .system-pagination .pagina-atual {
         new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
-    <!-- JAVASCRIPT PRINCIPAL -->
+    <!-- ==========================================================
+         GRÁFICOS
+    ========================================================== -->
     <script>
-        // Dados Iniciais do Servidor
-        const isContraste = document.body.classList.contains('contraste');
+        // Estado do alto contraste (a classe já foi aplicada no início do body)
+        const contrasteInicial = document.body.classList.contains('alto-contraste');
+        const corEixos = contrasteInicial ? '#ffffff' : '#052501';
+        const corGrade = contrasteInicial ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+        // Dados vindos do controller
         const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
         const datasetsTemperatura = <?= json_encode($datasets_temperatura ?? []) ?>;
         const datasetsUmidade = <?= json_encode($datasets_umidade ?? []) ?>;
@@ -1228,18 +1192,22 @@ body.contraste .system-pagination .pagina-atual {
         const datasetsLux = <?= json_encode($datasets_lux ?? []) ?>;
         let valorLuxAtual = <?= floatval($lux ?? 0) ?>;
 
-        // CORREÇÃO: a variável "infoLux" não existia em lugar nenhum do código.
-        // O plugin do gráfico de Lux tentava ler "infoLux.ambiente" e isso
-        // lançava um erro (ReferenceError) sempre que o gráfico era redesenhado.
-        // Esse erro interrompia o loop de "atualizarCoresGraficos()" no meio,
-        // e por isso os demais gráficos não recebiam as cores do alto contraste.
-        // Agora calculamos o texto do ambiente a partir do próprio valor do Lux.
-        function obterAmbienteLux(valor) {
-            if (valor < 50) return 'Escuro';
-            if (valor < 1000) return 'Nublado';
-            if (valor < 10000) return 'Claro';
-            return 'Sol direto';
-        }
+        const ultimas10Labels = labelsEixoX.slice(-10);
+
+        const datasetsTemperatura10 = datasetsTemperatura.map(dataset => ({
+            ...dataset,
+            data: dataset.data.slice(-10)
+        }));
+
+        const datasetsUmidade10 = datasetsUmidade.map(dataset => ({
+            ...dataset,
+            data: dataset.data.slice(-10)
+        }));
+
+        const datasetsSolo10 = datasetsSolo.map(dataset => ({
+            ...dataset,
+            data: dataset.data.slice(-10)
+        }));
 
         let chartTemperatura = null;
         let chartUmidade = null;
@@ -1251,16 +1219,16 @@ body.contraste .system-pagination .pagina-atual {
         if (ctxTemperatura) {
             chartTemperatura = new Chart(ctxTemperatura, {
                 type: 'line',
-                data: { labels: labelsEixoX, datasets: datasetsTemperatura },
+                data: { labels: ultimas10Labels, datasets: datasetsTemperatura10 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true, labels: { color: '#052501', font: { size: 13, weight: 'bold' } } }
+                        legend: { display: true, labels: { color: corEixos, font: { size: 13, weight: 'bold' } } }
                     },
                     scales: {
-                        y: { beginAtZero: true, ticks: { color: '#052501', callback: v => v + 'ºC' }, grid: { color: '#dfe6e9' } },
-                        x: { ticks: { color: '#052501' }, grid: { color: '#dfe6e9' } }
+                        y: { beginAtZero: true, ticks: { color: corEixos, callback: v => v + 'ºC' }, grid: { color: corGrade } },
+                        x: { ticks: { color: corEixos }, grid: { color: corGrade } }
                     }
                 }
             });
@@ -1271,16 +1239,16 @@ body.contraste .system-pagination .pagina-atual {
         if (ctxUmidade) {
             chartUmidade = new Chart(ctxUmidade, {
                 type: 'line',
-                data: { labels: labelsEixoX, datasets: datasetsUmidade },
+               data: { labels: ultimas10Labels, datasets: datasetsUmidade10 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true, labels: { color: '#052501', font: { size: 13, weight: 'bold' } } }
+                        legend: { display: true, labels: { color: corEixos, font: { size: 13, weight: 'bold' } } }
                     },
                     scales: {
-                        y: { beginAtZero: true, max: 100, ticks: { color: '#052501', callback: v => v + '%' }, grid: { color: '#dfe6e9' } },
-                        x: { ticks: { color: '#052501' }, grid: { color: '#dfe6e9' } }
+                        y: { beginAtZero: true, max: 100, ticks: { color: corEixos, callback: v => v + '%' }, grid: { color: corGrade } },
+                        x: { ticks: { color: corEixos }, grid: { color: corGrade } }
                     }
                 }
             });
@@ -1291,73 +1259,77 @@ body.contraste .system-pagination .pagina-atual {
         if (ctxUmidadeSolo) {
             chartSolo = new Chart(ctxUmidadeSolo, {
                 type: 'line',
-                data: { labels: labelsEixoX, datasets: datasetsSolo },
+                data: { labels: ultimas10Labels, datasets: datasetsSolo10 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
-                        legend: { display: true, labels: { color: '#052501', font: { size: 13, weight: 'bold' } } },
+                        legend: { display: true, labels: { color: corEixos, font: { size: 13, weight: 'bold' } } },
                         tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y}%` } }
                     },
                     scales: {
-                        y: { beginAtZero: true, min: 0, max: 100, ticks: { color: '#052501', callback: v => v + '%' }, grid: { color: '#dfe6e9' } },
-                        x: { ticks: { color: '#052501' }, grid: { color: '#dfe6e9' } }
+                        y: { beginAtZero: true, min: 0, max: 100, ticks: { color: corEixos, callback: v => v + '%' }, grid: { color: corGrade } },
+                        x: { ticks: { color: corEixos }, grid: { color: corGrade } }
                     }
                 }
             });
         }
 
-        /* =========================
-        GRÁFICO LUMINOSIDADE
-        ========================= */
-
+        // Gráfico Luminosidade
         const graficoLuxCanvas = document.getElementById('graficoLux');
         if (graficoLuxCanvas) {
             chartLux = new Chart(graficoLuxCanvas, {
                 type: 'doughnut',
                 data: {
                     datasets: [{
-                        data: [5, 10, 20, 30, 35],
-                        backgroundColor: ['#4b5563', '#3b82f6', '#add1ff', '#84cc16', '#ef4444'],
+                        data: [
+                            Math.min(Number(valorLuxAtual), 25000),
+                            Math.max(25000 - Number(valorLuxAtual), 0)
+                        ],
+                        backgroundColor: ['#4bc714', '#e5e7eb'],
                         borderWidth: 0
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    rotation: -90,
-                    circumference: 180,
-                    cutout: '70%'
+                    cutout: '82%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
                 },
                 plugins: [{
-                    id: 'gaugeText',
+                    id: 'radialLux',
                     afterDraw(chart) {
-                        const { ctx, chartArea: { width, height } } = chart;
-                        const isContraste = document.body.classList.contains('contraste');
-
-                        const corTextoPrincipal = isContraste ? '#ffffff' : '#052501';
-                        const corTextoSecundario = isContraste ? '#ffffff' : '#666666';
+                        const { ctx, chartArea } = chart;
+                        const centroX = (chartArea.left + chartArea.right) / 2;
+                        const centroY = (chartArea.top + chartArea.bottom) / 2;
+                        const contraste = document.body.classList.contains('alto-contraste');
 
                         ctx.save();
 
-                        /* Valor Lux */
-                        ctx.font = 'bold 26px Arial';
-                        ctx.fillStyle = corTextoPrincipal;
+                        // Ícone de sol
+                        ctx.font = '32px Arial';
+                        ctx.fillStyle = contraste ? '#ffffff' : '#052501';
                         ctx.textAlign = 'center';
-                        ctx.fillText(Number(valorLuxAtual).toLocaleString('pt-BR'), width / 2, height - 40);
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('☼', centroX, centroY - 28);
 
-                        /* Unidade */
+                        // Valor
+                        ctx.font = 'bold 28px Arial';
+                        ctx.fillStyle = contraste ? '#ffffff' : '#052501';
+                        ctx.fillText(
+                            Number(valorLuxAtual).toLocaleString('pt-BR'),
+                            centroX,
+                            centroY + 18
+                        );
+
+                        // Unidade
                         ctx.font = '16px Arial';
-                        ctx.fillStyle = corTextoSecundario;
-                        ctx.fillText('Lux', width / 2, height - 15);
-
-                        /* Ambiente */
-                        // CORREÇÃO: usa a função obterAmbienteLux() em vez da
-                        // variável inexistente "infoLux".
-                        ctx.font = '13px Arial';
-                        ctx.fillStyle = corTextoSecundario;
-                        ctx.fillText(obterAmbienteLux(valorLuxAtual), width / 2, height + 10);
+                        ctx.fillStyle = contraste ? '#ffffff' : '#666666';
+                        ctx.fillText('Lux', centroX, centroY + 43);
 
                         ctx.restore();
                     }
@@ -1365,15 +1337,73 @@ body.contraste .system-pagination .pagina-atual {
             });
         }
 
-        // Função auxiliar criada para atualizar o gráfico de Luminosidade
+        // Atualiza o gráfico de luminosidade
         function atualizarLux(novoValor) {
-            valorLuxAtual = novoValor;
+            valorLuxAtual = Number(novoValor);
+
             if (chartLux) {
+                chartLux.data.datasets[0].data = [
+                    Math.min(valorLuxAtual, 25000),
+                    Math.max(25000 - valorLuxAtual, 0)
+                ];
+
                 chartLux.update();
             }
         }
 
-        // Atualização Dinâmica dos Gráficos
+        /* =========================
+           CORES DOS GRÁFICOS NO ALTO CONTRASTE
+        ========================= */
+        function aplicarFundoGraficosJS(contraste) {
+            // Reforço via JS, caso algum CSS externo tente inverter o canvas
+            document.querySelectorAll('.grafico-box').forEach(box => {
+                if (contraste) {
+                    box.style.setProperty('background', '#111111', 'important');
+                } else {
+                    box.style.removeProperty('background');
+                }
+            });
+
+            document.querySelectorAll('.grafico-box canvas').forEach(canvas => {
+                if (contraste) {
+                    canvas.style.setProperty('filter', 'none', 'important');
+                    canvas.style.setProperty('background', 'transparent', 'important');
+                } else {
+                    canvas.style.removeProperty('filter');
+                    canvas.style.removeProperty('background');
+                }
+            });
+        }
+
+        function atualizarCoresGraficos() {
+            const ativo = document.body.classList.contains('alto-contraste');
+            const cor   = ativo ? '#ffffff' : '#052501';
+            const grade = ativo ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+            aplicarFundoGraficosJS(ativo);
+
+            [chartTemperatura, chartUmidade, chartSolo].forEach(function (chart) {
+                if (!chart) return;
+
+                try {
+                    chart.options.plugins.legend.labels.color = cor;
+                    chart.options.scales.x.ticks.color = cor;
+                    chart.options.scales.x.grid.color  = grade;
+                    chart.options.scales.y.ticks.color = cor;
+                    chart.options.scales.y.grid.color  = grade;
+                    chart.update();
+                } catch (erro) {
+                    console.error('Erro ao recolorir gráfico:', erro);
+                }
+            });
+
+            // O texto do gauge é recalculado sozinho no afterDraw
+            if (chartLux) chartLux.update();
+        }
+
+        /* =========================
+           ATUALIZA OS GRÁFICOS
+        ========================= */
         async function atualizarGraficos() {
             try {
                 const resposta = await fetch('<?= base_url('dados-graficos') ?>');
@@ -1396,392 +1426,243 @@ body.contraste .system-pagination .pagina-atual {
                     chartSolo.update();
                 }
                 if (dados.lux !== undefined && chartLux) {
-                    valorLuxAtual = dados.lux;
-                    chartLux.update();
+                    atualizarLux(dados.lux);
                 }
 
-                // Mantém as cores dos gráficos corretas após atualizar os dados.
+                // Mantém as cores corretas depois de atualizar os dados
                 atualizarCoresGraficos();
 
             } catch (erro) {
                 console.error('Erro ao atualizar gráficos:', erro);
             }
         }
-
     </script>
 
+    <!-- ==========================================================
+         STATUS DOS SENSORES + PAGINAÇÃO
+    ========================================================== -->
     <script>
-    // ==========================================================
-    // STATUS DOS SENSORES + PAGINAÇÃO
-    // ==========================================================
+        let sensoresTodos = [];
+        let paginaSensor = 1;
+        const sensoresPorPagina = 4;
 
-    let sensoresTodos = [];
-    let paginaSensor = 1;
+        // Evita injeção de HTML vindo da API
+        function escaparHtml(valor) {
+            return String(valor ?? '').replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
 
-    const sensoresPorPagina = 4;
+        // Só aceita classes de ícone seguras (fa-xxx)
+        function iconeSeguro(icone) {
+            return /^fa-[a-z0-9-]+$/i.test(icone || '') ? icone : 'fa-microchip';
+        }
 
-    async function atualizarStatusSensores() {
+        function totalPaginasSensores() {
+            return Math.max(1, Math.ceil(sensoresTodos.length / sensoresPorPagina));
+        }
 
-        const lista = document.getElementById('sensor-status-list');
-        const paginacao = document.getElementById('sensor-pagination');
+        async function atualizarStatusSensores() {
+            const lista = document.getElementById('sensor-status-list');
+            const paginacao = document.getElementById('sensor-pagination');
 
-        if (!lista) return;
+            if (!lista) return;
 
-        try {
+            try {
+                const resposta = await fetch('<?= base_url('status-sensores') ?>', { cache: 'no-store' });
 
-            const resposta = await fetch(
-                '<?= base_url('status-sensores') ?>',
-                { cache: 'no-store' }
-            );
+                if (!resposta.ok) {
+                    throw new Error('Erro ao buscar status');
+                }
 
-            if (!resposta.ok) {
-                throw new Error('Erro ao buscar status');
-            }
+                const sensores = await resposta.json();
 
-            const sensores = await resposta.json();
+                if (!Array.isArray(sensores) || sensores.length === 0) {
+                    sensoresTodos = [];
+                    paginaSensor = 1;
 
-            if (!Array.isArray(sensores) || sensores.length === 0) {
+                    lista.innerHTML = `
+                        <div style="text-align:center; padding:30px; color:#666;">
+                            Nenhum sensor encontrado.
+                        </div>`;
 
-                sensoresTodos = [];
-                paginaSensor = 1;
+                    if (paginacao) paginacao.style.display = 'none';
+                    return;
+                }
+
+                sensoresTodos = sensores;
+
+                // Se a página atual deixou de existir, volta para a última disponível
+                if (paginaSensor > totalPaginasSensores()) {
+                    paginaSensor = totalPaginasSensores();
+                }
+
+                mostrarPaginaSensores();
+
+            } catch (erro) {
+                console.error('Erro nos sensores:', erro);
 
                 lista.innerHTML = `
-                    <div style="text-align:center; padding:30px; color:#666;">
-                        Nenhum sensor encontrado.
-                    </div>
-                `;
+                    <div style="text-align:center; padding:30px; color:#888;">
+                        Erro ao carregar sensores.
+                    </div>`;
 
-                if (paginacao) {
-                    paginacao.style.display = 'none';
+                if (paginacao) paginacao.style.display = 'none';
+            }
+        }
+
+        function mostrarPaginaSensores() {
+            const lista = document.getElementById('sensor-status-list');
+            const paginacao = document.getElementById('sensor-pagination');
+            const botaoAnterior = document.getElementById('sensor-anterior');
+            const botaoProxima = document.getElementById('sensor-proxima');
+            const textoPagina = document.getElementById('sensor-pagina-atual');
+
+            if (!lista) return;
+
+            const inicio = (paginaSensor - 1) * sensoresPorPagina;
+
+            // Somente os sensores da página atual
+            const sensoresPagina = sensoresTodos.slice(inicio, inicio + sensoresPorPagina);
+
+            lista.innerHTML = sensoresPagina.map(sensor => {
+                let estado = 'offline';
+                let texto = 'Offline';
+                let pulso = '';
+
+                const minutos = (sensor.minutos_atras === null || sensor.minutos_atras === undefined)
+                    ? null
+                    : Number(sensor.minutos_atras);
+
+                if (minutos !== null && minutos <= 5) {
+                    estado = 'online';
+                    texto = 'Online';
+                    pulso = '<span class="pulse-dot"></span>';
+                } else if (minutos !== null && minutos <= 20) {
+                    estado = 'warning';
+                    texto = 'Oscilando';
                 }
+
+                return `
+                    <div class="sensor-status-item">
+                        <div class="sensor-left">
+                            <span class="status-circle ${estado}">
+                                <i class="fa-solid ${iconeSeguro(sensor.icone)}"></i>
+                                ${pulso}
+                            </span>
+                            <div class="sensor-info">
+                                <h4>${escaparHtml(sensor.nome || 'Sensor')}</h4>
+                                <p>${escaparHtml(sensor.tipo || 'Sensor')} · ${escaparHtml(sensor.tempo_texto || 'Sem leitura')}</p>
+                            </div>
+                        </div>
+                        <div class="sensor-right">
+                            <span class="signal-bars"><i></i><i></i><i></i></span>
+                            <span class="status-badge ${estado}">${texto}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            const totalPaginas = totalPaginasSensores();
+
+            // Só mostra a paginação se houver mais de uma página
+            if (paginacao && totalPaginas > 1) {
+                paginacao.style.display = 'flex';
+                textoPagina.textContent = `Página ${paginaSensor} de ${totalPaginas}`;
+                botaoAnterior.style.display = paginaSensor <= 1 ? 'none' : 'flex';
+                botaoProxima.style.display = paginaSensor >= totalPaginas ? 'none' : 'flex';
+            } else if (paginacao) {
+                paginacao.style.display = 'none';
+            }
+        }
+
+        document.getElementById('sensor-anterior')?.addEventListener('click', function () {
+            if (paginaSensor > 1) {
+                paginaSensor--;
+                mostrarPaginaSensores();
+            }
+        });
+
+        document.getElementById('sensor-proxima')?.addEventListener('click', function () {
+            if (paginaSensor < totalPaginasSensores()) {
+                paginaSensor++;
+                mostrarPaginaSensores();
+            }
+        });
+
+        // Primeira atualização e depois a cada 30 segundos
+        atualizarStatusSensores();
+        setInterval(atualizarStatusSensores, 30 * 1000);
+    </script>
+
+    <!-- ==========================================================
+         PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS
+    ========================================================== -->
+    <script>
+        let paginaSistema = 1;
+        const sistemasPorPagina = 4;
+
+        const linhasSistema = document.querySelectorAll('.linha-sensor');
+        const paginacaoSistema = document.getElementById('system-pagination');
+        const botaoSistemaAnterior = document.getElementById('system-anterior');
+        const botaoSistemaProxima = document.getElementById('system-proxima');
+        const textoPaginaSistema = document.getElementById('system-pagina-atual');
+
+        function mostrarPaginaSistemas() {
+
+            const totalPaginas = Math.ceil(linhasSistema.length / sistemasPorPagina);
+
+            // Se couber tudo em uma página, esconde a paginação
+            if (totalPaginas <= 1) {
+
+                if (paginacaoSistema) {
+                    paginacaoSistema.style.display = 'none';
+                }
+
+                linhasSistema.forEach(linha => {
+                    linha.style.display = '';
+                });
 
                 return;
             }
 
-            // Guarda todos os sensores
-            sensoresTodos = sensores;
-
-            // Se a página atual deixou de existir,
-            // volta para a última página disponível
-            const totalPaginas = Math.ceil(
-                sensoresTodos.length / sensoresPorPagina
-            );
-
-            if (paginaSensor > totalPaginas) {
-                paginaSensor = totalPaginas;
-            }
-
-            mostrarPaginaSensores();
-
-        } catch (erro) {
-
-            console.error('Erro nos sensores:', erro);
-
-            lista.innerHTML = `
-                <div style="text-align:center; padding:30px; color:#888;">
-                    Erro ao carregar sensores.
-                </div>
-            `;
-
-            if (paginacao) {
-                paginacao.style.display = 'none';
-            }
-        }
-    }
-
-
-    function mostrarPaginaSensores() {
-
-        const lista = document.getElementById('sensor-status-list');
-        const paginacao = document.getElementById('sensor-pagination');
-        const botaoAnterior = document.getElementById('sensor-anterior');
-        const botaoProxima = document.getElementById('sensor-proxima');
-        const textoPagina = document.getElementById('sensor-pagina-atual');
-
-        if (!lista) return;
-
-        // Calcula onde começa e termina a página
-        const inicio = (paginaSensor - 1) * sensoresPorPagina;
-        const fim = inicio + sensoresPorPagina;
-
-        // Pega somente os sensores da página atual
-        const sensoresPagina = sensoresTodos.slice(inicio, fim);
-
-        // Monta os sensores
-        lista.innerHTML = sensoresPagina.map(sensor => {
-
-            let circulo = 'offline';
-            let badge = 'offline';
-            let texto = 'Offline';
-            let pulso = '';
-
-            if (
-                sensor.minutos_atras !== null &&
-                Number(sensor.minutos_atras) <= 5
-            ) {
-
-                circulo = 'online';
-                badge = 'online';
-                texto = 'Online';
-
-                pulso = '<span class="pulse-dot"></span>';
-
-            } else if (
-                sensor.minutos_atras !== null &&
-                Number(sensor.minutos_atras) <= 20
-            ) {
-
-                circulo = 'warning';
-                badge = 'warning';
-                texto = 'Oscilando';
-            }
-
-            return `
-                <div class="sensor-status-item">
-
-                    <div class="sensor-left">
-
-                        <span class="status-circle ${circulo}">
-                            <i class="fa-solid ${sensor.icone || 'fa-microchip'}"></i>
-                            ${pulso}
-                        </span>
-
-                        <div class="sensor-info">
-                            <h4>
-                                ${sensor.nome || 'Sensor'}
-                            </h4>
-
-                            <p>
-                                ${sensor.tipo || 'Sensor'} ·
-                                ${sensor.tempo_texto || 'Sem leitura'}
-                            </p>
-                        </div>
-
-                    </div>
-
-                    <div class="sensor-right">
-
-                        <span class="signal-bars">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </span>
-
-                        <span class="status-badge ${badge}">
-                            ${texto}
-                        </span>
-
-                    </div>
-
-                </div>
-            `;
-
-        }).join('');
-
-
-        // Calcula quantidade de páginas
-        const totalPaginas = Math.ceil(
-            sensoresTodos.length / sensoresPorPagina
-        );
-
-
-        // Se tiver mais sensores que o limite por página,
-        // mostra a paginação
-        if (paginacao && totalPaginas > 1) {
-
-            paginacao.style.display = 'flex';
-
-            textoPagina.textContent =
-                `Página ${paginaSensor} de ${totalPaginas}`;
-
-            // =========================
-            // BOTÃO ANTERIOR
-            // =========================
-            if (paginaSensor <= 1) {
-                botaoAnterior.style.display = 'none';
-            } else {
-                botaoAnterior.style.display = 'flex';
-            }
-
-            // =========================
-            // BOTÃO PRÓXIMA
-            // =========================
-            if (paginaSensor >= totalPaginas) {
-                botaoProxima.style.display = 'none';
-            } else {
-                botaoProxima.style.display = 'flex';
-            }
-        } else {
-
-            // Sensores dentro do limite de uma página:
-            // não mostra paginação
-            paginacao.style.display = 'none';
-        }
-    }
-
-
-    // ==========================================================
-    // BOTÃO ANTERIOR
-    // ==========================================================
-
-    document.getElementById('sensor-anterior')?.addEventListener(
-        'click',
-        function () {
-
-            if (paginaSensor > 1) {
-
-                paginaSensor--;
-
-                mostrarPaginaSensores();
-            }
-
-        }
-    );
-
-
-    // ==========================================================
-    // BOTÃO PRÓXIMA
-    // ==========================================================
-
-    document.getElementById('sensor-proxima')?.addEventListener(
-        'click',
-        function () {
-
-            const totalPaginas = Math.ceil(
-                sensoresTodos.length / sensoresPorPagina
-            );
-
-            if (paginaSensor < totalPaginas) {
-
-                paginaSensor++;
-
-                mostrarPaginaSensores();
-            }
-
-        }
-    );
-
-
-    // Primeira atualização
-    atualizarStatusSensores();
-
-    // Atualiza os dados a cada 30 segundos
-    setInterval(atualizarStatusSensores, 30 * 1000);
-                    
-</script>
-<script>
-    // ==========================================================
-    // PAGINAÇÃO DOS SISTEMAS AUTOMATIZADOS
-    // ==========================================================
-
-    let paginaSistema = 1;
-    const sistemasPorPagina = 4;
-
-    const linhasSistema = document.querySelectorAll('.linha-sensor');
-    const paginacaoSistema = document.getElementById('system-pagination');
-    const botaoSistemaAnterior = document.getElementById('system-anterior');
-    const botaoSistemaProxima = document.getElementById('system-proxima');
-    const textoPaginaSistema = document.getElementById('system-pagina-atual');
-
-    function mostrarPaginaSistemas() {
-
-        const totalSistemas = linhasSistema.length;
-
-        const totalPaginas = Math.ceil(
-            totalSistemas / sistemasPorPagina
-        );
-
-        // Se não houver mais sistemas do que o limite por página,
-        // esconde a paginação
-        if (totalPaginas <= 1) {
-
-            if (paginacaoSistema) {
-                paginacaoSistema.style.display = 'none';
-            }
-
-            linhasSistema.forEach(linha => {
-                linha.style.display = '';
+            const inicio = (paginaSistema - 1) * sistemasPorPagina;
+            const fim = inicio + sistemasPorPagina;
+
+            linhasSistema.forEach((linha, indice) => {
+                linha.style.display = (indice >= inicio && indice < fim) ? '' : 'none';
             });
 
-            return;
+            paginacaoSistema.style.display = 'flex';
+
+            textoPaginaSistema.textContent = `Página ${paginaSistema} de ${totalPaginas}`;
+
+            botaoSistemaAnterior.style.display = paginaSistema <= 1 ? 'none' : 'flex';
+            botaoSistemaProxima.style.display = paginaSistema >= totalPaginas ? 'none' : 'flex';
         }
 
-        // Mostra somente os sistemas da página atual
-        const inicio = (paginaSistema - 1) * sistemasPorPagina;
-        const fim = inicio + sistemasPorPagina;
-
-        linhasSistema.forEach((linha, indice) => {
-
-            if (indice >= inicio && indice < fim) {
-                linha.style.display = '';
-            } else {
-                linha.style.display = 'none';
+        botaoSistemaAnterior?.addEventListener('click', function () {
+            if (paginaSistema > 1) {
+                paginaSistema--;
+                mostrarPaginaSistemas();
             }
-
         });
 
-        // Mostra a paginação
-        paginacaoSistema.style.display = 'flex';
+        botaoSistemaProxima?.addEventListener('click', function () {
+            const totalPaginas = Math.ceil(linhasSistema.length / sistemasPorPagina);
 
-        textoPaginaSistema.textContent =
-            `Página ${paginaSistema} de ${totalPaginas}`;
+            if (paginaSistema < totalPaginas) {
+                paginaSistema++;
+                mostrarPaginaSistemas();
+            }
+        });
 
-        // =========================
-        // BOTÃO ANTERIOR
-        // =========================
-        if (paginaSistema <= 1) {
-            botaoSistemaAnterior.style.display = 'none';
-        } else {
-            botaoSistemaAnterior.style.display = 'flex';
-        }
+        mostrarPaginaSistemas();
+    </script>
 
-        // =========================
-        // BOTÃO PRÓXIMA
-        // =========================
-        if (paginaSistema >= totalPaginas) {
-            botaoSistemaProxima.style.display = 'none';
-        } else {
-            botaoSistemaProxima.style.display = 'flex';
-        }
-    }
-
-
-    // BOTÃO ANTERIOR
-    botaoSistemaAnterior?.addEventListener('click', function () {
-
-        if (paginaSistema > 1) {
-
-            paginaSistema--;
-
-            mostrarPaginaSistemas();
-        }
-
-    });
-
-
-    // BOTÃO PRÓXIMA
-    botaoSistemaProxima?.addEventListener('click', function () {
-
-        const totalPaginas = Math.ceil(
-            linhasSistema.length / sistemasPorPagina
-        );
-
-        if (paginaSistema < totalPaginas) {
-
-            paginaSistema++;
-
-            mostrarPaginaSistemas();
-        }
-
-    });
-
-
-    // Primeira exibição
-    mostrarPaginaSistemas();
-
-</script>
+    <!-- ==========================================================
+         CLIMA
+    ========================================================== -->
     <script>
-        // Integração Clima Open-Meteo
         async function buscarClima() {
             const lat = -21.7056, lon = -47.2728;
             try {
@@ -1800,7 +1681,7 @@ body.contraste .system-pagination .pagina-atual {
                 const resAr = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=european_aqi`);
                 const dataAr = await resAr.json();
                 const aqi = dataAr.current.european_aqi;
-                
+
                 let textoAr = 'Boa';
                 if (aqi > 20 && aqi <= 40) textoAr = 'Moderada';
                 if (aqi > 40) textoAr = 'Ruim';
@@ -1811,133 +1692,111 @@ body.contraste .system-pagination .pagina-atual {
             }
         }
 
-        // ==========================================================
-        // ALTERNAR ALTO CONTRASTE
-        // ==========================================================
-
-        function atualizarCoresGraficos() {
-            const eContraste = document.body.classList.contains('contraste');
-
-            const corTexto = eContraste ? '#ffffff' : '#052501';
-            const corGrade = eContraste
-                ? 'rgba(255, 255, 255, 0.2)'
-                : '#dfe6e9';
-
-            // Atualiza também o padrão do Chart.js
-            Chart.defaults.color = corTexto;
-
-            Object.values(Chart.instances).forEach(chart => {
-
-                // CORREÇÃO: envolve cada atualização em try/catch para que
-                // um erro num gráfico específico (como acontecia antes com
-                // o gráfico de Lux, por causa da variável "infoLux") nunca
-                // mais interrompa a atualização de cor dos demais gráficos.
-                try {
-
-                    // Eixo X
-                    if (chart.options?.scales?.x) {
-                        chart.options.scales.x.ticks = {
-                            ...(chart.options.scales.x.ticks || {}),
-                            color: corTexto
-                        };
-
-                        chart.options.scales.x.grid = {
-                            ...(chart.options.scales.x.grid || {}),
-                            color: corGrade
-                        };
-                    }
-
-                    // Eixo Y
-                    if (chart.options?.scales?.y) {
-                        chart.options.scales.y.ticks = {
-                            ...(chart.options.scales.y.ticks || {}),
-                            color: corTexto
-                        };
-
-                        chart.options.scales.y.grid = {
-                            ...(chart.options.scales.y.grid || {}),
-                            color: corGrade
-                        };
-                    }
-
-                    // Legenda
-                    if (chart.options?.plugins?.legend?.labels) {
-                        chart.options.plugins.legend.labels = {
-                            ...(chart.options.plugins.legend.labels || {}),
-                            color: corTexto
-                        };
-                    }
-
-                    // CORREÇÃO: update('none') pulava a animação mas em
-                    // alguns casos não forçava o recálculo completo de
-                    // escalas/legenda. update() sem argumento garante que
-                    // as novas cores sejam realmente redesenhadas.
-                    chart.update();
-
-                } catch (erro) {
-                    console.error('Erro ao recolorir gráfico:', chart, erro);
-                }
-            });
-        }
-
-        const contrasteBtn = document.getElementById('contraste-btn');
-
-        if (contrasteBtn) {
-            contrasteBtn.addEventListener('click', () => {
-                document.body.classList.toggle('contraste');
-
-                // Espera o navegador aplicar a classe antes
-                // de redesenhar os gráficos.
-                requestAnimationFrame(() => {
-                    atualizarCoresGraficos();
-                });
-            });
-        }
-
-        // Acessibilidade de Fonte
-        let tamanhoFonte = parseInt(localStorage.getItem('tamanhoFonteDashboard')) || 100;
-        const aplicarFonte = () => {
-            document.documentElement.style.fontSize = tamanhoFonte + '%';
-            localStorage.setItem('tamanhoFonteDashboard', tamanhoFonte);
-        };
-        aplicarFonte();
-
-        document.getElementById('aumentar-fonte')?.addEventListener('click', () => { if (tamanhoFonte < 150) { tamanhoFonte += 10; aplicarFonte(); } });
-        document.getElementById('diminuir-fonte')?.addEventListener('click', () => { if (tamanhoFonte > 70) { tamanhoFonte -= 10; aplicarFonte(); } });
-        document.getElementById('resetar-fonte')?.addEventListener('click', () => { tamanhoFonte = 100; aplicarFonte(); });
-
-        // Redirecionamentos de Clima
+        // Redirecionamentos do clima
         document.getElementById('btn-previsao-completa')?.addEventListener('click', () => {
             window.open('https://www.msn.com/pt-br/clima/forecast/in-Tamba%C3%BA,S%C3%A3o-Paulo,Brasil', '_blank');
         });
         document.getElementById('btn-qualidade-ar')?.addEventListener('click', () => {
             window.open('https://www.iqair.com/br/brazil/sao-paulo/tambau', '_blank');
         });
+    </script>
 
-        // Inicializadores e Timers
-        atualizarStatusSensores();
+    <!-- JS compartilhado das telas -->
+    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
+
+    <!-- ==========================================================
+         ALTO CONTRASTE + FONTE (mesma chave e classe das outras telas)
+    ========================================================== -->
+    <script>
+        /* =========================
+           ALTO CONTRASTE (um único toggle, com persistência)
+        ========================= */
+        (function () {
+            const CHAVE = 'altoContraste';
+
+            // Sincroniza gráficos e botões com o estado salvo
+            atualizarCoresGraficos();
+
+            // Captura o clique antes de qualquer outro código tratar o botão
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#contraste-btn')) return;
+
+                e.stopImmediatePropagation();
+
+                const ativo = document.body.classList.toggle('alto-contraste');
+                localStorage.setItem(CHAVE, ativo);
+
+                // Espera o navegador aplicar a classe antes de redesenhar os gráficos
+                requestAnimationFrame(atualizarCoresGraficos);
+            }, true);
+        })();
+
+        /* =========================
+           FONTE (mesma chave e limites das outras telas)
+        ========================= */
+        document.addEventListener('DOMContentLoaded', () => {
+
+            let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
+
+            document.documentElement.style.fontSize = tamanhoFonte + 'px';
+
+            document.getElementById('aumentar-fonte').addEventListener('click', () => {
+                if (tamanhoFonte < 24) {
+                    tamanhoFonte += 2;
+                    document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                    localStorage.setItem('fonteSite', tamanhoFonte);
+                }
+            });
+
+            document.getElementById('diminuir-fonte').addEventListener('click', () => {
+                if (tamanhoFonte > 12) {
+                    tamanhoFonte -= 2;
+                    document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                    localStorage.setItem('fonteSite', tamanhoFonte);
+                }
+            });
+
+            document.getElementById('resetar-fonte').addEventListener('click', () => {
+                tamanhoFonte = 16;
+                document.documentElement.style.fontSize = tamanhoFonte + 'px';
+                localStorage.setItem('fonteSite', tamanhoFonte);
+            });
+
+        });
+
+        /* =========================
+           INICIALIZAÇÃO E TIMERS
+        ========================= */
         atualizarGraficos();
         buscarClima();
 
-        setInterval(atualizarStatusSensores, 30000);
-        setInterval(atualizarGraficos, 30000);
-        setInterval(buscarClima, 600000);
+        setInterval(atualizarGraficos, 30 * 1000);
+        setInterval(buscarClima, 10 * 60 * 1000);
     </script>
 
-    <!-- JS DE INTERAÇÃO COM A DOM -->
+    <!-- ==========================================================
+         MENU SANDUÍCHE
+    ========================================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Menu Sanduíche Mobile
+
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.querySelector('.sidebar');
-            const overlay = document.querySelector('.menu-overlay');
+            const overlay = document.getElementById('menuOverlay');
 
             if (menuToggle && sidebar) {
+
                 const toggleMenu = (abrir) => {
                     const active = abrir !== undefined ? abrir : !sidebar.classList.contains('active');
+
                     sidebar.classList.toggle('active', active);
                     if (overlay) overlay.classList.toggle('active', active);
-                    menuToggle.innerHTML = active ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.innerHTML = active
+                        ? '<i class="fa-solid fa-xmark"></i>'
+                        : '<i class="fa-solid fa-bars"></i>';
+
+                    menuToggle.setAttribute('aria-label', active ? 'Fechar menu' : 'Abrir menu');
                 };
 
                 menuToggle.addEventListener('click', () => toggleMenu());
@@ -1951,9 +1810,102 @@ body.contraste .system-pagination .pagina-atual {
             }
 
         });
-    </script>
+        /* =========================
+       PAGINAÇÃO - STATUS DOS SISTEMAS AUTOMATIZADOS
+    ========================= */
+    const linhasSistemas = document.querySelectorAll(".linha-sensor");
 
-    <!-- JS EXTERNO DO DASHBOARD -->
-    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
+    const paginacaoSistemas = document.getElementById("sistemas-pagination");
+    const sistemaAnterior = document.getElementById("sistema-anterior");
+    const sistemaProxima = document.getElementById("sistema-proxima");
+    const sistemaPaginaAtual = document.getElementById("sistema-pagina-atual");
+
+    let paginaSistema = 1;
+
+    const sistemasPorPagina = 4;
+
+    function atualizarPaginacaoSistemas() {
+
+        const totalPaginas = Math.ceil(linhasSistemas.length / sistemasPorPagina);
+
+        // Sem sistemas
+        if (totalPaginas === 0) {
+
+            if (paginacaoSistemas) {
+                paginacaoSistemas.style.display = "none";
+            }
+
+            return;
+        }
+
+        // Se couber tudo em uma página, não mostra os botões
+        if (totalPaginas <= 1) {
+
+            if (paginacaoSistemas) {
+                paginacaoSistemas.style.display = "none";
+            }
+
+            linhasSistemas.forEach(function (linha) {
+                linha.style.display = "";
+            });
+
+            paginaSistema = 1;
+
+            return;
+        }
+
+        // Garante que a página atual seja válida
+        if (paginaSistema > totalPaginas) {
+            paginaSistema = totalPaginas;
+        }
+
+        const inicio = (paginaSistema - 1) * sistemasPorPagina;
+        const fim = inicio + sistemasPorPagina;
+
+        // Mostra somente os sistemas da página atual
+        linhasSistemas.forEach(function (linha, indice) {
+            linha.style.display = (indice >= inicio && indice < fim) ? "" : "none";
+        });
+
+        if (paginacaoSistemas) {
+            paginacaoSistemas.style.display = "flex";
+        }
+
+        if (sistemaPaginaAtual) {
+            sistemaPaginaAtual.textContent = `Página ${paginaSistema} de ${totalPaginas}`;
+        }
+
+        if (sistemaAnterior) {
+            sistemaAnterior.style.display = paginaSistema === 1 ? 'none' : 'inline-flex';
+        }
+
+        if (sistemaProxima) {
+            sistemaProxima.style.display = paginaSistema === totalPaginas ? 'none' : 'inline-flex';
+        }
+
+    }
+
+    if (sistemaAnterior) {
+        sistemaAnterior.addEventListener("click", function () {
+            if (paginaSistema > 1) {
+                paginaSistema--;
+                atualizarPaginacaoSistemas();
+            }
+        });
+    }
+
+    if (sistemaProxima) {
+        sistemaProxima.addEventListener("click", function () {
+            const totalPaginas = Math.ceil(linhasSistemas.length / sistemasPorPagina);
+
+            if (paginaSistema < totalPaginas) {
+                paginaSistema++;
+                atualizarPaginacaoSistemas();
+            }
+        });
+    }
+
+    atualizarPaginacaoSistemas();
+    </script>
 </body>
 </html>
