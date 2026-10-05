@@ -122,46 +122,46 @@
            ALTO CONTRASTE (antes não existia nenhuma regra aqui,
            então o botão não tinha efeito visual nenhum na página)
            ======================================================== */
-        body.contraste {
-            background: #000 !important;
-        }
+        body.alto-contraste {
+    background: #000 !important;
+}
 
-        body.contraste .container {
-            background: #000 !important;
-            border: 1px solid #fff !important;
-        }
+body.alto-contraste .container {
+    background: #000 !important;
+    border: 1px solid #fff !important;
+}
 
-        body.contraste * {
-            color: #fff !important;
-            border-color: #fff !important;
-        }
+body.alto-contraste * {
+    color: #fff !important;
+    border-color: #fff !important;
+}
 
-        body.contraste input {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-        }
+body.alto-contraste input {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
 
-        body.contraste input::placeholder {
-            color: #ccc !important;
-        }
+body.alto-contraste input::placeholder {
+    color: #ccc !important;
+}
 
-        body.contraste .btn-primary {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-        }
+body.alto-contraste .btn-primary {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
 
-        body.contraste .acessibilidade-container button,
-        body.contraste .acessibilidade-container button#contraste-btn {
-            background: #000 !important;
-            color: #fff !important;
-            border: 2px solid #fff !important;
-        }
+body.alto-contraste .acessibilidade-container button,
+body.alto-contraste .acessibilidade-container button#contraste-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
 
-        body.contraste .back-link a {
-            color: #fff!important;
-        }
+body.alto-contraste .back-link a {
+    color: #fff !important;
+}
     </style>
 </head>
 
@@ -290,29 +290,6 @@
             });
         }
 
-        /* ========================================================
-           ALTO CONTRASTE
-           (antes não existia — o botão não tinha nenhum
-           listener de clique nem lia/gravava o estado salvo
-           pelas outras páginas, por isso não funcionava e
-           não acompanhava o estado ao navegar entre telas)
-           ======================================================== */
-        const btnContraste = document.getElementById('contraste-btn');
-
-        if (localStorage.getItem('altoContraste') === 'true') {
-            document.body.classList.add('alto-contraste');
-        }
-
-        btnContraste.addEventListener('click', () => {
-
-            document.body.classList.toggle('alto-contraste');
-
-            localStorage.setItem(
-                'altoContraste',
-                document.body.classList.contains('alto-contraste')
-            );
-
-        });
 
         /* ========================================================
            VALIDAÇÃO DO FORMULÁRIO COM SWEETALERT

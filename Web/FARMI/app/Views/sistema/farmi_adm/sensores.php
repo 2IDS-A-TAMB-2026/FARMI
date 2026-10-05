@@ -17,25 +17,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        /* ==========================================================
-   BOTÕES DE FONTE (PADRONIZADO COM O DASHBOARD)
+<style>
+
+/* ==========================================================
+   BOTÕES DE FONTE
    ========================================================== */
+
 #aumentar-fonte,
 #diminuir-fonte,
 #resetar-fonte {
     width: 42px;
     height: 42px;
     background-color: #58CC02;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 8px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     transition: 0.3s;
 }
 
@@ -46,31 +50,49 @@
     opacity: 1;
 }
 
+
 /* ==========================================================
-   BOTÃO DE CONTRASTE (PADRONIZADO COM O DASHBOARD)
+   BOTÃO DE CONTRASTE
    ========================================================== */
+
 #contraste-btn {
-    background: transparent !important;
+    width: 42px !important;
+    height: 42px !important;
+
+    background: #fff !important;
+    color: #000 !important;
+
     border: none !important;
-    display: flex;
+    border-radius: 50% !important;
+
+    display: flex !important;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+
     font-size: 20px;
-    color: #000;
     cursor: pointer;
+
     transition: all 0.3s ease;
+
     outline: none !important;
     box-shadow: none !important;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+#contraste-btn i {
+    color: #000 !important;
 }
 
 #contraste-btn:hover {
-    color: #46A302;
-    opacity: 1;
+    background: #fff !important;
+    color: #46A302 !important;
+}
+
+#contraste-btn:hover i {
+    color: #46A302 !important;
 }
 
 #contraste-btn:focus,
@@ -78,77 +100,68 @@
 #contraste-btn:focus-visible {
     outline: none !important;
     box-shadow: none !important;
-    background: transparent !important;
 }
 
+
 /* ==========================================================
-   BOTÃO LOGOUT (PADRONIZADO COM O DASHBOARD)
+   BOTÃO LOGOUT
    ========================================================== */
+
 .btn-logout {
     background: #58CC02;
-    color: white;
+    color: #fff;
     text-decoration: none;
+
     height: 42px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
     padding: 0 18px;
+
     border-radius: 10px;
+
     font-weight: bold;
+
     transition: 0.3s;
+
     margin-right: 15px;
 }
 
 .btn-logout:hover {
     background: #46A302;
-    color: white;
+    color: #fff;
 }
 
-/* AVATAR CIRCULAR */
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
 .avatar {
     background: #57c91b;
     color: #000;
+
     width: 42px;
     height: 42px;
+
     border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-weight: bold;
     font-size: 16px;
 }
 
-/* AUTO CONTRASTE */
-body.contraste .btn-logout {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
 
-body.contraste .btn-logout i {
-    color: #fff !important;
-}
+/* ==========================================================
+   RESPONSIVIDADE DA TABELA
+   ========================================================== */
 
-body.contraste #aumentar-fonte,
-body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-body.contraste #contraste-btn {
-    color: #fff !important;
-}
-
-body.contraste .avatar {
-    background: #fff !important;
-    color: #000 !important;
-}
-
-
-/* RESPONSIVEL */
 @media (max-width: 768px) {
 
     .table-container {
@@ -159,8 +172,12 @@ body.contraste .avatar {
     .table-container table {
         min-width: 900px;
     }
-
 }
+
+
+/* ==========================================================
+   RESPONSIVIDADE DO FORMULÁRIO
+   ========================================================== */
 
 @media (max-width: 768px) {
 
@@ -172,7 +189,6 @@ body.contraste .avatar {
         grid-column: auto !important;
 
         display: flex !important;
-
         flex-direction: column;
 
         width: 100%;
@@ -183,19 +199,22 @@ body.contraste .avatar {
     #formSensor > div:last-child button {
         width: 100%;
     }
-
 }
 
-/* =========================
-   PAGINAÇÃO SENSORES
-   ========================= */
+
+/* ==========================================================
+   PAGINAÇÃO
+   ========================================================== */
 
 .paginacao-container {
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 20px;
+
     margin-top: 15px;
+
     flex-wrap: wrap;
 }
 
@@ -208,16 +227,23 @@ body.contraste .avatar {
 .botao-paginacao {
     width: 42px;
     height: 42px;
+
     border: none;
     border-radius: 8px;
+
     cursor: pointer;
+
     background: #57c91b;
-    color: white;
+    color: #fff;
+
     font-weight: bold;
+
     transition: 0.3s;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 16px;
 }
 
@@ -229,17 +255,342 @@ body.contraste .avatar {
     display: none;
 }
 
-/* AUTO CONTRASTE */
 
-body.contraste .pagina-info {
+/* ==========================================================
+   ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste {
+    background: #000 !important;
     color: #fff !important;
 }
 
-body.contraste .botao-paginacao {
+
+/* ==========================================================
+   TEXTOS
+   ========================================================== */
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste h5,
+body.alto-contraste h6,
+body.alto-contraste p,
+body.alto-contraste label,
+body.alto-contraste span,
+body.alto-contraste .section-title,
+body.alto-contraste .pagina-info {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÃO DE CONTRASTE NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste #contraste-btn,
+body.alto-contraste #contraste-btn:hover,
+body.alto-contraste #contraste-btn:focus,
+body.alto-contraste #contraste-btn:active,
+body.alto-contraste #contraste-btn:focus-visible {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+
+    outline: none !important;
+
+    box-shadow: none !important;
+
+    opacity: 1 !important;
+
+    visibility: visible !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÕES DE FONTE NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+
+/* ==========================================================
+   LOGOUT NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .btn-logout,
+body.alto-contraste .btn-logout:hover,
+body.alto-contraste .btn-logout:focus,
+body.alto-contraste .btn-logout:active {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-logout i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   AVATAR NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .avatar {
+
+    background: #fff !important;
+
+    color: #000 !important;
+
+    border: 2px solid #fff !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .sidebar {
+    background: #000 !important;
+}
+
+body.alto-contraste .sidebar .logo,
+body.alto-contraste .sidebar .logo i,
+body.alto-contraste .sidebar .menu-item,
+body.alto-contraste .sidebar .menu-item i {
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   HEADER NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .header {
+
+    background: #000 !important;
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   CARDS NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .card {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .card *,
+body.alto-contraste .card-info h3,
+body.alto-contraste .card-info p,
+body.alto-contraste .card-icon i {
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .form-section {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .form-section *,
+body.alto-contraste .form-group label {
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   INPUTS E SELECTS NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste input::placeholder,
+body.alto-contraste textarea::placeholder {
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÕES DO FORMULÁRIO NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .btn {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   TABELA NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .table-container {
+    background: #000 !important;
+}
+
+body.alto-contraste table {
+
+    background: #000 !important;
+
+    color: #fff !important;
+}
+
+body.alto-contraste table th,
+body.alto-contraste table td {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border-color: #fff !important;
+}
+
+
+/* ==========================================================
+   PAGINAÇÃO NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .pagina-info {
+    color: #fff !important;
+}
+
+body.alto-contraste .botao-paginacao,
+body.alto-contraste .botao-paginacao:hover,
+body.alto-contraste .botao-paginacao:focus,
+body.alto-contraste .botao-paginacao:active {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .botao-paginacao i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   STATUS DOS SENSORES
+   ========================================================== */
+
+body.alto-contraste .status-badge {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
+
+
+/* ==========================================================
+   LINKS E ÍCONES DA TABELA
+   ========================================================== */
+
+body.alto-contraste table a {
+    color: #fff !important;
+}
+
+body.alto-contraste table i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÃO EXCLUIR / AÇÕES
+   ========================================================== */
+
+body.alto-contraste .btn-danger,
+body.alto-contraste .btn-primary,
+body.alto-contraste .btn-secondary {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-danger i,
+body.alto-contraste .btn-primary i,
+body.alto-contraste .btn-secondary i {
+
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   MENU MOBILE NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .menu-toggle {
+
+    background: #000 !important;
+
+    color: #fff !important;
+
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .menu-toggle i {
+    color: #fff !important;
+}
+
 </style>
 
 </head>
@@ -666,23 +1017,6 @@ body.contraste .botao-paginacao {
     /* =========================
        ACESSIBILIDADE - TAMANHO DA FONTE
     ========================= */
-    document.addEventListener('DOMContentLoaded', () => {
-        const btnContraste = document.getElementById('contraste-btn');
-
-        if (localStorage.getItem('altoContraste') === 'true') {
-            document.body.classList.add('alto-contraste');
-        }
-
-        btnContraste.addEventListener('click', () => {
-
-            document.body.classList.toggle('alto-contraste');
-
-            localStorage.setItem(
-                'altoContraste',
-                document.body.classList.contains('alto-contraste')
-            );
-
-        });
 
         let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
@@ -708,7 +1042,6 @@ body.contraste .botao-paginacao {
             document.documentElement.style.fontSize = tamanhoFonte + 'px';
             localStorage.setItem('fonteSite', tamanhoFonte);
         });
-    });
     </script>
 
     <script>

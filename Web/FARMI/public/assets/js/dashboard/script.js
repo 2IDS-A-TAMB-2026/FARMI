@@ -1,50 +1,49 @@
-// Alterar entre Alto Contraste
+// ========================================================
+// ALTO CONTRASTE
+// ========================================================
 
-const contrasteBtn = document.getElementById('contraste-btn');
+const CHAVE_CONTRASTE = 'altoContraste';
 
-if (contrasteBtn) {
+function iniciarContraste() {
 
-    contrasteBtn.addEventListener("click", function () {
-
-        document.body.classList.toggle('alto-contraste');
-
-        const divPrincipal = document.getElementById('div_principal');
-
-        if (divPrincipal) {
-            divPrincipal.classList.toggle('alto-contraste');
-        }
-
-        const addressForm = document.getElementById('addressForm');
-
-        if (addressForm) {
-            addressForm.classList.toggle('alto-contraste');
-        }
-
-    });
-
-}
-
-document.addEventListener('DOMContentLoaded', () => {
     const contrasteBtn = document.getElementById('contraste-btn');
 
-    // 1. Carrega o estado salvo ao abrir/navegar na página
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste', 'contraste');
+    // Recupera o estado salvo
+    if (localStorage.getItem(CHAVE_CONTRASTE) === 'true') {
+        document.body.classList.add('alto-contraste');
+    } else {
+        document.body.classList.remove('alto-contraste');
     }
 
-    // 2. Evento de clique para alternar o modo
+    // Configura o botão
     if (contrasteBtn) {
-        contrasteBtn.addEventListener('click', () => {
+
+        contrasteBtn.onclick = function () {
+
             document.body.classList.toggle('alto-contraste');
-            document.body.classList.toggle('contraste');
 
-            const ehAltoContraste = document.body.classList.contains('alto-contraste') || 
-                                    document.body.classList.contains('contraste');
+            const contrasteAtivo =
+                document.body.classList.contains('alto-contraste');
 
-            // Salva a escolha do usuário
-            localStorage.setItem('altoContraste', ehAltoContraste);
-        });
+            localStorage.setItem(
+                CHAVE_CONTRASTE,
+                contrasteAtivo ? 'true' : 'false'
+            );
+
+        };
     }
-});
+}
 
+// Executa quando a página estiver pronta
+if (document.readyState === 'loading') {
 
+    document.addEventListener(
+        'DOMContentLoaded',
+        iniciarContraste
+    );
+
+} else {
+
+    iniciarContraste();
+
+}

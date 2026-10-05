@@ -7,6 +7,16 @@
     <link rel="icon" href="<?= base_url('assets/images/about.png') ?>">
     <title>Funcionário - Painel Visual</title>
 
+    <!-- Aplica o tamanho da fonte ANTES de renderizar (evita o layout "pular") -->
+    <script>
+    (function () {
+        var f = parseInt(localStorage.getItem('fonteSite'));
+        if (isNaN(f)) f = 16;
+        f = Math.min(20, Math.max(14, f));
+        document.documentElement.style.fontSize = f + 'px';
+    })();
+    </script>
+
     <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -15,6 +25,12 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_responsivo.css') ?>">
 
     <style>
+        /* ==========================================================
+           REGRA DE OURO: tudo que é tamanho de texto, botão, ícone e
+           sidebar usa rem. Assim A+ / A- escalam o layout inteiro
+           junto, em vez de só alguns textos.
+           (1rem = tamanho da fonte do <html>, controlado pelo JS)
+        ========================================================== */
         :root {
             --verde-escuro: #052501;
             --verde-claro: #4bc714;
@@ -23,42 +39,47 @@
             --cinza-fundo: #f4f6f8;
             --texto-escuro: #333333;
             --sombra: 0 4px 6px rgba(0,0,0,0.1);
+            --largura-sidebar: 15.625rem; /* 250px a 16px */
+            --botao-topo: 2.625rem;       /* 42px a 16px */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial';
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
             background-color: var(--cinza-fundo);
             display: flex;
             min-height: 100vh;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease;
         }
 
         /* --- SIDEBAR --- */
         .sidebar {
-            width: 250px;
+            width: var(--largura-sidebar);
             background-color: var(--verde-escuro);
             color: var(--branco);
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 1.25rem;
             position: fixed;
             height: 100%;
-            transition: all 0.3s ease;
+            overflow-y: auto;          /* com fonte grande o menu rola em vez de cortar */
+            transition: transform 0.3s ease;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
-            margin-bottom: 40px;
+            margin-bottom: 2.5rem;
             display: flex;
+            flex-wrap: wrap;           /* o nome não vaza da sidebar */
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
+            line-height: 1.2;
         }
 
         .logo i {
@@ -68,12 +89,13 @@
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 15px;
+            padding: 0.9375rem;
             color: rgba(255,255,255,0.8);
             text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 5px;
+            border-radius: 0.5rem;
+            margin-bottom: 0.3125rem;
             transition: 0.3s;
+            line-height: 1.3;
         }
 
         .menu-item:hover, .menu-item.active {
@@ -82,29 +104,34 @@
         }
 
         .menu-item i {
-            margin-right: 15px;
-            width: 20px;
+            margin-right: 0.9375rem;
+            width: 1.25rem;
+            flex-shrink: 0;
+            text-align: center;
         }
 
         /* --- CONTEÚDO PRINCIPAL --- */
         .main-content {
-            margin-left: 250px;
+            margin-left: var(--largura-sidebar);
             flex: 1;
-            padding: 30px;
-            transition: all 0.3s ease;
+            padding: 1.875rem;
+            transition: margin 0.3s ease;
         }
 
         .header {
             display: flex;
+            flex-wrap: wrap;           /* cabeçalho quebra linha em vez de estourar */
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            gap: 0.9375rem;
+            margin-bottom: 1.875rem;
         }
 
         .header-right {
             display: flex;
+            flex-wrap: wrap;           /* botões A+ A- A descem se faltar espaço */
             align-items: center;
-            gap: 15px;
+            gap: 0.9375rem;
         }
 
         .header h2 {
@@ -114,12 +141,12 @@
         .user-profile {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
         }
 
         .avatar {
-            width: 42px;
-            height: 42px;
+            width: var(--botao-topo);
+            height: var(--botao-topo);
             background-color: var(--verde-claro);
             border-radius: 50%;
             display: flex;
@@ -132,54 +159,61 @@
         /* --- CARDS DE ESTATÍSTICAS --- */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1.875rem;
         }
 
         .card {
             background: var(--branco);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
             box-shadow: var(--sombra);
-            border-left: 5px solid var(--verde-escuro);
+            border-left: 0.3125rem solid var(--verde-escuro);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 0.625rem;
             transition: all 0.3s ease;
+        }
+
+        .card-info {
+            min-width: 0;
         }
 
         .card-info h3 {
             font-size: 0.9rem;
             color: #777;
-            margin-bottom: 5px;
+            margin-bottom: 0.3125rem;
         }
 
         .card-info p {
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--verde-escuro);
+            overflow-wrap: anywhere;
         }
 
         .card-icon {
             font-size: 2.5rem;
             color: var(--verde-claro);
             opacity: 0.8;
+            flex-shrink: 0;
         }
 
         /* --- TABELA DE STATUS --- */
         .section-title {
             color: var(--verde-escuro);
-            margin-bottom: 15px;
+            margin-bottom: 0.9375rem;
             font-size: 1.2rem;
         }
 
         .table-container {
             background: var(--branco);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
             box-shadow: var(--sombra);
-            margin-bottom: 30px;
+            margin-bottom: 1.875rem;
             transition: all 0.3s ease;
         }
 
@@ -190,7 +224,7 @@
 
         th, td {
             text-align: left;
-            padding: 15px;
+            padding: 0.9375rem;
             border-bottom: 1px solid #eee;
         }
 
@@ -200,8 +234,8 @@
         }
 
         .status-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
+            padding: 0.3125rem 0.625rem;
+            border-radius: 1.25rem;
             font-size: 0.8rem;
             font-weight: bold;
         }
@@ -219,9 +253,9 @@
         /* --- BOTÕES DE AÇÃO --- */
         .btn {
             width: 100%;
-            padding: 12px 20px;
+            padding: 0.75rem 1.25rem;
             border: none;
-            border-radius: 10px;
+            border-radius: 0.625rem;
             cursor: pointer;
             font-weight: bold;
             background-color: #58CC02;
@@ -230,7 +264,7 @@
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
             text-decoration: none;
         }
 
@@ -263,9 +297,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 42px;
-            height: 42px;
-            font-size: 20px;
+            width: var(--botao-topo);
+            height: var(--botao-topo);
+            font-size: 1.25rem;
             color: #000;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -292,14 +326,15 @@
             background: #58CC02;
             color: white;
             text-decoration: none;
-            height: 42px;
+            min-height: var(--botao-topo);   /* cresce junto com a fonte */
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 0 18px;
-            border-radius: 10px;
+            gap: 0.625rem;
+            padding: 0 1.125rem;
+            border-radius: 0.625rem;
             font-weight: bold;
+            white-space: nowrap;
             transition: 0.3s;
         }
 
@@ -309,13 +344,13 @@
         }
 
         .accessibility-btn {
-            width: 42px;
-            height: 42px;
+            width: var(--botao-topo);
+            height: var(--botao-topo);
             background-color: #58CC02;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 0.5rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             display: flex;
@@ -332,7 +367,7 @@
         .coluna-solo {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 1.25rem;
             min-width: 0;
         }
 
@@ -344,8 +379,8 @@
         .card-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 0.625rem;
+            margin-top: 1.25rem;
         }
 
         /* =========================
@@ -354,15 +389,15 @@
         .charts-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 1.25rem;
+            margin-bottom: 1.875rem;
         }
 
         .chart-card,
         .activities-card {
             background: var(--branco);
-            padding: 25px;
-            border-radius: 15px;
+            padding: 1.5625rem;
+            border-radius: 0.9375rem;
             box-shadow: var(--sombra);
         }
 
@@ -371,22 +406,24 @@
         ========================= */
         .chart-title {
             color: var(--verde-escuro);
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
             font-size: 1.3rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
         }
 
         /* =========================
            GRÁFICO
+           (altura FIXA é necessária: o Chart.js usa maintainAspectRatio:false)
         ========================= */
         .grafico-box {
             width: 100%;
-            min-height: 350px;
+            max-width: 100%;
+            height: 350px;
             position: relative;
-            border-radius: 15px;
-            padding: 15px;
+            border-radius: 0.9375rem;
+            padding: 0.9375rem;
             overflow: hidden;
         }
 
@@ -397,6 +434,7 @@
 
         canvas {
             display: block;
+            max-width: 100% !important;
         }
 
         /* =========================
@@ -404,12 +442,12 @@
         ========================= */
         .status-item {
             text-align: center;
-            padding: 22px;
+            padding: 1.375rem;
             background: #fff;
-            border-radius: 15px;
+            border-radius: 0.9375rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             transition: 0.3s;
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
 
         .status-item:hover {
@@ -421,7 +459,7 @@
         }
 
         .status-item h4 {
-            margin-top: 10px;
+            margin-top: 0.625rem;
             color: var(--verde-escuro);
             font-size: 1.2rem;
         }
@@ -435,10 +473,10 @@
            BOLINHA STATUS
         ========================= */
         .status-indicator {
-            width: 75px;
-            height: 75px;
+            width: 4.6875rem;
+            height: 4.6875rem;
             border-radius: 50%;
-            margin: 0 auto 15px;
+            margin: 0 auto 0.9375rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -465,14 +503,12 @@
         .status-perigo i   { color: #dc3545 !important; }
 
         /* ==========================================================
-           STATUS DOS SENSORES (base)
-           Estas regras não existiam neste arquivo, só as de alto
-           contraste e mobile. Agora o bloco não depende do CSS externo.
+           STATUS DOS SENSORES
         ========================================================== */
         .sensor-status-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 0.625rem;
             width: 100%;
         }
 
@@ -480,13 +516,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
-            padding: 12px 15px;
-            border-radius: 10px;
+            gap: 0.9375rem;
+            padding: 0.75rem 0.9375rem;
+            border-radius: 0.625rem;
             background: #f8f9fa;
             border: 1px solid #e5e7eb;
             transition: 0.3s;
             width: 100%;
+            min-width: 0;
             box-sizing: border-box;
         }
 
@@ -498,21 +535,21 @@
         .sensor-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 0.75rem;
             min-width: 0;
             flex: 1;
         }
 
         .status-circle {
             position: relative;
-            width: 40px;
-            height: 40px;
-            min-width: 40px;
+            width: 2.5rem;
+            height: 2.5rem;
+            min-width: 2.5rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         .status-circle.online  { background: #e8f8df; color: #58CC02; }
@@ -523,7 +560,7 @@
 
         .sensor-info h4 {
             margin: 0;
-            font-size: 14px;
+            font-size: 0.875rem;
             color: #052501;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -531,15 +568,16 @@
         }
 
         .sensor-info p {
-            margin: 3px 0 0;
-            font-size: 11px;
+            margin: 0.1875rem 0 0;
+            font-size: 0.6875rem;
             color: #666;
+            overflow-wrap: anywhere;
         }
 
         .sensor-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 0.75rem;
             flex-shrink: 0;
         }
 
@@ -547,24 +585,24 @@
             display: flex;
             align-items: flex-end;
             gap: 2px;
-            height: 16px;
+            height: 1rem;
         }
 
         .signal-bars i {
             display: block;
-            width: 4px;
+            width: 0.25rem;
             background: #58CC02;
             border-radius: 2px;
         }
 
-        .signal-bars i:nth-child(1) { height: 5px; }
-        .signal-bars i:nth-child(2) { height: 10px; }
-        .signal-bars i:nth-child(3) { height: 15px; }
+        .signal-bars i:nth-child(1) { height: 0.3125rem; }
+        .signal-bars i:nth-child(2) { height: 0.625rem; }
+        .signal-bars i:nth-child(3) { height: 0.9375rem; }
 
         .sensor-status-list .status-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 0.3125rem 0.625rem;
+            border-radius: 1.25rem;
+            font-size: 0.6875rem;
             font-weight: bold;
             white-space: nowrap;
         }
@@ -575,8 +613,8 @@
 
         .pulse-dot {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 0.5rem;
+            height: 0.5rem;
             background: #58CC02;
             border-radius: 50%;
             top: 2px;
@@ -591,7 +629,7 @@
 
         .sensor-status-vazio {
             text-align: center;
-            padding: 30px;
+            padding: 1.875rem;
             color: #666;
         }
 
@@ -600,11 +638,12 @@
         ========================= */
         .weather-card {
             background: linear-gradient(135deg, #1b5bb5 0%, #3275d2 50%, #4b8be3 100%);
-            border-radius: 20px;
-            padding: 16px 20px;
+            border-radius: 1.25rem;
+            padding: 1rem 1.25rem;
             color: #ffffff;
             font-family: 'Segoe UI', system-ui, sans-serif;
             width: 100%;
+            max-width: 100%;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
@@ -615,55 +654,57 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 600;
         }
 
         .location-selector {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.5rem;
             cursor: pointer;
         }
 
         .weather-body {
             display: flex;
+            flex-wrap: wrap;           /* temperatura e qualidade do ar não se espremem */
             justify-content: space-between;
             align-items: center;
-            margin: 15px 0;
+            gap: 0.75rem;
+            margin: 0.9375rem 0;
         }
 
         .temp-main {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
         }
 
         .temp-main #weather-icon {
-            font-size: 42px;
+            font-size: 2.625rem;
             color: #ffc107;
         }
 
         .temp-main #temperatura {
-            font-size: 52px;
+            font-size: 3.25rem;
             font-weight: 300;
             line-height: 1;
         }
 
         .temp-main .unit {
-            font-size: 20px;
+            font-size: 1.25rem;
             vertical-align: top;
-            margin-top: -15px;
+            margin-top: -0.9375rem;
         }
 
         .air-quality {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 0.5rem;
+            font-size: 0.75rem;
             background: rgba(255, 255, 255, 0.1);
-            padding: 6px 10px;
-            border-radius: 8px;
+            padding: 0.375rem 0.625rem;
+            border-radius: 0.5rem;
             cursor: pointer;
         }
 
@@ -678,16 +719,16 @@
 
         .weather-footer {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 0.625rem;
         }
 
         .btn-previsao {
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.25);
             color: white;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 0.375rem 1.25rem;
+            border-radius: 1.25rem;
+            font-size: 0.8125rem;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -699,30 +740,33 @@
         .weather-details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-            padding-top: 15px;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            padding-top: 0.9375rem;
             border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .detail-item {
             background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 0.625rem;
+            border-radius: 0.625rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            font-size: 12px;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            min-width: 0;
+            text-align: center;
         }
 
         .detail-item i {
-            font-size: 18px;
+            font-size: 1.125rem;
             margin-bottom: 2px;
         }
 
         .detail-item strong {
-            font-size: 14px;
+            font-size: 0.875rem;
+            overflow-wrap: anywhere;
         }
 
         /* ===========================
@@ -927,7 +971,7 @@
 
         .main-content {
             min-width: 0;
-            width: calc(100% - 250px);
+            width: calc(100% - var(--largura-sidebar));
         }
 
         .stats-grid,
@@ -945,22 +989,6 @@
             max-width: 100%;
         }
 
-        .grafico-box {
-            width: 100%;
-            max-width: 100%;
-            height: 350px;
-            min-height: 0;
-        }
-
-        .grafico-box canvas {
-            max-width: 100% !important;
-        }
-
-        .weather-card {
-            width: 100%;
-            max-width: 100%;
-        }
-
         .table-container {
             width: 100%;
             overflow-x: auto;
@@ -968,7 +996,7 @@
         }
 
         .table-container table {
-            min-width: 700px;
+            min-width: 43.75rem;       /* 700px a 16px */
         }
 
         /* ATÉ 1200px */
@@ -980,17 +1008,13 @@
             .charts-grid {
                 grid-template-columns: 1fr;
             }
-
-            .weather-card {
-                width: 100%;
-            }
         }
 
         /* TABLET - ATÉ 768px */
         @media (max-width: 768px) {
 
             .sidebar {
-                width: 250px;
+                width: var(--largura-sidebar);
                 height: 100vh;
                 left: 0;
                 top: 0;
@@ -1020,18 +1044,18 @@
 
             .menu-toggle {
                 position: fixed;
-                top: 15px;
-                left: 15px;
-                width: 45px;
-                height: 45px;
+                top: 0.9375rem;
+                left: 0.9375rem;
+                width: 2.8125rem;
+                height: 2.8125rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 background: #052501;
                 color: #ffffff;
                 border: none;
-                border-radius: 10px;
-                font-size: 20px;
+                border-radius: 0.625rem;
+                font-size: 1.25rem;
                 cursor: pointer;
                 z-index: 1100;
             }
@@ -1044,49 +1068,44 @@
                 margin-left: 0 !important;
                 width: 100% !important;
                 max-width: 100%;
-                padding: 75px 20px 30px;
+                padding: 4.6875rem 1.25rem 1.875rem;
             }
 
             .header {
                 width: 100%;
-                gap: 15px;
-                margin-bottom: 25px;
+                gap: 0.9375rem;
+                margin-bottom: 1.5625rem;
             }
 
             .header h2 {
-                font-size: 22px;
+                font-size: 1.375rem;
             }
 
             .header-right {
-                gap: 8px;
-                flex-wrap: wrap;
+                gap: 0.5rem;
                 justify-content: flex-end;
             }
 
             .logout-btn {
-                padding: 0 12px;
+                padding: 0 0.75rem;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 15px;
+                gap: 0.9375rem;
             }
 
             .card {
-                padding: 18px;
-            }
-
-            .card-info {
-                min-width: 0;
+                padding: 1.125rem;
             }
 
             .card-info h3 {
-                font-size: 14px;
+                font-size: 0.875rem;
                 line-height: 1.3;
             }
 
             .card-info p {
-                font-size: 24px;
+                font-size: 1.5rem;
                 white-space: normal;
                 overflow-wrap: anywhere;
             }
@@ -1094,18 +1113,18 @@
             .card-icon {
                 font-size: 2rem;
                 flex-shrink: 0;
-                margin-left: 10px;
+                margin-left: 0.625rem;
             }
 
             .charts-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 0.9375rem;
             }
 
             .chart-card,
             .activities-card {
                 width: 100%;
-                padding: 18px;
+                padding: 1.125rem;
             }
 
             .chart-title {
@@ -1116,24 +1135,24 @@
             .grafico-box {
                 width: 100%;
                 height: 300px;
-                padding: 8px;
+                padding: 0.5rem;
             }
 
             .weather-card {
                 width: 100%;
-                padding: 16px;
+                padding: 1rem;
             }
 
             .weather-body {
-                gap: 15px;
+                gap: 0.9375rem;
             }
 
             .temp-main #temperatura {
-                font-size: 44px;
+                font-size: 2.75rem;
             }
 
             .temp-main #weather-icon {
-                font-size: 35px;
+                font-size: 2.1875rem;
             }
 
             .air-quality {
@@ -1142,7 +1161,7 @@
 
             .weather-details-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 0.625rem;
             }
 
             .sensor-status-item {
@@ -1169,7 +1188,7 @@
             }
 
             .table-container table {
-                min-width: 700px;
+                min-width: 43.75rem;
             }
         }
 
@@ -1177,7 +1196,7 @@
         @media (max-width: 600px) {
 
             .main-content {
-                padding: 70px 12px 25px;
+                padding: 4.375rem 0.75rem 1.5625rem;
             }
 
             .header {
@@ -1186,69 +1205,69 @@
             }
 
             .header h2 {
-                font-size: 21px;
+                font-size: 1.3125rem;
             }
 
             .header-right {
                 width: 100%;
                 justify-content: flex-start;
-                gap: 7px;
+                gap: 0.4375rem;
             }
 
             .logout-btn {
-                height: 40px;
-                padding: 0 12px;
-                font-size: 13px;
+                min-height: 2.5rem;
+                padding: 0 0.75rem;
+                font-size: 0.8125rem;
             }
 
             .accessibility-btn,
             #contraste-btn {
-                width: 40px;
-                height: 40px;
+                width: 2.5rem;
+                height: 2.5rem;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 0.75rem;
             }
 
             .card {
-                min-height: 90px;
-                padding: 16px;
+                min-height: 5.625rem;
+                padding: 1rem;
             }
 
             .card-info p {
-                font-size: 25px;
+                font-size: 1.5625rem;
             }
 
             .chart-card,
             .activities-card {
-                padding: 14px;
+                padding: 0.875rem;
             }
 
             .chart-title {
                 font-size: 1.05rem;
-                margin-bottom: 15px;
+                margin-bottom: 0.9375rem;
             }
 
             .grafico-box {
                 height: 260px;
-                padding: 5px;
+                padding: 0.3125rem;
             }
 
             .weather-card {
                 width: 100%;
-                padding: 15px;
+                padding: 0.9375rem;
             }
 
             .weather-header {
-                font-size: 13px;
+                font-size: 0.8125rem;
             }
 
             .weather-body {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 15px;
+                gap: 0.9375rem;
             }
 
             .temp-main {
@@ -1256,7 +1275,7 @@
             }
 
             .temp-main #temperatura {
-                font-size: 48px;
+                font-size: 3rem;
             }
 
             .air-quality {
@@ -1270,42 +1289,44 @@
             }
 
             .detail-item {
-                padding: 9px 5px;
-                font-size: 11px;
+                padding: 0.5625rem 0.3125rem;
+                font-size: 0.6875rem;
             }
 
             .sensor-status-item {
-                padding: 12px;
+                padding: 0.75rem;
             }
 
             .sensor-left {
-                gap: 10px;
+                gap: 0.625rem;
             }
 
             .status-circle {
-                width: 42px;
-                height: 42px;
+                width: 2.625rem;
+                height: 2.625rem;
+                min-width: 2.625rem;
                 flex-shrink: 0;
             }
 
             .sensor-info h4 {
-                font-size: 14px;
+                font-size: 0.875rem;
             }
 
             .sensor-info p {
-                font-size: 12px;
+                font-size: 0.75rem;
             }
 
             .sensor-right {
-                gap: 6px;
+                gap: 0.375rem;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
             }
 
+            .sensor-status-list .status-badge,
             .status-badge {
-                padding: 5px 9px;
-                font-size: 11px;
+                padding: 0.3125rem 0.5625rem;
+                font-size: 0.6875rem;
             }
         }
 
@@ -1313,31 +1334,31 @@
         @media (max-width: 480px) {
 
             .main-content {
-                padding: 68px 10px 20px;
+                padding: 4.25rem 0.625rem 1.25rem;
             }
 
             .menu-toggle {
-                width: 42px;
-                height: 42px;
-                top: 12px;
-                left: 12px;
+                width: 2.625rem;
+                height: 2.625rem;
+                top: 0.75rem;
+                left: 0.75rem;
             }
 
             .header h2 {
-                font-size: 19px;
+                font-size: 1.1875rem;
             }
 
             .header p {
-                font-size: 13px;
+                font-size: 0.8125rem;
             }
 
             .header-right {
-                gap: 5px;
+                gap: 0.3125rem;
             }
 
             .logout-btn {
-                padding: 0 10px;
-                font-size: 12px;
+                padding: 0 0.625rem;
+                font-size: 0.75rem;
             }
 
             .logout-btn i {
@@ -1346,21 +1367,21 @@
 
             .accessibility-btn,
             #contraste-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 15px;
+                width: 2.375rem;
+                height: 2.375rem;
+                font-size: 0.9375rem;
             }
 
             .card {
-                padding: 14px;
+                padding: 0.875rem;
             }
 
             .card-info h3 {
-                font-size: 13px;
+                font-size: 0.8125rem;
             }
 
             .card-info p {
-                font-size: 23px;
+                font-size: 1.4375rem;
             }
 
             .card-icon {
@@ -1369,7 +1390,7 @@
 
             .chart-card,
             .activities-card {
-                padding: 12px;
+                padding: 0.75rem;
             }
 
             .chart-title {
@@ -1381,59 +1402,61 @@
             }
 
             .weather-card {
-                padding: 13px;
-                border-radius: 15px;
+                padding: 0.8125rem;
+                border-radius: 0.9375rem;
             }
 
             .temp-main #temperatura {
-                font-size: 42px;
+                font-size: 2.625rem;
             }
 
             .temp-main #weather-icon {
-                font-size: 30px;
+                font-size: 1.875rem;
             }
 
             .weather-details-grid {
-                gap: 7px;
+                gap: 0.4375rem;
             }
 
             .detail-item {
-                padding: 8px 3px;
+                padding: 0.5rem 0.1875rem;
             }
 
             .detail-item strong {
-                font-size: 12px;
+                font-size: 0.75rem;
             }
 
             .sensor-status-item {
-                padding: 10px;
+                padding: 0.625rem;
             }
 
             .status-circle {
-                width: 38px;
-                height: 38px;
-                font-size: 15px;
+                width: 2.375rem;
+                height: 2.375rem;
+                min-width: 2.375rem;
+                font-size: 0.9375rem;
             }
 
             .sensor-info h4 {
-                font-size: 13px;
+                font-size: 0.8125rem;
             }
 
             .sensor-info p {
-                font-size: 11px;
+                font-size: 0.6875rem;
             }
 
+            .sensor-status-list .status-badge,
             .status-badge {
-                font-size: 10px;
-                padding: 4px 7px;
+                font-size: 0.625rem;
+                padding: 0.25rem 0.4375rem;
             }
 
             .table-container {
-                padding: 12px;
+                padding: 0.75rem;
             }
 
             .table-container table {
-                min-width: 650px;
+                min-width: 40.625rem;
             }
         }
 
@@ -1441,8 +1464,8 @@
         @media (max-width: 360px) {
 
             .main-content {
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
             }
 
             .header-right {
@@ -1458,7 +1481,7 @@
             }
 
             .temp-main #temperatura {
-                font-size: 38px;
+                font-size: 2.375rem;
             }
         }
 
@@ -1468,10 +1491,11 @@
         .sensor-pagination,
         .sistemas-pagination {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 0.625rem;
+            margin-top: 0.9375rem;
         }
 
         .sensor-pagination button,
@@ -1479,9 +1503,9 @@
             background: #58CC02;
             color: #fff;
             border: none;
-            border-radius: 8px;
-            padding: 8px 14px;
-            font-size: 13px;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.875rem;
+            font-size: 0.8125rem;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
@@ -1503,7 +1527,7 @@
         .sistemas-pagination .pagina-atual {
             font-weight: bold;
             color: #052501;
-            min-width: 100px;
+            min-width: 6.25rem;
             text-align: center;
         }
 
@@ -1572,7 +1596,7 @@
                     Logout
                 </a>
 
-                <button id="contraste-btn" aria-label="Alterar contraste">
+                <button id="contraste-btn" type="button" aria-label="Alterar contraste">
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </button>
 
@@ -1922,10 +1946,17 @@
     ========================================================== -->
     <script>
     // Estado do alto contraste (lido direto do localStorage, pois a classe
-    // ainda não foi aplicada no body quando os gráficos são criados)
+    // ainda pode não ter sido aplicada no body quando os gráficos são criados)
     const contrasteAtivoInicial = localStorage.getItem('altoContraste') === 'true';
     const corEixos = contrasteAtivoInicial ? '#ffffff' : '#052501';
     const corGrade = contrasteAtivoInicial ? 'rgba(255, 255, 255, 0.2)' : '#dfe6e9';
+
+    // Fator de escala da fonte (1 = 16px). Lê o tamanho real aplicado no <html>,
+    // então os textos dentro dos gráficos acompanham o A+ / A-.
+    function fatorFonte() {
+        const px = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        return px / 16;
+    }
 
     // Dados vindos do controller
     const labelsEixoX = <?= json_encode($grafico_horarios ?? []) ?>;
@@ -1972,7 +2003,7 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                        labels: { color: corEixos, font: { size: Math.round(13 * fatorFonte()), weight: 'bold' } }
                     }
                 },
                 scales: {
@@ -1980,12 +2011,13 @@
                         beginAtZero: true,
                         ticks: {
                             color: corEixos,
+                            font: { size: Math.round(12 * fatorFonte()) },
                             callback: function (value) { return value + 'ºC'; }
                         },
                         grid: { color: corGrade }
                     },
                     x: {
-                        ticks: { color: corEixos },
+                        ticks: { color: corEixos, font: { size: Math.round(12 * fatorFonte()) } },
                         grid: { color: corGrade }
                     }
                 }
@@ -2007,7 +2039,7 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                        labels: { color: corEixos, font: { size: Math.round(13 * fatorFonte()), weight: 'bold' } }
                     }
                 },
                 scales: {
@@ -2016,12 +2048,13 @@
                         max: 100,
                         ticks: {
                             color: corEixos,
+                            font: { size: Math.round(12 * fatorFonte()) },
                             callback: function (value) { return value + '%'; }
                         },
                         grid: { color: corGrade }
                     },
                     x: {
-                        ticks: { color: corEixos },
+                        ticks: { color: corEixos, font: { size: Math.round(12 * fatorFonte()) } },
                         grid: { color: corGrade }
                     }
                 }
@@ -2047,7 +2080,7 @@
                 plugins: {
                     legend: {
                         display: true,
-                        labels: { color: corEixos, font: { size: 13, weight: 'bold' } }
+                        labels: { color: corEixos, font: { size: Math.round(13 * fatorFonte()), weight: 'bold' } }
                     },
                     tooltip: {
                         callbacks: {
@@ -2064,12 +2097,13 @@
                         max: 100,
                         ticks: {
                             color: corEixos,
+                            font: { size: Math.round(12 * fatorFonte()) },
                             callback: function (value) { return value + '%'; }
                         },
                         grid: { color: corGrade }
                     },
                     x: {
-                        ticks: { color: corEixos },
+                        ticks: { color: corEixos, font: { size: Math.round(12 * fatorFonte()) } },
                         grid: { color: corGrade }
                     }
                 }
@@ -2111,29 +2145,30 @@
                     const centroX = (chartArea.left + chartArea.right) / 2;
                     const centroY = (chartArea.top + chartArea.bottom) / 2;
                     const contraste = document.body.classList.contains('alto-contraste');
+                    const f = fatorFonte();
 
                     ctx.save();
 
                     // Ícone de sol
-                    ctx.font = '32px Arial';
+                    ctx.font = Math.round(32 * f) + 'px Arial';
                     ctx.fillStyle = contraste ? '#ffffff' : '#052501';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('☼', centroX, centroY - 28);
+                    ctx.fillText('☼', centroX, centroY - 28 * f);
 
                     // Valor
-                    ctx.font = 'bold 28px Arial';
+                    ctx.font = 'bold ' + Math.round(28 * f) + 'px Arial';
                     ctx.fillStyle = contraste ? '#ffffff' : '#052501';
                     ctx.fillText(
                         Number(valorLuxAtual).toLocaleString('pt-BR'),
                         centroX,
-                        centroY + 18
+                        centroY + 18 * f
                     );
 
                     // Unidade
-                    ctx.font = '16px Arial';
+                    ctx.font = Math.round(16 * f) + 'px Arial';
                     ctx.fillStyle = contraste ? '#ffffff' : '#666666';
-                    ctx.fillText('Lux', centroX, centroY + 43);
+                    ctx.fillText('Lux', centroX, centroY + 43 * f);
 
                     ctx.restore();
                 }
@@ -2156,6 +2191,29 @@
     }
 
     /* =========================
+       FONTES DOS GRÁFICOS (chamada pelo A+ / A- / A)
+    ========================= */
+    function atualizarFontesGraficos() {
+        const f = fatorFonte();
+
+        [chartTemperatura, chartUmidade, chartSolo].forEach(function (chart) {
+            if (!chart) return;
+            chart.options.plugins.legend.labels.font.size = Math.round(13 * f);
+            chart.options.scales.x.ticks.font = { size: Math.round(12 * f) };
+            chart.options.scales.y.ticks.font = { size: Math.round(12 * f) };
+            chart.resize();
+            chart.update();
+        });
+
+        // O texto do gauge é recalculado no afterDraw usando fatorFonte()
+        if (chartLux) {
+            chartLux.resize();
+            chartLux.update();
+        }
+    }
+    window.atualizarFontesGraficos = atualizarFontesGraficos;
+
+    /* =========================
        CORES DOS GRÁFICOS NO ALTO CONTRASTE
     ========================= */
     function atualizarCoresGraficosContraste() {
@@ -2176,6 +2234,19 @@
         // O texto do gauge é recalculado sozinho no afterDraw
         if (chartLux) chartLux.update();
     }
+    window.atualizarCoresGraficosContraste = atualizarCoresGraficosContraste;
+
+    /* =========================
+       OBSERVA O ALTO CONTRASTE
+       Recolore os gráficos sempre que a classe "alto-contraste"
+       for ligada/desligada no <body> (independe do script.js).
+    ========================= */
+    new MutationObserver(function () {
+        atualizarCoresGraficosContraste();
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // Garante o estado correto ao carregar a página
+    atualizarCoresGraficosContraste();
 
     /* =========================
        ATUALIZA OS GRÁFICOS
@@ -2368,65 +2439,49 @@
     atualizarStatusSensores();
     setInterval(atualizarStatusSensores, 30 * 1000);
     </script>
-
-    <!-- JS compartilhado das telas -->
-    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
-
-    <!-- ==========================================================
-         ALTO CONTRASTE + FONTE (mesma chave e classe das outras telas)
-    ========================================================== -->
     <script>
-    /* =========================
-       ALTO CONTRASTE (um único toggle, com persistência)
-    ========================= */
-    (function () {
-        const CHAVE = 'altoContraste';
-
-        // Aplica o estado salvo ao abrir a tela
-        if (localStorage.getItem(CHAVE) === 'true') {
-            document.body.classList.add('alto-contraste');
-        }
-        atualizarCoresGraficosContraste();
-
-        // Captura o clique antes de qualquer outro código tratar o botão
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('#contraste-btn')) return;
-
-            e.stopImmediatePropagation();
-
-            const ativo = document.body.classList.toggle('alto-contraste');
-            localStorage.setItem(CHAVE, ativo);
-            atualizarCoresGraficosContraste();
-        }, true);
-    })();
 
     /* =========================
-       FONTE (mesma chave e limites das outras telas)
+       FONTE
+       Limites desta tela: 14px a 20px, passo de 2px.
+       (acima de 20px o layout deixa de caber)
     ========================= */
-    let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
+    const FONTE_MIN = 14;
+    const FONTE_MAX = 20;
+    const FONTE_PADRAO = 16;
+    const FONTE_PASSO = 2;
+
+    let tamanhoFonte = parseInt(localStorage.getItem('fonteSite'));
+    if (isNaN(tamanhoFonte)) tamanhoFonte = FONTE_PADRAO;
+    tamanhoFonte = Math.min(FONTE_MAX, Math.max(FONTE_MIN, tamanhoFonte));
     document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
     function salvarFonte() {
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
         localStorage.setItem('fonteSite', tamanhoFonte);
+
+        // Redesenha os gráficos com o novo tamanho de texto
+        if (typeof window.atualizarFontesGraficos === 'function') {
+            window.atualizarFontesGraficos();
+        }
     }
 
     function aumentarFonte() {
-        if (tamanhoFonte < 24) {
-            tamanhoFonte += 2;
+        if (tamanhoFonte < FONTE_MAX) {
+            tamanhoFonte += FONTE_PASSO;
             salvarFonte();
         }
     }
 
     function diminuirFonte() {
-        if (tamanhoFonte > 12) {
-            tamanhoFonte -= 2;
+        if (tamanhoFonte > FONTE_MIN) {
+            tamanhoFonte -= FONTE_PASSO;
             salvarFonte();
         }
     }
 
     function resetarFonte() {
-        tamanhoFonte = 16;
+        tamanhoFonte = FONTE_PADRAO;
         salvarFonte();
     }
     </script>
@@ -2669,5 +2724,6 @@
 
     atualizarPaginacaoSistemas();
     </script>
+    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
 </body>
 </html>

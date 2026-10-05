@@ -8,66 +8,278 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style.css') ?>">
     
-    <style>
-    /* CSS unificado, espaçado e com o botão de contraste preto */
-    #aumentar-fonte,
-    #diminuir-fonte,
-    #resetar-fonte {
-        width: 42px;
-        height: 42px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        background: #57c91b;
-        color: white;
-        font-weight: bold;
-        margin-left: 5px;
-        transition: .3s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+<style>
 
-    /* ESTILIZAÇÃO DO BOTÃO DE CONTRASTE (PRETO) */
-    #contraste-btn {
-        width: 42px;
-        height: 42px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        background: #000; /* Fundo Preto */
-        color: #000;     /* Ícone Branco */
-        margin-left: 5px;
-        transition: .3s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+/* ==========================================================
+   BOTÕES DE FONTE
+   ========================================================== */
 
-    /* Espaço entre o último botão (A) e o Avatar G */
-    #resetar-fonte {
-        margin-right: 15px; 
-    }
+#aumentar-fonte,
+#diminuir-fonte,
+#resetar-fonte {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #57c91b;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+    transition: .3s;
 
-    /* Efeito de hover mantendo as cores corretas */
-    #contraste-btn:hover {
-        transform: scale(1.05);
-        background: #000; /* Mantém preto no hover */
-        color: #fff;
-    }
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    #aumentar-fonte:hover,
-    #diminuir-fonte:hover,
-    #resetar-fonte:hover {
-        transform: scale(1.05);
-    }
-    
-    .user-profile {
-        display: flex;
-        align-items: center;
-    }
+#aumentar-fonte:hover,
+#diminuir-fonte:hover,
+#resetar-fonte:hover {
+    transform: scale(1.05);
+}
+
+
+/* ==========================================================
+   BOTÃO DE CONTRASTE
+   ========================================================== */
+
+#contraste-btn {
+    width: 42px !important;
+    height: 42px !important;
+
+    border: none !important;
+    border-radius: 50% !important;
+
+    cursor: pointer !important;
+
+    background: #fff !important;
+    color: #000 !important;
+
+    margin-left: 5px;
+
+    transition: .3s;
+
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    outline: none !important;
+    box-shadow: none !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+#contraste-btn i {
+    color: #000 !important;
+    font-size: 21px;
+}
+
+#contraste-btn:hover i {
+    color: #46A302 !important;
+}
+
+
+/* Não deixa o botão mudar depois do clique */
+
+#contraste-btn:focus,
+#contraste-btn:active,
+#contraste-btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ==========================================================
+   ESPAÇO ENTRE BOTÃO A E AVATAR
+   ========================================================== */
+
+#resetar-fonte {
+    margin-right: 15px;
+}
+
+
+/* ==========================================================
+   PERFIL
+   ========================================================== */
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - PÁGINA
+   ========================================================== */
+
+body.alto-contraste {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - TEXTOS
+   ========================================================== */
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste h5,
+body.alto-contraste h6,
+body.alto-contraste p,
+body.alto-contraste label,
+body.alto-contraste span {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - BOTÃO DE CONTRASTE
+   ========================================================== */
+
+body.alto-contraste #contraste-btn,
+body.alto-contraste #contraste-btn:hover,
+body.alto-contraste #contraste-btn:focus,
+body.alto-contraste #contraste-btn:active,
+body.alto-contraste #contraste-btn:focus-visible {
+    background: #000 !important;
+    color: #fff !important;
+
+
+
+    outline: none !important;
+    box-shadow: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - BOTÕES DE FONTE
+   ========================================================== */
+
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
+    background: #000 !important;
+    color: #fff !important;;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - FORMULÁRIO
+   ========================================================== */
+
+body.alto-contraste .form-section {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .form-section *,
+body.alto-contraste .form-group label,
+body.alto-contraste .section-title {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - CAMPOS
+   ========================================================== */
+
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste input::placeholder {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - DROPDOWN
+   ========================================================== */
+
+body.alto-contraste .dropdown-btn {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste .dropdown-content {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .dropdown-content label {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   ALTO CONTRASTE - BOTÕES DO FORMULÁRIO
+   ========================================================== */
+
+body.alto-contraste .btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+body.alto-contraste .avatar {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
+
+body.alto-contraste .sidebar {
+    background: #000 !important;
+}
+
+body.alto-contraste .sidebar .logo,
+body.alto-contraste .sidebar .logo i,
+body.alto-contraste .sidebar .menu-item,
+body.alto-contraste .sidebar .menu-item i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+
+body.alto-contraste .header {
+    background: #000 !important;
+    color: #fff !important;
+}
+
 </style>
-    </style>
 </head>
 <body>
     

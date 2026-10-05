@@ -9,165 +9,265 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/css/dashboard/style_recuperar.css') ?>">
 
-    <style>
-        /* ========================================================
-           BARRA E BOTÕES DE ACESSIBILIDADE CORRIGIDOS EM LINHA
-           ======================================================== */
-        
-        /* Garante que o card principal seja a referência e dê espaço no topo */
+<style>
+    /* ========================================================
+       BARRA DE ACESSIBILIDADE
+       ======================================================== */
+
+    .recover-container {
+        position: relative !important;
+        padding-top: 75px !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+    }
+
+    .acessibilidade-container {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 6px !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 100 !important;
+    }
+
+    .acessibilidade-container button {
+        background: #57c91b !important;
+        border: none !important;
+        border-radius: 5px !important;
+        width: 34px !important;
+        height: 34px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: 0.2s !important;
+        color: #fff !important;
+        font-size: 13px !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .acessibilidade-container button:hover {
+        opacity: 0.85 !important;
+    }
+
+    /* ========================================================
+       VALIDAÇÃO DO INPUT
+       ======================================================== */
+
+    input:invalid {
+        border: 2px solid #ff4d4d;
+    }
+
+    input:valid {
+        border: 2px solid #4caf50;
+    }
+
+    .mensagem-erro {
+        color: #ff4d4d;
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+    }
+
+    /* ========================================================
+       BOTÃO DE CONTRASTE - MODO NORMAL
+       ======================================================== */
+
+    #contraste-btn {
+        cursor: pointer !important;
+    }
+
+    #contraste-btn i {
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       ALTO CONTRASTE
+       ======================================================== */
+
+    html.alto-contraste,
+    body.alto-contraste {
+        background: #000 !important;
+        color: #fff !important;
+    }
+
+    /* CONTAINER PRINCIPAL */
+
+    body.alto-contraste .recover-container {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    /* CABEÇALHO */
+
+    body.alto-contraste h2,
+    body.alto-contraste p,
+    body.alto-contraste label,
+    body.alto-contraste .logo {
+        color: #fff !important;
+    }
+
+    body.alto-contraste .logo i {
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       INPUT
+       ======================================================== */
+
+    body.alto-contraste input {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    body.alto-contraste input::placeholder {
+        color: #ccc !important;
+        opacity: 1 !important;
+    }
+
+    /* ========================================================
+       BOTÕES DO FORMULÁRIO
+       ======================================================== */
+
+    body.alto-contraste .btn-primary,
+    body.alto-contraste .btn-secondary {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    body.alto-contraste .btn-primary i,
+    body.alto-contraste .btn-secondary i {
+        color: #fff !important;
+    }
+
+    body.alto-contraste .btn-primary:hover,
+    body.alto-contraste .btn-secondary:hover {
+        background: #000 !important;
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       BOTÃO DE CONTRASTE
+       ======================================================== */
+
+    body.alto-contraste #contraste-btn,
+    body.alto-contraste #contraste-btn:hover,
+    body.alto-contraste #contraste-btn:focus,
+    body.alto-contraste #contraste-btn:active,
+    body.alto-contraste #contraste-btn:focus-visible {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+        outline: none !important;
+        box-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    body.alto-contraste #contraste-btn i {
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       BOTÕES DE TAMANHO DA FONTE
+       ======================================================== */
+
+    body.alto-contraste #aumentar-fonte,
+    body.alto-contraste #diminuir-fonte,
+    body.alto-contraste #resetar-fonte {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    body.alto-contraste #aumentar-fonte:hover,
+    body.alto-contraste #diminuir-fonte:hover,
+    body.alto-contraste #resetar-fonte:hover {
+        background: #000 !important;
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       PASSOS
+       ======================================================== */
+
+    body.alto-contraste .step {
+        background: #666 !important;
+        color: #fff !important;
+    }
+
+    body.alto-contraste .step.active,
+    body.alto-contraste .step.completed {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    /* ========================================================
+       LINK - FAZER LOGIN
+       ======================================================== */
+
+    body.alto-contraste .back-link a {
+        color: #fff !important;
+    }
+
+    body.alto-contraste .back-link a i {
+        color: #fff !important;
+    }
+
+    body.alto-contraste .back-link a:hover {
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       ALERTAS
+       ======================================================== */
+
+    body.alto-contraste .alert {
+        background: #000 !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+    }
+
+    body.alto-contraste .alert i,
+    body.alto-contraste .alert span {
+        color: #fff !important;
+    }
+
+    /* ========================================================
+       RESPONSIVIDADE
+       ======================================================== */
+
+    @media (max-width: 768px) {
+
         .recover-container {
-            position: relative !important;
-            padding-top: 75px !important; 
-            box-sizing: border-box !important;
-            overflow: visible !important; /* Impede que os botões deformem ou sumam para fora */
+            padding-top: 85px !important;
         }
 
-        /* Container que alinha os botões horizontalmente no topo direito interno */
         .acessibilidade-container {
-            position: absolute !important;
-            top: 20px !important;
-            right: 20px !important;
-            display: flex !important;
-            flex-direction: row !important; /* Força os botões a ficarem na mesma linha */
-            align-items: center !important;
-            gap: 6px !important;            /* Distância exata entre eles */
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            z-index: 100 !important;
+            top: 15px !important;
+            right: 15px !important;
         }
 
-        /* Estilo base dos botões reduzido para caber perfeitamente no card */
         .acessibilidade-container button {
-            background: #57c91b !important;
-            border: none !important;
-            border-radius: 5px !important;
-            width: 34px !important;         /* Tamanho ajustado para não estourar */
-            height: 34px !important;        /* Tamanho ajustado para não estourar */
-            font-weight: bold !important;
-            cursor: pointer !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: 0.2s !important;
-            color: #fff !important;
-            font-size: 13px !important;     /* Fonte proporcional ao botão */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
+            width: 30px !important;
+            height: 30px !important;
+            font-size: 11px !important;
         }
-
-        /* Efeito Hover padrão */
-        .acessibilidade-container button:hover {
-            opacity: .85 !important;
-        }
-
-        @media (max-width: 768px) {
-            .recover-container {
-                padding-top: 85px !important;
-            }
-            .acessibilidade-container {
-                top: 15px !important;
-                right: 15px !important;
-            }
-            .acessibilidade-container button {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 11px !important;
-            }
-        }
-
-        /* VALIDAÇÃO VISUAL */
-        input:invalid {
-            border: 2px solid #ff4d4d;
-        }
-
-        input:valid {
-            border: 2px solid #4caf50;
-        }
-
-        .mensagem-erro {
-            color: #ff4d4d;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* ==========================
-   ALTO CONTRASTE
-========================== */
-
-body.alto-contraste {
-    background: #000 !important;
-    color: #fff !important;
-}
-
-body.alto-contraste .recover-container {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-body.alto-contraste h2,
-body.alto-contraste p,
-body.alto-contraste label,
-body.alto-contraste a,
-body.alto-contraste .logo {
-    color: #fff !important;
-}
-
-body.alto-contraste input {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-body.alto-contraste input::placeholder {
-    color: #ccc !important;
-}
-
-body.alto-contraste .btn-primary,
-body.alto-contraste .btn-secondary {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-body.alto-contraste #contraste-btn,
-body.alto-contraste #aumentar-fonte,
-body.alto-contraste #diminuir-fonte,
-body.alto-contraste #resetar-fonte {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
-
-body.alto-contraste .step {
-    background: #666 !important;
-}
-
-body.alto-contraste .step.active,
-body.alto-contraste .step.completed {
-    background: #fff !important;
-}       
-html.alto-contraste,
-body.alto-contraste {
-    background: #000 !important;
-    color: #fff !important;
-}
-body.alto-contraste,
-body.alto-contraste * {
-    background-color: #000 !important;
-    color: #fff !important;
-    border-color: #fff !important;
-}
-
-body.alto-contraste input::placeholder {
-    color: #ccc !important;
-}
-    </style>
+    }
+</style>
 </head>
 
 <body>
@@ -175,7 +275,7 @@ body.alto-contraste input::placeholder {
     <div class="recover-container">
 
         <div class="acessibilidade-container">
-            <button id="contraste-btn" type="button" aria-label="Alterar contraste">
+            <button id="auto-contraste" type="button" aria-label="Alterar contraste">
                 <i class="fa-solid fa-circle-half-stroke"></i>
             </button>
             <button id="aumentar-fonte" type="button" aria-label="Aumentar fonte">A+</button>
@@ -341,14 +441,6 @@ body.alto-contraste input::placeholder {
             form.dispatchEvent(new Event('submit'));
         }
     });
-
-   const contrasteBtn = document.getElementById('contraste-btn');
-
-contrasteBtn.onclick = function () {
-
-    
-
-};
     // ========================================================
     // REMOVE ESPAÇOS EMAIL
     // ========================================================
@@ -390,25 +482,7 @@ contrasteBtn.onclick = function () {
             tamanhoFonte = 100; aplicarFonte();
         });
     }
-
-    const btnContraste = document.getElementById('contraste-btn');
-
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste');
-    }
-
-    btnContraste.addEventListener('click', () => {
-
-        document.body.classList.toggle('alto-contraste');
-
-        localStorage.setItem(
-            'altoContraste',
-            document.body.classList.contains('alto-contraste')
-        );
-
-    });
     </script>
-        
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
 </body>
 </html>

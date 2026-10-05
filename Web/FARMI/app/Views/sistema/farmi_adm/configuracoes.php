@@ -212,7 +212,7 @@
 
         .badge-role {
             display: inline-block;
-            background: #e8f5e9;
+            background: #000;
             color: #2e7d32;
             padding: 4px 12px;
             border-radius: 20px;
@@ -514,6 +514,52 @@
                 gap: 15px;
             }
         }
+        /* ==========================================================
+   CORREÇÃO DO LOGOUT NO AUTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .btn-logout,
+body.alto-contraste .btn-logout:hover,
+body.alto-contraste .btn-logout:focus,
+body.alto-contraste .btn-logout:active {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-logout i {
+    color: #fff !important;
+}
+
+body.alto-contraste .sec-btn,
+body.alto-contraste .sec-btn:hover {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .sec-btn i {
+    color: #000 !important;
+}
+/* MODO NORMAL */
+.badge-role {
+    background: #fff !important;
+    color: #4bc714 !important;
+}
+
+.badge-role i {
+    color: #4bc714 !important;
+}
+
+/* MODO ALTO CONTRASTE */
+body.alto-contraste .badge-role {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.alto-contraste .badge-role i {
+    color: #000 !important;
+}
     </style>
 </head>
 
@@ -751,24 +797,6 @@
 
     <script>
         /* Acessibilidade de fonte e contraste */
-        document.addEventListener('DOMContentLoaded', () => {
-            const btnContraste = document.getElementById('contraste-btn');
-
-            if (localStorage.getItem('altoContraste') === 'true') {
-                document.body.classList.add('alto-contraste');
-            }
-
-            btnContraste.addEventListener('click', () => {
-
-                document.body.classList.toggle('alto-contraste');
-
-                localStorage.setItem(
-                    'altoContraste',
-                    document.body.classList.contains('alto-contraste')
-                );
-
-            });
-
 
             let tamanhoFonte = parseInt(localStorage.getItem('fonteSite')) || 16;
             document.documentElement.style.fontSize = tamanhoFonte + 'px';

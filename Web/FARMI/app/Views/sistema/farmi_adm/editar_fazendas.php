@@ -12,110 +12,252 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        /* ========================================================
-           BARRA DE ACESSIBILIDADE CORRIGIDA (FLUTUANTE EM LINHA)
-           ======================================================== */
-        
-        /* Força o container principal a aceitar o posicionamento correto sem cortar os botões */
-        .recover-container {
-            position: relative !important;
-            padding-top: 75px !important; 
-            box-sizing: border-box !important;
-            overflow: visible !important; /* Impede que os botões fiquem cortados ou sumam */
-        }
+ <style>
+/* ========================================================
+   BARRA DE ACESSIBILIDADE
+   ======================================================== */
 
-        /* Container dos botões: isolado no topo direito interno do card */
-        .acessibilidade-container {
-            position: absolute !important;
-            top: 20px !important;
-            right: 20px !important;
-            display: flex !important;
-            flex-direction: row !important; /* Garante que fiquem lado a lado */
-            align-items: center !important;
-            gap: 6px !important;            /* Espaçamento exato entre os botões */
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            width: auto !important;
-            height: auto !important;
-            z-index: 9999 !important;       /* Fica acima de qualquer outro elemento */
-        }
+.recover-container {
+    position: relative !important;
+    padding-top: 75px !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+}
 
-        /* Estilo base reduzido idêntico para todos os botões de tamanho */
-        .acessibilidade-container button {
-            background: #57c91b !important;
-            border: none !important;
-            border-radius: 5px !important;
-            width: 34px !important;         /* Padronizado com as outras telas */
-            height: 34px !important;        /* Padronizado com as outras telas */
-            font-weight: bold !important;
-            cursor: pointer !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            transition: 0.2s !important;
-            color: #fff !important;
-            font-size: 13px !important;     /* Fonte proporcional ao botão */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
-            box-sizing: border-box !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
+.acessibilidade-container {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    z-index: 9999 !important;
+}
 
-        /* APENAS o botão de contraste fica preto com ícone branco */
-        #contraste-btn {
-            background: #000000 !important;
-            color: #ffffff !important;
-        }
+.acessibilidade-container button {
+    background: #57c91b !important;
+    border: none !important;
+    border-radius: 5px !important;
+    width: 34px !important;
+    height: 34px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: 0.2s !important;
+    color: #fff !important;
+    font-size: 13px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
-        /* Efeito de hover padrão */
-        .acessibilidade-container button:hover {
-            opacity: .85 !important;
-        }
+.acessibilidade-container button:hover {
+    opacity: .85 !important;
+}
 
-        /* CAMPOS EM 2 COLUNAS */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
 
-        .form-row.full-width {
-            grid-template-columns: 1fr;
-        }
+/* ========================================================
+   BOTÃO DE CONTRASTE - MODO NORMAL
+   ======================================================== */
 
-        /* Ajuste para telas menores/celular */
-        @media (max-width: 768px) {
-            .recover-container {
-                padding-top: 85px !important;
-            }
-            .acessibilidade-container {
-                top: 15px !important;
-                right: 15px !important;
-            }
-            .acessibilidade-container button {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 11px !important;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-        }
+#contraste-btn {
+    background: #fff !important;
+    color: #000 !important;
+    border: none !important;
+}
 
-        /* VALIDAÇÃO VISUAL */
-        input:invalid {
-            border: 2px solid #ff4d4d;
-        }
+#contraste-btn i {
+    color: #000 !important;
+    font-size: 16px !important;
+}
 
-        input:valid {
-            border: 2px solid #4caf50;
-        }
-    </style>
+
+/* ========================================================
+   CAMPOS EM 2 COLUNAS
+   ======================================================== */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-row.full-width {
+    grid-template-columns: 1fr;
+}
+
+
+/* ========================================================
+   VALIDAÇÃO VISUAL
+   ======================================================== */
+
+input:invalid {
+    border: 2px solid #ff4d4d;
+}
+
+input:valid {
+    border: 2px solid #4caf50;
+}
+
+
+/* ========================================================
+   ALTO CONTRASTE
+   ======================================================== */
+
+body.alto-contraste {
+    background: #000 !important;
+    color: #fff !important;
+}
+
+
+/* CONTAINER PRINCIPAL */
+
+body.alto-contraste .recover-container {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: none !important;
+}
+
+
+/* LOGO E TÍTULOS */
+
+body.alto-contraste .logo,
+body.alto-contraste .logo i,
+body.alto-contraste .recover-header h2,
+body.alto-contraste .recover-header p {
+    color: #fff !important;
+}
+
+
+/* LABELS */
+
+body.alto-contraste label,
+body.alto-contraste label i {
+    color: #fff !important;
+}
+
+
+/* INPUTS */
+
+body.alto-contraste input {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste input::placeholder {
+    color: #cfcfcf !important;
+}
+
+
+/* ========================================================
+   BOTÃO SALVAR
+   ======================================================== */
+
+body.alto-contraste .btn-primary {
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-primary i {
+    color: #000 !important;
+}
+
+
+/* ========================================================
+   BOTÃO VOLTAR
+   ======================================================== */
+
+body.alto-contraste .btn-secondary {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .btn-secondary i {
+    color: #fff !important;
+}
+
+
+/* ========================================================
+   LINK DASHBOARD
+   ======================================================== */
+
+body.alto-contraste .back-link,
+body.alto-contraste .back-link a,
+body.alto-contraste .back-link i {
+    color: #fff !important;
+}
+
+
+/* ========================================================
+   BOTÃO DE CONTRASTE NO ALTO CONTRASTE
+   ======================================================== */
+
+body.alto-contraste #contraste-btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* ========================================================
+   BOTÕES DE FONTE NO ALTO CONTRASTE
+   ======================================================== */
+
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* ========================================================
+   MOBILE
+   ======================================================== */
+
+@media (max-width: 768px) {
+
+    .recover-container {
+        padding-top: 85px !important;
+    }
+
+    .acessibilidade-container {
+        top: 15px !important;
+        right: 15px !important;
+    }
+
+    .acessibilidade-container button {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 11px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -530,7 +672,7 @@ if (formEndereco) {
         });
     }
 </script>
-
+   
     <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
 </body>
 </html>

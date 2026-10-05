@@ -96,13 +96,7 @@
             color: #46A302;
             opacity: 1;
         }
-        #contraste-btn:focus,
-        #contraste-btn:active,
-        #contraste-btn:focus-visible {
-            outline: none !important;
-            box-shadow: none !important;
-            background: transparent !important;
-        }
+
         /* Botões de Acessibilidade (A+, A-, A) com espaçamento adicionado */
         #acessibilidade-fonte button,
         #aumentar-fonte,
@@ -863,22 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
         localStorage.setItem('fonteSite', tamanhoFonte);
     });
-    const btnContraste = document.getElementById('contraste-btn');
-
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste');
-    }
-
-    btnContraste.addEventListener('click', () => {
-
-        document.body.classList.toggle('alto-contraste');
-
-        localStorage.setItem(
-            'altoContraste',
-            document.body.classList.contains('alto-contraste')
-        );
-
-    });
+    
 });
 </script>
 <script>

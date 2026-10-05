@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <style>
-    /* ==========================================================
-   BOTÕES DE FONTE (PADRONIZADO COM O DASHBOARD)
+<style>
+/* ==========================================================
+   BOTÕES DE FONTE
    ========================================================== */
+
 #aumentar-fonte,
 #diminuir-fonte,
 #resetar-fonte {
@@ -29,9 +30,11 @@
     opacity: 1;
 }
 
+
 /* ==========================================================
-   BOTÃO DE CONTRASTE (PADRONIZADO COM O DASHBOARD)
+   BOTÃO DE CONTRASTE
    ========================================================== */
+
 #contraste-btn {
     width: 42px;
     height: 42px;
@@ -63,13 +66,15 @@
 #contraste-btn:focus,
 #contraste-btn:active,
 #contraste-btn:focus-visible {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
+
 /* ==========================================================
-   BOTÃO LOGOUT E AVATAR (PADRONIZADO COM O DASHBOARD)
+   BOTÃO LOGOUT E AVATAR
    ========================================================== */
+
 .btn-logout {
     background: #58CC02;
     color: white;
@@ -91,12 +96,13 @@
     color: white;
 }
 
-.user-avatar, .avatar {
+.user-avatar,
+.avatar {
     background: #57c91b;
     color: #000;
     width: 42px;
     height: 42px;
-    border-radius: 50%; /* Transforma em um círculo perfeito */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,92 +110,269 @@
     font-size: 16px;
 }
 
-.user-avatar:hover, .avatar:hover {
+.user-avatar:hover,
+.avatar:hover {
     background-color: #46A302;
 }
 
+
 /* ==========================================================
-   ALTO CONTRASTE (APLICADO QUANDO CONFIGURADO)
+   ALTO CONTRASTE
+   Ativado pela classe .alto-contraste no body
    ========================================================== */
-body.contraste {
+
+body.alto-contraste {
     background: #000 !important;
     color: #fff !important;
 }
 
-/* Força TODOS os ícones do site a ficarem visíveis (Brancos) */
-body.contraste i,
-body.contraste .sidebar i,
-body.contraste .card i,
-body.contraste .fazenda-card i,
-body.contraste button i,
-body.contraste a i {
+
+/* ==========================================================
+   TEXTOS E ÍCONES
+   ========================================================== */
+
+body.alto-contraste,
+body.alto-contraste p,
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste h5,
+body.alto-contraste h6,
+body.alto-contraste span,
+body.alto-contraste label,
+body.alto-contraste a {
     color: #fff !important;
 }
 
-/* Sidebar e Header na estrutura de contraste */
-body.contraste .sidebar,
-body.contraste .header,
-body.contraste .main-content {
+body.alto-contraste i,
+body.alto-contraste .sidebar i,
+body.alto-contraste .card i,
+body.alto-contraste .fazenda-card i,
+body.alto-contraste button i,
+body.alto-contraste a i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   SIDEBAR / HEADER / CONTEÚDO
+   ========================================================== */
+
+body.alto-contraste .sidebar,
+body.alto-contraste .header,
+body.alto-contraste .main-content {
     background: #000 !important;
     color: #fff !important;
     border-color: #fff !important;
 }
 
-/* Elementos do Menu lateral (Sidebar) */
-body.contraste .menu-item {
+
+/* ==========================================================
+   MENU LATERAL
+   ========================================================== */
+
+body.alto-contraste .menu-item {
     color: #fff !important;
 }
-body.contraste .menu-item.active,
-body.contraste .menu-item:hover {
+
+body.alto-contraste .menu-item.active,
+body.alto-contraste .menu-item:hover {
     background: #fff !important;
     color: #000 !important;
 }
-body.contraste .menu-item.active i,
-body.contraste .menu-item:hover i {
+
+body.alto-contraste .menu-item.active i,
+body.alto-contraste .menu-item:hover i {
     color: #000 !important;
 }
 
-/* Botões do Sistema e de Acessibilidade */
-body.contraste .btn,
-body.contraste .btn-primary,
-body.contraste .btn-secondary,
-body.contraste .btn-danger,
-body.contraste .btn-logout,
-body.contraste #aumentar-fonte,
-body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte,
-body.contraste #logout {
+
+/* ==========================================================
+   BOTÕES DO SISTEMA
+   ========================================================== */
+
+body.alto-contraste .btn,
+body.alto-contraste .btn-primary,
+body.alto-contraste .btn-secondary,
+body.alto-contraste .btn-danger,
+body.alto-contraste .btn-logout,
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte,
+body.alto-contraste #logout {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
 
-/* Cards */
-body.contraste .card,
-body.contraste .fazenda-card {
-    background: #000 !important;
+
+/* Ícones dos botões */
+body.alto-contraste .btn i,
+body.alto-contraste .btn-primary i,
+body.alto-contraste .btn-secondary i,
+body.alto-contraste .btn-danger i,
+body.alto-contraste .btn-logout i {
     color: #fff !important;
-    
 }
 
-/* Inputs e Seletores */
-body.contraste input,
-body.contraste select,
-body.contraste textarea {
+
+/* ==========================================================
+   BOTÃO DE CONTRASTE NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste #contraste-btn {
+    background: #000 !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+body.alto-contraste #contraste-btn:hover i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   CARDS
+   ========================================================== */
+
+body.alto-contraste .card,
+body.alto-contraste .fazenda-card {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+
+/* ==========================================================
+   CONTEÚDO DOS CARDS
+   ========================================================== */
+
+body.alto-contraste .card h3,
+body.alto-contraste .card p,
+body.alto-contraste .fazenda-card h3,
+body.alto-contraste .fazenda-card p,
+body.alto-contraste .fazenda-card span,
+body.alto-contraste .info-label,
+body.alto-contraste .info-value,
+body.alto-contraste .fazenda-status {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   INPUTS / SELECTS / TEXTAREA
+   ========================================================== */
+
+body.alto-contraste input,
+body.alto-contraste select,
+body.alto-contraste textarea {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
 
-body.contraste input::placeholder {
+body.alto-contraste input::placeholder,
+body.alto-contraste textarea::placeholder {
     color: #bbb !important;
 }
 
-/* Avatar de Usuário */
-body.contraste .avatar {
+
+/* ==========================================================
+   BOTÃO DE PESQUISA
+   ========================================================== */
+
+body.alto-contraste .search-bar button,
+body.alto-contraste .search-bar .btn {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .search-bar button i,
+body.alto-contraste .search-bar .btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   CARD "ADICIONAR NOVA FAZENDA"
+   ========================================================== */
+
+body.alto-contraste .add-fazenda {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .add-fazenda i {
+    color: #fff !important;
+}
+
+body.alto-contraste .add-fazenda h3,
+body.alto-contraste .add-fazenda p {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   STATUS DA FAZENDA
+   ========================================================== */
+
+body.alto-contraste .status-dot {
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .status-online {
+    background: #fff !important;
+}
+
+body.alto-contraste .fazenda-status span {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+body.alto-contraste .avatar,
+body.alto-contraste .user-avatar {
     background: #fff !important;
     color: #000 !important;
     border: 2px solid #fff !important;
+}
+
+body.alto-contraste .avatar:hover,
+body.alto-contraste .user-avatar:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+
+/* ==========================================================
+   MENU SANDUÍCHE
+   ========================================================== */
+
+body.alto-contraste .menu-toggle {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste .menu-toggle i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   OVERLAY DO MENU
+   ========================================================== */
+
+body.alto-contraste .menu-overlay {
+    background: rgba(0, 0, 0, 0.85) !important;
 }
 </style>
 <head>
@@ -407,7 +590,6 @@ body.contraste .avatar {
             <?php endforeach; ?>
 
     </main>
-    <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <?php if(session()->getFlashdata('erro')): ?>
@@ -624,22 +806,5 @@ if (resetarFonte) {
         aplicarFonte();
     });
 }
-
-const btnContraste = document.getElementById('contraste-btn');
-
-    if (localStorage.getItem('altoContraste') === 'true') {
-        document.body.classList.add('alto-contraste');
-    }
-
-    btnContraste.addEventListener('click', () => {
-
-        document.body.classList.toggle('alto-contraste');
-
-        localStorage.setItem(
-            'altoContraste',
-            document.body.classList.contains('alto-contraste')
-        );
-
-    });
-
 </script>
+<script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>

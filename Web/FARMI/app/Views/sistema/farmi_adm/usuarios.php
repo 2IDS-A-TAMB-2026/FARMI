@@ -106,31 +106,67 @@
 }
 
 /* AUTO CONTRASTE */
-body.contraste .btn-logout {
+/* ==========================================================
+   ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste .btn-logout,
+body.alto-contraste .btn-logout:hover,
+body.alto-contraste .btn-logout:focus,
+body.alto-contraste .btn-logout:active {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
 
-body.contraste .btn-logout i {
+body.alto-contraste .btn-logout i {
     color: #fff !important;
 }
 
-body.contraste #aumentar-fonte,
-body.contraste #diminuir-fonte,
-body.contraste #resetar-fonte {
+
+/* BOTÕES DE FONTE */
+
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
 
-body.contraste #contraste-btn {
+
+/* BOTÃO DE CONTRASTE */
+
+body.alto-contraste #contraste-btn {
+    background: #000 !important;
     color: #fff !important;
 }
 
-body.contraste .avatar {
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* AVATAR */
+
+body.alto-contraste .avatar {
     background: #fff !important;
     color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* PAGINAÇÃO */
+
+body.alto-contraste .pagina-info {
+    color: #fff !important;
+}
+
+body.alto-contraste .botao-paginacao,
+body.alto-contraste .botao-paginacao:hover {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
 }
 
 .dropdown {
@@ -617,27 +653,6 @@ body.contraste .botao-paginacao {
     </script>
 
     <script>
-
-        // ==========================================
-        // ACESSIBILIDADE: FONTE (AUMENTAR / DIMINUIR)
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnContraste = document.getElementById('contraste-btn');
-
-            if (localStorage.getItem('altoContraste') === 'true') {
-                document.body.classList.add('alto-contraste');
-            }
-
-            btnContraste.addEventListener('click', () => {
-
-                document.body.classList.toggle('alto-contraste');
-
-                localStorage.setItem(
-                    'altoContraste',
-                    document.body.classList.contains('alto-contraste')
-                );
-
-            });
 
             const btnAumentar = document.getElementById('aumentar-fonte');
             const btnDiminuir = document.getElementById('diminuir-fonte');

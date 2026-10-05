@@ -43,17 +43,17 @@
         input:valid {
             border: 2px solid #4caf50;
         }
-        /* =========================
+        /* ==========================================================
    ACESSIBILIDADE
-========================= */
+   ========================================================== */
 
-.recover-container{
+.recover-container {
     position: relative;
     padding-top: 75px;
     overflow: visible;
 }
 
-.acessibilidade-container{
+.acessibilidade-container {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -64,7 +64,7 @@
     z-index: 100;
 }
 
-.acessibilidade-container button{
+.acessibilidade-container button {
     background: #57c91b;
     border: none;
     border-radius: 5px;
@@ -81,37 +81,31 @@
     box-shadow: 0 2px 4px rgba(0,0,0,.1);
 }
 
-.acessibilidade-container button:hover{
+.acessibilidade-container button:hover {
     opacity: .85;
 }
 
-#contraste-btn{
-    background: #000;
-    color: #fff;
+
+/* ==========================================================
+   BOTÃO DE CONTRASTE - MODO NORMAL
+   ========================================================== */
+
+#contraste-btn {
+    background: #fff !important;
+    color: #000 !important;
+    border: none !important;
 }
 
-@media(max-width:768px){
-
-    .recover-container{
-        padding-top: 85px;
-    }
-
-    .acessibilidade-container{
-        top: 15px;
-        right: 15px;
-    }
-
-    .acessibilidade-container button{
-        width: 30px;
-        height: 30px;
-        font-size: 11px;
-    }
-
+#contraste-btn i {
+    color: #000 !important;
+    font-size: 16px;
 }
 
-/* =========================
+
+/* ==========================================================
    ALTO CONTRASTE
-========================= */
+   ========================================================== */
+
 body.alto-contraste {
     background: #000 !important;
     color: #fff !important;
@@ -119,7 +113,7 @@ body.alto-contraste {
 
 body.alto-contraste .recover-container {
     background: #000 !important;
-    border: 2px solid #ffff00 !important;
+    border: 2px solid #fff !important;
     box-shadow: none !important;
 }
 
@@ -128,35 +122,103 @@ body.alto-contraste .recover-header h2,
 body.alto-contraste .recover-header p,
 body.alto-contraste label,
 body.alto-contraste .back-link a {
-    color: #ffff00 !important;
+    color: #fff !important;
 }
+
+body.alto-contraste .logo i,
+body.alto-contraste label i,
+body.alto-contraste .back-link i {
+    color: #fff !important;
+}
+
+
+/* INPUTS */
 
 body.alto-contraste input {
     background: #000 !important;
     color: #fff !important;
-    border: 2px solid #ffff00 !important;
+    border: 2px solid #fff !important;
 }
 
 body.alto-contraste input::placeholder {
     color: #cfcfcf !important;
 }
 
+
+/* BOTÃO SALVAR */
+
 body.alto-contraste .btn-primary {
-    background: #ffff00 !important;
+    background: #fff !important;
     color: #000 !important;
-    border: 2px solid #ffff00 !important;
+    border: 2px solid #fff !important;
 }
+
+body.alto-contraste .btn-primary i {
+    color: #000 !important;
+}
+
+
+/* BOTÃO VOLTAR */
 
 body.alto-contraste .btn-secondary {
     background: #000 !important;
-    color: #ffff00 !important;
-    border: 2px solid #ffff00 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
 }
 
-/* botão de contraste fica visível no modo escuro */
+body.alto-contraste .btn-secondary i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÃO DE CONTRASTE NO ALTO CONTRASTE
+   ========================================================== */
+
 body.alto-contraste #contraste-btn {
-    background: #fff !important;
-    color: #000 !important;
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste #contraste-btn i {
+    color: #fff !important;
+}
+
+
+/* ==========================================================
+   BOTÕES DE FONTE NO ALTO CONTRASTE
+   ========================================================== */
+
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    .recover-container {
+        padding-top: 85px;
+    }
+
+    .acessibilidade-container {
+        top: 15px;
+        right: 15px;
+    }
+
+    .acessibilidade-container button {
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+    }
 }
 
     </style>
@@ -604,29 +666,7 @@ if (resetarFonte) {
         aplicarFonte();
     });
 }
-
-/* =========================
-   ALTO CONTRASTE (salvo entre páginas)
-========================= */
-const btnContraste = document.getElementById('contraste-btn');
-
-if (localStorage.getItem('altoContraste') === 'true') {
-    document.body.classList.add('alto-contraste');
-}
-
-if (btnContraste) {
-    btnContraste.addEventListener('click', (e) => {
-        // impede que outro script (ex: script.js) alterne de novo e anule o clique
-        e.stopImmediatePropagation();
-
-        const ativo = document.body.classList.toggle('alto-contraste');
-        localStorage.setItem('altoContraste', ativo);
-    });
-}
-
 </script>
-
 <script src="<?= base_url('assets/js/dashboard/script.js') ?>"></script>
-    
 </body>
 </html>

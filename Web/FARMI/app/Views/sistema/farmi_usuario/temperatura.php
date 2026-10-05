@@ -479,6 +479,50 @@
             background: #222 !important;
             color: #fff !important;
         }
+        /* =========================
+   AJUSTE PARA FONTE GRANDE
+   ========================= */
+
+.logo {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+html[style*="font-size: 18px"] .sidebar,
+html[style*="font-size: 20px"] .sidebar,
+html[style*="font-size: 22px"] .sidebar {
+    width: 280px;
+}
+
+html[style*="font-size: 18px"] .main-content,
+html[style*="font-size: 20px"] .main-content,
+html[style*="font-size: 22px"] .main-content {
+    margin-left: 280px;
+}
+
+html[style*="font-size: 18px"] .logo,
+html[style*="font-size: 20px"] .logo,
+html[style*="font-size: 22px"] .logo {
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+
+.header {
+    min-width: 0;
+}
+
+.header > div:first-child {
+    min-width: 0;
+}
+
+.header h2,
+.header p {
+    overflow-wrap: break-word;
+}
+
+.temperature-indicator span {
+    overflow-wrap: break-word;
+}
     </style>
 </head>
 <body>
@@ -745,7 +789,7 @@
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
         document.getElementById('aumentar-fonte').addEventListener('click', () => {
-            if (tamanhoFonte < 24) {
+            if (tamanhoFonte < 22) {
                 tamanhoFonte += 2;
                 document.documentElement.style.fontSize = tamanhoFonte + 'px';
                 localStorage.setItem('fonteSite', tamanhoFonte);

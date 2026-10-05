@@ -480,6 +480,58 @@
             background: #222 !important;
             color: #fff !important;
         }
+        /* =========================
+   AJUSTE PARA FONTE GRANDE
+   ========================= */
+
+/* Evita que textos estourem a largura */
+.logo {
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+/* Quando a fonte estiver maior */
+html[style*="font-size: 18px"] .sidebar,
+html[style*="font-size: 20px"] .sidebar,
+html[style*="font-size: 22px"] .sidebar,
+html[style*="font-size: 24px"] .sidebar {
+    width: 280px;
+}
+
+html[style*="font-size: 18px"] .main-content,
+html[style*="font-size: 20px"] .main-content,
+html[style*="font-size: 22px"] .main-content,
+html[style*="font-size: 24px"] .main-content {
+    margin-left: 280px;
+}
+
+/* Logo não deixa a palavra sair da sidebar */
+html[style*="font-size: 18px"] .logo,
+html[style*="font-size: 20px"] .logo,
+html[style*="font-size: 22px"] .logo,
+html[style*="font-size: 24px"] .logo {
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+
+/* Cabeçalho pode quebrar sem estourar */
+.header {
+    min-width: 0;
+}
+
+.header > div:first-child {
+    min-width: 0;
+}
+
+.header h2,
+.header p {
+    overflow-wrap: break-word;
+}
+
+/* Texto do indicador também pode quebrar */
+.light-indicator span {
+    overflow-wrap: break-word;
+}
     </style>
 </head>
 <body>
@@ -743,7 +795,7 @@
         document.documentElement.style.fontSize = tamanhoFonte + 'px';
 
         document.getElementById('aumentar-fonte').addEventListener('click', () => {
-            if (tamanhoFonte < 24) {
+            if (tamanhoFonte < 22) {
                 tamanhoFonte += 2;
                 document.documentElement.style.fontSize = tamanhoFonte + 'px';
                 localStorage.setItem('fonteSite', tamanhoFonte);

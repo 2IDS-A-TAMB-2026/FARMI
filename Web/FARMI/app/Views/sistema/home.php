@@ -421,7 +421,7 @@
 
             <div class="card">
                 <a href="https://www.instagram.com/_isabellagarcia__/" target="_blank">
-                    <img src="<?= base_url('assets/equipe/isabella.png') ?>" alt="Membro da Equipe chamado: Isabella">
+                    <img src="<?= base_url('assets/equipe/isabella.jpeg') ?>" alt="Membro da Equipe chamado: Isabella">
                 </a>
                 <h3>Isabella Garcia</h3>
                 <p>Desenvolvedora Full Stack</p>
