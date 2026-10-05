@@ -463,7 +463,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             {'n': 'Thaiene Tessaro', 'c': 'Scrum Master e\nProg. Back-End', 'p': 'assets/equipe/thaiene.jpeg', 'l': 'https://www.instagram.com/thaienetessaro/'},
                             {'n': 'Paula Zito', 'c': 'P.O e\nProg. Back-End', 'p': 'assets/equipe/paula.jpeg', 'l': 'https://www.instagram.com/zito_paula/'},
                             {'n': 'Vinícius Lima', 'c': 'Desenvolvedor\nFull Stack', 'p': 'assets/equipe/vinicius.png', 'l': 'https://www.instagram.com/vinyssues/'},
-                            {'n': 'Isabella Garcia', 'c': 'Desenvolvedora\nFull Stack', 'p': 'assets/equipe/isabella.jpeg', 'l': 'https://www.instagram.com/_isabellagarcia__/'},
+                            {'n': 'Isabella Garcia', 'c': 'Desenvolvedora\nFull Stack', 'p': 'assets/equipe/isa.jpeg', 'l': 'https://www.instagram.com/_isabellagarcia__/'},
                             {'n': 'Maria Clara', 'c': 'Analista de\nBanco de Dados', 'p': 'assets/equipe/maria.jpeg', 'l': 'https://www.instagram.com/imnott_mariaaaa/'},
                             {'n': 'Vitor Delduca', 'c': 'Analista de\nBanco de Dados', 'p': 'assets/equipe/vitor.png', 'l': 'https://www.instagram.com/vitinzxx__/'},
                           ];

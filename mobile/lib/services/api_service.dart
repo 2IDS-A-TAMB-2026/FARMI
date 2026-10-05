@@ -9,7 +9,7 @@ import '../models/sensor.dart';
 class ApiService {
   // Rota base
   static const String baseUrl =
-      'http://10.141.130.59/FARMI/public/index.php/api';
+      'http://10.141.131.75/FARMI/public/index.php/api';
 
   static Future<Map<String, dynamic>> login(
       String email, String password) async {
