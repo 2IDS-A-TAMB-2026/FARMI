@@ -684,7 +684,6 @@ body.contraste .botao-paginacao {
             btnResetar.addEventListener('click', function() {
                 atualizarFonte(100);
             });
-        });
 
         // =========================
         // DROPDOWN

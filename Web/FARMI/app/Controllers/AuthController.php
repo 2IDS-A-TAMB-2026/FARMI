@@ -34,7 +34,7 @@ class AuthController extends BaseController
                 ]);
 
                 // Redireciona conforme perfil
-                if ($usuario['PERFIL'] == 'Admin') {
+                if ($usuario['PERFIL'] == 'Gestor') {
                     return redirect()->to('/dashboard-admin');
                 }
 
@@ -158,7 +158,7 @@ class AuthController extends BaseController
             ]);
 
             // Redireciona conforme o perfil
-            if ($usuario['PERFIL'] == 'Admin') {
+            if ($usuario['PERFIL'] == 'Gestor') {
                 return redirect()->to('/dashboard-admin');
             }
 

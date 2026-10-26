@@ -29,7 +29,7 @@ class Database extends Config
         'hostname'     => 'localhost',
         'username'     => 'root',
         'password'     => 'root',
-        'database'     => 'BD_FAZENDA_INTELIGENTE',
+        'database'     => 'BD_FAZENDA_INTELIGENTE_TESTE_DE_MESA',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

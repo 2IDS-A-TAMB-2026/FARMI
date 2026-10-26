@@ -20,11 +20,6 @@ $routes->post('/login/autenticar', 'AuthController::autenticar');
 
 $routes->get('/logout', 'AuthController::logout');
 
-$routes->post(
-    'fazenda/atualizar/(:num)',
-    'FazendaController::atualizar/$1'
-);
-
 
 // =========================
 // ROTAS PROTEGIDAS (EXIGE LOGIN VIA FILTRO)
