@@ -10,8 +10,8 @@ import 'screens/cultura_screen.dart';
 import 'screens/sensores_screen.dart';
 import 'screens/alerts_screen.dart';
 import 'screens/login_screen.dart';
-import 'screens/forgot_password_screen.dart';
-import 'screens/reset_password_screen.dart';
+
+
 import 'screens/fazenda_screen.dart';
 
 void main() {
@@ -191,13 +191,8 @@ class _FarmiAppState extends State<FarmiApp> {
         '/login': (context) =>
             const LoginScreen(),
 
-        '/forgot-password': (context) =>
-            const ForgotPasswordScreen(),
-
-        '/reset-password': (context) =>
-            const ResetPasswordScreen(),
-      },
-      
+  
+      }
     );
   }
 }

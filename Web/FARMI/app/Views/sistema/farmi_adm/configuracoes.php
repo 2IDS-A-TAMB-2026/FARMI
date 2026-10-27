@@ -212,13 +212,13 @@
 
         .badge-role {
             display: inline-block;
-            background: #000;
+            background: #e8f5e9;
             color: #2e7d32;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1.25rem;
+            font-size: 0.8125rem;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 0.375rem;
         }
 
         .profile-subtext {
@@ -514,52 +514,209 @@
                 gap: 15px;
             }
         }
-        /* ==========================================================
-   CORREÇÃO DO LOGOUT NO AUTO CONTRASTE
+        
+/* ==========================================================
+   AUTO CONTRASTE - CONFIGURAÇÕES FARMI
    ========================================================== */
 
+/* Botões de aumentar, diminuir e resetar fonte */
+body.contraste #aumentar-fonte,
+body.contraste #diminuir-fonte,
+body.contraste #resetar-fonte,
+body.alto-contraste #aumentar-fonte,
+body.alto-contraste #diminuir-fonte,
+body.alto-contraste #resetar-fonte {
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: none !important;
+}
+
+/* Manter os botões iguais ao passar o mouse ou clicar */
+body.contraste #aumentar-fonte:hover,
+body.contraste #diminuir-fonte:hover,
+body.contraste #resetar-fonte:hover,
+body.contraste #aumentar-fonte:focus,
+body.contraste #diminuir-fonte:focus,
+body.contraste #resetar-fonte:focus,
+body.alto-contraste #aumentar-fonte:hover,
+body.alto-contraste #diminuir-fonte:hover,
+body.alto-contraste #resetar-fonte:hover,
+body.alto-contraste #aumentar-fonte:focus,
+body.alto-contraste #diminuir-fonte:focus,
+body.alto-contraste #resetar-fonte:focus {
+    background: #000 !important;
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 2px solid #fff !important;
+    outline-color: #fff !important;
+}
+
+/* Botão de auto-contraste */
+body.contraste #contraste-btn,
+body.alto-contraste #contraste-btn {
+    background: transparent !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+/* Bola de perfil do cabeçalho */
+body.contraste .avatar,
+body.alto-contraste .avatar {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    border: 2px solid #fff !important;
+    border-radius: 50% !important;
+}
+
+/* Letra dentro da bola de perfil */
+body.contraste .avatar *,
+body.alto-contraste .avatar * {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+/* Botão Logout */
+body.contraste .btn-logout,
+body.contraste .btn-logout:hover,
 body.alto-contraste .btn-logout,
-body.alto-contraste .btn-logout:hover,
-body.alto-contraste .btn-logout:focus,
-body.alto-contraste .btn-logout:active {
+body.alto-contraste .btn-logout:hover {
     background: #000 !important;
     color: #fff !important;
     border: 2px solid #fff !important;
 }
 
+body.contraste .btn-logout i,
 body.alto-contraste .btn-logout i {
     color: #fff !important;
 }
 
-body.alto-contraste .sec-btn,
-body.alto-contraste .sec-btn:hover {
+/* Cartão principal do perfil */
+body.contraste .profile-hero,
+body.alto-contraste .profile-hero,
+body.contraste .profile-card,
+body.alto-contraste .profile-card {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+/* Avatar grande dentro do perfil */
+body.contraste .profile-avatar-large,
+body.alto-contraste .profile-avatar-large {
     background: #fff !important;
     color: #000 !important;
-    border: 2px solid #fff !important;
+    border: 3px solid #fff !important;
 }
 
-body.alto-contraste .sec-btn i {
-    color: #000 !important;
-}
-/* MODO NORMAL */
-.badge-role {
-    background: #fff !important;
-    color: #4bc714 !important;
-}
-
-.badge-role i {
-    color: #4bc714 !important;
+/* Nome e textos do perfil */
+body.contraste .profile-details h2,
+body.alto-contraste .profile-details h2,
+body.contraste .profile-subtext,
+body.alto-contraste .profile-subtext,
+body.contraste .hero-banner-right,
+body.alto-contraste .hero-banner-right {
+    color: #fff !important;
 }
 
-/* MODO ALTO CONTRASTE */
+/* Identificação do perfil */
+body.contraste .badge-role,
 body.alto-contraste .badge-role {
     background: #fff !important;
     color: #000 !important;
+    border: 1px solid #fff !important;
 }
 
+body.contraste .badge-role i,
 body.alto-contraste .badge-role i {
     color: #000 !important;
 }
+
+/* Títulos dos cartões */
+body.contraste .profile-card-header,
+body.alto-contraste .profile-card-header {
+    color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+
+body.contraste .profile-card-header i,
+body.alto-contraste .profile-card-header i {
+    color: #fff !important;
+}
+
+/* Informações pessoais */
+body.contraste .info-item,
+body.alto-contraste .info-item {
+    border-bottom-color: #fff !important;
+}
+
+body.contraste .info-item i,
+body.alto-contraste .info-item i,
+body.contraste .info-content label,
+body.alto-contraste .info-content label,
+body.contraste .info-content span,
+body.alto-contraste .info-content span {
+    color: #fff !important;
+}
+
+/* Informações da conta */
+body.contraste .info-box,
+body.alto-contraste .info-box {
+    background: #000 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+body.contraste .info-box-left i,
+body.alto-contraste .info-box-left i,
+body.contraste .info-box-title,
+body.alto-contraste .info-box-title {
+    color: #fff !important;
+}
+
+/* Situação da conta */
+body.contraste .status-badge,
+body.alto-contraste .status-badge {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+body.contraste .status-badge::before,
+body.alto-contraste .status-badge::before {
+    background: #000 !important;
+}
+
+/* Aviso informativo */
+body.contraste .notice-card,
+body.alto-contraste .notice-card {
+    background: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.contraste .notice-card i,
+body.alto-contraste .notice-card i,
+body.contraste .notice-card p,
+body.alto-contraste .notice-card p {
+    color: #fff !important;
+}
+
+/* Botões de segurança */
+body.contraste .sec-btn,
+body.contraste .sec-btn:hover,
+body.alto-contraste .sec-btn,
+body.alto-contraste .sec-btn:hover {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.contraste .sec-btn i,
+body.alto-contraste .sec-btn i {
+    color: #fff !important;
+}
+
     </style>
 </head>
 
@@ -627,7 +784,7 @@ body.alto-contraste .badge-role i {
                     <i class="fa-solid fa-circle-half-stroke"></i>
                 </button>
 
-                <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
+                <button type="button" id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
                 <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
                 <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
@@ -822,7 +979,7 @@ body.alto-contraste .badge-role i {
                 document.documentElement.style.fontSize = tamanhoFonte + 'px';
                 localStorage.setItem('fonteSite', tamanhoFonte);
             });
-        });
+    
 
         /* Menu Sanduíche Responsivo */
         document.addEventListener('DOMContentLoaded', function () {

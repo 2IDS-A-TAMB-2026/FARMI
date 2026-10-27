@@ -348,9 +348,9 @@ body.contraste .botao-paginacao {
         <i class="fa-solid fa-circle-half-stroke"></i>
     </button>
 
-    <button id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
-    <button id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
-    <button id="resetar-fonte" aria-label="Resetar fonte">A</button>
+    <button type="button" id="aumentar-fonte" aria-label="Aumentar fonte">A+</button>
+    <button type="button" id="diminuir-fonte" aria-label="Diminuir fonte">A-</button>
+    <button type="button" id="resetar-fonte" aria-label="Resetar fonte">A</button>
 
     <div class="avatar">G</div>
 

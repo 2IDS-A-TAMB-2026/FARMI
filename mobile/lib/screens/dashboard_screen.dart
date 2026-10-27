@@ -228,43 +228,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ],
                   ),
-                  PopupMenuButton<String>(
-                    onSelected: (value) {
-                      if (value == 'sair') {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
-                      }
-                    },
-                    itemBuilder: (context) => [
-                      const PopupMenuItem(
-                        value: 'sair',
-                        child: Row(
-                          children: [
-                            Icon(Icons.logout, size: 20),
-                            SizedBox(width: 8),
-                            Text('Sair'),
-                          ],
+                  TextButton.icon(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
                         ),
+                        (route) => false,
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.redAccent,
+                      backgroundColor: Colors.redAccent.withOpacity(0.1),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
                       ),
-                    ],
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: corVerdePadrao.withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.person_outline_rounded,
-                        color: corVerdePadrao,
-                        size: 22,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                  )
+                    icon: const Icon(
+                      Icons.logout_rounded,
+                      size: 18,
+                    ),
+                    label: Text(
+                      'Logout',
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ],
               ),
 

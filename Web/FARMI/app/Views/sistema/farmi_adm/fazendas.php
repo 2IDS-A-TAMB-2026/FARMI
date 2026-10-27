@@ -169,24 +169,28 @@ body.alto-contraste .main-content {
 
 
 /* ==========================================================
-   MENU LATERAL
+   MENU LATERAL - AUTO CONTRASTE
    ========================================================== */
 
 body.alto-contraste .menu-item {
+    background: #000 !important;
+    color: #fff !important;
+    border-radius: 10px;
+}
+
+/* Aba selecionada ou ao passar o mouse */
+body.alto-contraste .menu-item.active,
+body.alto-contraste .menu-item:hover {
+    background: #2d2d2d !important;
     color: #fff !important;
 }
 
-body.alto-contraste .menu-item.active,
-body.alto-contraste .menu-item:hover {
-    background: #fff !important;
-    color: #000 !important;
-}
-
+/* Ícones permanecem brancos */
+body.alto-contraste .menu-item i,
 body.alto-contraste .menu-item.active i,
 body.alto-contraste .menu-item:hover i {
-    color: #000 !important;
+    color: #fff !important;
 }
-
 
 /* ==========================================================
    BOTÕES DO SISTEMA

@@ -187,9 +187,9 @@
                     </label>
                     <select name="FK_ID_FAZENDA" class="form-control" required>
                         <option value="">Selecione uma fazenda</option>
-
                         <?php foreach($fazendas as $fazenda): ?>
-                            <option value="<?= $fazenda['ID_FAZENDA'] ?>">
+                            <option value="<?= $fazenda['ID_FAZENDA'] ?>"
+                                <?= $fazenda['ID_FAZENDA'] == $cultura['FK_ID_FAZENDA'] ? 'selected' : '' ?>>
                                 <?= $fazenda['NOME'] ?>
                             </option>
                         <?php endforeach; ?>

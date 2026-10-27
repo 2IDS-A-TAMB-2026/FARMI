@@ -622,6 +622,32 @@
             background: #000 !important;
             border-right: 2px solid #fff;
         }
+        
+        /* ==========================================================
+        MENU LATERAL - ABAS NO ALTO CONTRASTE
+        ========================================================== */
+
+        /* Todas as abas ficam pretas */
+        body.alto-contraste .sidebar .menu-item {
+            background: #000 !important;
+            color: #fff !important;
+            border-radius: 10px !important;
+        }
+
+        /* Aba selecionada e aba sob o mouse ficam cinza */
+        body.alto-contraste .sidebar .menu-item.active,
+        body.alto-contraste .sidebar .menu-item:hover {
+            background: #2d2d2d !important;
+            color: #fff !important;
+        }
+
+        /* Ícones sempre brancos */
+        body.alto-contraste .sidebar .menu-item i,
+        body.alto-contraste .sidebar .menu-item.active i,
+        body.alto-contraste .sidebar .menu-item:hover i {
+            color: #fff !important;
+        }
+
 
         body.alto-contraste .main-content {
             background: #000 !important;
@@ -832,6 +858,7 @@
         body:not(.alto-contraste) #contraste-btn {
             color: #000;
         }
+
     </style>
 </head>
 <body>

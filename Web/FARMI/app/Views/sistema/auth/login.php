@@ -151,12 +151,65 @@
     display: block !important;
 }
 
-/* SEPARADOR */
+/* BOTÃO VOLTAR PARA A TELA INICIAL */
+.btn-voltar-inicio {
+    position: fixed;
+    top: 20px;
+    left: 25px;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #58CC02;
+    color: #fff;
+    font-size: 19px;
+    border-radius: 14px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1001;
 }
-        </style>
-    </head>
+
+.btn-voltar-inicio:hover {
+    background: #46A302;
+    color: #fff;
+    transform: translateX(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-voltar-inicio:focus-visible {
+    outline: 3px solid #052501;
+    outline-offset: 3px;
+}
+
+/* COMPATIBILIDADE COM ALTO CONTRASTE */
+body.contraste .btn-voltar-inicio {
+    background: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: none;
+}
+
+@media (max-width: 600px) {
+    .btn-voltar-inicio {
+        top: 15px;
+        left: 15px;
+        width: 42px;
+        height: 42px;
+    }
+}
+
+/* SEPARADOR */
+</style>
+</head>
 
     <body>
+        
+        <a href="<?= base_url('/') ?>" class="btn-voltar-inicio" aria-label="Voltar para a tela inicial" title="Voltar para a tela inicial">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
         <div class="acessibilidade-login">
             <button id="contraste-btn" title="Alto Contraste">
                 <i class="fa-solid fa-circle-half-stroke"></i>

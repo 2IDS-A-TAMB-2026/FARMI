@@ -15,7 +15,7 @@ class Security extends BaseConfig
      *
      * @var string 'cookie' or 'session'
      */
-    public string $csrfProtection = 'cookie';
+    public string $csrfProtection = 'session'; // ALTERADO: trocado de 'cookie' para 'session'
 
     /**
      * --------------------------------------------------------------------------
@@ -71,7 +71,7 @@ class Security extends BaseConfig
      *
      * Regenerate CSRF Token on every submission.
      */
-    public bool $regenerate = true;
+    public bool $regenerate = false; // ALTERADO: trocado de true para false
 
     /**
      * --------------------------------------------------------------------------

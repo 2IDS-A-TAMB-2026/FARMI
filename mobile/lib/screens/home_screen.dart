@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       spacing: 40,
                       runSpacing: 30,
                       children: [
-                        _infoItem(Icons.location_on, 'Local'),
+                        _infoItem(Icons.location_on, 'SESI-SENAI'),
                         _infoItem(Icons.email, 'farmi_tcc2026@gmail.com'),
                         _infoItem(Icons.phone, '(19) 99112-6878'),
                       ],

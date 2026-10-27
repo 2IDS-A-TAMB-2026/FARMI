@@ -265,8 +265,9 @@
             <p>Digite sua nova senha</p>
         </div>
 
-     <form id="changePasswordForm" method="post" action="<?= base_url('/alterar-senha') ?>">
-
+     <!-- CORRETO -->
+<form id="changePasswordForm" method="post" action="<?= base_url('/alterar-senha-admin') ?>">
+        <?= csrf_field() ?>
     <div class="form-group">
         <label for="currentPassword">
             <i class="fas fa-lock"></i>
@@ -426,7 +427,7 @@
             }).then((result) => {
                 if(result.isConfirmed){
                     Swal.fire({
-                        title: 'Senha altered!',
+                        title: 'Senha alterada!',
                         text: 'Sua senha foi atualizada com sucesso.',
                         icon: 'success',
                         timer: 1500,

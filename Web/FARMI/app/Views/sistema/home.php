@@ -79,8 +79,8 @@
                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
                         <div class="location_icon_bottum_tt">
                             <ul>
-                                <li><img src="<?= base_url('assets/icon/loc1.png') ?>" id="loc_icon" alt="Símbolo de local" />SESI</li>
-                                <li><img src="<?= base_url('assets/icon/email1.png') ?>" id="email_icon" alt="Símbolo de uma carta"/>farmi_tcc2026@gmail</li>
+                                <li><img src="<?= base_url('assets/icon/loc1.png') ?>" id="loc_icon" alt="Símbolo de local" />SESI SENAI</li>
+                                <li><img src="<?= base_url('assets/icon/email1.png') ?>" id="email_icon" alt="Símbolo de uma carta"/>farmi_tcc2026@gmail.com</li>
                                 <li><img src="<?= base_url('assets/icon/call1.png') ?>" id="call_icon" alt="Símbolo de telefone"/>(19)99112-6878</li>
                             </ul>
                         </div>
@@ -123,11 +123,6 @@
     <!-- === CARROSSEL === carousel -->
     <section class="slider_section">
         <div id="myCarousel" class="carousel slide banner-main" data-ride="carousel">
-            <ul class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-            </ul>
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="first-slide" src="<?= base_url('assets/images/banner.jpg') ?>" id="banner1" alt="Imagem de uma paisagem rural com plantações e colinas suaves ao fundo, transmitindo tranquilidade no campo.">
@@ -168,12 +163,6 @@
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <i class='fa fa-angle-left'></i>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <i class='fa fa-angle-right'></i>
-            </a>
         </div>
     </section>
     <!-- === END CARROSSEL === -->
@@ -484,13 +473,13 @@
                             <p>Acesse nossas redes sociais para saber mais </p>
                             <ul class="icone_redes">
                                 <li>
-                                    <a href="https://www.instagram.com/farmi.tech/"><img src="<?= base_url('assets/icon/instagram.png') ?>" alt="Símbolo do Instagram" /></a>
+                                    <a href="https://www.instagram.com/farmi.tech/" target="_blank"><img src="<?= base_url('assets/icon/instagram.png') ?>" alt="Símbolo do Instagram" /></a>
                                 </li>
                                 <li>
-                                    <a href="https://tiktok.com/@_farmi.370"><img src="<?= base_url('assets/icon/tiktok.png') ?>" alt="Símbolo do TikTok" /></a>
+                                    <a href="https://tiktok.com/@_farmi.370" target="_blank"><img src="<?= base_url('assets/icon/tiktok.png') ?>" alt="Símbolo do TikTok" /></a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/2IDS-A-TAMB-2026/FARMI"><img src="<?= base_url('assets/icon/github.png') ?>" alt="Símbolo do GitHub" /></a>
+                                    <a href="https://github.com/2IDS-A-TAMB-2026/FARMI" target="_blank"><img src="<?= base_url('assets/icon/github.png') ?>" alt="Símbolo do GitHub" /></a>
                                 </li>
                             </ul>
                         </div>
@@ -504,10 +493,10 @@
 
                             <ul class="loca">
                                 <li>
-                                    <a href="https://www.google.com/maps/place/Servi%C3%A7o+Social+da+Ind%C3%BAstria-SESI/@-21.7110061,-47.279045,17z/data=!3m1!4b1!4m6!3m5!1s0x94b7efc1347e3265:0x53eb3a234374dc72!8m2!3d-21.7110061!4d-47.2764701!16s%2Fg%2F1q5hrr5y8!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D"><img src="<?= base_url('assets/icon/loc.png') ?>" alt="ícone de localização" /></a>SESI CE 370
+                                    <a href="https://www.google.com/maps/place/Servi%C3%A7o+Social+da+Ind%C3%BAstria-SESI/@-21.7110061,-47.279045,17z/data=!3m1!4b1!4m6!3m5!1s0x94b7efc1347e3265:0x53eb3a234374dc72!8m2!3d-21.7110061!4d-47.2764701!16s%2Fg%2F1q5hrr5y8!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D" target="_blank"><img src="<?= base_url('assets/icon/loc.png') ?>" alt="ícone de localização" /></a>SESI CE 370
                                     <br>Joelmir Beting </li>
                                 <li>
-                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fami.tcc2026@gmail.com"><img src="<?= base_url('assets/icon/email.png') ?>" alt="ícone de carta" /></a>farmi.tcc2026@gmail.com</li>
+                                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fami.tcc2026@gmail.com" target="_blank"><img src="<?= base_url('assets/icon/email.png') ?>" alt="ícone de carta" /></a>farmi.tcc2026@gmail.com</li>
                                 <li>
                                     <a href="#"><img src="<?= base_url('assets/icon/call.png') ?>" alt="ícone de telefone" /></a>+55 (19) 99112-6878 </li>
                             </ul>

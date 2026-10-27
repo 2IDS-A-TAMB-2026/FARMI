@@ -14,26 +14,24 @@
 
     <style>
         /* ========================================================
-           BARRA E BOTÕES DE ACESSIBILIDADE CORRIGIDOS EM LINHA
+           BARRA E BOTÕES DE ACESSIBILIDADE
            ======================================================== */
         
-        /* Garante que o card principal seja a referência e dê espaço no topo */
         .container {
             position: relative !important;
             padding-top: 75px !important; 
             box-sizing: border-box !important;
-            overflow: visible !important; /* Impede que os botões deformem ou sumam para fora */
+            overflow: visible !important;
         }
 
-        /* Container que alinha os botões horizontalmente no topo direito interno */
         .acessibilidade-container {
             position: absolute !important;
             top: 20px !important;
             right: 20px !important;
             display: flex !important;
-            flex-direction: row !important; /* Força os botões a ficarem na mesma linha */
+            flex-direction: row !important;
             align-items: center !important;
-            gap: 6px !important;            /* Distância exata entre eles */
+            gap: 6px !important;
             background: transparent !important;
             border: none !important;
             padding: 0 !important;
@@ -41,13 +39,12 @@
             z-index: 100 !important;
         }
 
-        /* Estilo base dos botões reduzido para caber perfeitamente no card */
         .acessibilidade-container button {
             background: #57c91b !important;
             border: none !important;
             border-radius: 5px !important;
-            width: 34px !important;         /* Tamanho ajustado para não estourar */
-            height: 34px !important;        /* Tamanho ajustado para não estourar */
+            width: 34px !important;
+            height: 34px !important;
             font-weight: bold !important;
             cursor: pointer !important;
             display: flex !important;
@@ -55,27 +52,13 @@
             justify-content: center !important;
             transition: 0.2s !important;
             color: #fff !important;
-            font-size: 13px !important;     /* Fonte proporcional ao botão */
+            font-size: 13px !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box !important;
         }
 
-        /* Botão de Contraste: usa o mesmo estilo verde dos outros botões
-           enquanto o modo claro estiver ativo. A aparência preta só é
-           aplicada quando o alto contraste está realmente ligado
-           (ver regra "body.contraste .acessibilidade-container button"
-           mais abaixo) — antes essa cor preta era fixa e nunca mudava. */
-
-        /* O botão #contraste-btn é mais antigo que os outros e o
-           style_alterar.css externo tem uma regra específica por ID
-           para ele (especificidade maior que .acessibilidade-container
-           button), então o fundo/borda/tamanho definidos acima nunca
-           chegavam a aparecer de fato — só o ícone ficava visível,
-           "flutuando" sem o quadradinho verde ao redor, em qualquer
-           estado (claro, escuro, hover). Repetimos o estilo direto no
-           #id para garantir que ele vença esse conflito. */
         .acessibilidade-container button#contraste-btn {
             background: #57c91b !important;
             border: none !important;
@@ -93,7 +76,6 @@
             box-sizing: border-box !important;
         }
 
-        /* Efeito Hover padrão */
         .acessibilidade-container button:hover {
             opacity: .85 !important;
         }
@@ -106,11 +88,7 @@
                 top: 15px !important;
                 right: 15px !important;
             }
-            .acessibilidade-container button {
-                width: 30px !important;
-                height: 30px !important;
-                font-size: 11px !important;
-            }
+            .acessibilidade-container button,
             .acessibilidade-container button#contraste-btn {
                 width: 30px !important;
                 height: 30px !important;
@@ -119,49 +97,48 @@
         }
 
         /* ========================================================
-           ALTO CONTRASTE (antes não existia nenhuma regra aqui,
-           então o botão não tinha efeito visual nenhum na página)
+           ALTO CONTRASTE
            ======================================================== */
         body.alto-contraste {
-    background: #000 !important;
-}
+            background: #000 !important;
+        }
 
-body.alto-contraste .container {
-    background: #000 !important;
-    border: 1px solid #fff !important;
-}
+        body.alto-contraste .container {
+            background: #000 !important;
+            border: 1px solid #fff !important;
+        }
 
-body.alto-contraste * {
-    color: #fff !important;
-    border-color: #fff !important;
-}
+        body.alto-contraste * {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
 
-body.alto-contraste input {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
+        body.alto-contraste input {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
 
-body.alto-contraste input::placeholder {
-    color: #ccc !important;
-}
+        body.alto-contraste input::placeholder {
+            color: #ccc !important;
+        }
 
-body.alto-contraste .btn-primary {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
+        body.alto-contraste .btn-primary {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
 
-body.alto-contraste .acessibilidade-container button,
-body.alto-contraste .acessibilidade-container button#contraste-btn {
-    background: #000 !important;
-    color: #fff !important;
-    border: 2px solid #fff !important;
-}
+        body.alto-contraste .acessibilidade-container button,
+        body.alto-contraste .acessibilidade-container button#contraste-btn {
+            background: #000 !important;
+            color: #fff !important;
+            border: 2px solid #fff !important;
+        }
 
-body.alto-contraste .back-link a {
-    color: #fff !important;
-}
+        body.alto-contraste .back-link a {
+            color: #fff !important;
+        }
     </style>
 </head>
 
@@ -184,43 +161,46 @@ body.alto-contraste .back-link a {
             <p>Digite sua nova senha</p>
         </div>
 
-     <form id="changePasswordForm" method="post" action="<?= base_url('/alterar-senha') ?>">
+        <form id="changePasswordForm" method="post" action="<?= base_url('/alterar-senha') ?>">
+            
+            <!-- CAMPO OBRIGATÓRIO PARA PROTEÇÃO CSRF -->
+            <?= csrf_field() ?>
 
-    <div class="form-group">
-        <label for="currentPassword">
-            <i class="fas fa-lock"></i>
-            Senha Atual
-        </label>
-        <input type="password" id="currentPassword" name="currentPassword" placeholder="Senha atual" required>
-    </div>
+            <div class="form-group">
+                <label for="currentPassword">
+                    <i class="fas fa-lock"></i>
+                    Senha Atual
+                </label>
+                <input type="password" id="currentPassword" name="currentPassword" placeholder="Senha atual" required>
+            </div>
 
-    <div class="form-group">
-        <label for="newPassword">
-            <i class="fas fa-key"></i>
-            Nova Senha
-        </label>
-        <input type="password" id="newPassword" name="newPassword" placeholder="Nova senha" maxlength="8" required>
-    </div>
+            <div class="form-group">
+                <label for="newPassword">
+                    <i class="fas fa-key"></i>
+                    Nova Senha
+                </label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="Nova senha" maxlength="8" required>
+            </div>
 
-    <div class="form-group">
-        <label for="confirmPassword">
-            <i class="fas fa-check"></i>
-            Confirmar Nova Senha
-        </label>
-        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar nova senha" maxlength="8" required>
-    </div>
+            <div class="form-group">
+                <label for="confirmPassword">
+                    <i class="fas fa-check"></i>
+                    Confirmar Nova Senha
+                </label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar nova senha" maxlength="8" required>
+            </div>
 
-    <div class="password-requirements">
-        <strong>Senha deve conter:</strong><br>
-        - Exatamente 8 caracteres
-    </div>
+            <div class="password-requirements">
+                <strong>Senha deve conter:</strong><br>
+                - Exatamente 8 caracteres
+            </div>
 
-    <button type="submit" class="btn btn-primary">
-        <i class="fas fa-save"></i>
-        Alterar Senha
-    </button>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i>
+                Alterar Senha
+            </button>
 
-</form>
+        </form>
 
         <div class="back-link">
             <a href="<?= base_url('/configuracoes-usuario') ?>">
@@ -289,7 +269,6 @@ body.alto-contraste .back-link a {
                 aplicarFonte();
             });
         }
-
 
         /* ========================================================
            VALIDAÇÃO DO FORMULÁRIO COM SWEETALERT

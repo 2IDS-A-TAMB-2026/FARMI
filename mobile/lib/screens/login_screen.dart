@@ -240,19 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 18),
 
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                          context,
-                          '/forgot-password');
-                    },
-                    child: const Text(
-                      'Esqueceu a senha?',
-                      style: TextStyle(
-                        color: Color(0xFF052501),
-                      ),
-                    ),
-                  ),
+                
                 ],
               ),
             ),
@@ -413,21 +401,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         // 🆕 BOTÃO ADICIONADO AQUI NO LAYOUT DESKTOP:
                         const SizedBox(height: 18),
-
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/forgot-password',
-                            );
-                          },
-                          child: const Text(
-                            'Esqueceu a senha?',
-                            style: TextStyle(
-                              color: Color(0xFF052501),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
